@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+.next/
+out/
+dist/
+build/
+
+# Environment — the service-role key lives here and must never be committed
+.env
+.env.local
+.env*.local
+
+# Supabase local dev
+.branches
+.temp
+supabase/.temp/
+
+# Testing
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Editors / OS
+.DS_Store
+.idea/
+*.swp
+
+# Agent harness
+.pi/
