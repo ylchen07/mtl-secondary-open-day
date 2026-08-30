@@ -40,3 +40,6 @@ next-env.d.ts
 
 # Agent harness
 .pi/
+
+# SDD scratch workspace (ledger, briefs, review packages)
+.superpowers/
