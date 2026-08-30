@@ -1,0 +1,47 @@
+{
+  "name": "mtl-secondary-open-day",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "seed": "tsx scripts/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@11.24.0",
+  "dependencies": {
+    "@date-fns/tz": "^1.5.0",
+    "@supabase/supabase-js": "^2.112.4",
+    "date-fns": "^4.4.0",
+    "next": "^16.3.3",
+    "next-intl": "^4.14.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.4.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "autoprefixer": "^10.5.4",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.9.1",
+    "eslint-config-next": "^16.3.3",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
+    "typescript": "^6.0.3",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.11"
+  }
+}
