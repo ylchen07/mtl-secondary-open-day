@@ -1,4 +1,6 @@
-export default [
+import nextConfig from 'eslint-config-next';
+
+const config = [
   {
     ignores: [
       '.next/**',
@@ -8,4 +10,7 @@ export default [
       '.superpowers/**',
     ],
   },
+  ...nextConfig,
 ];
+
+export default config;
