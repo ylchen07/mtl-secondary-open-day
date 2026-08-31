@@ -110,4 +110,16 @@ describe('validateSchoolFiles', () => {
     expect(errors.filter((e) => e.startsWith('data/schools/a.json')).length).toBeGreaterThan(0);
     expect(errors.filter((e) => e.startsWith('data/schools/b.json')).length).toBeGreaterThan(0);
   });
+
+  it('excludes files with file-level errors from ok array', () => {
+    const validSchool = { ...valid, slug: 'school-a' };
+    const duplicateSlugSchool = { ...valid, slug: 'school-a' };
+    const { errors, ok } = validateSchoolFiles([
+      { path: 'data/schools/school-a.json', json: validSchool },
+      { path: 'data/schools/other.json', json: duplicateSlugSchool },
+    ]);
+    expect(errors.some((e) => e.includes('duplicate slug'))).toBe(true);
+    expect(ok).toHaveLength(1);
+    expect(ok[0].slug).toBe('school-a');
+  });
 });

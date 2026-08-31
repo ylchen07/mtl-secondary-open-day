@@ -109,8 +109,10 @@ export function validateSchoolFiles(
 
     const school = parsed.data;
     const expectedFilename = `${school.slug}.json`;
+    let hasFileLevelError = false;
 
     if (!file.path.endsWith(`/${expectedFilename}`)) {
+      hasFileLevelError = true;
       errors.push(
         `${file.path}: slug "${school.slug}" does not match filename (expected ${expectedFilename})`,
       );
@@ -118,12 +120,15 @@ export function validateSchoolFiles(
 
     const previous = seenSlugs.get(school.slug);
     if (previous) {
+      hasFileLevelError = true;
       errors.push(`${file.path}: duplicate slug "${school.slug}" (also in ${previous})`);
     } else {
       seenSlugs.set(school.slug, file.path);
     }
 
-    ok.push(school);
+    if (!hasFileLevelError) {
+      ok.push(school);
+    }
   }
 
   return { ok, errors };
