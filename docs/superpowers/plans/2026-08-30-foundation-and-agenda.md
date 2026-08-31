@@ -6,7 +6,14 @@
 
 **Architecture:** Hand-curated JSON files in `data/schools/` are the source of truth. A zod-validated seed script upserts them into Supabase Postgres. Next.js server components read from Supabase with an anon key under read-only RLS, ship the full published dataset to the browser once, and all filtering happens client-side. Deployed on Vercel with ISR plus on-demand revalidation triggered by the seed script.
 
-**Tech Stack:** Next.js 15 (App Router) · TypeScript (strict) · Tailwind CSS v4 · Supabase Postgres · `@supabase/supabase-js` · `next-intl` v4 · `zod` v4 · `date-fns` v4 + `@date-fns/tz` · Vitest · Playwright · pnpm
+**Tech Stack:** Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS v4 · Supabase Postgres · `@supabase/supabase-js` · `next-intl` v4 · `zod` v3 · `date-fns` v4 + `@date-fns/tz` · Vitest · Playwright · pnpm
+
+> **Version note (ruling R4, recorded during execution):** the plan was drafted
+> against Next 15; the current major in this environment is 16, which is what
+> `create-next-app` installs and what `eslint-config-next` targets. Everything
+> this plan uses — App Router, async `params`/`searchParams`, `revalidate`,
+> `revalidatePath` — is unchanged between 15 and 16, so the project targets 16.
+> Zod is `v3`, not v4: see Task 1 Step 2 for why.
 
 **Spec:** `docs/superpowers/specs/2026-08-30-mtl-private-secondary-open-days-design.md`
 

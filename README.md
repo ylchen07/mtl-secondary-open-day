@@ -39,8 +39,8 @@ queryable projection of the repository — if the database is wiped,
 
 ## Stack
 
-Next.js 15 · TypeScript · Tailwind · Supabase Postgres · Vercel ·
-next-intl (EN/FR) · MapLibre + MapTiler
+Next.js 16 · React 19 · TypeScript · Tailwind v4 · Supabase Postgres ·
+Vercel · next-intl (EN/FR) · MapLibre + MapTiler
 
 ## Data corrections
 
