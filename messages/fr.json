@@ -14,7 +14,9 @@
     "emptyTitle": "Aucune porte ouverte à venir pour le moment",
     "emptyBody": "La plupart des écoles privées publient leurs dates en août pour la saison d'automne. Consultez le répertoire des écoles entre-temps.",
     "emptyFiltered": "Aucun événement ne correspond à ces filtres.",
-    "clearFilters": "Effacer les filtres"
+    "clearFilters": "Effacer les filtres",
+    "filtersLandmark": "Filtres",
+    "eventsLandmark": "Événements"
   },
   "filters": {
     "search": "Rechercher une école",

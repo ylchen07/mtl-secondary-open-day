@@ -14,10 +14,47 @@ the conflicts.
 
 ## Status
 
-**Design approved, implementation not started.**
+**v1 implementation complete.**
+
+The site features:
+- Agenda at `/en` and `/fr` listing upcoming open houses and entrance exams, with filters and conflict detection
+- Data for 3 schools and 4 events, hand-curated in `data/schools/`
+- Supabase Postgres schema with read-only public access
+- 38 unit tests + 4 Playwright e2e tests, CI on every push
 
 See [`docs/superpowers/specs/2026-08-30-mtl-private-secondary-open-days-design.md`](docs/superpowers/specs/2026-08-30-mtl-private-secondary-open-days-design.md)
 for the full design.
+
+## Getting started
+
+1. **Install dependencies:**
+   ```sh
+   pnpm install
+   ```
+
+2. **Set up environment:**
+   ```sh
+   cp .env.local.example .env.local
+   ```
+   Then edit `.env.local` and fill in your Supabase credentials.
+
+3. **Seed the database:**
+   ```sh
+   pnpm seed
+   ```
+   This loads school data from `data/schools/*.json` into Supabase.
+
+4. **Start the dev server:**
+   ```sh
+   pnpm dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+5. **Run tests:**
+   ```sh
+   pnpm test          # Unit and integration tests
+   pnpm test:e2e      # End-to-end tests
+   ```
 
 ## Approach in one diagram
 

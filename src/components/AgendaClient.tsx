@@ -41,11 +41,11 @@ export function AgendaClient({
 
   return (
     <div className="grid gap-8 md:grid-cols-[16rem_1fr]">
-      <aside>
+      <aside aria-label={t('filtersLandmark')}>
         <FilterBar filters={filters} onChange={update} />
       </aside>
 
-      <section>
+      <section aria-label={t('eventsLandmark')}>
         <p className="mb-4 text-sm text-neutral-500">
           {t('resultCount', { count: visible.length })}
         </p>

@@ -14,7 +14,9 @@
     "emptyTitle": "No upcoming open days right now",
     "emptyBody": "Most private schools publish their dates in August for the autumn season. Browse the school directory in the meantime.",
     "emptyFiltered": "No events match these filters.",
-    "clearFilters": "Clear filters"
+    "clearFilters": "Clear filters",
+    "filtersLandmark": "Filters",
+    "eventsLandmark": "Events"
   },
   "filters": {
     "search": "Search schools",
