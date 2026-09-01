@@ -1588,9 +1588,11 @@ describe('groupByWeek', () => {
       { starts_at: '2026-10-03T17:00:00.000Z' },
       { starts_at: '2026-09-27T17:00:00.000Z' },
     ]);
+    // Sep 26 (Sat) and Sep 27 (Sun) both fall in the Monday-start week of
+    // Sep 21 — Sunday is the LAST day of that week, not the first of the next.
     expect(groups.map((g) => g.weekStart)).toEqual(['2026-09-21', '2026-09-28']);
-    expect(groups[0].events).toHaveLength(1);
-    expect(groups[1].events).toHaveLength(2);
+    expect(groups[0].events).toHaveLength(2);
+    expect(groups[1].events).toHaveLength(1);
   });
 });
 ```
