@@ -25,6 +25,8 @@ test-results/
 playwright-report/
 blob-report/
 .playwright/
+/e2e-results/
+/playwright/.cache/
 
 # Vercel
 .vercel
