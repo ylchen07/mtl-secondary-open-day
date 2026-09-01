@@ -1,0 +1,51 @@
+{
+  "site": {
+    "title": "Portes ouvertes des écoles secondaires privées de Montréal",
+    "tagline": "Portes ouvertes et examens d'admission, au même endroit."
+  },
+  "agenda": {
+    "heading": "À venir",
+    "resultCount": "{count, plural, =0 {Aucun événement} one {# événement} other {# événements}}",
+    "clashWith": "Chevauche {school} ({type})",
+    "verifiedOn": "Vérifié le {date}",
+    "source": "source",
+    "register": "S'inscrire",
+    "registrationRequired": "Inscription requise",
+    "emptyTitle": "Aucune porte ouverte à venir pour le moment",
+    "emptyBody": "La plupart des écoles privées publient leurs dates en août pour la saison d'automne. Consultez le répertoire des écoles entre-temps.",
+    "emptyFiltered": "Aucun événement ne correspond à ces filtres.",
+    "clearFilters": "Effacer les filtres"
+  },
+  "filters": {
+    "search": "Rechercher une école",
+    "searchPlaceholder": "Nom, ville ou programme",
+    "language": "Langue",
+    "region": "Région",
+    "gender": "Clientèle",
+    "type": "Type d'événement"
+  },
+  "language": {
+    "fr": "Français",
+    "en": "Anglais",
+    "bilingual": "Bilingue"
+  },
+  "gender": {
+    "mixed": "Mixte",
+    "girls": "Filles",
+    "boys": "Garçons"
+  },
+  "region": {
+    "montreal_island": "Île de Montréal",
+    "west_island": "West Island",
+    "laval": "Laval",
+    "north_shore": "Rive-Nord",
+    "south_shore": "Rive-Sud"
+  },
+  "eventType": {
+    "open_house": "Portes ouvertes",
+    "info_session": "Séance d'information",
+    "entrance_exam": "Examen d'admission",
+    "tour": "Visite guidée",
+    "virtual": "Événement virtuel"
+  }
+}

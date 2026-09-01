@@ -1,0 +1,43 @@
+{
+  "site": {
+    "title": "Montreal Private Secondary Open Days",
+    "tagline": "Open houses and entrance exams, in one place."
+  },
+  "agenda": {
+    "heading": "Upcoming",
+    "resultCount": "{count, plural, =0 {No events} one {# event} other {# events}}",
+    "clashWith": "Overlaps with {school} ({type})",
+    "verifiedOn": "Verified {date}",
+    "source": "source",
+    "register": "Register",
+    "registrationRequired": "Registration required",
+    "emptyTitle": "No upcoming open days right now",
+    "emptyBody": "Most private schools publish their dates in August for the autumn season. Browse the school directory in the meantime.",
+    "emptyFiltered": "No events match these filters.",
+    "clearFilters": "Clear filters"
+  },
+  "filters": {
+    "search": "Search schools",
+    "searchPlaceholder": "Name, city, or program",
+    "language": "Language",
+    "region": "Region",
+    "gender": "Student body",
+    "type": "Event type"
+  },
+  "language": { "fr": "French", "en": "English", "bilingual": "Bilingual" },
+  "gender": { "mixed": "Co-ed", "girls": "Girls", "boys": "Boys" },
+  "region": {
+    "montreal_island": "Montreal Island",
+    "west_island": "West Island",
+    "laval": "Laval",
+    "north_shore": "North Shore",
+    "south_shore": "South Shore"
+  },
+  "eventType": {
+    "open_house": "Open house",
+    "info_session": "Info session",
+    "entrance_exam": "Entrance exam",
+    "tour": "Guided tour",
+    "virtual": "Virtual event"
+  }
+}
