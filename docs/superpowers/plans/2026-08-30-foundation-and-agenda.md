@@ -6,7 +6,14 @@
 
 **Architecture:** Hand-curated JSON files in `data/schools/` are the source of truth. A zod-validated seed script upserts them into Supabase Postgres. Next.js server components read from Supabase with an anon key under read-only RLS, ship the full published dataset to the browser once, and all filtering happens client-side. Deployed on Vercel with ISR plus on-demand revalidation triggered by the seed script.
 
-**Tech Stack:** Next.js 15 (App Router) · TypeScript (strict) · Tailwind CSS v4 · Supabase Postgres · `@supabase/supabase-js` · `next-intl` v4 · `zod` v4 · `date-fns` v4 + `@date-fns/tz` · Vitest · Playwright · pnpm
+**Tech Stack:** Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS v4 · Supabase Postgres · `@supabase/supabase-js` · `next-intl` v4 · `zod` v3 · `date-fns` v4 + `@date-fns/tz` · Vitest · Playwright · pnpm
+
+> **Version note (ruling R4, recorded during execution):** the plan was drafted
+> against Next 15; the current major in this environment is 16, which is what
+> `create-next-app` installs and what `eslint-config-next` targets. Everything
+> this plan uses — App Router, async `params`/`searchParams`, `revalidate`,
+> `revalidatePath` — is unchanged between 15 and 16, so the project targets 16.
+> Zod is `v3`, not v4: see Task 1 Step 2 for why.
 
 **Spec:** `docs/superpowers/specs/2026-08-30-mtl-private-secondary-open-days-design.md`
 
@@ -14,7 +21,9 @@
 
 Every task's requirements implicitly include this section.
 
-- **Node 20+**, package manager is **pnpm**. Never run `npm install` or `yarn`.
+- **Node 22+**, package manager is **pnpm**. Never run `npm install` or `yarn`.
+  (Originally drafted as "Node 20+"; pnpm 11 requires Node >= 22.13 because it
+  depends on `node:sqlite`. CI on Node 20 fails at `pnpm store path`.)
 - **TypeScript strict mode on.** No `any` in committed code. No `@ts-ignore`.
 - **Locales are exactly `en` and `fr`.** Default locale `en`. Every user-visible string must exist in both `messages/en.json` and `messages/fr.json`.
 - **Every school and event must have both `name_en`/`name_fr` and both `description_en`/`description_fr` non-empty.** This is enforced by schema, not convention.
@@ -1581,9 +1590,11 @@ describe('groupByWeek', () => {
       { starts_at: '2026-10-03T17:00:00.000Z' },
       { starts_at: '2026-09-27T17:00:00.000Z' },
     ]);
+    // Sep 26 (Sat) and Sep 27 (Sun) both fall in the Monday-start week of
+    // Sep 21 — Sunday is the LAST day of that week, not the first of the next.
     expect(groups.map((g) => g.weekStart)).toEqual(['2026-09-21', '2026-09-28']);
-    expect(groups[0].events).toHaveLength(1);
-    expect(groups[1].events).toHaveLength(2);
+    expect(groups[0].events).toHaveLength(2);
+    expect(groups[1].events).toHaveLength(1);
   });
 });
 ```

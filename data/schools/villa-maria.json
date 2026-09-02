@@ -1,0 +1,41 @@
+{
+  "slug": "villa-maria",
+  "name_en": "Villa Maria",
+  "name_fr": "Collège Villa Maria",
+  "language": "bilingual",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montreal",
+  "address": "4245, boulevard Décarie, Montréal, QC H4A 3K4",
+  "postal_code": "H4A 3K4",
+  "location": {
+    "lat": 45.4717,
+    "lng": -73.6283
+  },
+  "geocode_precision": "approximate",
+  "website_url": "https://www.villamaria.qc.ca",
+  "admissions_url": "https://villamaria.qc.ca/admission/",
+  "tuition_annual_cad": 5520,
+  "has_boarding": false,
+  "programs": ["pei"],
+  "description_en": "Collège Villa Maria is a bilingual private co-educational secondary school in Montreal's Notre-Dame-de-Grâce area, founded in 1854. The school offers instruction in both French and English sectors and is introducing a new project-based learning model starting in the 2026-2027 school year focused on student voice and choice. Villa Maria provides four distinct study profiles and emphasizes innovation, community, and a bilingual environment.",
+  "description_fr": "Le Collège Villa Maria est une école secondaire privée bilingue et mixte située dans le quartier Notre-Dame-de-Grâce à Montréal, fondée en 1854. L'école offre un enseignement dans les secteurs français et anglais et introduit un nouveau modèle pédagogique par projets à partir de l'année scolaire 2026-2027, axé sur la voix et le choix des élèves. Villa Maria propose quatre profils d'études distincts et met l'accent sur l'innovation, la communauté et un environnement bilingue.",
+  "source_url": "https://villamaria.qc.ca/admission/",
+  "last_verified_at": "2026-08-30",
+  "status": "published",
+  "open_days": [
+    {
+      "starts_at": "2026-09-12T10:00:00-04:00",
+      "ends_at": "2026-09-12T15:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": "No registration or appointment required. Drop-in event open to both French and English sectors. Families can tour campus, meet teachers and students, and see facilities.",
+      "notes_fr": "Aucune inscription ou prise de rendez-vous n'est nécessaire. Événement ouvert aux secteurs français et anglais. Les familles peuvent visiter le campus, rencontrer les enseignants et les élèves et voir les installations.",
+      "source_url": "https://portesouvertes.villamaria.qc.ca/",
+      "last_verified_at": "2026-08-30",
+      "status": "published"
+    }
+  ]
+}

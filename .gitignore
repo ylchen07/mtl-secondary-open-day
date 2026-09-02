@@ -25,6 +25,8 @@ test-results/
 playwright-report/
 blob-report/
 .playwright/
+/e2e-results/
+/playwright/.cache/
 
 # Vercel
 .vercel
@@ -40,3 +42,6 @@ next-env.d.ts
 
 # Agent harness
 .pi/
+
+# SDD scratch workspace (ledger, briefs, review packages)
+.superpowers/

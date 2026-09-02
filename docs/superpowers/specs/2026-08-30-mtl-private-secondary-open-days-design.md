@@ -35,7 +35,7 @@ would triple the curation burden before the core idea is proven.
 
 ## 1. Architecture
 
-Next.js 15 (App Router) + TypeScript + Tailwind, deployed on Vercel.
+Next.js 16 (App Router) + TypeScript + Tailwind, deployed on Vercel.
 Supabase Postgres as the read store. **The school data itself lives in
 git.**
 

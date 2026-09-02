@@ -1,0 +1,41 @@
+{
+  "slug": "loyola-high-school",
+  "name_en": "Loyola High School",
+  "name_fr": "École secondaire Loyola",
+  "language": "en",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montreal",
+  "address": "7272, rue Sherbrooke Ouest, Montréal, QC H4B 1R6",
+  "postal_code": "H4B 1R6",
+  "location": {
+    "lat": 45.4582,
+    "lng": -73.6404
+  },
+  "geocode_precision": "approximate",
+  "website_url": "https://loyola.ca",
+  "admissions_url": "https://loyola.ca/admissions",
+  "tuition_annual_cad": 6008,
+  "has_boarding": false,
+  "programs": ["jesuit_education"],
+  "description_en": "Loyola High School is a Jesuit Catholic co-educational university preparatory school in Montreal's Notre-Dame-de-Grâce neighbourhood, founded in 1896. The school provides English-language education and follows the Jesuit educational tradition, focusing on academic excellence while forming students who are intellectually competent, compassionate, conscientious, and committed to justice. Students must hold an English Eligibility Certificate to attend.",
+  "description_fr": "L'École secondaire Loyola est une école secondaire jésuite catholique mixte et préparatoire à l'université située dans le quartier Notre-Dame-de-Grâce à Montréal, fondée en 1896. L'école offre un enseignement en anglais et suit la tradition éducative jésuite, en mettant l'accent sur l'excellence académique tout en formant des élèves intellectuellement compétents, compatissants, guidés par leur conscience et engagés envers la justice. Les élèves doivent détenir un certificat d'admissibilité à l'enseignement en anglais.",
+  "source_url": "https://loyola.ca/admissions",
+  "last_verified_at": "2026-08-30",
+  "status": "published",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T09:00:00-04:00",
+      "ends_at": "2026-09-19T14:30:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": true,
+      "registration_url": null,
+      "notes_en": "Grade 5 and 6 students and families invited. One-hour guided tours to see facilities and meet faculty and staff. Registration details posted mid-July 2026 on website. Families register for specific time slots throughout the day.",
+      "notes_fr": "Élèves de 5e et 6e année et leurs familles invités. Visites guidées d'une heure pour voir les installations et rencontrer les professeurs et le personnel. Détails d'inscription publiés à la mi-juillet 2026 sur le site Web. Les familles s'inscrivent pour des créneaux horaires spécifiques tout au long de la journée.",
+      "source_url": "https://loyola.ca/admissions",
+      "last_verified_at": "2026-08-30",
+      "status": "published"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "college-jean-de-brebeuf",
+  "name_en": "Collège Jean-de-Brébeuf",
+  "name_fr": "Collège Jean-de-Brébeuf",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montreal",
+  "address": "3200, chemin de la Côte-Sainte-Catherine, Montréal, QC H3T 1C1",
+  "postal_code": "H3T 1C1",
+  "location": {
+    "lat": 45.5034,
+    "lng": -73.6164
+  },
+  "geocode_precision": "approximate",
+  "website_url": "https://www.brebeuf.qc.ca",
+  "admissions_url": "https://www.brebeuf.qc.ca/secondaire/admission/",
+  "tuition_annual_cad": 5884,
+  "has_boarding": false,
+  "programs": ["sport_et_monde"],
+  "description_en": "Collège Jean-de-Brébeuf is a private French-language co-educational secondary school in Montreal's Côte-des-Neiges neighbourhood, founded nearly 100 years ago. The school offers a values-based education grounded in humanist principles, with specialized programs including Sport et monde for athletically inclined students. Classes are organized by gender in grades 7-10, though students share campus facilities.",
+  "description_fr": "Le Collège Jean-de-Brébeuf est une école secondaire privée francophone mixte située dans le quartier Côte-des-Neiges à Montréal, fondée il y a près de 100 ans. L'école offre une éducation axée sur les valeurs humanistes, avec des programmes spécialisés incluant Sport et monde pour les élèves athlétiques. Les classes sont organisées par genre de la 1re à la 4e secondaire, bien que les élèves partagent les installations du campus.",
+  "source_url": "https://www.brebeuf.qc.ca/secondaire/admission/",
+  "last_verified_at": "2026-08-30",
+  "status": "published",
+  "open_days": [
+    {
+      "starts_at": "2026-09-26T08:30:00-04:00",
+      "ends_at": "2026-09-26T17:00:00-04:00",
+      "type": "entrance_exam",
+      "academic_year": "2027-2028",
+      "registration_required": true,
+      "registration_url": null,
+      "notes_en": "Invitation only. Only selected candidates are invited to attend based on application review. Exams consist of Mathematics (logic, approximately 35 minutes) and French (three components, 90 minutes total). Parents cannot attend.",
+      "notes_fr": "Sur invitation seulement. Seuls les candidats sélectionnés sont invités à assister en fonction de l'examen de la demande. Les examens comprennent les mathématiques (logique, environ 35 minutes) et le français (trois composantes, 90 minutes au total). Les parents ne peuvent pas assister.",
+      "source_url": "https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/",
+      "last_verified_at": "2026-08-30",
+      "status": "published"
+    },
+    {
+      "starts_at": "2026-09-27T08:30:00-04:00",
+      "ends_at": "2026-09-27T12:00:00-04:00",
+      "type": "entrance_exam",
+      "academic_year": "2027-2028",
+      "registration_required": true,
+      "registration_url": null,
+      "notes_en": "Invitation only. Continuation of entrance exam process. Only invited candidates attend.",
+      "notes_fr": "Sur invitation seulement. Suite du processus d'examen d'entrée. Seuls les candidats invités y assistent.",
+      "source_url": "https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/",
+      "last_verified_at": "2026-08-30",
+      "status": "published"
+    }
+  ]
+}
