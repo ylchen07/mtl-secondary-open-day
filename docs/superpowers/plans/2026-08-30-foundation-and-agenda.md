@@ -21,7 +21,9 @@
 
 Every task's requirements implicitly include this section.
 
-- **Node 20+**, package manager is **pnpm**. Never run `npm install` or `yarn`.
+- **Node 22+**, package manager is **pnpm**. Never run `npm install` or `yarn`.
+  (Originally drafted as "Node 20+"; pnpm 11 requires Node >= 22.13 because it
+  depends on `node:sqlite`. CI on Node 20 fails at `pnpm store path`.)
 - **TypeScript strict mode on.** No `any` in committed code. No `@ts-ignore`.
 - **Locales are exactly `en` and `fr`.** Default locale `en`. Every user-visible string must exist in both `messages/en.json` and `messages/fr.json`.
 - **Every school and event must have both `name_en`/`name_fr` and both `description_en`/`description_fr` non-empty.** This is enforced by schema, not convention.
