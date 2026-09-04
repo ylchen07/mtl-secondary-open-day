@@ -24,6 +24,23 @@
 - `SUPABASE_SERVICE_ROLE_KEY` is never imported under `src/app/` and is never a Vercel env var.
 - Existing published files (`villa-maria`, `loyola-high-school`, `college-jean-de-brebeuf`) must remain byte-identical after any harvest run.
 
+### Test file locations — read this before writing any test
+
+`vitest.config.ts` sets `include: ['tests/**/*.test.ts']`. **A test file anywhere else is silently never run, and `pnpm test` still reports success.** Every test in this plan therefore lives in `tests/`, flat, with the module path folded into the filename:
+
+| Module under test | Test file |
+|---|---|
+| `src/lib/schema.ts` | `tests/schema.test.ts` (exists — add to it) |
+| `scripts/check-sources.ts` | `tests/check-sources.test.ts` |
+| `src/lib/harvest/parse-listing.ts` | `tests/harvest-parse-listing.test.ts` |
+| `src/lib/harvest/parse-detail.ts` | `tests/harvest-parse-detail.test.ts` |
+| `src/lib/harvest/reconcile.ts` | `tests/harvest-reconcile.test.ts` |
+| `src/lib/harvest/emit.ts` | `tests/harvest-emit.test.ts` |
+
+Tests import via the `@/` alias (`@/lib/harvest/reconcile`), which `vite-tsconfig-paths` resolves. Only `scripts/` has no alias, so `tests/check-sources.test.ts` imports it relatively as `../scripts/check-sources`. **Source files keep their own relative imports** (`./types`, `../schema`) — do not rewrite those.
+
+After adding any test file, confirm it actually ran: the reported test count must increase. A suite that passes without running your new tests is worse than a failing one.
+
 ## File Structure
 
 | File | Responsibility |
@@ -46,7 +63,7 @@
 
 **Files:**
 - Modify: `src/lib/schema.ts`
-- Test: `src/lib/schema.test.ts`
+- Test: `tests/schema.test.ts`
 
 **Interfaces:**
 - Consumes: nothing (first task)
@@ -54,7 +71,7 @@
 
 - [ ] **Step 1: Write the failing tests**
 
-Add to `src/lib/schema.test.ts`. Build the valid-school fixture with the helper already used in that file if one exists; otherwise inline a complete valid school object and spread over it.
+Add to `tests/schema.test.ts`. Build the valid-school fixture with the helper already used in that file if one exists; otherwise inline a complete valid school object and spread over it.
 
 ```typescript
 import { describe, it, expect } from 'vitest';
@@ -121,7 +138,7 @@ describe('description optionality', () => {
 
 - [ ] **Step 2: Run the tests and confirm they fail**
 
-Run: `pnpm vitest run src/lib/schema.test.ts -t 'description optionality'`
+Run: `pnpm vitest run tests/schema.test.ts -t 'description optionality'`
 Expected: the "neither description" and "explicit nulls" cases FAIL (schema currently requires non-empty strings); the two rejection cases also FAIL because the schema currently rejects for the wrong reason (missing required field) — but confirm the *messages* do not yet match `/both .* or neither/i`.
 
 - [ ] **Step 3: Change the schema**
@@ -148,7 +165,7 @@ Then add a refinement alongside the existing `geocode_precision` refinement. Not
 
 - [ ] **Step 4: Run the tests and confirm they pass**
 
-Run: `pnpm vitest run src/lib/schema.test.ts`
+Run: `pnpm vitest run tests/schema.test.ts`
 Expected: PASS, including all pre-existing schema tests.
 
 - [ ] **Step 5: Confirm the seed pipeline still handles absent descriptions**
@@ -183,7 +200,7 @@ Expected: 0 type errors, 0 lint errors, all tests pass.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add src/lib/schema.ts src/lib/schema.test.ts supabase/migrations/
+git add src/lib/schema.ts tests/schema.test.ts supabase/migrations/
 git commit -m "feat(schema): make descriptions optional, both-or-neither
 
 FEEP supplies no usable bilingual description. Requiring them is the
@@ -198,7 +215,7 @@ a French-speaking parent on /fr."
 
 **Files:**
 - Create: `scripts/check-sources.ts`
-- Create: `scripts/check-sources.test.ts`
+- Create: `tests/check-sources.test.ts`
 - Modify: `package.json` (add `check:sources` script)
 - Modify: `.github/workflows/ci.yml`
 
@@ -208,12 +225,12 @@ a French-speaking parent on /fr."
 
 - [ ] **Step 1: Write the failing test**
 
-Create `scripts/check-sources.test.ts`:
+Create `tests/check-sources.test.ts`:
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { findAggregatorSources } from './check-sources';
-import type { SchoolFile } from '../src/lib/schema';
+import { findAggregatorSources } from '../scripts/check-sources';
+import type { SchoolFile } from '@/lib/schema';
 
 function school(over: Partial<SchoolFile>): SchoolFile {
   return {
@@ -287,7 +304,7 @@ describe('findAggregatorSources', () => {
 
 - [ ] **Step 2: Run it and confirm it fails**
 
-Run: `pnpm vitest run scripts/check-sources.test.ts`
+Run: `pnpm vitest run tests/check-sources.test.ts`
 Expected: FAIL — cannot resolve `./check-sources`.
 
 - [ ] **Step 3: Implement the guard**
@@ -370,7 +387,7 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
 
 - [ ] **Step 4: Run the tests and confirm they pass**
 
-Run: `pnpm vitest run scripts/check-sources.test.ts`
+Run: `pnpm vitest run tests/check-sources.test.ts`
 Expected: PASS (6 tests).
 
 - [ ] **Step 5: Wire it into package.json and CI**
@@ -408,7 +425,7 @@ Expected: clean again. **Do not commit the temporary edit.**
 - [ ] **Step 8: Commit**
 
 ```bash
-git add scripts/check-sources.ts scripts/check-sources.test.ts package.json .github/workflows/ci.yml
+git add scripts/check-sources.ts tests/check-sources.test.ts package.json .github/workflows/ci.yml
 git commit -m "feat(ci): fail the build if a published row cites an aggregator
 
 Turns 'aggregators are leads, not sources' into something that cannot be
@@ -424,7 +441,7 @@ for. Only published rows are held to the bar."
 - Create: `tests/fixtures/feep/listing-montreal.html`
 - Create: `src/lib/harvest/types.ts`
 - Create: `src/lib/harvest/parse-listing.ts`
-- Create: `src/lib/harvest/parse-listing.test.ts`
+- Create: `tests/harvest-parse-listing.test.ts`
 - Modify: `package.json` (add `cheerio` devDependency)
 
 **Interfaces:**
@@ -465,14 +482,14 @@ Record in the commit body which selectors you found. The tests below assert on *
 
 - [ ] **Step 3: Write the failing test**
 
-Create `src/lib/harvest/parse-listing.test.ts`. These expectations are transcribed from the live FEEP listing as of 2026-09-03 and are known-correct:
+Create `tests/harvest-parse-listing.test.ts`. These expectations are transcribed from the live FEEP listing as of 2026-09-03 and are known-correct:
 
 ```typescript
 import { describe, it, expect, beforeAll } from 'vitest';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { parseListing } from './parse-listing';
-import type { ListingEntry } from './types';
+import { parseListing } from '@/lib/harvest/parse-listing';
+import type { ListingEntry } from '@/lib/harvest/types';
 
 let entries: ListingEntry[];
 
@@ -543,7 +560,7 @@ describe('parseListing', () => {
 
 - [ ] **Step 4: Run it and confirm it fails**
 
-Run: `pnpm vitest run src/lib/harvest/parse-listing.test.ts`
+Run: `pnpm vitest run tests/harvest-parse-listing.test.ts`
 Expected: FAIL — cannot resolve `./parse-listing`.
 
 - [ ] **Step 5: Write the types**
@@ -685,7 +702,7 @@ Replace both `REPLACE_ME` constants with the real selectors. Iterate against the
 
 - [ ] **Step 7: Run the tests until they pass**
 
-Run: `pnpm vitest run src/lib/harvest/parse-listing.test.ts`
+Run: `pnpm vitest run tests/harvest-parse-listing.test.ts`
 Expected: PASS (8 tests).
 
 - [ ] **Step 8: Commit**
@@ -707,7 +724,7 @@ null times rather than guessed ones (ruling R10)."
 - Create: `tests/fixtures/feep/detail-marie-de-france.html`
 - Create: `tests/fixtures/feep/detail-primary-only.html`
 - Create: `src/lib/harvest/parse-detail.ts`
-- Create: `src/lib/harvest/parse-detail.test.ts`
+- Create: `tests/harvest-parse-detail.test.ts`
 
 **Interfaces:**
 - Consumes: `SchoolFacts` from `./types` (Task 3).
@@ -730,13 +747,13 @@ Read both with the `read` tool. Locate the Contact Information block and the Edu
 
 - [ ] **Step 2: Write the failing test**
 
-Create `src/lib/harvest/parse-detail.test.ts`:
+Create `tests/harvest-parse-detail.test.ts`:
 
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { parseDetail, parsePostalLine, inferGender } from './parse-detail';
+import { parseDetail, parsePostalLine, inferGender } from '@/lib/harvest/parse-detail';
 
 const fixture = (name: string): string =>
   readFileSync(path.join(process.cwd(), 'tests/fixtures/feep', name), 'utf8');
@@ -806,7 +823,7 @@ describe('parseDetail', () => {
 
 - [ ] **Step 3: Run it and confirm it fails**
 
-Run: `pnpm vitest run src/lib/harvest/parse-detail.test.ts`
+Run: `pnpm vitest run tests/harvest-parse-detail.test.ts`
 Expected: FAIL — cannot resolve `./parse-detail`.
 
 - [ ] **Step 4: Implement**
@@ -889,13 +906,13 @@ Adjust `field` and the contact-block extraction until the tests pass. `*:contain
 
 - [ ] **Step 5: Run the tests until they pass**
 
-Run: `pnpm vitest run src/lib/harvest/parse-detail.test.ts`
+Run: `pnpm vitest run tests/harvest-parse-detail.test.ts`
 Expected: PASS (11 tests).
 
 - [ ] **Step 6: Commit**
 
 ```bash
-git add tests/fixtures/feep/ src/lib/harvest/parse-detail.ts src/lib/harvest/parse-detail.test.ts
+git add tests/fixtures/feep/ src/lib/harvest/parse-detail.ts tests/harvest-parse-detail.test.ts
 git commit -m "feat(harvest): parse FEEP detail pages for address, level and language
 
 gender has no structured field anywhere on FEEP, only prose. inferGender
@@ -910,7 +927,7 @@ checked', not 'this school is co-ed'."
 
 **Files:**
 - Create: `src/lib/harvest/reconcile.ts`
-- Create: `src/lib/harvest/reconcile.test.ts`
+- Create: `tests/harvest-reconcile.test.ts`
 
 **Interfaces:**
 - Consumes: `ListingEntry`, `SchoolFacts` (Tasks 3–4); `SchoolFile` (Task 1).
@@ -918,13 +935,13 @@ checked', not 'this school is co-ed'."
 
 - [ ] **Step 1: Write the failing test**
 
-Create `src/lib/harvest/reconcile.test.ts`:
+Create `tests/harvest-reconcile.test.ts`:
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { reconcile, normaliseName } from './reconcile';
-import type { ListingEntry } from './types';
-import type { SchoolFile } from '../schema';
+import { reconcile, normaliseName } from '@/lib/harvest/reconcile';
+import type { ListingEntry } from '@/lib/harvest/types';
+import type { SchoolFile } from '@/lib/schema';
 
 const TODAY = '2026-09-03';
 
@@ -1020,7 +1037,7 @@ describe('reconcile', () => {
 
 - [ ] **Step 2: Run it and confirm it fails**
 
-Run: `pnpm vitest run src/lib/harvest/reconcile.test.ts`
+Run: `pnpm vitest run tests/harvest-reconcile.test.ts`
 Expected: FAIL — cannot resolve `./reconcile`.
 
 - [ ] **Step 3: Implement**
@@ -1093,13 +1110,13 @@ export function reconcile(
 
 - [ ] **Step 4: Run the tests and confirm they pass**
 
-Run: `pnpm vitest run src/lib/harvest/reconcile.test.ts`
+Run: `pnpm vitest run tests/harvest-reconcile.test.ts`
 Expected: PASS (9 tests).
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/lib/harvest/reconcile.ts src/lib/harvest/reconcile.test.ts
+git add src/lib/harvest/reconcile.ts tests/harvest-reconcile.test.ts
 git commit -m "feat(harvest): reconcile candidates against existing files
 
 Two protections a human cannot be relied on to remember: published files
@@ -1113,7 +1130,7 @@ adjudication rather than written as a duplicate school."
 
 **Files:**
 - Create: `src/lib/harvest/emit.ts`
-- Create: `src/lib/harvest/emit.test.ts`
+- Create: `tests/harvest-emit.test.ts`
 - Create: `src/lib/harvest/report.ts`
 
 **Interfaces:**
@@ -1122,13 +1139,13 @@ adjudication rather than written as a duplicate school."
 
 - [ ] **Step 1: Write the failing test**
 
-Create `src/lib/harvest/emit.test.ts`:
+Create `tests/harvest-emit.test.ts`:
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { toDraftSchool, serialise } from './emit';
-import { schoolFileSchema } from '../schema';
-import type { ListingEntry, SchoolFacts } from './types';
+import { toDraftSchool, serialise } from '@/lib/harvest/emit';
+import { schoolFileSchema } from '@/lib/schema';
+import type { ListingEntry, SchoolFacts } from '@/lib/harvest/types';
 
 const TODAY = '2026-09-03';
 
@@ -1212,7 +1229,7 @@ describe('serialise', () => {
 
 - [ ] **Step 2: Run it and confirm it fails**
 
-Run: `pnpm vitest run src/lib/harvest/emit.test.ts`
+Run: `pnpm vitest run tests/harvest-emit.test.ts`
 Expected: FAIL — cannot resolve `./emit`.
 
 - [ ] **Step 3: Implement**
@@ -1357,13 +1374,13 @@ export function renderReport(decisions: HarvestDecision[], flagged: string[]): s
 
 - [ ] **Step 4: Run the tests and confirm they pass**
 
-Run: `pnpm vitest run src/lib/harvest/emit.test.ts`
+Run: `pnpm vitest run tests/harvest-emit.test.ts`
 Expected: PASS (9 tests). The DST test is the one that matters most — if it fails, `montrealOffset` is wrong and every November event would be an hour off.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/lib/harvest/emit.ts src/lib/harvest/emit.test.ts src/lib/harvest/report.ts
+git add src/lib/harvest/emit.ts tests/harvest-emit.test.ts src/lib/harvest/report.ts
 git commit -m "feat(harvest): emit schema-valid draft files with stable key order
 
 Offsets are derived from America/Toronto rather than hardcoded, so events
