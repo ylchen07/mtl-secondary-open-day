@@ -58,6 +58,12 @@ describe('toSchoolRow', () => {
     expect(row.lat).toBeNull();
     expect(row.lng).toBeNull();
   });
+
+  it('normalizes absent descriptions to null rather than undefined', () => {
+    const row = toSchoolRow({ ...file, description_en: undefined, description_fr: undefined });
+    expect(row.description_en).toBeNull();
+    expect(row.description_fr).toBeNull();
+  });
 });
 
 describe('toOpenDayRows', () => {

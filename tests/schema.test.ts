@@ -85,6 +85,47 @@ describe('schoolFileSchema', () => {
   });
 });
 
+describe('description optionality', () => {
+  it('accepts a school with both descriptions', () => {
+    expect(schoolFileSchema.safeParse(valid).success).toBe(true);
+  });
+
+  it('accepts a school with neither description', () => {
+    const { description_en: _en, description_fr: _fr, ...without } = valid;
+    expect(schoolFileSchema.safeParse(without).success).toBe(true);
+  });
+
+  it('accepts explicit nulls for both descriptions', () => {
+    const r = schoolFileSchema.safeParse({
+      ...valid,
+      description_en: null,
+      description_fr: null,
+    });
+    expect(r.success).toBe(true);
+  });
+
+  it('rejects English description without French', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, description_fr: null });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(r.error.issues[0].message).toMatch(/both .* or neither/i);
+    }
+  });
+
+  it('rejects French description without English', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, description_en: null });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(r.error.issues[0].message).toMatch(/both .* or neither/i);
+    }
+  });
+
+  it('still rejects an empty-string description', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, description_en: '', description_fr: '' });
+    expect(r.success).toBe(false);
+  });
+});
+
 describe('validateSchoolFiles', () => {
   it('reports duplicate slugs across files', () => {
     const { errors } = validateSchoolFiles([
