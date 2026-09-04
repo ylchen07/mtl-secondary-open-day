@@ -45,3 +45,6 @@ next-env.d.ts
 
 # SDD scratch workspace (ledger, briefs, review packages)
 .superpowers/
+
+# Design prototype (throwaway, not deployed)
+demo/
