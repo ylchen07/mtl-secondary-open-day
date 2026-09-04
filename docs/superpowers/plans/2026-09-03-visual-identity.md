@@ -54,13 +54,18 @@
 
 Read `demo/agenda-prototype.html`. The `:root` block in its `<style>` is the token set this task ports. If the file is missing, the token values below are complete and authoritative.
 
-- [ ] **Step 2: Confirm the Tailwind major version**
+- [ ] **Step 2: Tailwind v4 is confirmed — port the CSS accordingly**
+
+`package.json` pins `tailwindcss@^4.3.3` with `@tailwindcss/postcss`. This is **v4**, verified 2026-09-03. Do not re-litigate it; act on it:
+
+1. `globals.css` currently opens with the v3 directives `@tailwind base/components/utilities`. Replace all three with a single `@import "tailwindcss";`.
+2. **Every `[--token]` arbitrary value in Tasks 2, 3, and 4 of this plan must be written `(--token)` instead.** v4 changed the syntax for CSS-variable shorthand. `text-[--ink-3]` is parsed by v4 as an arbitrary *value*, not a variable reference, and silently produces no style. Example: `border-[--rule]` becomes `border-(--rule)`.
+3. Confirm before building on it. After the first styled commit, inspect one rendered element in devtools and check the computed colour is the token value, not the browser default. **The build will not warn you.**
 
 ```bash
-grep -n '"tailwindcss"' package.json && ls tailwind.config.* 2>/dev/null
+grep -n '"tailwindcss"' package.json
+grep -rn '\[--' src/ || echo "no v3-style variable classes remain"
 ```
-
-`globals.css` currently uses `@tailwind base;` (v3 syntax). If Tailwind is v4, replace those three directives with `@import "tailwindcss";` and define tokens in an `@theme` block instead. Record which you found.
 
 - [ ] **Step 3: Load the fonts**
 
@@ -751,10 +756,12 @@ Task 2 and consumed in Task 2 Step 5 with matching signatures. `EventCard`
 keeps its Plan 1 props unchanged, so `AgendaClient` needs no edit beyond
 the grouping swap. `ClashIcon` takes only `className`.
 
-**Known risk:** Tailwind's arbitrary-value syntax for CSS variables
-differs between v3 (`text-[--ink-3]`) and v4 (`text-(--ink-3)`). Task 1
-Step 2 establishes the version; if it is v4, every `[--token]` in Tasks
-2–4 must be written `(--token)`. Get this wrong and the classes silently
-do nothing — check one rendered element in devtools after the first
-styled commit rather than trusting the build to complain, because it
-will not.
+**Known risk (now resolved, but still the sharpest trap here):** Tailwind
+is **v4**, confirmed against `package.json` on 2026-09-03. The token
+classes written throughout Tasks 2–4 use the v3 form `[--token]` and
+**must all be transposed to the v4 form `(--token)`** as they are typed.
+This is not a style preference: in v4 the bracket form is treated as an
+arbitrary value rather than a variable reference, so it silently emits
+nothing. There is no build error and no lint error — the page simply
+renders with default colours and looks approximately fine at a glance.
+Verify in devtools after the first styled commit.
