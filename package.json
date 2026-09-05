@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed": "tsx scripts/seed.ts",
+    "check:sources": "tsx scripts/check-sources.ts",
     "test:e2e": "playwright test"
   },
   "keywords": [],

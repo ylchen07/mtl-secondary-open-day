@@ -20,6 +20,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
       - run: pnpm lint
+      - name: Check data sources
+        run: pnpm check:sources
       - name: Validate school data
         run: pnpm test tests/data-integrity.test.ts
       - name: Unit tests
