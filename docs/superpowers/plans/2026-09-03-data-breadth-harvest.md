@@ -56,6 +56,9 @@ After adding any test file, confirm it actually ran: the reported test count mus
 | `tests/fixtures/feep/listing-montreal.html` | Checked-in listing fixture |
 | `tests/fixtures/feep/detail-marie-de-france.html` | Checked-in detail fixture |
 | `src/lib/schema.ts` | **Modified** — descriptions become optional, all-or-nothing |
+| `src/lib/types.ts` | **Modified** — `SchoolRow` description fields become `string \| null` |
+| `src/lib/seed-mapping.ts` | **Modified** — `?? null` normalisation, mirroring `tuition_annual_cad` |
+| `supabase/migrations/20260903120000_descriptions_nullable.sql` | **Created** — drops `NOT NULL`, retains the non-empty CHECK |
 
 ---
 
