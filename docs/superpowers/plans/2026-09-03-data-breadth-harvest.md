@@ -217,8 +217,27 @@ a French-speaking parent on /fr."
 
 ### Task 2: CI guard — no published row may cite an aggregator
 
+> **AS BUILT (differs from the steps below — read this first).** Review of
+> the first cut found the single-file layout forced an `import.meta.url`
+> entry-point heuristic that had its own silent-no-op mode. The task was
+> completed with the logic **split**:
+> - `src/lib/check-sources.ts` — pure logic, exports `AGGREGATOR_HOSTS` and
+>   `findAggregatorSources`. Internally uses a private
+>   `sourceProblem(url): string | null` classifier rather than a boolean, so
+>   each URL is parsed once and carries its own reason.
+> - `scripts/check-sources.ts` — CLI only, exports nothing, bare
+>   `main().catch(...)` matching `scripts/seed.ts`. No heuristic.
+> - `tests/check-sources.test.ts` imports `@/lib/check-sources`, not `../scripts/...`.
+>
+> Also added beyond the steps below: a **floor check** failing when zero
+> school files are found (the guard previously reported clean having checked
+> nothing), and **fail-closed** handling for URLs that will not parse *or*
+> that parse with an empty host (`javascript:`, `mailto:`, `data:`).
+> Rulings R34–R37.
+
 **Files:**
-- Create: `scripts/check-sources.ts`
+- Create: `src/lib/check-sources.ts` (pure logic)
+- Create: `scripts/check-sources.ts` (CLI only)
 - Create: `tests/check-sources.test.ts`
 - Modify: `package.json` (add `check:sources` script)
 - Modify: `.github/workflows/ci.yml`
