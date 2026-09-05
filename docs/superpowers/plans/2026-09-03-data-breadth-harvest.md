@@ -31,13 +31,13 @@
 | Module under test | Test file |
 |---|---|
 | `src/lib/schema.ts` | `tests/schema.test.ts` (exists — add to it) |
-| `scripts/check-sources.ts` | `tests/check-sources.test.ts` |
+| `src/lib/check-sources.ts` | `tests/check-sources.test.ts` |
 | `src/lib/harvest/parse-listing.ts` | `tests/harvest-parse-listing.test.ts` |
 | `src/lib/harvest/parse-detail.ts` | `tests/harvest-parse-detail.test.ts` |
 | `src/lib/harvest/reconcile.ts` | `tests/harvest-reconcile.test.ts` |
 | `src/lib/harvest/emit.ts` | `tests/harvest-emit.test.ts` |
 
-Tests import via the `@/` alias (`@/lib/harvest/reconcile`), which `vite-tsconfig-paths` resolves. Only `scripts/` has no alias, so `tests/check-sources.test.ts` imports it relatively as `../scripts/check-sources`. **Source files keep their own relative imports** (`./types`, `../schema`) — do not rewrite those.
+Tests import via the `@/` alias (`@/lib/harvest/reconcile`), which `vite-tsconfig-paths` resolves. `scripts/` has no alias, which is one reason no test imports a script: as built, every `scripts/*.ts` file is CLI-only and exports nothing, and the logic worth testing lives under `src/lib/`. **Source files keep their own relative imports** (`./types`, `../schema`) — do not rewrite those.
 
 After adding any test file, confirm it actually ran: the reported test count must increase. A suite that passes without running your new tests is worse than a failing one.
 
@@ -52,7 +52,8 @@ After adding any test file, confirm it actually ran: the reported test count mus
 | `src/lib/harvest/emit.ts` | Build draft `SchoolFile` objects in stable key order |
 | `src/lib/harvest/report.ts` | Render `harvest-report.md` |
 | `scripts/harvest-feep.ts` | CLI: fetch or read fixtures, run pipeline, write files |
-| `scripts/check-sources.ts` | CI guard: no published row cites an aggregator |
+| `src/lib/check-sources.ts` | Aggregator detection: `AGGREGATOR_HOSTS`, `findAggregatorSources` |
+| `scripts/check-sources.ts` | CI guard CLI: loads `data/schools/`, validates, reports; exports nothing |
 | `tests/fixtures/feep/listing-montreal.html` | Checked-in listing fixture |
 | `tests/fixtures/feep/detail-marie-de-france.html` | Checked-in detail fixture |
 | `src/lib/schema.ts` | **Modified** — descriptions become optional, all-or-nothing |
