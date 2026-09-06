@@ -60,6 +60,10 @@ const NON_HOMEPAGE_HOSTS = [
   'youtube.com',
   'eventbrite.ca',
   'eventbrite.com',
+  'my.matterport.com',
+  'matterport.com',
+  'vimeo.com',
+  'youtu.be',
 ];
 
 /** cheerio does not re-export its DOM node types, so name a selection this way. */
@@ -91,20 +95,52 @@ export function parseTimeRange(
   return { startTime: times[0], endTime: times[1] };
 }
 
+const DOCUMENT_EXTENSIONS = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'];
+
+/**
+ * Decode HTML entities in a URL string.
+ */
+function decodeHtmlEntities(text: string): string {
+  return text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+}
+
+/**
+ * Normalize a URL candidate: trim whitespace and decode HTML entities.
+ */
+function normalizeUrl(href: string): string {
+  return decodeHtmlEntities(href.trim());
+}
+
+/**
+ * True when the URL pathname ends with a document extension.
+ */
+function isDocumentUrl(href: string): boolean {
+  let pathname: string;
+  try {
+    pathname = new URL(href).pathname.toLowerCase();
+  } catch {
+    return false;
+  }
+  return DOCUMENT_EXTENSIONS.some((ext) => pathname.endsWith(ext));
+}
+
 /**
  * True when `href` is an absolute URL to somewhere other than an aggregator
- * or a non-homepage host (booking page, form builder, doc host, social media).
+ * or a non-homepage host (booking page, form builder, doc host, social media),
+ * and is not a document file.
  */
 export function isSchoolOwnUrl(href: string): boolean {
+  const normalized = normalizeUrl(href);
   let host: string;
   try {
-    host = new URL(href).hostname.toLowerCase().replace(/\.+$/, '');
+    host = new URL(normalized).hostname.toLowerCase().replace(/\.+$/, '');
   } catch {
     return false;
   }
   if (host === '') return false;
   if (AGGREGATOR_HOSTS.some((a) => host === a || host.endsWith(`.${a}`))) return false;
   if (NON_HOMEPAGE_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return false;
+  if (isDocumentUrl(normalized)) return false;
   return true;
 }
 
@@ -130,7 +166,7 @@ export function parseListing(html: string): ListingEntry[] {
           $block
             .find('a[href]')
             .toArray()
-            .map((a) => $(a).attr('href') ?? '')
+            .map((a) => normalizeUrl($(a).attr('href') ?? ''))
             .find(isSchoolOwnUrl) ?? null;
 
         entries.push({

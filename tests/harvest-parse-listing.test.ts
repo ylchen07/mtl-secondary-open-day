@@ -87,9 +87,9 @@ describe('parseListing', () => {
     expect(find('Regina Assumpta').region).toBe('montreal_island');
   });
 
-  it('skips Calendly booking link and picks the school homepage for Vision Terrebonne', () => {
+  it('rejects PDF URL for Vision Terrebonne', () => {
     const entry = find('Trilingue Vision Terrebonne');
-    expect(entry.externalUrl).toBe('https://ecolevision.com/medias/documents/TER_ProcedureAdmission-Primaire.pdf');
+    expect(entry.externalUrl).toBeNull();
   });
 
   it('skips Google Sites link and picks the school homepage for Externat Saint-Coeur de Marie', () => {
@@ -102,11 +102,37 @@ describe('parseListing', () => {
     expect(entry.externalUrl).toBe('https://www.ss-f.com/admission/processus-d-admission');
   });
 
+  it('trims whitespace from URLs', () => {
+    const entry = find('Saint-Bernard');
+    expect(entry.externalUrl).toBe('https://www.csb.qc.ca');
+    expect(entry.externalUrl).not.toMatch(/^\s|\s$/);
+  });
+
+  it('rejects Matterport virtual tour URL for Vision Victoriaville', () => {
+    const entry = find('Trilingue Vision Victoriaville');
+    expect(entry.externalUrl).toBeNull();
+  });
+
+  it('decodes HTML entities in all URLs', () => {
+    for (const entry of entries) {
+      if (entry.externalUrl) {
+        expect(entry.externalUrl).not.toContain('&amp;');
+      }
+    }
+  });
+
+  it('does not reject query parameters that mention documents', () => {
+    expect(isSchoolOwnUrl('https://example.com/admission?doc=pdf')).toBe(true);
+    expect(isSchoolOwnUrl('https://example.com/page?file=document.pdf')).toBe(true);
+  });
+
   it('rejects blocklisted hosts as non-homepage URLs', () => {
     expect(isSchoolOwnUrl('https://calendly.com/booking')).toBe(false);
     expect(isSchoolOwnUrl('https://docs.google.com/forms/d/abc')).toBe(false);
     expect(isSchoolOwnUrl('https://sites.google.com/site/page')).toBe(false);
     expect(isSchoolOwnUrl('https://facebook.com/page')).toBe(false);
     expect(isSchoolOwnUrl('https://www.instagram.com/page')).toBe(false);
+    expect(isSchoolOwnUrl('https://my.matterport.com/show/?m=abc')).toBe(false);
+    expect(isSchoolOwnUrl('https://vimeo.com/12345')).toBe(false);
   });
 });
