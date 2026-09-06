@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { parseListing } from '@/lib/harvest/parse-listing';
+import { parseListing, isSchoolOwnUrl } from '@/lib/harvest/parse-listing';
 import type { ListingEntry } from '@/lib/harvest/types';
 
 let entries: ListingEntry[];
@@ -85,5 +85,28 @@ describe('parseListing', () => {
 
   it('assigns the region from the listing grouping', () => {
     expect(find('Regina Assumpta').region).toBe('montreal_island');
+  });
+
+  it('skips Calendly booking link and picks the school homepage for Vision Terrebonne', () => {
+    const entry = find('Trilingue Vision Terrebonne');
+    expect(entry.externalUrl).toBe('https://ecolevision.com/medias/documents/TER_ProcedureAdmission-Primaire.pdf');
+  });
+
+  it('skips Google Sites link and picks the school homepage for Externat Saint-Coeur de Marie', () => {
+    const entry = find('Saint-Coeur de Marie');
+    expect(entry.externalUrl).toBe('https://externat-scm.ca/admissions/');
+  });
+
+  it('skips Google Forms link and picks the school homepage for Séminaire Saint-François', () => {
+    const entry = find('Séminaire Saint-François');
+    expect(entry.externalUrl).toBe('https://www.ss-f.com/admission/processus-d-admission');
+  });
+
+  it('rejects blocklisted hosts as non-homepage URLs', () => {
+    expect(isSchoolOwnUrl('https://calendly.com/booking')).toBe(false);
+    expect(isSchoolOwnUrl('https://docs.google.com/forms/d/abc')).toBe(false);
+    expect(isSchoolOwnUrl('https://sites.google.com/site/page')).toBe(false);
+    expect(isSchoolOwnUrl('https://facebook.com/page')).toBe(false);
+    expect(isSchoolOwnUrl('https://www.instagram.com/page')).toBe(false);
   });
 });

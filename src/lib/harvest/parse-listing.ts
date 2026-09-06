@@ -36,7 +36,31 @@ const FEEP_DETAIL_LINK_SELECTOR = 'a[href*="/ecoles-privees-quebec/"]';
  * card would publish an admission deadline as an open house.
  */
 const OPEN_HOUSE_HEADING = 'Portes ouvertes';
-const ADMISSION_HEADING = /^Processus d['’]admission$/;
+const ADMISSION_HEADING = /^Processus d['']admission$/;
+
+/**
+ * Hosts that are booking pages, form builders, doc hosts, or social media.
+ * These are never a school's own homepage. This list is distinct from
+ * AGGREGATOR_HOSTS in src/lib/check-sources.ts: that constant means "is a
+ * directory of schools, must never be a published source" and is enforced by CI.
+ * This list means "is not a school's own homepage". Different meanings,
+ * different consequences; fusing them would let a change to one silently alter
+ * the other.
+ */
+const NON_HOMEPAGE_HOSTS = [
+  'calendly.com',
+  'docs.google.com',
+  'forms.gle',
+  'sites.google.com',
+  'facebook.com',
+  'instagram.com',
+  'linkedin.com',
+  'twitter.com',
+  'x.com',
+  'youtube.com',
+  'eventbrite.ca',
+  'eventbrite.com',
+];
 
 /** cheerio does not re-export its DOM node types, so name a selection this way. */
 type ElementSelection = ReturnType<cheerio.CheerioAPI>;
@@ -67,8 +91,11 @@ export function parseTimeRange(
   return { startTime: times[0], endTime: times[1] };
 }
 
-/** True when `href` is an absolute URL to somewhere other than an aggregator. */
-function isSchoolOwnUrl(href: string): boolean {
+/**
+ * True when `href` is an absolute URL to somewhere other than an aggregator
+ * or a non-homepage host (booking page, form builder, doc host, social media).
+ */
+export function isSchoolOwnUrl(href: string): boolean {
   let host: string;
   try {
     host = new URL(href).hostname.toLowerCase().replace(/\.+$/, '');
@@ -76,7 +103,9 @@ function isSchoolOwnUrl(href: string): boolean {
     return false;
   }
   if (host === '') return false;
-  return !AGGREGATOR_HOSTS.some((a) => host === a || host.endsWith(`.${a}`));
+  if (AGGREGATOR_HOSTS.some((a) => host === a || host.endsWith(`.${a}`))) return false;
+  if (NON_HOMEPAGE_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return false;
+  return true;
 }
 
 export function parseListing(html: string): ListingEntry[] {
