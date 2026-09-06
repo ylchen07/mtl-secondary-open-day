@@ -14,10 +14,28 @@ beforeAll(() => {
   entries = parseListing(html);
 });
 
+/**
+ * Look up exactly one entry by name fragment.
+ *
+ * Throws on AMBIGUITY as well as absence. FEEP lists sibling campuses under
+ * near-identical names — "Dorval" alone matches both the préscolaire-primaire
+ * and the secondaire campus of Collège Sainte-Anne, which publish different
+ * dates. A first-match helper would silently bind an assertion to whichever
+ * campus FEEP happened to render first, so a reordering upstream would change
+ * what the test means rather than fail. Ambiguity is a test defect here, not a
+ * lookup detail.
+ */
 const find = (fragment: string): ListingEntry => {
-  const hit = entries.find((e) => e.nameFr.includes(fragment));
-  if (!hit) throw new Error(`no entry matching "${fragment}"`);
-  return hit;
+  const hits = entries.filter((e) => e.nameFr.includes(fragment));
+  if (hits.length === 0) throw new Error(`no entry matching "${fragment}"`);
+  if (hits.length > 1) {
+    throw new Error(
+      `ambiguous fragment "${fragment}" matched ${hits.length} entries: ${hits
+        .map((h) => h.nameFr)
+        .join(' | ')}`,
+    );
+  }
+  return hits[0];
 };
 
 describe('parseListing', () => {
@@ -59,7 +77,7 @@ describe('parseListing', () => {
   });
 
   it('returns null times when only a date is published', () => {
-    const entry = find('Dorval');
+    const entry = find('préscolaire-primaire Dorval');
     const ev = entry.events[0];
     expect(ev.date).toBe('2026-10-03');
     expect(ev.startTime).toBeNull();
