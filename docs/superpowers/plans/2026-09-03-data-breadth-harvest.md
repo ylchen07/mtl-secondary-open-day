@@ -1354,7 +1354,11 @@ Create `src/lib/harvest/report.ts`:
 ```typescript
 import type { HarvestDecision } from './reconcile';
 
-export function renderReport(decisions: HarvestDecision[], flagged: string[]): string {
+export function renderReport(
+  decisions: HarvestDecision[],
+  flagged: string[],
+  skippedAsPrimary: string[] = [],
+): string {
   const created = decisions.filter((d) => d.kind === 'create');
   const skipped = decisions.filter((d) => d.kind === 'skip');
   const conflicts = decisions.filter((d) => d.kind === 'conflict');
@@ -1371,8 +1375,17 @@ export function renderReport(decisions: HarvestDecision[], flagged: string[]): s
     `- Skipped: **${skipped.length}**`,
     `- Conflicts needing adjudication: **${conflicts.length}**`,
     `- Gender unconfirmed: **${flagged.length}**`,
+    `- Excluded as primary-only: **${skippedAsPrimary.length}**`,
     '',
   ];
+
+  // A school excluded as primary-only leaves no other trace. If a real secondary
+  // school lands here, this list is the only chance anyone has to notice.
+  if (skippedAsPrimary.length > 0) {
+    lines.push('## Excluded as primary-only \u2014 skim for mistakes', '');
+    for (const slug of skippedAsPrimary) lines.push(`- \`${slug}\``);
+    lines.push('');
+  }
 
   if (conflicts.length > 0) {
     lines.push('## Conflicts — resolve by hand', '');
@@ -1489,6 +1502,11 @@ async function main(): Promise<void> {
     }
 
     if (!facts.isSecondary) {
+      // Collect these; they MUST reach harvest-report.md. isSecondary comes from
+      // FEEP's teaching-level field, and a page missing that field yields false.
+      // A wrongly-excluded school is INVISIBLE — absence leaves no trace — so the
+      // report is the only place a human can notice one. Do not merely log it.
+      skippedAsPrimary.push(decision.slug);
       console.log(`  - ${decision.slug}: primary only, skipped`);
       continue;
     }
@@ -1513,7 +1531,7 @@ async function main(): Promise<void> {
 
   await writeFile(
     path.join(process.cwd(), 'harvest-report.md'),
-    renderReport(decisions, flagged),
+    renderReport(decisions, flagged, skippedAsPrimary),
     'utf8',
   );
 
