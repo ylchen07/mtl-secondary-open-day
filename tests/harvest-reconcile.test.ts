@@ -67,10 +67,14 @@ describe('reconcile', () => {
       [existing('closed-school', 'École Fermée', 'archived')],
       TODAY,
     );
-    expect(out[0].kind).toBe('skip');
-    if (out[0].kind === 'skip') {
-      expect(out[0].reason).toMatch(/archived/i);
-    }
+    expect(out).toEqual([
+      {
+        kind: 'skip',
+        slug: 'closed-school',
+        reason:
+          'existing file is archived — a human retired this school; not resurrecting it without review',
+      },
+    ]);
   });
 
   it('flags a CONFLICT when FEEP uses a different slug for a school we already hold', () => {
@@ -101,10 +105,9 @@ describe('reconcile', () => {
       [],
       TODAY,
     );
-    expect(out[0].kind).toBe('skip');
-    if (out[0].kind === 'skip') {
-      expect(out[0].reason).toMatch(/no usable event/i);
-    }
+    expect(out).toEqual([
+      { kind: 'skip', slug: 'new-school', reason: 'no usable event — no parseable date' },
+    ]);
   });
 
   it('skips an entry whose only event is in the past', () => {
@@ -113,10 +116,9 @@ describe('reconcile', () => {
       [],
       TODAY,
     );
-    expect(out[0].kind).toBe('skip');
-    if (out[0].kind === 'skip') {
-      expect(out[0].reason).toMatch(/past/i);
-    }
+    expect(out).toEqual([
+      { kind: 'skip', slug: 'new-school', reason: 'all events are in the past — stale FEEP entry' },
+    ]);
   });
 
   it('skips an event that has a date but no time (R10)', () => {
@@ -129,10 +131,9 @@ describe('reconcile', () => {
       [],
       TODAY,
     );
-    expect(out[0].kind).toBe('skip');
-    if (out[0].kind === 'skip') {
-      expect(out[0].reason).toMatch(/no published time/i);
-    }
+    expect(out).toEqual([
+      { kind: 'skip', slug: 'new-school', reason: 'no published time — refusing to guess (R10)' },
+    ]);
   });
 
   it('skips a FEEP entry outside Greater Montreal (region: null)', () => {
@@ -178,5 +179,22 @@ describe('reconcile', () => {
     if (out[0].kind === 'create') {
       expect(out[0].entry.events).toEqual([good]);
     }
+  });
+
+  it('SKIPS every entry after the first that shares a feepSlug within the same call', () => {
+    // A region-boundary school FEEP double-lists, or a markup bug: both entries
+    // independently qualify as `create`, but they target the same filename.
+    const firstListing = entry({ feepSlug: 'dup-school', nameFr: 'École Un' });
+    const secondListing = entry({ feepSlug: 'dup-school', nameFr: 'École Deux' });
+    const out = reconcile([firstListing, secondListing], [], TODAY);
+    expect(out).toEqual([
+      { kind: 'create', slug: 'dup-school', entry: firstListing },
+      {
+        kind: 'skip',
+        slug: 'dup-school',
+        reason:
+          'duplicate FEEP slug "dup-school" within this harvest run — an earlier entry already claims this filename',
+      },
+    ]);
   });
 });
