@@ -1603,7 +1603,20 @@ Expected: no modified files from the second run. Newly created files from Step 3
 
 - [ ] **Step 7: Read the report before committing**
 
-Read `harvest-report.md`. Confirm the conflict section is either empty or contains only genuine ambiguities. If Brébeuf appears under a different FEEP slug, that is Rule 8 working correctly — resolve it by deleting the spurious draft.
+Read `harvest-report.md`. Confirm the conflict section is either empty or contains only genuine ambiguities.
+
+> **Correction (R62):** earlier drafts of this plan used "Brébeuf's FEEP slug
+> differs from ours" as the motivating example for the name-match conflict
+> rule. Checked against the real fixture: FEEP's link for Collège
+> Jean-de-Brébeuf is `/ecoles-privees-quebec/college-jean-de-brebeuf` —
+> **identical** to our slug. No conflict is expected for Brébeuf specifically.
+> The rule itself is still correctly implemented and tested (Task 5) against
+> a fabricated slug divergence; do not expect a Brébeuf conflict as a sign the
+> rule is working, and do not treat its absence as a sign it is broken. Any
+> conflict that DOES appear in the report is for a different school and
+> should be investigated on its own facts — resolve genuine duplicates by
+> deleting the spurious draft, after confirming which of the two candidates
+> is actually correct.
 
 - [ ] **Step 8: Commit**
 
