@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toDraftSchool, serialise, montrealOffset } from '@/lib/harvest/emit';
+import { toDraftSchool, serialise, montrealOffset, academicYearFor } from '@/lib/harvest/emit';
 import { schoolFileSchema } from '@/lib/schema';
 import type { ListingEntry, SchoolFacts } from '@/lib/harvest/types';
 
@@ -40,6 +40,23 @@ describe('montrealOffset', () => {
 
   it('is -05:00 on the changeover date itself (clocks fall back at 2am)', () => {
     expect(montrealOffset('2026-11-01', '09:00')).toBe('-05:00');
+  });
+});
+
+describe('academicYearFor', () => {
+  // Real, checked-in FEEP evidence for the July 1 boundary — not invented
+  // data. Both entries are April (m=4 < 7), the branch the three
+  // already-published September files never exercise. FEEP publishes its own
+  // "Année scolaire" for each and both match this function's output exactly.
+
+  it('matches FEEP\'s own stated "Année scolaire 2027-2028" for Collège Reine-Marie (17 avril 2027)', () => {
+    // tests/fixtures/feep/listing-montreal.html: "17 avril 2027" ... "Année scolaire 2027-2028"
+    expect(academicYearFor('2027-04-17')).toBe('2027-2028');
+  });
+
+  it('matches FEEP\'s own stated "Année scolaire 2026-2027" for Académie Centennial (25 avril 2026)', () => {
+    // tests/fixtures/feep/listing-montreal.html: "25 avril 2026" ... "Année scolaire 2026-2027"
+    expect(academicYearFor('2026-04-25')).toBe('2026-2027');
   });
 });
 

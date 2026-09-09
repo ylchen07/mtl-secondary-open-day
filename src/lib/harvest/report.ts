@@ -33,6 +33,15 @@ export function renderReport(
     '',
   ];
 
+  // The count alone forces a human to re-derive which schools need the extra
+  // gender check by re-running the harvester's own logic — exactly the kind
+  // of triage this report exists to save them from doing.
+  if (flagged.length > 0) {
+    lines.push('## Gender unconfirmed — verify before publishing', '');
+    for (const slug of flagged) lines.push(`- \`${slug}\``);
+    lines.push('');
+  }
+
   // A school excluded as primary-only leaves no other trace. If a real secondary
   // school lands here, this list is the only chance anyone has to notice.
   if (skippedAsPrimary.length > 0) {

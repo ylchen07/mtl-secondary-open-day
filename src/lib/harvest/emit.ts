@@ -30,11 +30,19 @@ function localIso(date: string, time: string): string {
  * Academic year a given open-house date feeds. FEEP open houses in the
  * second half of a calendar year (July onward) recruit for the intake that
  * starts the *following* September; open houses earlier in the year recruit
- * for the intake starting that same September. Confirmed against the three
- * already-published files (all September events, all `academic_year`
- * one year ahead of the event's own year).
+ * for the intake starting that same September.
+ *
+ * The July 1 boundary itself — not just the general one-year-ahead shape —
+ * is confirmed against two real, checked-in FEEP entries that sit on the
+ * *other* side of it from the three already-published files (which are all
+ * September events and never exercised this boundary): Collège Reine-Marie's
+ * open house on 17 avril 2027, which FEEP itself labels "Année scolaire
+ * 2027-2028", and Académie Centennial's on 25 avril 2026, labelled "Année
+ * scolaire 2026-2027" (both in `tests/fixtures/feep/listing-montreal.html`).
+ * Both are April (`m=4 < 7`), so both take the `start = y` branch — and both
+ * match FEEP's own stated academic year exactly.
  */
-function academicYearFor(date: string): string {
+export function academicYearFor(date: string): string {
   const [y, m] = date.split('-').map(Number);
   const start = m >= 7 ? y + 1 : y;
   return `${start}-${start + 1}`;

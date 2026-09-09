@@ -74,6 +74,22 @@ describe('renderReport', () => {
     expect(report).toContain('- `maybe-secondary-school`');
   });
 
+  it('lists gender-unconfirmed drafts BY NAME, not just as a count — a human must not have to re-derive which schools need the check', () => {
+    const decisions: HarvestDecision[] = [
+      { kind: 'create', slug: 'ecole-un', entry: entry('ecole-un') },
+      { kind: 'create', slug: 'ecole-deux', entry: entry('ecole-deux') },
+    ];
+    const report = renderReport(decisions, ['ecole-un', 'ecole-deux']);
+    expect(report).toContain('## Gender unconfirmed — verify before publishing');
+    expect(report).toContain('- `ecole-un`');
+    expect(report).toContain('- `ecole-deux`');
+  });
+
+  it('omits the Gender unconfirmed section entirely when nothing is flagged', () => {
+    const report = renderReport([], []);
+    expect(report).not.toContain('Gender unconfirmed — verify');
+  });
+
   it('produces the exact report text for a fixed, empty input', () => {
     const report = renderReport([], []);
     expect(report).toBe(
