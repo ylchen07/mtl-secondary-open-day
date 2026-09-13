@@ -302,6 +302,68 @@ describe('runHarvest', () => {
     expect(result.report).toMatch(/Not_Kebab_Case.*(draft failed validation|schema)/i);
   });
 
+  it('recovers from a writeFile rejection: skips that candidate as a visible write-failure, delays before the next detail fetch, and still writes a later success', async () => {
+    const callOrder: string[] = [];
+    const fetchDetail = vi.fn().mockImplementation(async (url: string) => {
+      callOrder.push(`fetchDetail:${url}`);
+      return '<html>ok</html>';
+    });
+    const writeFile = vi
+      .fn()
+      .mockImplementationOnce(async () => {
+        callOrder.push('writeFile:fails');
+        throw new Error('ENOSPC: no space left on device');
+      })
+      .mockImplementationOnce(async () => {
+        callOrder.push('writeFile:good');
+      });
+    const delay = vi.fn().mockImplementation(async () => {
+      callOrder.push('delay');
+    });
+    const deps = baseDeps({
+      parseListing: vi.fn().mockReturnValue([entry('fails'), entry('good')]),
+      fetchDetail,
+      writeFile,
+      delay,
+      // genderConfident: false on every call — proves the failed candidate is
+      // excluded from "Gender unconfirmed" even though it would otherwise
+      // qualify, while the later success is still correctly flagged.
+      parseDetail: vi.fn().mockReturnValue({
+        address: '1 Rue X',
+        city: 'Montréal',
+        postalCode: 'H1H 1H1',
+        language: 'fr',
+        isSecondary: true,
+        genderGuess: 'mixed',
+        genderConfident: false,
+      }),
+    });
+
+    const result = await runHarvest(deps);
+
+    expect(fetchDetail).toHaveBeenCalledTimes(2);
+    expect(writeFile).toHaveBeenCalledTimes(2);
+    expect(callOrder).toEqual([
+      'fetchDetail:https://www.feep.qc.ca/ecoles-privees-quebec/fails',
+      'writeFile:fails',
+      'delay',
+      'fetchDetail:https://www.feep.qc.ca/ecoles-privees-quebec/good',
+      'writeFile:good',
+      'delay',
+    ]);
+
+    expect(result.written).toEqual(['good']);
+    expect(result.report).toMatch(/- `fails` \u2014 write failed \u2014 ENOSPC/);
+    const genderSection = /## Gender unconfirmed[\s\S]*?\n\n## /.exec(result.report)?.[0] ?? '';
+    expect(genderSection).toMatch(/- `good`/);
+    expect(genderSection).not.toMatch(/`fails`/);
+
+    const createdSection = /## Created drafts[\s\S]*?\n\n## /.exec(result.report)?.[0] ?? '';
+    expect(createdSection).toMatch(/- \[ \] `good`/);
+    expect(createdSection).not.toMatch(/`fails`/);
+    expect(result.report).toMatch(/Created: \*\*1\*\*/);
+  });
+
   it('is idempotent: running twice against the same inputs writes the same bytes both times', async () => {
     const deps1 = baseDeps({ parseListing: vi.fn().mockReturnValue([entry('repeat-me')]) });
     const result1 = await runHarvest(deps1);

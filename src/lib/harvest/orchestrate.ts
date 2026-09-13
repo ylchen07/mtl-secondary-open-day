@@ -170,7 +170,22 @@ export async function runHarvest(deps: HarvestDeps): Promise<HarvestResult> {
       continue;
     }
 
-    await deps.writeFile(`${dataDir}/${draft.slug}.json`, serialise(draft));
+    try {
+      await deps.writeFile(`${dataDir}/${draft.slug}.json`, serialise(draft));
+    } catch (cause) {
+      // Unlike a detail-fetch failure, this candidate has already produced a
+      // schema-valid draft — the only reason it is not on disk is the write
+      // itself. Prior successful writes this run must stand: report this one
+      // as a skip and keep going, rather than letting the exception escape
+      // and silently cancel renderReport() (and every later candidate) too.
+      finalDecisions.push({
+        kind: 'skip',
+        slug: decision.slug,
+        reason: `write failed — ${(cause as Error).message}`,
+      });
+      await deps.delay();
+      continue;
+    }
     written.push(draft.slug);
     finalDecisions.push(decision);
     if (!facts.genderConfident) flagged.push(draft.slug);
