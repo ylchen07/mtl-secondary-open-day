@@ -19,20 +19,6 @@
   "description_fr": null,
   "source_url": "https://reginaassumpta.qc.ca/admission/",
   "last_verified_at": "2026-09-12",
-  "status": "published",
-  "open_days": [
-    {
-      "starts_at": "2026-09-12T09:00:00-04:00",
-      "ends_at": "2026-09-12T14:30:00-04:00",
-      "type": "open_house",
-      "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
-      "notes_en": null,
-      "notes_fr": "Ne manquez pas la prochaine journée Portes ouvertes à Regina, le samedi 12 septembre 2026 de 9 h à 14 h 30.",
-      "source_url": "https://reginaassumpta.qc.ca/admission/",
-      "last_verified_at": "2026-09-12",
-      "status": "published"
-    }
-  ]
+  "status": "draft",
+  "open_days": []
 }
