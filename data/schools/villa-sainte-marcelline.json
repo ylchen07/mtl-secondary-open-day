@@ -19,7 +19,7 @@
   "description_fr": null,
   "source_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
   "last_verified_at": "2026-09-12",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-10-03T10:00:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": "Portes ouvertes samedi 3 octobre 2026 de 10 h à 15 h. Réservez votre place via le formulaire sur la page.",
       "source_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
       "last_verified_at": "2026-09-12",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }

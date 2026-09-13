@@ -19,7 +19,7 @@
   "description_fr": null,
   "source_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
   "last_verified_at": "2026-09-12",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-19T08:45:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": "Visite sur rendez-vous, samedi 19 septembre, par plages de 10 minutes de 8h45 à 14h05 (événement complet).",
       "source_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
       "last_verified_at": "2026-09-12",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }
