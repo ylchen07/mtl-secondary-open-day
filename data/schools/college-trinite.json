@@ -6,8 +6,8 @@
   "gender": "mixed",
   "region": "south_shore",
   "city": "Saint-Bruno-de-Montarville",
-  "address": "1475, CH Des Vingt",
-  "postal_code": "J3N 0E4",
+  "address": "1475, rang des Vingt",
+  "postal_code": "J3V 4P6",
   "location": null,
   "geocode_precision": "missing",
   "website_url": "https://collegetrinite.ca/portes-ouvertes/",
@@ -17,8 +17,8 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-trinite",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://collegetrinite.ca/portes-ouvertes/",
+  "last_verified_at": "2026-09-13",
   "status": "draft",
   "open_days": [
     {
@@ -30,8 +30,8 @@
       "registration_url": null,
       "notes_en": null,
       "notes_fr": "Sans rendez-vous, découvrez notre école à votre rythme grâce à des kiosques animés par des gens qui vivent le Collège au quotidien!",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-trinite",
-      "last_verified_at": "2026-09-12",
+      "source_url": "https://collegetrinite.ca/portes-ouvertes/",
+      "last_verified_at": "2026-09-13",
       "status": "draft"
     }
   ]

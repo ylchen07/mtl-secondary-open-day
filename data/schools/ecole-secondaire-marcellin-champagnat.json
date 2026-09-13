@@ -7,7 +7,7 @@
   "region": "south_shore",
   "city": "Saint-Jean-sur-Richelieu",
   "address": "14, chemin des Patriotes Est",
-  "postal_code": "J2X 1A3",
+  "postal_code": "J2X 5P9",
   "location": null,
   "geocode_precision": "missing",
   "website_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
@@ -17,22 +17,22 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-secondaire-marcellin-champagnat",
-  "last_verified_at": "2026-09-12",
-  "status": "draft",
+  "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
+  "last_verified_at": "2026-09-13",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
       "ends_at": "2026-09-19T13:00:00-04:00",
       "type": "open_house",
       "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
+      "registration_required": true,
+      "registration_url": "https://www.tickettailor.com/all-tickets-calendar/colesecondairemarcellinchampagnat/",
       "notes_en": null,
       "notes_fr": "Réservez votre place",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-secondaire-marcellin-champagnat",
-      "last_verified_at": "2026-09-12",
-      "status": "draft"
+      "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
+      "last_verified_at": "2026-09-13",
+      "status": "published"
     }
   ]
 }

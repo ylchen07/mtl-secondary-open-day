@@ -17,8 +17,8 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-charles-lemoyne-campus-longueuil-saint-lambert",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://monccl.com/actualites/journee-portes-ouvertes-2026/",
+  "last_verified_at": "2026-09-13",
   "status": "draft",
   "open_days": [
     {
@@ -26,12 +26,12 @@
       "ends_at": "2026-09-20T14:00:00-04:00",
       "type": "open_house",
       "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
+      "registration_required": true,
+      "registration_url": "https://site.booxi.com/collegecharleslemoyne?lang=fre",
       "notes_en": null,
       "notes_fr": null,
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-charles-lemoyne-campus-longueuil-saint-lambert",
-      "last_verified_at": "2026-09-12",
+      "source_url": "https://monccl.com/actualites/journee-portes-ouvertes-2026/",
+      "last_verified_at": "2026-09-13",
       "status": "draft"
     }
   ]
