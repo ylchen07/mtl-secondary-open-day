@@ -10,15 +10,15 @@
   "postal_code": "J7H 0A4",
   "location": null,
   "geocode_precision": "missing",
-  "website_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
-  "admissions_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
+  "website_url": "https://collegeboisbriand.qc.ca/",
+  "admissions_url": "https://collegeboisbriand.qc.ca/procedure-dadmission/",
   "tuition_annual_cad": null,
   "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-boisbriand",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://collegeboisbriand.qc.ca/",
+  "last_verified_at": "2026-09-13",
   "status": "draft",
   "open_days": [
     {
@@ -29,9 +29,9 @@
       "registration_required": false,
       "registration_url": null,
       "notes_en": null,
-      "notes_fr": "Visite virtuelle sur notre site web",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-boisbriand",
-      "last_verified_at": "2026-09-12",
+      "notes_fr": "Portes ouvertes le 19 septembre 2026, de 11h30 \u00e0 15h. Vous n\u2019avez qu\u2019\u00e0 vous pr\u00e9senter.",
+      "source_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
+      "last_verified_at": "2026-09-13",
       "status": "draft"
     }
   ]
