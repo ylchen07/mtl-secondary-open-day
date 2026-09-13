@@ -7,7 +7,7 @@
   "region": "laval",
   "city": "Laval",
   "address": "950, rue Élodie-Boucher",
-  "postal_code": "H7W 5A9",
+  "postal_code": "H7W 0C6",
   "location": null,
   "geocode_precision": "missing",
   "website_url": "https://northstaracademy.ca/?&Itemid=562&option=com_content&view=article&id=199&lang=en",
@@ -17,8 +17,8 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/academie-etoile-du-nord-laval-north-star-academy-laval",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
+  "last_verified_at": "2026-09-13",
   "status": "draft",
   "open_days": [
     {
@@ -30,8 +30,8 @@
       "registration_url": null,
       "notes_en": null,
       "notes_fr": null,
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/academie-etoile-du-nord-laval-north-star-academy-laval",
-      "last_verified_at": "2026-09-12",
+      "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
+      "last_verified_at": "2026-09-13",
       "status": "draft"
     }
   ]

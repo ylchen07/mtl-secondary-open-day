@@ -17,22 +17,8 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-laval",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://collegelaval.ca/journee-portes-ouvertes/",
+  "last_verified_at": "2026-09-13",
   "status": "draft",
-  "open_days": [
-    {
-      "starts_at": "2026-09-12T08:30:00-04:00",
-      "ends_at": "2026-09-12T12:00:00-04:00",
-      "type": "open_house",
-      "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
-      "notes_en": null,
-      "notes_fr": "Le grand événement de la rentrée à ne pas manquer!",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-laval",
-      "last_verified_at": "2026-09-12",
-      "status": "draft"
-    }
-  ]
+  "open_days": []
 }

@@ -17,8 +17,8 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-socrates-demosthene-campus-demosthene",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://www.socdem.org/par-campus/demosthene/",
+  "last_verified_at": "2026-09-13",
   "status": "draft",
   "open_days": [
     {
@@ -26,12 +26,12 @@
       "ends_at": "2026-10-03T12:00:00-04:00",
       "type": "open_house",
       "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
+      "registration_required": true,
+      "registration_url": "https://hcgm.org/ecoles/socdem/index.html",
       "notes_en": null,
       "notes_fr": "Découvrez votre héritage, Préparez votre avenir!",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-socrates-demosthene-campus-demosthene",
-      "last_verified_at": "2026-09-12",
+      "source_url": "https://hcgm.org/ecoles/socdem/index.html",
+      "last_verified_at": "2026-09-13",
       "status": "draft"
     }
   ]
