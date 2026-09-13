@@ -1,0 +1,38 @@
+{
+  "slug": "academie-etoile-du-nord-laval-north-star-academy-laval",
+  "name_en": "Académie Étoile du Nord Laval/ North Star Academy Laval",
+  "name_fr": "Académie Étoile du Nord Laval/ North Star Academy Laval",
+  "language": "en",
+  "gender": "mixed",
+  "region": "laval",
+  "city": "Laval",
+  "address": "950, rue Élodie-Boucher",
+  "postal_code": "H7W 5A9",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://northstaracademy.ca/?&Itemid=562&option=com_content&view=article&id=199&lang=en",
+  "admissions_url": "https://northstaracademy.ca/?&Itemid=562&option=com_content&view=article&id=199&lang=en",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/academie-etoile-du-nord-laval-north-star-academy-laval",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-24T18:00:00-04:00",
+      "ends_at": "2026-09-24T21:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": null,
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/academie-etoile-du-nord-laval-north-star-academy-laval",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

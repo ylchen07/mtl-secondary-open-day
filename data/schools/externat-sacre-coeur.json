@@ -1,0 +1,38 @@
+{
+  "slug": "externat-sacre-coeur",
+  "name_en": "Externat Sacré-Coeur",
+  "name_fr": "Externat Sacré-Coeur",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "north_shore",
+  "city": "Rosemère",
+  "address": "535, rue Lefrançois",
+  "postal_code": "J7A 4R5",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://externat.qc.ca/",
+  "admissions_url": "https://externat.qc.ca/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/externat-sacre-coeur",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-13T09:00:00-04:00",
+      "ends_at": "2026-09-13T14:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Visite en ligne disponible : https://externat.qc.ca/",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/externat-sacre-coeur",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "college-boisbriand",
+  "name_en": "Collège Boisbriand",
+  "name_fr": "Collège Boisbriand",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "north_shore",
+  "city": "Boisbriand",
+  "address": "4747, rue Ambroise-Lafortune",
+  "postal_code": "J7H 0A4",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
+  "admissions_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-boisbriand",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T11:30:00-04:00",
+      "ends_at": "2026-09-19T15:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Visite virtuelle sur notre site web",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-boisbriand",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

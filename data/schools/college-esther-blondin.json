@@ -1,0 +1,38 @@
+{
+  "slug": "college-esther-blondin",
+  "name_en": "Collège Esther-Blondin",
+  "name_fr": "Collège Esther-Blondin",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "north_shore",
+  "city": "Saint-Jacques",
+  "address": "101, rue Sainte Anne",
+  "postal_code": "J0K 2R0",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://www.collegeblondin.qc.ca/admission/portes-ouvertes",
+  "admissions_url": "https://www.collegeblondin.qc.ca/admission/portes-ouvertes",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-esther-blondin",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-12T09:40:00-04:00",
+      "ends_at": "2026-09-12T13:10:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "La traditionnelle journée portes ouvertes sur rendez-vous au Collège aura lieu le samedi 12 septembre 2026",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-esther-blondin",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

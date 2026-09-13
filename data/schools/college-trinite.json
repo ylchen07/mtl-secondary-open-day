@@ -1,0 +1,38 @@
+{
+  "slug": "college-trinite",
+  "name_en": "Collège Trinité",
+  "name_fr": "Collège Trinité",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "south_shore",
+  "city": "Saint-Bruno-de-Montarville",
+  "address": "1475, CH Des Vingt",
+  "postal_code": "J3N 0E4",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://collegetrinite.ca/portes-ouvertes/",
+  "admissions_url": "https://collegetrinite.ca/portes-ouvertes/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-trinite",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T10:00:00-04:00",
+      "ends_at": "2026-09-19T14:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Sans rendez-vous, découvrez notre école à votre rythme grâce à des kiosques animés par des gens qui vivent le Collège au quotidien!",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-trinite",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

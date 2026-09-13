@@ -1,0 +1,38 @@
+{
+  "slug": "ecole-marie-clarac",
+  "name_en": "École Marie-Clarac",
+  "name_fr": "École Marie-Clarac",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "11273, avenue de Mère-Anselme",
+  "postal_code": "H1H 4Z2",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/#portes-ouvertes-2025",
+  "admissions_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/#portes-ouvertes-2025",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-marie-clarac",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-10-23T17:00:00-04:00",
+      "ends_at": "2026-10-23T20:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Secondaire : 11 septembre 2026 | Préscolaire-Primaire : 23 octobre 2026",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-marie-clarac",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

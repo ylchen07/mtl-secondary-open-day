@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "seed": "tsx scripts/seed.ts",
     "check:sources": "tsx scripts/check-sources.ts",
+    "harvest": "tsx scripts/harvest-feep.ts",
     "test:e2e": "playwright test"
   },
   "keywords": [],

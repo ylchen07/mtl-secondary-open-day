@@ -1,0 +1,38 @@
+{
+  "slug": "college-beaubois",
+  "name_en": "Collège Beaubois",
+  "name_fr": "Collège Beaubois",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "4901, rue du Collège - Beaubois",
+  "postal_code": "H0H 0H0",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://collegebeaubois.qc.ca/portes-ouvertes/",
+  "admissions_url": "https://collegebeaubois.qc.ca/portes-ouvertes/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-beaubois",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-12T08:30:00-04:00",
+      "ends_at": "2026-09-12T11:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Le Collège Beaubois vous accueille sur rendez-vous le 12 septembre prochain. Nos différentes activités en présentiel vous offriront une immersion complète dans notre environnement unique et vous permettront d’en apprendre plus sur ce qui nous distingue.",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-beaubois",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

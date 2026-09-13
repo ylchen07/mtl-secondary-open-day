@@ -1,0 +1,38 @@
+{
+  "slug": "pensionnat-du-saint-nom-de-marie",
+  "name_en": "Pensionnat du Saint-Nom-de-Marie",
+  "name_fr": "Pensionnat du Saint-Nom-de-Marie",
+  "language": "fr",
+  "gender": "girls",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "628, chemin de la Côte-Sainte-Catherine",
+  "postal_code": "H2V 2C5",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://www.psnm.qc.ca/portes-ouvertes",
+  "admissions_url": "https://www.psnm.qc.ca/portes-ouvertes",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/pensionnat-du-saint-nom-de-marie",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2027-04-24T09:30:00-04:00",
+      "ends_at": "2027-04-24T13:30:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": null,
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/pensionnat-du-saint-nom-de-marie",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}
