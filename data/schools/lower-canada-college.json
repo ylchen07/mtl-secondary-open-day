@@ -10,16 +10,16 @@
   "postal_code": "H4A 2M5",
   "location": null,
   "geocode_precision": "missing",
-  "website_url": "https://www.lcc.ca/portesouvertes",
-  "admissions_url": "https://www.lcc.ca/portesouvertes",
+  "website_url": "https://www.lcc.ca",
+  "admissions_url": "https://www.lcc.ca/admissions/openhouse-info",
   "tuition_annual_cad": null,
   "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/lower-canada-college",
+  "source_url": "https://www.lcc.ca/admissions/openhouse-info",
   "last_verified_at": "2026-09-12",
-  "status": "draft",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-17T09:15:00-04:00",
@@ -28,11 +28,11 @@
       "academic_year": "2027-2028",
       "registration_required": false,
       "registration_url": null,
-      "notes_en": null,
-      "notes_fr": "Portes ouvertes - Inscription requise",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/lower-canada-college",
+      "notes_en": "Grade 7 Open House, 4099 Royal Avenue.",
+      "notes_fr": null,
+      "source_url": "https://www.lcc.ca/admissions/openhouse-info",
       "last_verified_at": "2026-09-12",
-      "status": "draft"
+      "status": "published"
     },
     {
       "starts_at": "2026-09-17T17:00:00-04:00",
@@ -41,11 +41,11 @@
       "academic_year": "2027-2028",
       "registration_required": false,
       "registration_url": null,
-      "notes_en": null,
-      "notes_fr": "Portes ouvertes - Inscription requise",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/lower-canada-college",
+      "notes_en": "Grade 7 Open House, 4099 Royal Avenue.",
+      "notes_fr": null,
+      "source_url": "https://www.lcc.ca/admissions/openhouse-info",
       "last_verified_at": "2026-09-12",
-      "status": "draft"
+      "status": "published"
     },
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
@@ -54,11 +54,11 @@
       "academic_year": "2027-2028",
       "registration_required": false,
       "registration_url": null,
-      "notes_en": null,
-      "notes_fr": "Portes ouvertes - Inscription requise",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/lower-canada-college",
+      "notes_en": "Grade 7 Open House, 4099 Royal Avenue.",
+      "notes_fr": null,
+      "source_url": "https://www.lcc.ca/admissions/openhouse-info",
       "last_verified_at": "2026-09-12",
-      "status": "draft"
+      "status": "published"
     }
   ]
 }

@@ -10,16 +10,16 @@
   "postal_code": "H2C 1X4",
   "location": null,
   "geocode_precision": "missing",
-  "website_url": "https://www.reginaassumpta.qc.ca/admission/journee-portes-ouvertes/",
-  "admissions_url": "https://www.reginaassumpta.qc.ca/admission/journee-portes-ouvertes/",
+  "website_url": "https://reginaassumpta.qc.ca/",
+  "admissions_url": "https://reginaassumpta.qc.ca/admission/",
   "tuition_annual_cad": null,
   "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-regina-assumpta",
+  "source_url": "https://reginaassumpta.qc.ca/admission/",
   "last_verified_at": "2026-09-12",
-  "status": "draft",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-12T09:00:00-04:00",
@@ -29,10 +29,10 @@
       "registration_required": false,
       "registration_url": null,
       "notes_en": null,
-      "notes_fr": "Venez nous rencontrer!",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-regina-assumpta",
+      "notes_fr": "Ne manquez pas la prochaine journée Portes ouvertes à Regina, le samedi 12 septembre 2026 de 9 h à 14 h 30.",
+      "source_url": "https://reginaassumpta.qc.ca/admission/",
       "last_verified_at": "2026-09-12",
-      "status": "draft"
+      "status": "published"
     }
   ]
 }

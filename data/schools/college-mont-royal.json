@@ -7,19 +7,19 @@
   "region": "montreal_island",
   "city": "Montréal",
   "address": "2165, rue Baldwin",
-  "postal_code": "H1L 4Y7",
+  "postal_code": "H1L 5A7",
   "location": null,
   "geocode_precision": "missing",
-  "website_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/#portes-ouvertes",
-  "admissions_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/#portes-ouvertes",
+  "website_url": "https://collegemont-royal.qc.ca/",
+  "admissions_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
   "tuition_annual_cad": null,
   "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-mont-royal",
+  "source_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
   "last_verified_at": "2026-09-12",
-  "status": "draft",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T10:00:00-04:00",
@@ -30,9 +30,9 @@
       "registration_url": null,
       "notes_en": null,
       "notes_fr": "Nos portes ouvertes auront lieux le 19 septembre de 10 h à 14 h",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-mont-royal",
+      "source_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
       "last_verified_at": "2026-09-12",
-      "status": "draft"
+      "status": "published"
     }
   ]
 }
