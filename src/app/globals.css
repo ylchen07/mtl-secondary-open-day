@@ -1,3 +1,103 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+:root {
+  --paper: #fbfaf7;
+  --paper-sunk: #f4f2ed;
+  --ink: #1a1917;
+  --ink-2: #4a4741;
+  --ink-3: #6f6a61;
+  --rule: #e2dfd7;
+  --rule-strong: #cfcabe;
+  --flag: #a8341a;
+  --flag-wash: #fbf0ec;
+  --exam: #2c4a3b;
+  --exam-wash: #eef3f0;
+  --focus: #1a1917;
+  --measure: 74ch;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rule-strong);
+  border: 3px solid var(--paper);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+.locale-switch {
+  color: var(--paper);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .agenda-event {
+    animation: settle 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes settle {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(3px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+  }
+}
