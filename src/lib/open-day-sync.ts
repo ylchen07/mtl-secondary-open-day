@@ -128,3 +128,32 @@ export function computeStaleOpenDayIds(
   }
   return staleIds;
 }
+
+/**
+ * Last line of defense before the actual `DELETE`: refuses a stale-event
+ * deletion that would clear every `open_days` row for the entire corpus.
+ *
+ * `computeStaleOpenDayIds` correctly treats "nothing desired anywhere" as
+ * "every remote row is stale" — that's the right identity comparison, but
+ * acting on it blindly turns a targeted sync into a full-table wipe if the
+ * desired event set is empty across *all* schools (e.g. every local file
+ * temporarily has `open_days: []`). A single school losing all its events
+ * while other schools still have desired events (the Villa Maria case) is
+ * unaffected — `desiredEventCount` is corpus-wide, not per-school.
+ *
+ * seed.ts must call this with the exact `staleEventIds` and
+ * `desiredIdentities.length` it is about to act on, immediately before the
+ * delete, archive, or revalidation steps.
+ */
+export function assertSafeToDeleteStaleOpenDays(
+  staleEventIds: readonly string[],
+  desiredEventCount: number,
+): void {
+  if (staleEventIds.length > 0 && desiredEventCount === 0) {
+    throw new Error(
+      `Refusing to delete ${staleEventIds.length} open_days row(s): local desired event ` +
+        'count is 0 across the entire corpus, which would clear the whole table instead of ' +
+        'a targeted stale-row sync.',
+    );
+  }
+}

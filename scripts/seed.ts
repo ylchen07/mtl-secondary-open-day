@@ -4,6 +4,7 @@ config({ path: '.env.local' });
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  assertSafeToDeleteStaleOpenDays,
   buildSlugBySchoolId,
   computeStaleOpenDayIds,
   resolveRemoteOpenDayIdentities,
@@ -99,6 +100,13 @@ async function main() {
     })),
   );
   const staleEventIds = computeStaleOpenDayIds(remoteIdentities, desiredIdentities);
+
+  // Refuse a corpus-wide clear: if every valid local school has zero events,
+  // desiredIdentities is empty and computeStaleOpenDayIds would (correctly,
+  // by identity) mark every remote row stale. Acting on that would delete
+  // the entire open_days table instead of syncing a targeted stale set.
+  // Throws before delete, archive, or revalidation.
+  assertSafeToDeleteStaleOpenDays(staleEventIds, desiredIdentities.length);
 
   if (staleEventIds.length > 0) {
     const { error: deleteError } = await supabase

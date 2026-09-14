@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  assertSafeToDeleteStaleOpenDays,
   buildSlugBySchoolId,
   computeStaleOpenDayIds,
   resolveRemoteOpenDayIdentities,
@@ -178,6 +179,47 @@ describe('resolveRemoteOpenDayIdentities', () => {
     ];
 
     expect(resolveRemoteOpenDayIdentities(rawRows, slugBySchoolId)).toEqual([]);
+  });
+});
+
+describe('assertSafeToDeleteStaleOpenDays', () => {
+  it('throws a refusal naming the stale count when desired events are empty across the entire corpus', () => {
+    expect(() =>
+      assertSafeToDeleteStaleOpenDays(['villa-maria-event', 'another-event'], 0),
+    ).toThrow(
+      'Refusing to delete 2 open_days row(s): local desired event count is 0 across the ' +
+        'entire corpus, which would clear the whole table instead of a targeted stale-row sync.',
+    );
+  });
+
+  it('does not throw when both the stale set and the desired set are empty', () => {
+    expect(() => assertSafeToDeleteStaleOpenDays([], 0)).not.toThrow();
+  });
+
+  it('permits deleting exact stale ids when desired events exist elsewhere in the corpus', () => {
+    expect(() => assertSafeToDeleteStaleOpenDays(['removed-event'], 3)).not.toThrow();
+  });
+
+  it('permits deleting a stale event for a now-empty school when another school still has a desired event (Villa scenario)', () => {
+    const remote: RemoteOpenDayIdentity[] = [
+      {
+        id: 'villa-maria-event',
+        schoolSlug: 'villa-maria',
+        startsAt: '2026-09-12T14:00:00.000Z',
+        type: 'open_house',
+      },
+    ];
+    const desired: LocalOpenDayIdentity[] = [
+      {
+        schoolSlug: 'selwyn-house',
+        startsAt: '2026-10-01T09:00:00-04:00',
+        type: 'open_house',
+      },
+    ];
+
+    const staleEventIds = computeStaleOpenDayIds(remote, desired);
+    expect(staleEventIds).toEqual(['villa-maria-event']);
+    expect(() => assertSafeToDeleteStaleOpenDays(staleEventIds, desired.length)).not.toThrow();
   });
 });
 
