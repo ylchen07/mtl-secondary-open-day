@@ -6,6 +6,8 @@ export function toSchoolRow(file: SchoolFile): Omit<SchoolRow, 'id'> {
   return {
     ...rest,
     tuition_annual_cad: file.tuition_annual_cad ?? null,
+    description_en: file.description_en ?? null,
+    description_fr: file.description_fr ?? null,
     lat: location?.lat ?? null,
     lng: location?.lng ?? null,
   };

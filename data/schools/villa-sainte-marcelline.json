@@ -1,0 +1,38 @@
+{
+  "slug": "villa-sainte-marcelline",
+  "name_en": "Villa Sainte-Marcelline",
+  "name_fr": "Villa Sainte-Marcelline",
+  "language": "fr",
+  "gender": "girls",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "815, avenue Upper Belmont",
+  "postal_code": "H3Y 1K5",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://villa.marcelline.qc.ca/",
+  "admissions_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-10-03T10:00:00-04:00",
+      "ends_at": "2026-10-03T15:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": true,
+      "registration_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
+      "notes_en": null,
+      "notes_fr": "Portes ouvertes samedi 3 octobre 2026 de 10 h à 15 h. Réservez votre place via le formulaire sur la page.",
+      "source_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

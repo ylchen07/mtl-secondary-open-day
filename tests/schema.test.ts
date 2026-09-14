@@ -45,7 +45,7 @@ describe('schoolFileSchema', () => {
     expect(schoolFileSchema.safeParse(valid).success).toBe(true);
   });
 
-  it('rejects a missing French description', () => {
+  it('rejects an empty French description', () => {
     const r = schoolFileSchema.safeParse({ ...valid, description_fr: '' });
     expect(r.success).toBe(false);
   });
@@ -81,6 +81,70 @@ describe('schoolFileSchema', () => {
       ...valid,
       open_days: [{ ...valid.open_days[0], academic_year: '2027-2029' }],
     });
+    expect(r.success).toBe(false);
+  });
+});
+
+describe('description optionality', () => {
+  it('accepts a school with both descriptions', () => {
+    expect(schoolFileSchema.safeParse(valid).success).toBe(true);
+  });
+
+  it('accepts a school with neither description', () => {
+    const { description_en: _en, description_fr: _fr, ...without } = valid;
+    expect(schoolFileSchema.safeParse(without).success).toBe(true);
+  });
+
+  it('accepts explicit nulls for both descriptions', () => {
+    const r = schoolFileSchema.safeParse({
+      ...valid,
+      description_en: null,
+      description_fr: null,
+    });
+    expect(r.success).toBe(true);
+  });
+
+  it('rejects English description without French', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, description_fr: null });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(r.error.issues.some((i) => /both .* or neither/i.test(i.message))).toBe(true);
+    }
+  });
+
+  it('rejects French description without English', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, description_en: null });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(r.error.issues.some((i) => /both .* or neither/i.test(i.message))).toBe(true);
+    }
+  });
+
+  // JSON has no `undefined`, so an absent description arrives as an OMITTED key,
+  // not as null. This is the shape the harvester will actually emit. The
+  // refinement handles it only because it uses loose `== null`; tightening that
+  // to `=== null` would silently reopen the /fr-renders-English hole with the
+  // whole suite still green. These two tests are what would catch that.
+  it('rejects an omitted French description when English is present', () => {
+    const { description_fr: _fr, ...withoutFr } = valid;
+    const r = schoolFileSchema.safeParse(withoutFr);
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(r.error.issues.some((i) => /both .* or neither/i.test(i.message))).toBe(true);
+    }
+  });
+
+  it('rejects an omitted English description when French is present', () => {
+    const { description_en: _en, ...withoutEn } = valid;
+    const r = schoolFileSchema.safeParse(withoutEn);
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(r.error.issues.some((i) => /both .* or neither/i.test(i.message))).toBe(true);
+    }
+  });
+
+  it('still rejects an empty-string description', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, description_en: '', description_fr: '' });
     expect(r.success).toBe(false);
   });
 });

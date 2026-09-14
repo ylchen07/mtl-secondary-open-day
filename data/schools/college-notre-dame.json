@@ -1,0 +1,38 @@
+{
+  "slug": "college-notre-dame",
+  "name_en": "Collège Notre-Dame",
+  "name_fr": "Collège Notre-Dame",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "3791, chemin Queen Mary",
+  "postal_code": "H3V 1A8",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://www.collegenotredame.com/",
+  "admissions_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T09:00:00-04:00",
+      "ends_at": "2026-09-19T14:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Portes ouvertes en présence et sans rendez-vous – le samedi 19 septembre 2026, de 9 h à 14 h.",
+      "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

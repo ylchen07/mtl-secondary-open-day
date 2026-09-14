@@ -17,8 +17,8 @@ export type SchoolRow = {
   tuition_annual_cad: number | null;
   has_boarding: boolean;
   programs: string[];
-  description_en: string;
-  description_fr: string;
+  description_en: string | null;
+  description_fr: string | null;
   source_url: string;
   last_verified_at: string;
   status: 'published' | 'draft' | 'archived';

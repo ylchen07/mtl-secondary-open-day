@@ -1,0 +1,38 @@
+{
+  "slug": "ecole-secondaire-marcellin-champagnat",
+  "name_en": "École secondaire Marcellin-Champagnat",
+  "name_fr": "École secondaire Marcellin-Champagnat",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "south_shore",
+  "city": "Saint-Jean-sur-Richelieu",
+  "address": "14, chemin des Patriotes Est",
+  "postal_code": "J2X 5P9",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
+  "admissions_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
+  "last_verified_at": "2026-09-13",
+  "status": "published",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T09:00:00-04:00",
+      "ends_at": "2026-09-19T13:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": true,
+      "registration_url": "https://www.tickettailor.com/all-tickets-calendar/colesecondairemarcellinchampagnat/",
+      "notes_en": null,
+      "notes_fr": "Réservez votre place",
+      "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
+      "last_verified_at": "2026-09-13",
+      "status": "published"
+    }
+  ]
+}

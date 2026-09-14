@@ -1,0 +1,38 @@
+{
+  "slug": "college-pasteur",
+  "name_en": "Collège Pasteur",
+  "name_fr": "Collège Pasteur",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "12345, avenue de la Miséricorde",
+  "postal_code": "H4J 2E8",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://collegepasteur.ca/portes-ouvertes-college-pasteur.php",
+  "admissions_url": "https://collegepasteur.ca/portes-ouvertes-college-pasteur.php",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-pasteur",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-26T09:30:00-04:00",
+      "ends_at": "2026-09-26T12:30:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Samedi 26 septembre 2026",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-pasteur",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

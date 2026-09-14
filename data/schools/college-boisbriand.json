@@ -1,0 +1,38 @@
+{
+  "slug": "college-boisbriand",
+  "name_en": "Collège Boisbriand",
+  "name_fr": "Collège Boisbriand",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "north_shore",
+  "city": "Boisbriand",
+  "address": "4747, rue Ambroise-Lafortune",
+  "postal_code": "J7H 0A4",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://collegeboisbriand.qc.ca/",
+  "admissions_url": "https://collegeboisbriand.qc.ca/procedure-dadmission/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://collegeboisbriand.qc.ca/",
+  "last_verified_at": "2026-09-13",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T11:30:00-04:00",
+      "ends_at": "2026-09-19T15:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Portes ouvertes le 19 septembre 2026, de 11h30 \u00e0 15h. Vous n\u2019avez qu\u2019\u00e0 vous pr\u00e9senter.",
+      "source_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
+      "last_verified_at": "2026-09-13",
+      "status": "draft"
+    }
+  ]
+}

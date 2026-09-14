@@ -74,8 +74,8 @@ export const schoolFileSchema = z
     tuition_annual_cad: z.number().int().positive().nullish(),
     has_boarding: z.boolean(),
     programs: z.array(z.string()),
-    description_en: nonEmpty,
-    description_fr: nonEmpty,
+    description_en: nonEmpty.nullish(),
+    description_fr: nonEmpty.nullish(),
     source_url: httpsUrl,
     last_verified_at: isoDate,
     status: publicationStatus,
@@ -84,6 +84,11 @@ export const schoolFileSchema = z
   .refine((s) => (s.geocode_precision === 'missing') === (s.location == null), {
     message: 'location must be present unless geocode_precision is "missing"',
     path: ['location'],
+  })
+  .refine((s) => (s.description_en == null) === (s.description_fr == null), {
+    message:
+      'descriptions must be both present or neither — a one-sided description would render the wrong language',
+    path: ['description_fr'],
   });
 
 export type SchoolFile = z.infer<typeof schoolFileSchema>;

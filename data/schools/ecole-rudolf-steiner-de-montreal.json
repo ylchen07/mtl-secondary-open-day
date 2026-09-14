@@ -1,0 +1,38 @@
+{
+  "slug": "ecole-rudolf-steiner-de-montreal",
+  "name_en": "École Rudolf Steiner de Montréal",
+  "name_fr": "École Rudolf Steiner de Montréal",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "4855, avenue de Kensington",
+  "postal_code": "H3X 3S6",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://ersm.org/",
+  "admissions_url": "https://ersm.org/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-rudolf-steiner-de-montreal",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-10-03T10:00:00-04:00",
+      "ends_at": "2026-10-03T14:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "Inscrivez-vous via la fenêtre contextuelle sur notre site web www.ersm.org",
+      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/ecole-rudolf-steiner-de-montreal",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

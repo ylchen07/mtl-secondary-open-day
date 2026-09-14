@@ -1,0 +1,38 @@
+{
+  "slug": "ecole-marie-clarac",
+  "name_en": "École Marie-Clarac",
+  "name_fr": "École Marie-Clarac",
+  "language": "fr",
+  "gender": "girls",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "3641, boulevard Gouin Est",
+  "postal_code": "H1H 5L8",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://www.ecolemarie-clarac.qc.ca/",
+  "admissions_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-11T17:00:00-04:00",
+      "ends_at": "2026-09-11T20:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": false,
+      "registration_url": null,
+      "notes_en": null,
+      "notes_fr": "SECONDAIRE – 100 % FILLES. Vendredi 11 septembre 2026 • 17 h à 20 h (campus secondaire, 3641 boul. Gouin Est). Cette date est antérieure à la date de vérification (12 septembre 2026) — événement déjà passé, école laissée en brouillon.",
+      "source_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "college-st-jean-vianney",
+  "name_en": "Collège St-Jean-Vianney",
+  "name_fr": "Collège St-Jean-Vianney",
+  "language": "fr",
+  "gender": "mixed",
+  "region": "montreal_island",
+  "city": "Montréal",
+  "address": "12630, boulevard Gouin Est",
+  "postal_code": "H1C 1C1",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://www.csjv.ca/fr",
+  "admissions_url": "https://www.csjv.ca/fr/admission-secondaire-1",
+  "tuition_annual_cad": null,
+  "has_boarding": false,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
+  "last_verified_at": "2026-09-12",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T08:45:00-04:00",
+      "ends_at": "2026-09-19T14:15:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": true,
+      "registration_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
+      "notes_en": null,
+      "notes_fr": "Visite sur rendez-vous, samedi 19 septembre, par plages de 10 minutes de 8h45 à 14h05 (événement complet).",
+      "source_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
+      "last_verified_at": "2026-09-12",
+      "status": "draft"
+    }
+  ]
+}
