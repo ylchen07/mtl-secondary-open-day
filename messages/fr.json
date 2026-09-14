@@ -4,8 +4,11 @@
     "tagline": "Portes ouvertes et examens d'admission, au même endroit."
   },
   "agenda": {
-    "heading": "À venir",
+    "heading": "Portes ouvertes et examens d’admission",
+    "tagline": "Écoles secondaires privées du Grand Montréal. Chaque date renvoie à la page de l’école.",
+    "coverage": "événements à venir",
     "resultCount": "{count, plural, =0 {Aucun événement} one {# événement} other {# événements}}",
+    "dayCount": "{count, plural, one {# événement} other {# événements}}",
     "clashWith": "Chevauche {school} ({type})",
     "verifiedOn": "Vérifié le {date}",
     "source": "source",

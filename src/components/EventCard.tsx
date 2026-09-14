@@ -1,7 +1,8 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { formatEventTime, formatVerifiedDate } from '@/lib/dates';
+import { ClashIcon } from './ClashIcon';
+import { formatEventRange, formatVerifiedDate } from '@/lib/dates';
 import type { AgendaEvent } from '@/lib/types';
 import type { Locale } from '@/lib/constants';
 
@@ -14,58 +15,76 @@ export function EventCard({
 }) {
   const t = useTranslations('agenda');
   const tType = useTranslations('eventType');
+  const tLanguage = useTranslations('language');
+  const tGender = useTranslations('gender');
   const locale = useLocale() as Locale;
   const schoolName = locale === 'fr' ? event.school.name_fr : event.school.name_en;
+  const note = locale === 'fr' ? event.notes_fr : event.notes_en;
+  const isExam = event.type === 'entrance_exam';
 
   return (
-    <article className="rounded-lg border border-neutral-200 p-4">
-      <div className="flex items-baseline justify-between gap-3">
-        <h3 className="font-medium">{schoolName}</h3>
-        <span className="shrink-0 rounded bg-neutral-100 px-2 py-0.5 text-xs">
-          {tType(event.type)}
-        </span>
+    <article className="agenda-event grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 border-b border-(--rule) py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:gap-x-5">
+      <p className="col-span-full pb-1 text-[13px] font-medium leading-5 text-(--ink) sm:col-span-1 sm:pb-0 sm:pt-0.5 sm:text-sm">
+        {formatEventRange(event.starts_at, event.ends_at, locale)}
+      </p>
+
+      <div className="min-w-0 sm:col-span-1">
+        <h3 className="text-[16px] font-medium leading-5 tracking-[-0.01em] sm:text-[17px]">
+          {schoolName}
+        </h3>
+        <p className="mt-1 flex flex-wrap gap-x-2 text-[12px] leading-5 text-(--ink-3)">
+          <span>{event.school.city}</span>
+          <span aria-hidden="true" className="text-(--rule-strong)">·</span>
+          <span>{tLanguage(event.school.language)}</span>
+          <span aria-hidden="true" className="text-(--rule-strong)">·</span>
+          <span>{tGender(event.school.gender)}</span>
+        </p>
+        {note && <p className="mt-1.5 max-w-[60ch] text-[13px] leading-5 text-(--ink-2)">{note}</p>}
       </div>
 
-      <p className="mt-1 text-sm text-neutral-700">
-        {formatEventTime(event.starts_at, event.ends_at, locale)}
-      </p>
-      <p className="text-sm text-neutral-500">{event.school.city}</p>
+      <span className={`shrink-0 self-start px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.05em] ${
+        isExam ? 'bg-(--exam-wash) text-(--exam)' : 'bg-(--paper-sunk) text-(--ink-2)'
+      }`}>
+        {tType(event.type)}
+      </span>
 
       {clashes.length > 0 && (
-        <ul className="mt-2 space-y-1">
+        <ul className="col-span-full mt-2 space-y-1 bg-(--flag-wash) px-3 py-2 text-[13px] leading-5 text-(--flag) sm:col-start-2 sm:col-span-2">
           {clashes.map((clash) => (
-            <li key={clash.id} className="text-sm text-amber-700">
-              {t('clashWith', {
-                school: locale === 'fr' ? clash.school.name_fr : clash.school.name_en,
-                type: tType(clash.type),
-              })}
+            <li key={clash.id} className="flex items-start gap-2">
+              <ClashIcon />
+              <span>
+                {t('clashWith', {
+                  school: locale === 'fr' ? clash.school.name_fr : clash.school.name_en,
+                  type: tType(clash.type),
+                })}
+              </span>
             </li>
           ))}
         </ul>
       )}
 
-      {event.registration_required && event.registration_url && (
-        <a
-          href={event.registration_url}
-          className="mt-3 inline-block rounded bg-neutral-900 px-3 py-1.5 text-sm text-white"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('register')}
-        </a>
-      )}
-
-      <footer className="mt-3 text-xs text-neutral-500">
-        {t('verifiedOn', { date: formatVerifiedDate(event.last_verified_at, locale) })}
-        {' · '}
+      <footer className="col-span-full mt-2 flex flex-wrap items-center gap-2 text-[12px] text-(--ink-3) sm:col-start-2 sm:col-span-2">
+        <span>{t('verifiedOn', { date: formatVerifiedDate(event.last_verified_at, locale) })}</span>
+        <span aria-hidden="true" className="text-(--rule-strong)">·</span>
         <a
           href={event.source_url}
-          className="underline"
+          className="text-(--ink-2) underline decoration-(--rule-strong) underline-offset-2 hover:decoration-(--ink-2)"
           target="_blank"
           rel="noopener noreferrer"
         >
           {t('source')}
         </a>
+        {event.registration_required && event.registration_url && (
+          <a
+            href={event.registration_url}
+            className="ml-auto bg-(--ink) px-3 py-1.5 font-medium text-(--paper) transition-colors hover:bg-(--ink-2)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('register')}
+          </a>
+        )}
       </footer>
     </article>
   );

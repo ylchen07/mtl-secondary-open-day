@@ -13,12 +13,12 @@ export function EmptyState({
 
   if (filtered) {
     return (
-      <div className="rounded-lg border border-dashed border-neutral-300 p-8 text-center">
-        <p className="text-neutral-700">{t('emptyFiltered')}</p>
+      <div className="border border-dashed border-(--rule-strong) bg-(--paper-sunk) p-8 text-center">
+        <p className="text-(--ink-2)">{t('emptyFiltered')}</p>
         <button
           type="button"
           onClick={onClear}
-          className="mt-3 text-sm underline"
+          className="mt-3 text-sm font-medium text-(--ink) underline underline-offset-4"
         >
           {t('clearFilters')}
         </button>
@@ -27,9 +27,9 @@ export function EmptyState({
   }
 
   return (
-    <div className="rounded-lg border border-dashed border-neutral-300 p-8 text-center">
-      <h2 className="font-medium">{t('emptyTitle')}</h2>
-      <p className="mx-auto mt-2 max-w-prose text-sm text-neutral-600">
+    <div className="border border-dashed border-(--rule-strong) bg-(--paper-sunk) p-8 text-center">
+      <h2 className="font-(--font-serif) text-2xl font-medium">{t('emptyTitle')}</h2>
+      <p className="mx-auto mt-2 max-w-prose text-sm text-(--ink-2)">
         {t('emptyBody')}
       </p>
     </div>

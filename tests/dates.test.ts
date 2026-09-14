@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatEventTime, groupByWeek, weekKey } from '@/lib/dates';
+import { formatEventRange, formatEventTime, groupByDay, groupByWeek, weekKey } from '@/lib/dates';
 
 describe('weekKey', () => {
   it('returns the Monday of the event week in Montreal time', () => {
@@ -10,6 +10,37 @@ describe('weekKey', () => {
   it('assigns a late-Sunday-UTC event to the correct Montreal week', () => {
     // 2026-09-21T02:00Z is Sunday 22:00 in Montreal — still the week of Sep 14
     expect(weekKey('2026-09-21T02:00:00.000Z')).toBe('2026-09-14');
+  });
+});
+
+describe('formatEventRange', () => {
+  it('renders only the Montreal time range for an agenda row', () => {
+    expect(
+      formatEventRange('2026-09-26T17:00:00.000Z', '2026-09-26T20:00:00.000Z', 'en'),
+    ).toBe('1:00 PM – 4:00 PM');
+  });
+});
+
+describe('groupByDay', () => {
+  it('groups events by Montreal calendar day in chronological order', () => {
+    const groups = groupByDay([
+      { starts_at: '2026-10-03T17:00:00.000Z' },
+      { starts_at: '2026-09-26T17:00:00.000Z' },
+      { starts_at: '2026-09-26T15:00:00.000Z' },
+      { starts_at: '2026-09-27T02:00:00.000Z' },
+    ]);
+    expect(groups.map((g) => g.day)).toEqual(['2026-09-26', '2026-10-03']);
+    expect(groups[0].events).toHaveLength(3);
+    expect(groups[0].events.map((event) => event.starts_at)).toEqual([
+      '2026-09-26T15:00:00.000Z',
+      '2026-09-26T17:00:00.000Z',
+      '2026-09-27T02:00:00.000Z',
+    ]);
+  });
+
+  it('does not let a late UTC timestamp move an event into the next Montreal day', () => {
+    const groups = groupByDay([{ starts_at: '2026-09-27T02:00:00.000Z' }]);
+    expect(groups[0].day).toBe('2026-09-26');
   });
 });
 
