@@ -115,7 +115,7 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 | École Socrates-Démosthène, campus Socrates II — 2026-10-03 | ✗ | ✗ | ✗ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — school/campus naming, campus-region/address mapping, directory language classification, whole-school gender, and incoming Secondary 1 relevance remain unresolved. |
 | The Study — 2026-10-01 morning | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — official admissions and academic pages support an all-girls bilingual day school, full address, primary-and-secondary open house, exact sessions, and Grade 7 admission. |
 | The Study — 2026-10-01 evening | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — same official evidence as the morning session. |
-| Villa Sainte-Marcelline — 2026-10-03 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — official pages identify a French girls’ school, address, exact event, embedded reservation, and a Secondary 1 option in the event form. |
+| Villa Sainte-Marcelline — 2026-10-03 | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — official pages establish the girls’ student body, address, exact event, embedded reservation, and a Secondary 1 option in the event form, but do not explicitly establish French as the general language of instruction. French-language website content and French/Bac assessments do not by themselves prove the directory classification. |
 
 ### Official-source bundles used for the checklist
 
@@ -141,13 +141,14 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 
 - **CDSL:** the directory record points at the second-cycle Pavillon Durocher, but the official event page sends incoming families to the first-cycle Pavillon Saint-Lambert at 375 Riverside. The event remains draft until the product can model an event venue separately or the school record is safely recast around the first-cycle campus.
 - **Collège Charles-Lemoyne:** the event page explicitly names both campuses and publishes both addresses, so campus identity and location pass. Whole-school gender remains the only publication-critical blocker found.
-- **The Study, Villa Sainte-Marcelline, Collège Notre-Dame, and Collège Mont-Royal:** every publication-critical field passes. Unknown boarding is not a blocker.
+- **The Study, Collège Notre-Dame, and Collège Mont-Royal:** every publication-critical field passes. Unknown boarding is not a blocker.
+- **Villa Sainte-Marcelline:** remains draft because the reviewed official pages do not explicitly establish the directory’s general French instructional-language classification. The French-language site, advanced English/Spanish offerings, and French/Bac assessments are insufficient to infer the school-wide classification.
 
 ### Promotion results
 
-- Promoted schools: The Study, Villa Sainte-Marcelline, Collège Notre-Dame, Collège Mont-Royal.
-- Promoted events: both The Study sessions plus one event each for Villa Sainte-Marcelline, Collège Notre-Dame, and Collège Mont-Royal.
-- Reviewed totals after promotion: **10 published schools and 14 published events**.
+- Promoted schools: The Study, Collège Notre-Dame, Collège Mont-Royal.
+- Promoted events: both The Study sessions plus one event each for Collège Notre-Dame and Collège Mont-Royal.
+- Reviewed totals after promotion: **9 published schools and 13 published events**.
 - Loyola’s published open-house event now uses `https://loyola.ca/openhouse` as its event source, matching the official page that supports the date, audience, registration requirement, and registration destination.
 
 ## Mechanical coverage summary
