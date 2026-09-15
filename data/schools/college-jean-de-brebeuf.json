@@ -16,7 +16,7 @@
   "website_url": "https://www.brebeuf.qc.ca",
   "admissions_url": "https://www.brebeuf.qc.ca/secondaire/admission/",
   "tuition_annual_cad": 5884,
-  "has_boarding": true,
+  "has_boarding": null,
   "programs": [
     "sport_et_monde"
   ],
