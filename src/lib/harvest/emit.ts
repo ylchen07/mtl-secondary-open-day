@@ -66,8 +66,9 @@ function requireTimedEvent(e: ListingEvent): { date: string; startTime: string; 
 /**
  * Build a schema-valid draft `SchoolFile` from a reconciled `create` entry.
  * Every field a human has not yet verified (location, tuition, programs,
- * descriptions) is left null/empty rather than guessed — this file exists to
- * be reviewed and edited, not published as-is.
+ * descriptions, boarding, registration requirement) is left null/empty rather
+ * than guessed — this file exists to be reviewed and edited, not published
+ * as-is.
  *
  * `source_url` is always the FEEP detail page: that page, not the school's
  * own site, is what was actually parsed for this date and time. `website_url`
@@ -106,7 +107,7 @@ export function toDraftSchool(
     website_url: site,
     admissions_url: site,
     tuition_annual_cad: null,
-    has_boarding: false,
+    has_boarding: null,
     programs: [],
     description_en: null,
     description_fr: null,
@@ -120,7 +121,7 @@ export function toDraftSchool(
         ends_at: localIso(e.date, e.endTime),
         type: 'open_house' as const,
         academic_year: academicYearFor(e.date),
-        registration_required: false,
+        registration_required: null,
         registration_url: null,
         notes_en: null,
         notes_fr: rawEvent.noteFr,
