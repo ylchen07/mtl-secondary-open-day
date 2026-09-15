@@ -13,7 +13,7 @@
   "website_url": "https://www.csjv.ca/fr",
   "admissions_url": "https://www.csjv.ca/fr/admission-secondaire-1",
   "tuition_annual_cad": null,
-  "has_boarding": false,
+  "has_boarding": true,
   "programs": [],
   "description_en": null,
   "description_fr": null,

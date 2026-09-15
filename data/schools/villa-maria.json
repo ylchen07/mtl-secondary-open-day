@@ -16,8 +16,10 @@
   "website_url": "https://www.villamaria.qc.ca",
   "admissions_url": "https://villamaria.qc.ca/admission/",
   "tuition_annual_cad": 5520,
-  "has_boarding": false,
-  "programs": ["pei"],
+  "has_boarding": null,
+  "programs": [
+    "pei"
+  ],
   "description_en": "Collège Villa Maria is a bilingual private co-educational secondary school in Montreal's Notre-Dame-de-Grâce area, founded in 1854. The school offers instruction in both French and English sectors and is introducing a new project-based learning model starting in the 2026-2027 school year focused on student voice and choice. Villa Maria provides four distinct study profiles and emphasizes innovation, community, and a bilingual environment.",
   "description_fr": "Le Collège Villa Maria est une école secondaire privée bilingue et mixte située dans le quartier Notre-Dame-de-Grâce à Montréal, fondée en 1854. L'école offre un enseignement dans les secteurs français et anglais et introduit un nouveau modèle pédagogique par projets à partir de l'année scolaire 2026-2027, axé sur la voix et le choix des élèves. Villa Maria propose quatre profils d'études distincts et met l'accent sur l'innovation, la communauté et un environnement bilingue.",
   "source_url": "https://villamaria.qc.ca/admission/",

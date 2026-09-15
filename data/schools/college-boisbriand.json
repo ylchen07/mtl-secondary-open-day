@@ -13,7 +13,7 @@
   "website_url": "https://collegeboisbriand.qc.ca/",
   "admissions_url": "https://collegeboisbriand.qc.ca/procedure-dadmission/",
   "tuition_annual_cad": null,
-  "has_boarding": false,
+  "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
@@ -29,7 +29,7 @@
       "registration_required": false,
       "registration_url": null,
       "notes_en": null,
-      "notes_fr": "Portes ouvertes le 19 septembre 2026, de 11h30 \u00e0 15h. Vous n\u2019avez qu\u2019\u00e0 vous pr\u00e9senter.",
+      "notes_fr": "Portes ouvertes le 19 septembre 2026, de 11h30 à 15h. Vous n’avez qu’à vous présenter.",
       "source_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
       "last_verified_at": "2026-09-13",
       "status": "draft"
