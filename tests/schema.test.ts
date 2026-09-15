@@ -45,6 +45,63 @@ describe('schoolFileSchema', () => {
     expect(schoolFileSchema.safeParse(valid).success).toBe(true);
   });
 
+  it('accepts unknown boarding and registration evidence', () => {
+    const result = schoolFileSchema.safeParse({
+      ...valid,
+      has_boarding: null,
+      open_days: [
+        {
+          ...valid.open_days[0],
+          registration_required: null,
+          registration_url: null,
+        },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it.each([
+    [true, null],
+    [false, 'https://school.example/register'],
+    [null, 'https://school.example/register'],
+  ] as const)(
+    'rejects registration invariant %s / %s',
+    (registration_required, registration_url) => {
+      const result = schoolFileSchema.safeParse({
+        ...valid,
+        open_days: [
+          {
+            ...valid.open_days[0],
+            registration_required,
+            registration_url,
+          },
+        ],
+      });
+      expect(result.success).toBe(false);
+    },
+  );
+
+  it.each([
+    [true, 'https://school.example/register'],
+    [false, null],
+    [null, null],
+  ] as const)(
+    'accepts registration invariant %s / %s',
+    (registration_required, registration_url) => {
+      const result = schoolFileSchema.safeParse({
+        ...valid,
+        open_days: [
+          {
+            ...valid.open_days[0],
+            registration_required,
+            registration_url,
+          },
+        ],
+      });
+      expect(result.success).toBe(true);
+    },
+  );
+
   it('rejects an empty French description', () => {
     const r = schoolFileSchema.safeParse({ ...valid, description_fr: '' });
     expect(r.success).toBe(false);

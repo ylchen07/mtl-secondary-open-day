@@ -28,7 +28,7 @@ const openDaySchema = z
     ends_at: z.string().datetime({ offset: true }),
     type: z.enum(['open_house', 'info_session', 'entrance_exam', 'tour', 'virtual']),
     academic_year: academicYear,
-    registration_required: z.boolean(),
+    registration_required: z.boolean().nullable(),
     registration_url: httpsUrl.nullish(),
     notes_en: z.string().nullish(),
     notes_fr: z.string().nullish(),
@@ -43,7 +43,24 @@ const openDaySchema = z
   .refine(
     (e) => new Date(e.starts_at).getTime() - Date.now() < EIGHTEEN_MONTHS_MS,
     { message: 'event is more than 18 months out — likely a year typo', path: ['starts_at'] },
-  );
+  )
+  .superRefine((event, ctx) => {
+    if (event.registration_required === true && event.registration_url == null) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['registration_url'],
+        message: 'is required when registration is required',
+      });
+    }
+
+    if (event.registration_required !== true && event.registration_url != null) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['registration_url'],
+        message: 'must be empty unless registration is required',
+      });
+    }
+  });
 
 export const schoolFileSchema = z
   .object({
@@ -72,7 +89,7 @@ export const schoolFileSchema = z
     website_url: httpsUrl,
     admissions_url: httpsUrl,
     tuition_annual_cad: z.number().int().positive().nullish(),
-    has_boarding: z.boolean(),
+    has_boarding: z.boolean().nullable(),
     programs: z.array(z.string()),
     description_en: nonEmpty.nullish(),
     description_fr: nonEmpty.nullish(),
