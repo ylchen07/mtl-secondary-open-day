@@ -11,6 +11,7 @@
     "dayCount": "{count, plural, one {# event} other {# events}}",
     "pastHeading": "Past events",
     "pastDescription": "For reference only — these dates are no longer active.",
+    "upcomingHeading": "Upcoming",
     "pastEvent": "Past",
     "clashWith": "Overlaps with {school} ({type})",
     "verifiedOn": "Verified {date}",
