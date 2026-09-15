@@ -928,7 +928,7 @@ import { createReadClient } from './supabase';
 import type { AgendaEvent } from './types';
 
 /**
- * Every published, not-yet-past event with its school.
+ * Every published event with its published school; past events render as inactive history.
  * The full result is shipped to the browser once; filtering happens there.
  */
 export async function fetchUpcomingEvents(): Promise<AgendaEvent[]> {
@@ -2436,7 +2436,7 @@ Check all of the following at `http://localhost:3000/en`:
 
 - [ ] **Step 7: Verify the empty state honestly**
 
-Temporarily set every seeded event's `starts_at` to a past date, re-seed, and reload. Expected: the "no upcoming open days" message — **not** past events. Restore the dates and re-seed.
+Temporarily set one published event's `ends_at` to a past date, re-seed, and reload. Expected: the event remains visible in the muted "Past events" section without a registration action. Restore the event dates and re-seed.
 
 - [ ] **Step 8: Commit**
 

@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { formatEventRange, formatEventTime, groupByDay, groupByWeek, weekKey } from '@/lib/dates';
+import {
+  formatEventRange,
+  formatEventTime,
+  groupByDay,
+  groupByWeek,
+  partitionAgendaEvents,
+  weekKey,
+} from '@/lib/dates';
 
 describe('weekKey', () => {
   it('returns the Monday of the event week in Montreal time', () => {
@@ -10,6 +17,21 @@ describe('weekKey', () => {
   it('assigns a late-Sunday-UTC event to the correct Montreal week', () => {
     // 2026-09-21T02:00Z is Sunday 22:00 in Montreal — still the week of Sep 14
     expect(weekKey('2026-09-21T02:00:00.000Z')).toBe('2026-09-14');
+  });
+});
+
+describe('partitionAgendaEvents', () => {
+  it('keeps ended events in a separate historical bucket', () => {
+    const result = partitionAgendaEvents(
+      [
+        { starts_at: '2026-09-15T14:00:00.000Z', ends_at: '2026-09-15T16:00:00.000Z' },
+        { starts_at: '2026-09-10T14:00:00.000Z', ends_at: '2026-09-10T16:00:00.000Z' },
+      ],
+      new Date('2026-09-14T12:00:00.000Z'),
+    );
+    expect(result.upcoming).toHaveLength(1);
+    expect(result.past).toHaveLength(1);
+    expect(result.past[0].ends_at).toBe('2026-09-10T16:00:00.000Z');
   });
 });
 

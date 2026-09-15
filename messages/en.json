@@ -6,9 +6,12 @@
   "agenda": {
     "heading": "Open houses & entrance exams",
     "tagline": "Private secondary schools across Greater Montreal. Every date links to the school’s own page.",
-    "coverage": "upcoming events",
+    "coverage": "published events",
     "resultCount": "Showing {count, plural, =0 {no events} one {# event} other {# events}}",
     "dayCount": "{count, plural, one {# event} other {# events}}",
+    "pastHeading": "Past events",
+    "pastDescription": "For reference only — these dates are no longer active.",
+    "pastEvent": "Past",
     "clashWith": "Overlaps with {school} ({type})",
     "verifiedOn": "Verified {date}",
     "source": "source",

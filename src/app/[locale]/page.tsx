@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { AgendaClient } from '@/components/AgendaClient';
 import { Link } from '@/i18n/navigation';
-import { fetchUpcomingEvents } from '@/lib/queries';
+import { fetchAgendaEvents } from '@/lib/queries';
 import { parseFilters } from '@/lib/filters';
 
 export const revalidate = 3600;
@@ -17,7 +17,7 @@ export default async function AgendaPage({
   setRequestLocale(locale);
 
   const [events, t, rawSearch] = await Promise.all([
-    fetchUpcomingEvents(),
+    fetchAgendaEvents(),
     getTranslations('agenda'),
     searchParams,
   ]);
