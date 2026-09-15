@@ -14,6 +14,11 @@ describe('message catalogs', () => {
     expect(keys(fr).sort()).toEqual(keys(en).sort());
   });
 
+  it('includes checkRegistrationDetails for unknown registration evidence', () => {
+    expect(en.agenda.checkRegistrationDetails).toBeTypeOf('string');
+    expect(fr.agenda.checkRegistrationDetails).toBeTypeOf('string');
+  });
+
   it('no message is left empty', () => {
     for (const catalog of [en, fr]) {
       const empties = keys(catalog).filter((path) => {
