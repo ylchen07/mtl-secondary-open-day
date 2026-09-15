@@ -11,6 +11,7 @@
     "dayCount": "{count, plural, one {# événement} other {# événements}}",
     "pastHeading": "Événements passés",
     "pastDescription": "À titre de référence seulement — ces dates ne sont plus actives.",
+    "upcomingHeading": "À venir",
     "pastEvent": "Passé",
     "clashWith": "Chevauche {school} ({type})",
     "verifiedOn": "Vérifié le {date}",

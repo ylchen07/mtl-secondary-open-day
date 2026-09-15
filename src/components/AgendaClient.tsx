@@ -43,7 +43,7 @@ export function AgendaClient({
 
   return (
     <div className="grid gap-8 md:grid-cols-[16rem_1fr] md:gap-10">
-      <aside aria-label={t('filtersLandmark')}>
+      <aside aria-label={t('filtersLandmark')} className="md:sticky md:top-6 md:self-start">
         <FilterBar filters={filters} onChange={update} />
       </aside>
 
@@ -56,32 +56,8 @@ export function AgendaClient({
           <EmptyState filtered={isFiltered} onClear={() => update(EMPTY_FILTERS)} />
         ) : (
           <div className="space-y-12">
-            <div className="space-y-9">
-              {upcomingDays.map((day) => (
-                <div key={day.day}>
-                  <div className="flex items-baseline gap-3 border-b border-(--rule-strong) pb-2">
-                    <h2 className="font-(--font-serif) text-[23px] font-medium leading-tight tracking-[-0.01em]">
-                      {formatDayHeading(day.day, locale)}
-                    </h2>
-                    <span className="ml-auto text-[12px] text-(--ink-3)">
-                      {t('dayCount', { count: day.events.length })}
-                    </span>
-                  </div>
-                  <div>
-                    {day.events.map((event) => (
-                      <EventCard
-                        key={event.id}
-                        event={event}
-                        clashes={clashes.get(event.id) ?? []}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {pastDays.length > 0 && (
-              <section aria-labelledby="past-events-heading" className="border-t border-(--rule-strong) pt-7">
+              <section aria-labelledby="past-events-heading" className="border-t border-(--rule-strong) pt-5">
                 <div className="mb-4 flex items-baseline justify-between gap-4">
                   <div>
                     <h2 id="past-events-heading" className="font-(--font-serif) text-2xl font-medium tracking-[-0.01em]">
@@ -107,6 +83,38 @@ export function AgendaClient({
                       <div>
                         {day.events.map((event) => (
                           <EventCard key={event.id} event={event} clashes={[]} past />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {upcomingDays.length > 0 && (
+              <section aria-labelledby="upcoming-events-heading" className="border-t border-(--ink) pt-5">
+                <div className="mb-4 flex items-baseline justify-between gap-4">
+                  <h2 id="upcoming-events-heading" className="font-(--font-serif) text-2xl font-medium tracking-[-0.01em]">
+                    {t('upcomingHeading')}
+                  </h2>
+                  <span className="text-[12px] text-(--ink-3)">
+                    {t('dayCount', { count: upcoming.length })}
+                  </span>
+                </div>
+                <div className="space-y-9">
+                  {upcomingDays.map((day) => (
+                    <div key={day.day}>
+                      <div className="flex items-baseline gap-3 border-b border-(--rule-strong) pb-2">
+                        <h3 className="font-(--font-serif) text-[23px] font-medium leading-tight tracking-[-0.01em]">
+                          {formatDayHeading(day.day, locale)}
+                        </h3>
+                        <span className="ml-auto text-[12px] text-(--ink-3)">
+                          {t('dayCount', { count: day.events.length })}
+                        </span>
+                      </div>
+                      <div>
+                        {day.events.map((event) => (
+                          <EventCard key={event.id} event={event} clashes={clashes.get(event.id) ?? []} />
                         ))}
                       </div>
                     </div>
