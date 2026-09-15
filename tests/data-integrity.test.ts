@@ -65,6 +65,11 @@ function parseAuditRows(): { schoolRows: SchoolAuditRow[]; eventRows: EventAudit
       continue;
     }
 
+    if (line.startsWith('## ')) {
+      section = 'none';
+      continue;
+    }
+
     if (!line.startsWith('|')) continue;
     if (line.startsWith('|---')) continue;
     if (line.startsWith('| File |')) continue;
@@ -133,6 +138,24 @@ describe('data/schools', () => {
       .filter((s) => s.status === 'published' && s.open_days.length === 0)
       .map((s) => s.slug);
     expect(barren).toEqual([]);
+  });
+
+  it('has the reviewed publication counts and no published event under a draft school', () => {
+    const { ok } = validateSchoolFiles(loadAll());
+    const publishedSchools = ok.filter((school) => school.status === 'published');
+    const publishedEvents = ok.flatMap((school) =>
+      school.open_days
+        .filter((event) => event.status === 'published')
+        .map((event) => ({ school, event })),
+    );
+
+    expect(publishedSchools).toHaveLength(10);
+    expect(publishedEvents).toHaveLength(14);
+    expect(
+      publishedEvents
+        .filter(({ school }) => school.status !== 'published')
+        .map(({ school, event }) => `${school.slug}|${event.starts_at}|${event.type}`),
+    ).toEqual([]);
   });
 
   it('enforces tri-state values and registration URL invariants across all records', () => {

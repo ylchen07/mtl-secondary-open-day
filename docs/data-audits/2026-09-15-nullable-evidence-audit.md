@@ -90,6 +90,66 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `villa-maria.json` | `registration_required` | `2026-09-12T10:00:00-04:00 + open_house` | `false` | `false` | `supported` | https://portesouvertes.villamaria.qc.ca/ | Official page explicitly says no registration or appointment is necessary. |
 | `villa-sainte-marcelline.json` | `registration_required` | `2026-10-03T10:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ | Official page says “Réservez votre place” for the open house and provides the registration form. |
 
+## Candidate promotion review
+
+All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time** were rechecked against current school-owned pages. `has_boarding: null` and `registration_required: null` were not treated as blockers. A check mark means the required fact is supported by the cited official pages; a cross means the named non-nullable blocker remains.
+
+| Candidate | Identity | Address / region | Language | Whole-school gender | Exact year / date | Exact start / end | Type | Incoming Secondary 1 relevance | Official event source | Verification date | Verdict / precise blocker |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Collège Boisbriand — 2026-09-19 | ✓ | ✓ | ✗ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — official pages reviewed do not explicitly establish instructional language, whole-school gender, or that incoming Secondary 1 families are included in this open house. |
+| Collège Charles-Lemoyne, Longueuil–Saint-Lambert — 2026-09-20 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — official pages establish both campuses, French instruction, event details, and Secondary 1 programming, but not whole-school gender. |
+| Collège Charles-Lemoyne, Ville de Sainte-Catherine — 2026-09-20 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — official pages establish both campuses, French instruction, event details, and Secondary 1 programming, but not whole-school gender. |
+| Collège Durocher Saint-Lambert — 2026-09-19 | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — the open house is explicitly at the first-cycle Pavillon Saint-Lambert, 375 Riverside, while the school record still presents the second-cycle 857 Riverside address; this campus/event-location mismatch would mislead incoming Secondary 1 families. |
+| Collège Français Secondaire Montréal — 2026-10-04 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — official page establishes French secondary instruction, address, time, and a 6e-year admission path, but not whole-school gender. |
+| Collège International Marie de France — 2026-09-26 | ✓ | ✓ | ✗ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — official pages do not explicitly establish the directory language classification, whole-school gender, or that the open house includes incoming 6e/Secondary 1 families. |
+| Collège Mont-Royal — 2026-09-19 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — the official admission page identifies a private mixed French secondary school, gives the address, explicitly covers 1re secondaire 2027–2028, and states the 2026 open-house date and exact hours. |
+| Collège Notre-Dame-de-Lourdes — 2026-10-03 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — accessible official event evidence covers students in 5e année, but current official evidence reviewed does not explicitly establish whole-school gender. |
+| Collège Notre-Dame — 2026-09-19 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — official project and open-house pages explicitly establish a mixed French institution, address, 1re secondaire 2027–2028 audience, exact 2026 date/time, and no-appointment event. |
+| Collège Pasteur — 2026-09-26 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — official pages do not explicitly establish whole-school gender or that the open house includes incoming Secondary 1 families. |
+| Collège Saint-Maurice — 2026-09-20 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — official homepage supports the French secondary school and exact event time but does not explicitly establish whole-school gender or incoming Secondary 1 event relevance. |
+| Collège Saint-Sacrement — 2026-09-19 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — official pages identify future students and the 2027–2028 admission cycle, but current official evidence reviewed does not explicitly establish whole-school gender. |
+| Collège St-Jean-Vianney — 2026-09-19 | ✓ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | Keep draft — the official booking page exposes slots through 14:05, so the stored inferred 14:15 end is unsupported; the school/event address evidence also remains inconsistent. |
+| Collège Trinité — 2026-09-19 | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — the official 2026 event and admission pages establish the exact event and incoming 1re secondaire audience, but do not explicitly establish whole-school gender. |
+| École Rudolf Steiner de Montréal — 2026-10-03 | ✓ | ✓ | ✗ | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Keep draft — official calendar establishes the event from kindergarten through secondary, but official evidence reviewed does not explicitly establish the directory language classification or whole-school gender. |
+| École Socrates-Démosthène, campus Démosthène — 2026-10-03 | ✗ | ✗ | ✗ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — school/campus naming, campus-region/address mapping, directory language classification, whole-school gender, and incoming Secondary 1 relevance remain unresolved. |
+| École Socrates-Démosthène, campus Socrates II — 2026-10-03 | ✗ | ✗ | ✗ | ✗ | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | Keep draft — school/campus naming, campus-region/address mapping, directory language classification, whole-school gender, and incoming Secondary 1 relevance remain unresolved. |
+| The Study — 2026-10-01 morning | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — official admissions and academic pages support an all-girls bilingual day school, full address, primary-and-secondary open house, exact sessions, and Grade 7 admission. |
+| The Study — 2026-10-01 evening | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — same official evidence as the morning session. |
+| Villa Sainte-Marcelline — 2026-10-03 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **Publish** — official pages identify a French girls’ school, address, exact event, embedded reservation, and a Secondary 1 option in the event form. |
+
+### Official-source bundles used for the checklist
+
+- Collège Boisbriand: https://collegeboisbriand.qc.ca/visite-virtuelle/ ; https://collegeboisbriand.qc.ca/procedure-dadmission/ ; https://collegeboisbriand.qc.ca/nous-joindre/
+- Collège Charles-Lemoyne (both campuses): https://monccl.com/actualites/journee-portes-ouvertes-2026/ ; https://monccl.com/le-college/presentation/ ; https://monccl.com/secondaire/programme-deducation-campus-longueuil-saint-lambert/ ; https://monccl.com/secondaire/programme-deducation-campus-ville-de-sainte-catherine/
+- Collège Durocher Saint-Lambert: https://cdsl.qc.ca/portes-ouvertes/ ; https://cdsl.qc.ca/a-propos/
+- Collège Français Secondaire Montréal: https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/
+- Collège International Marie de France: https://www.cimf.ca/journees-portes-ouvertes/ ; https://www.cimf.ca/a-propos/
+- Collège Mont-Royal: https://collegemont-royal.qc.ca/admission-college-mont-royal/
+- Collège Notre-Dame-de-Lourdes: https://www.ndl.qc.ca/portes-ouvertes/ ; https://www.ndl.qc.ca/admissions/
+- Collège Notre-Dame: https://www.collegenotredame.com/admissions/portes-ouvertes/ ; https://www.collegenotredame.com/college/projet-educatif/
+- Collège Pasteur: https://collegepasteur.ca/portes-ouvertes-college-pasteur.php ; https://collegepasteur.ca/programme-secondaire-college-pasteur.php
+- Collège Saint-Maurice: https://www.csm.qc.ca/ ; https://www.csm.qc.ca/le-college/
+- Collège Saint-Sacrement: https://collegesaintsacrement.qc.ca/portes-ouvertes/ ; https://collegesaintsacrement.qc.ca/procedures-admission/ ; https://collegesaintsacrement.qc.ca/projet-educatif/
+- Collège St-Jean-Vianney: https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026 ; https://www.csjv.ca/
+- Collège Trinité: https://collegetrinite.ca/le-college/portes-ouvertes/ ; https://collegetrinite.ca/le-college/admission/ ; https://collegetrinite.ca/le-college/a-propos/
+- École Rudolf Steiner de Montréal: https://ersm.org/calendrier-des-evenements/ ; https://ersm.org/admission-ecole/ ; https://ersm.org/notre-ecole/
+- École Socrates-Démosthène campuses: https://hcgm.org/ecoles/socdem/index.html ; https://www.socdem.org/par-campus/demosthene/
+- The Study: https://www.thestudy.qc.ca/fr/admission ; https://www.thestudy.qc.ca/academics ; https://www.thestudy.qc.ca/about/campus-location
+- Villa Sainte-Marcelline: https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ ; https://villa.marcelline.qc.ca/secondaire/ ; https://villa.marcelline.qc.ca/nous-joindre/
+
+### Priority-candidate campus rulings
+
+- **CDSL:** the directory record points at the second-cycle Pavillon Durocher, but the official event page sends incoming families to the first-cycle Pavillon Saint-Lambert at 375 Riverside. The event remains draft until the product can model an event venue separately or the school record is safely recast around the first-cycle campus.
+- **Collège Charles-Lemoyne:** the event page explicitly names both campuses and publishes both addresses, so campus identity and location pass. Whole-school gender remains the only publication-critical blocker found.
+- **The Study, Villa Sainte-Marcelline, Collège Notre-Dame, and Collège Mont-Royal:** every publication-critical field passes. Unknown boarding is not a blocker.
+
+### Promotion results
+
+- Promoted schools: The Study, Villa Sainte-Marcelline, Collège Notre-Dame, Collège Mont-Royal.
+- Promoted events: both The Study sessions plus one event each for Villa Sainte-Marcelline, Collège Notre-Dame, and Collège Mont-Royal.
+- Reviewed totals after promotion: **10 published schools and 14 published events**.
+- Loyola’s published open-house event now uses `https://loyola.ca/openhouse` as its event source, matching the official page that supports the date, audience, registration requirement, and registration destination.
+
 ## Mechanical coverage summary
 
 - School rows: 41/41
