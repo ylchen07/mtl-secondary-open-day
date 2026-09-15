@@ -1,5 +1,5 @@
 import { TZDate } from '@date-fns/tz';
-import { format, startOfWeek } from 'date-fns';
+import { addMonths, endOfDay, format, startOfWeek } from 'date-fns';
 import { enUS, fr } from 'date-fns/locale';
 import { MONTREAL_TZ, type Locale } from './constants';
 
@@ -7,6 +7,12 @@ const dateFnsLocale = { en: enUS, fr } as const;
 
 function montreal(iso: string): TZDate {
   return new TZDate(new Date(iso), MONTREAL_TZ);
+}
+
+/** End of the same Montreal calendar date three months after now. */
+export function agendaWindowEnd(now = new Date()): Date {
+  const end = endOfDay(addMonths(new TZDate(now, MONTREAL_TZ), 3));
+  return new Date(end.getTime());
 }
 
 /** ISO date of the Monday starting this event's week, in Montreal time. */

@@ -17,21 +17,21 @@
   "programs": [],
   "description_en": null,
   "description_fr": null,
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-international-marie-de-france",
-  "last_verified_at": "2026-09-12",
+  "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
+  "last_verified_at": "2026-09-15",
   "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-26T09:00:00-04:00",
-      "ends_at": "2026-09-26T13:15:00-04:00",
+      "ends_at": "2026-09-26T13:00:00-04:00",
       "type": "open_house",
       "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
+      "registration_required": true,
+      "registration_url": "https://5o18i3lc.sibpages.com/",
       "notes_en": null,
       "notes_fr": "Le Collège ouvrira ses portes le samedi 26 septembre 2026 de 9h à 13h.",
-      "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-international-marie-de-france",
-      "last_verified_at": "2026-09-12",
+      "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
+      "last_verified_at": "2026-09-15",
       "status": "draft"
     }
   ]
