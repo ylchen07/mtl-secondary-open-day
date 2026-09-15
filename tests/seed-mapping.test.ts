@@ -49,6 +49,11 @@ describe('toSchoolRow', () => {
     expect('location' in row).toBe(false);
   });
 
+  it('preserves unknown boarding in the school row', () => {
+    const row = toSchoolRow({ ...file, has_boarding: null });
+    expect(row.has_boarding).toBeNull();
+  });
+
   it('drops open_days from the school row', () => {
     expect('open_days' in toSchoolRow(file)).toBe(false);
   });
@@ -71,5 +76,21 @@ describe('toOpenDayRows', () => {
     const [row] = toOpenDayRows(file, 'school-uuid');
     expect(row.starts_at).toBe('2026-09-26T17:00:00.000Z');
     expect(row.school_id).toBe('school-uuid');
+  });
+
+  it('preserves unknown registration in event rows', () => {
+    const input = {
+      ...file,
+      open_days: [
+        {
+          ...file.open_days[0],
+          registration_required: null,
+          registration_url: null,
+        },
+      ],
+    } as SchoolFile;
+
+    const [row] = toOpenDayRows(input, 'school-uuid');
+    expect(row.registration_required).toBeNull();
   });
 });
