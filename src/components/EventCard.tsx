@@ -9,9 +9,11 @@ import type { Locale } from '@/lib/constants';
 export function EventCard({
   event,
   clashes,
+  past = false,
 }: {
   event: AgendaEvent;
   clashes: AgendaEvent[];
+  past?: boolean;
 }) {
   const t = useTranslations('agenda');
   const tType = useTranslations('eventType');
@@ -23,29 +25,50 @@ export function EventCard({
   const isExam = event.type === 'entrance_exam';
 
   return (
-    <article className="agenda-event grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 border-b border-(--rule) py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:gap-x-5">
-      <p className="col-span-full pb-1 text-[13px] font-medium leading-5 text-(--ink) sm:col-span-1 sm:pb-0 sm:pt-0.5 sm:text-sm">
+    <article
+      className={`agenda-event grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 border-b border-(--rule) py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:gap-x-5 ${past ? 'text-(--ink-3)' : ''}`}
+      aria-label={past ? t('pastEvent') : undefined}
+    >
+      <p
+        className={`col-span-full pb-1 text-[13px] font-medium leading-5 sm:col-span-1 sm:pb-0 sm:pt-0.5 sm:text-sm ${past ? 'text-(--ink-3)' : 'text-(--ink)'}`}
+      >
         {formatEventRange(event.starts_at, event.ends_at, locale)}
       </p>
 
       <div className="min-w-0 sm:col-span-1">
-        <h3 className="text-[16px] font-medium leading-5 tracking-[-0.01em] sm:text-[17px]">
+        <h3
+          className={`text-[16px] font-medium leading-5 tracking-[-0.01em] sm:text-[17px] ${past ? 'text-(--ink-2)' : ''}`}
+        >
           {schoolName}
         </h3>
         <p className="mt-1 flex flex-wrap gap-x-2 text-[12px] leading-5 text-(--ink-3)">
           <span>{event.school.city}</span>
-          <span aria-hidden="true" className="text-(--rule-strong)">·</span>
+          <span aria-hidden="true" className="text-(--rule-strong)">
+            ·
+          </span>
           <span>{tLanguage(event.school.language)}</span>
-          <span aria-hidden="true" className="text-(--rule-strong)">·</span>
+          <span aria-hidden="true" className="text-(--rule-strong)">
+            ·
+          </span>
           <span>{tGender(event.school.gender)}</span>
         </p>
-        {note && <p className="mt-1.5 max-w-[60ch] text-[13px] leading-5 text-(--ink-2)">{note}</p>}
+        {note && (
+          <p className="mt-1.5 max-w-[60ch] text-[13px] leading-5 text-(--ink-2)">
+            {note}
+          </p>
+        )}
       </div>
 
-      <span className={`shrink-0 self-start px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.05em] ${
-        isExam ? 'bg-(--exam-wash) text-(--exam)' : 'bg-(--paper-sunk) text-(--ink-2)'
-      }`}>
-        {tType(event.type)}
+      <span
+        className={`shrink-0 self-start px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.05em] ${
+          past
+            ? 'bg-(--paper-sunk) text-(--ink-3)'
+            : isExam
+              ? 'bg-(--exam-wash) text-(--exam)'
+              : 'bg-(--paper-sunk) text-(--ink-2)'
+        }`}
+      >
+        {past ? t('pastEvent') : tType(event.type)}
       </span>
 
       {clashes.length > 0 && (
@@ -66,7 +89,9 @@ export function EventCard({
 
       <footer className="col-span-full mt-2 flex flex-wrap items-center gap-2 text-[12px] text-(--ink-3) sm:col-start-2 sm:col-span-2">
         <span>{t('verifiedOn', { date: formatVerifiedDate(event.last_verified_at, locale) })}</span>
-        <span aria-hidden="true" className="text-(--rule-strong)">·</span>
+        <span aria-hidden="true" className="text-(--rule-strong)">
+          ·
+        </span>
         <a
           href={event.source_url}
           className="text-(--ink-2) underline decoration-(--rule-strong) underline-offset-2 hover:decoration-(--ink-2)"
@@ -75,7 +100,7 @@ export function EventCard({
         >
           {t('source')}
         </a>
-        {event.registration_required && event.registration_url && (
+        {!past && event.registration_required && event.registration_url && (
           <a
             href={event.registration_url}
             className="ml-auto bg-(--ink) px-3 py-1.5 font-medium text-(--paper) transition-colors hover:bg-(--ink-2)"

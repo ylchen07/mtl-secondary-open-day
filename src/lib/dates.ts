@@ -42,6 +42,25 @@ export function formatVerifiedDate(date: string, locale: Locale): string {
   });
 }
 
+export function isPastEvent(endsAt: string, now = new Date()): boolean {
+  return new Date(endsAt).getTime() < now.getTime();
+}
+
+export function partitionAgendaEvents<T extends { starts_at: string; ends_at: string }>(
+  events: T[],
+  now = new Date(),
+): { upcoming: T[]; past: T[] } {
+  const upcoming: T[] = [];
+  const past: T[] = [];
+
+  for (const event of events) {
+    (isPastEvent(event.ends_at, now) ? past : upcoming).push(event);
+  }
+
+  const byStart = (a: T, b: T) => a.starts_at.localeCompare(b.starts_at);
+  return { upcoming: upcoming.sort(byStart), past: past.sort(byStart) };
+}
+
 export function dayKey(iso: string): string {
   return format(montreal(iso), 'yyyy-MM-dd');
 }

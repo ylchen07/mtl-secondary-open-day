@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { EmptyState } from './EmptyState';
 import { EventCard } from './EventCard';
 import { FilterBar } from './FilterBar';
-import { formatDayHeading, groupByDay } from '@/lib/dates';
+import { formatDayHeading, groupByDay, partitionAgendaEvents } from '@/lib/dates';
 import { EMPTY_FILTERS, applyFilters, serializeFilters, type FilterState } from '@/lib/filters';
 import { findClashes } from '@/lib/clash';
 import type { AgendaEvent } from '@/lib/types';
@@ -33,7 +33,9 @@ export function AgendaClient({
   // Clashes are computed over ALL events, not the filtered subset: a conflict
   // with a school you filtered out is still a conflict on your calendar.
   const clashes = useMemo(() => findClashes(events), [events]);
-  const days = useMemo(() => groupByDay(visible), [visible]);
+  const { upcoming, past } = useMemo(() => partitionAgendaEvents(visible), [visible]);
+  const upcomingDays = useMemo(() => groupByDay(upcoming), [upcoming]);
+  const pastDays = useMemo(() => groupByDay(past), [past]);
 
   const isFiltered =
     filters.q !== '' ||
@@ -53,28 +55,65 @@ export function AgendaClient({
         {visible.length === 0 ? (
           <EmptyState filtered={isFiltered} onClear={() => update(EMPTY_FILTERS)} />
         ) : (
-          <div className="space-y-9">
-            {days.map((day) => (
-              <div key={day.day}>
-                <div className="flex items-baseline gap-3 border-b border-(--rule-strong) pb-2">
-                  <h2 className="font-(--font-serif) text-[23px] font-medium leading-tight tracking-[-0.01em]">
-                    {formatDayHeading(day.day, locale)}
-                  </h2>
-                  <span className="ml-auto text-[12px] text-(--ink-3)">
-                    {t('dayCount', { count: day.events.length })}
+          <div className="space-y-12">
+            <div className="space-y-9">
+              {upcomingDays.map((day) => (
+                <div key={day.day}>
+                  <div className="flex items-baseline gap-3 border-b border-(--rule-strong) pb-2">
+                    <h2 className="font-(--font-serif) text-[23px] font-medium leading-tight tracking-[-0.01em]">
+                      {formatDayHeading(day.day, locale)}
+                    </h2>
+                    <span className="ml-auto text-[12px] text-(--ink-3)">
+                      {t('dayCount', { count: day.events.length })}
+                    </span>
+                  </div>
+                  <div>
+                    {day.events.map((event) => (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        clashes={clashes.get(event.id) ?? []}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {pastDays.length > 0 && (
+              <section aria-labelledby="past-events-heading" className="border-t border-(--rule-strong) pt-7">
+                <div className="mb-4 flex items-baseline justify-between gap-4">
+                  <div>
+                    <h2 id="past-events-heading" className="font-(--font-serif) text-2xl font-medium tracking-[-0.01em]">
+                      {t('pastHeading')}
+                    </h2>
+                    <p className="mt-1 text-[13px] text-(--ink-3)">{t('pastDescription')}</p>
+                  </div>
+                  <span className="text-[12px] text-(--ink-3)">
+                    {t('dayCount', { count: past.length })}
                   </span>
                 </div>
-                <div>
-                  {day.events.map((event) => (
-                    <EventCard
-                      key={event.id}
-                      event={event}
-                      clashes={clashes.get(event.id) ?? []}
-                    />
+                <div className="space-y-9 opacity-65">
+                  {pastDays.map((day) => (
+                    <div key={day.day}>
+                      <div className="flex items-baseline gap-3 border-b border-(--rule) pb-2">
+                        <h3 className="font-(--font-serif) text-[21px] font-medium leading-tight tracking-[-0.01em]">
+                          {formatDayHeading(day.day, locale)}
+                        </h3>
+                        <span className="ml-auto text-[12px] text-(--ink-3)">
+                          {t('dayCount', { count: day.events.length })}
+                        </span>
+                      </div>
+                      <div>
+                        {day.events.map((event) => (
+                          <EventCard key={event.id} event={event} clashes={[]} past />
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </div>
-            ))}
+              </section>
+            )}
           </div>
         )}
       </section>

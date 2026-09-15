@@ -295,8 +295,8 @@ scrollbar. Full states — hover, focus-visible, empty — are implemented,
 not just the default state.
 
 The honest empty state from Plan 1 is preserved exactly: when a filter
-matches nothing, the site says so. It never falls back to showing past
-events.
+matches nothing, the site says so. Published past events remain available in a
+clearly muted, inactive history section and never appear as actionable upcoming events.
 
 Accessibility is a floor, not a goal: contrast at or above 4.5:1 for body
 text, focus visible on every interactive element, and the clash warning

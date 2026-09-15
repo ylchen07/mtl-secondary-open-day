@@ -16,7 +16,7 @@
 
 - Full EN/FR parity. Every new string exists in both `messages/en.json` and `messages/fr.json`. No English fallback on `/fr`.
 - Times always render `America/Toronto`, never the visitor's zone.
-- The honest empty state is preserved: when nothing matches, say so. **Never** fall back to showing past events.
+- The honest empty state is preserved: when nothing matches, say so. Past published events remain available for reference in a clearly muted inactive section.
 - Contrast ≥ 4.5:1 for body text, ≥ 3:1 for large text and UI borders.
 - The clash warning is conveyed by **text**, not by colour alone.
 - Focus is visible on every interactive element. Never remove an outline without replacing it.
@@ -695,7 +695,7 @@ Walk each state and confirm:
 |---|---|---|
 | Populated | `/en` | Day headings, rows, source links |
 | French | `/fr` | French chrome, French dates, French clash text |
-| Filtered empty | `/en?gender=girls` | Honest empty state, no past events |
+| Filtered empty | `/en?gender=girls` | Honest empty state; past events remain visibly inactive |
 | Keyboard | `/en`, press Tab repeatedly | Visible focus ring on every control |
 | Reduced motion | OS setting on, reload | No entrance animation |
 | Narrow | 375px viewport | Time stacks above school name, nothing clipped |

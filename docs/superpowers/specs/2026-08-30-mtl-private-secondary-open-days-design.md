@@ -269,15 +269,17 @@ the site existing.
 button when `registration_url` is present, and a quiet footer line:
 *"Verified Sep 14 · source"* linking to `source_url`.
 
-**Past events gray out on school pages, and only there.** Someone
-browsing in June benefits from knowing a school typically holds its open
-house in late September. The agenda itself never shows past events.
+**Past events remain visible as inactive history.** Someone browsing in June
+benefits from knowing a school typically holds its open house in late
+September. The agenda keeps published past events in a muted history section;
+they are never presented as actionable upcoming events and never retain a
+registration action.
 
 ### Empty season
 
-Between seasons the agenda shows an honest empty state pointing to the
-directory. It does **not** fall back to displaying last season's dates —
-stale dates presented as upcoming are worse than no dates.
+Between seasons the agenda shows an honest empty state for the upcoming
+section while retaining any published historical events below it as inactive
+reference.
 
 ### Timezone
 
