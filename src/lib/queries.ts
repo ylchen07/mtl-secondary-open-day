@@ -1,9 +1,11 @@
 import { createReadClient } from './supabase';
+import { agendaWindowEnd } from './dates';
 import type { AgendaEvent } from './types';
 
 /**
- * Every published event with its published school, including historical events.
- * The full result is shipped to the browser once; filtering happens there.
+ * Published historical events and upcoming events within the rolling
+ * three-calendar-month Montreal window, each with its published school.
+ * The result is shipped to the browser once; filtering happens there.
  */
 export async function fetchAgendaEvents(): Promise<AgendaEvent[]> {
   const supabase = createReadClient();
@@ -13,8 +15,9 @@ export async function fetchAgendaEvents(): Promise<AgendaEvent[]> {
     .select('*, school:schools!inner(*)')
     .eq('status', 'published')
     .eq('school.status', 'published')
+    .lte('starts_at', agendaWindowEnd().toISOString())
     .order('starts_at', { ascending: true });
 
-  if (error) throw new Error(`Failed to fetch upcoming events: ${error.message}`);
+  if (error) throw new Error(`Failed to fetch agenda events: ${error.message}`);
   return (data ?? []) as unknown as AgendaEvent[];
 }

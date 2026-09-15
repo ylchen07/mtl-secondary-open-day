@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  agendaWindowEnd,
   formatEventRange,
   formatEventTime,
   groupByDay,
@@ -7,6 +8,20 @@ import {
   partitionAgendaEvents,
   weekKey,
 } from '@/lib/dates';
+
+describe('agendaWindowEnd', () => {
+  it('ends three calendar months later at the end of the Montreal day across DST', () => {
+    expect(agendaWindowEnd(new Date('2026-09-15T14:00:00.000Z')).toISOString()).toBe(
+      '2026-12-16T04:59:59.999Z',
+    );
+  });
+
+  it('uses the last valid day when the target month is shorter', () => {
+    expect(agendaWindowEnd(new Date('2027-01-31T15:00:00.000Z')).toISOString()).toBe(
+      '2027-05-01T03:59:59.999Z',
+    );
+  });
+});
 
 describe('weekKey', () => {
   it('returns the Monday of the event week in Montreal time', () => {
