@@ -13,7 +13,7 @@
   "website_url": "https://www.lcc.ca",
   "admissions_url": "https://www.lcc.ca/admissions/openhouse-info",
   "tuition_annual_cad": null,
-  "has_boarding": null,
+  "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,

@@ -13,13 +13,13 @@
   "website_url": "https://www.thestudy.qc.ca/fr",
   "admissions_url": "https://www.thestudy.qc.ca/fr/admission",
   "tuition_annual_cad": null,
-  "has_boarding": null,
+  "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.thestudy.qc.ca/fr/admission",
   "last_verified_at": "2026-09-15",
-  "status": "draft",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-10-01T08:30:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": "Portes ouvertes de notre école primaire et secondaire, 1er octobre 2026, le matin de 8h30 à 10h00.",
       "source_url": "https://www.thestudy.qc.ca/fr/admission",
       "last_verified_at": "2026-09-15",
-      "status": "draft"
+      "status": "published"
     },
     {
       "starts_at": "2026-10-01T17:00:00-04:00",
@@ -45,7 +45,7 @@
       "notes_fr": "Portes ouvertes de notre école primaire et secondaire, 1er octobre 2026, le soir de 17h00 à 19h00.",
       "source_url": "https://www.thestudy.qc.ca/fr/admission",
       "last_verified_at": "2026-09-15",
-      "status": "draft"
+      "status": "published"
     }
   ]
 }
