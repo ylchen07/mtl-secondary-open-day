@@ -177,7 +177,7 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - Promoted schools: The Study, Collège Notre-Dame, Collège Mont-Royal.
 - Promoted events: both The Study sessions plus one event each for Collège Notre-Dame and Collège Mont-Royal.
 - Reviewed totals after promotion: **6 published schools and 8 published events**.
-- Loyola’s published open-house event now uses `https://loyola.ca/openhouse` as its event source, matching the official page that supports the date, audience, registration requirement, and registration destination.
+- Loyola’s draft open-house event uses `https://loyola.ca/openhouse` as its event source, matching the official page that supports the date, audience, registration requirement, and registration destination. It remains draft because the page does not state explicit 09:00–14:30 whole-event bounds.
 
 ## Mechanical coverage summary
 
@@ -189,5 +189,5 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 ## Notable corrections applied in JSON
 
 - `college-jean-de-brebeuf.json`: both entrance-exam events changed from `registration_required: true` to `null` because official sources did not provide explicit event-level registration requirement wording and destination.
-- `loyola-high-school.json`: retained `registration_required: true` and populated `registration_url` with the official Eventbrite destination from `https://loyola.ca/openhouse`.
+- `loyola-high-school.json`: retained `registration_required: true`, populated `registration_url` with the official Eventbrite destination from `https://loyola.ca/openhouse`, and retained draft status because the official page does not establish the stored whole-event bounds.
 - `college-notre-dame-de-lourdes.json`: retained `registration_required: true` and aligned `registration_url` to the official open-house page destination `https://forms.gle/as5z6wH6ZadAhAif9`.
