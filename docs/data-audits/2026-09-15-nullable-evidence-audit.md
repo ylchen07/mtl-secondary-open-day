@@ -96,8 +96,8 @@ This matrix resolves the no-grandfathering review for every record that was publ
 
 | Kind | Identity | Result | Official URL bundle | Evidence / action |
 |---|---|---|---|---|
-| school | `academie-etoile-du-nord-laval-north-star-academy-laval` | PASS | https://northstaracademy.ca/en/ ; https://northstaracademy.ca/en/admissions/open-house-new.html | Official open-house page supports the Grade 7–11 event, date and time; no remaining mandatory school-field contradiction in the completed audit. Boarding is unknown because the school-profile fetch was not inspectable. |
-| event | `academie-etoile-du-nord-laval-north-star-academy-laval|2026-09-24T18:00:00-04:00|open_house` | PASS | https://northstaracademy.ca/en/admissions/open-house-new.html | “Grade 7-11 Fall open house: September 24th, 2026, 6:00-9:00PM” establishes year, date, exact bounds, type and Grade 7 relevance. |
+| school | `academie-etoile-du-nord-laval-north-star-academy-laval` | FAIL | https://northstaracademy.ca/en/ ; https://northstaracademy.ca/en/admissions/open-house-new.html ; https://northstaracademy.ca/en/student-services/dormitories.html | Demoted: official pages support English private Grades 7–12 education and housing, but the reviewed source bundle does not explicitly establish a whole-school mixed-gender classification or provide durable source support for the stored 950 rue Élodie-Boucher, Laval H7W 0C6 address and postal code. |
+| event | `academie-etoile-du-nord-laval-north-star-academy-laval|2026-09-24T18:00:00-04:00|open_house` | FAIL | https://northstaracademy.ca/en/admissions/open-house-new.html | Demoted with its parent school: the official event page establishes Grade 7–11, September 24, 2026, 18:00–21:00, open-house type, and registration, but the parent school lacks mandatory gender and address/postal evidence. |
 | school | `villa-maria` | PASS | https://villamaria.qc.ca/en/ ; https://villamaria.qc.ca/en/admissions ; https://villamaria.qc.ca/admission/ | Official pages support names, Montréal address, bilingual instruction, co-education and Secondary 1–5 admissions. |
 | event | `villa-maria|2026-09-12T10:00:00-04:00|open_house` | PASS | https://openhouse.villamaria.qc.ca/ | Official page states September 12, 2026 from 10 a.m. to 3 p.m., open-house context, French/English sectors and no registration required. |
 | school | `college-jean-de-brebeuf` | PASS | https://www.brebeuf.qc.ca/ ; https://www.brebeuf.qc.ca/nous-joindre/ ; https://www.brebeuf.qc.ca/secondaire/admission/ ; https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/ | Official pages support shared name, Montréal address H3T 1C1, French instruction and girls-and-boys student body. |
@@ -176,8 +176,8 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 
 - Promoted schools: The Study, Collège Notre-Dame, Collège Mont-Royal.
 - Promoted events: both The Study sessions plus one event each for Collège Notre-Dame and Collège Mont-Royal.
-- Reviewed totals after promotion: **6 published schools and 8 published events**.
-- Loyola’s draft open-house event uses `https://loyola.ca/openhouse` as its event source, matching the official page that supports the date, audience, registration requirement, and registration destination. It remains draft because the page does not state explicit 09:00–14:30 whole-event bounds.
+- Reviewed totals after promotion: **5 published schools and 7 published events**.
+- North Star Academy Laval remains draft: official sources support its Grades 7–12 English program, exact event, registration, and housing, but do not durably establish whole-school mixed gender or the stored address/postal code.
 
 ## Mechanical coverage summary
 
