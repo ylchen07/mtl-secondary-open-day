@@ -39,6 +39,7 @@ export function AgendaClient({
 
   const isFiltered =
     filters.q !== '' ||
+    filters.boarding ||
     filters.language.length + filters.region.length + filters.gender.length + filters.type.length > 0;
 
   return (

@@ -15,7 +15,7 @@ export type SchoolRow = {
   website_url: string;
   admissions_url: string;
   tuition_annual_cad: number | null;
-  has_boarding: boolean;
+  has_boarding: boolean | null;
   programs: string[];
   description_en: string | null;
   description_fr: string | null;
@@ -31,7 +31,7 @@ export type OpenDayRow = {
   ends_at: string;
   type: 'open_house' | 'info_session' | 'entrance_exam' | 'tour' | 'virtual';
   academic_year: string;
-  registration_required: boolean;
+  registration_required: boolean | null;
   registration_url: string | null;
   notes_en: string | null;
   notes_fr: string | null;

@@ -19,7 +19,7 @@
   "description_fr": null,
   "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
   "last_verified_at": "2026-09-15",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-24T18:00:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": null,
       "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
       "last_verified_at": "2026-09-15",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }

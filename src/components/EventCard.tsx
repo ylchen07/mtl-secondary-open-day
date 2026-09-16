@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { ClashIcon } from './ClashIcon';
 import { formatEventRange, formatVerifiedDate } from '@/lib/dates';
+import { registrationAction } from '@/lib/registration';
 import type { AgendaEvent } from '@/lib/types';
 import type { Locale } from '@/lib/constants';
 
@@ -23,6 +24,7 @@ export function EventCard({
   const schoolName = locale === 'fr' ? event.school.name_fr : event.school.name_en;
   const note = locale === 'fr' ? event.notes_fr : event.notes_en;
   const isExam = event.type === 'entrance_exam';
+  const registration = registrationAction(event, past);
 
   return (
     <article
@@ -100,14 +102,14 @@ export function EventCard({
         >
           {t('source')}
         </a>
-        {!past && event.registration_required && event.registration_url && (
+        {registration && (
           <a
-            href={event.registration_url}
+            href={registration.href}
             className="ml-auto bg-(--ink) px-3 py-1.5 font-medium text-(--paper) transition-colors hover:bg-(--ink-2)"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t('register')}
+            {registration.kind === 'register' ? t('register') : t('checkRegistrationDetails')}
           </a>
         )}
       </footer>

@@ -37,13 +37,39 @@ describe('normalize', () => {
 });
 
 describe('applyFilters', () => {
+  const boardingEvent = event({
+    id: 'e-boarding',
+    school: school({
+      id: 's-boarding',
+      slug: 'north-star',
+      name_en: 'North Star Academy Laval',
+      name_fr: 'North Star Academy Laval',
+      region: 'laval',
+      city: 'Laval',
+      has_boarding: true,
+      programs: [],
+    }),
+  });
+
   const events = [
     event(),
     event({ id: 'e2', type: 'entrance_exam', school: school({ id: 's2', slug: 'loyola', name_en: 'Loyola High School', name_fr: 'Loyola High School', language: 'en', gender: 'boys', city: 'Montreal', programs: [] }) }),
+    event({
+      id: 'e3',
+      school: school({
+        id: 's3',
+        slug: 'unknown-boarding',
+        name_en: 'Unknown Boarding School',
+        name_fr: 'École pensionnat inconnu',
+        has_boarding: null,
+        programs: [],
+      }),
+    }),
+    boardingEvent,
   ];
 
   it('returns everything when no filters are set', () => {
-    expect(applyFilters(events, EMPTY_FILTERS)).toHaveLength(2);
+    expect(applyFilters(events, EMPTY_FILTERS)).toHaveLength(4);
   });
 
   it('matches an unaccented query against an accented name', () => {
@@ -58,7 +84,7 @@ describe('applyFilters', () => {
 
   it('treats values within one facet as OR', () => {
     const out = applyFilters(events, { ...EMPTY_FILTERS, language: ['fr', 'en'] });
-    expect(out).toHaveLength(2);
+    expect(out).toHaveLength(4);
   });
 
   it('treats separate facets as AND', () => {
@@ -67,11 +93,28 @@ describe('applyFilters', () => {
     });
     expect(out).toHaveLength(0);
   });
+
+  it('includes unknown boarding values when the boarding facet is off', () => {
+    const out = applyFilters(events, EMPTY_FILTERS);
+    expect(out.map((e) => e.id)).toContain('e3');
+  });
+
+  it('matches boarding facet only when has_boarding is explicitly true', () => {
+    const out = applyFilters(events, { ...EMPTY_FILTERS, boarding: true });
+    expect(out).toEqual([boardingEvent]);
+  });
 });
 
 describe('filter URL round-trip', () => {
   it('survives serialization', () => {
-    const filters = { q: 'brebeuf', language: ['fr'], region: [], gender: ['mixed'], type: ['entrance_exam'] };
+    const filters = {
+      q: 'brebeuf',
+      language: ['fr'],
+      region: [],
+      gender: ['mixed'],
+      type: ['entrance_exam'],
+      boarding: true,
+    };
     expect(parseFilters(serializeFilters(filters))).toEqual(filters);
   });
 

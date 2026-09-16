@@ -80,6 +80,13 @@ describe('toDraftSchool', () => {
     expect(draft.description_fr ?? null).toBeNull();
   });
 
+  it('defaults unverified boarding and registration facts to null', () => {
+    const draft = toDraftSchool(entry, facts, TODAY);
+    expect(draft.has_boarding).toBeNull();
+    expect(draft.open_days[0].registration_required).toBeNull();
+    expect(draft.open_days[0].registration_url).toBeNull();
+  });
+
   it('converts local Montreal time to an explicit offset', () => {
     const draft = toDraftSchool(entry, facts, TODAY);
     // 26 Sep is EDT (-04:00)
@@ -179,7 +186,7 @@ describe('serialise', () => {
           website_url: 'https://www.cimf.ca/admission/sinscrire/',
           admissions_url: 'https://www.cimf.ca/admission/sinscrire/',
           tuition_annual_cad: null,
-          has_boarding: false,
+          has_boarding: null,
           programs: [],
           description_en: null,
           description_fr: null,
@@ -192,7 +199,7 @@ describe('serialise', () => {
               ends_at: '2026-09-26T13:15:00-04:00',
               type: 'open_house',
               academic_year: '2027-2028',
-              registration_required: false,
+              registration_required: null,
               registration_url: null,
               notes_en: null,
               notes_fr: null,
