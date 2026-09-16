@@ -24,7 +24,7 @@
   "description_fr": "L'École secondaire Loyola est une école secondaire jésuite catholique mixte et préparatoire à l'université située dans le quartier Notre-Dame-de-Grâce à Montréal, fondée en 1896. L'école offre un enseignement en anglais et suit la tradition éducative jésuite, en mettant l'accent sur l'excellence académique tout en formant des élèves intellectuellement compétents, compatissants, guidés par leur conscience et engagés envers la justice. Les élèves doivent détenir un certificat d'admissibilité à l'enseignement en anglais.",
   "source_url": "https://loyola.ca/admissions",
   "last_verified_at": "2026-08-30",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
@@ -37,7 +37,7 @@
       "notes_fr": "Élèves de 5e et 6e année et leurs familles invités. Visites guidées d'une heure pour voir les installations et rencontrer les professeurs et le personnel. Détails d'inscription publiés à la mi-juillet 2026 sur le site Web. Les familles s'inscrivent pour des créneaux horaires spécifiques tout au long de la journée.",
       "source_url": "https://loyola.ca/openhouse",
       "last_verified_at": "2026-09-15",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }

@@ -19,7 +19,7 @@
   "description_fr": null,
   "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
   "last_verified_at": "2026-09-13",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": "Réservez votre place",
       "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
       "last_verified_at": "2026-09-13",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }

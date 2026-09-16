@@ -19,7 +19,7 @@
   "description_fr": null,
   "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
   "last_verified_at": "2026-09-15",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": "Portes ouvertes en présence et sans rendez-vous – le samedi 19 septembre 2026, de 9 h à 14 h.",
       "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
       "last_verified_at": "2026-09-15",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }

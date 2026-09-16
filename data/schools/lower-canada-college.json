@@ -13,13 +13,13 @@
   "website_url": "https://www.lcc.ca",
   "admissions_url": "https://www.lcc.ca/admissions/openhouse-info",
   "tuition_annual_cad": null,
-  "has_boarding": false,
+  "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.lcc.ca/admissions/openhouse-info",
   "last_verified_at": "2026-09-12",
-  "status": "published",
+  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-17T09:15:00-04:00",
@@ -32,7 +32,7 @@
       "notes_fr": null,
       "source_url": "https://www.lcc.ca/admissions/openhouse-info",
       "last_verified_at": "2026-09-12",
-      "status": "published"
+      "status": "draft"
     },
     {
       "starts_at": "2026-09-17T17:00:00-04:00",
@@ -45,7 +45,7 @@
       "notes_fr": null,
       "source_url": "https://www.lcc.ca/admissions/openhouse-info",
       "last_verified_at": "2026-09-12",
-      "status": "published"
+      "status": "draft"
     },
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
@@ -58,7 +58,7 @@
       "notes_fr": null,
       "source_url": "https://www.lcc.ca/admissions/openhouse-info",
       "last_verified_at": "2026-09-12",
-      "status": "published"
+      "status": "draft"
     }
   ]
 }
