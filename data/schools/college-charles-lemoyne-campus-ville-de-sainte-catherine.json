@@ -18,8 +18,8 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://monccl.com/actualites/journee-portes-ouvertes-2026/",
-  "last_verified_at": "2026-09-13",
-  "status": "draft",
+  "last_verified_at": "2026-09-19",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-20T09:00:00-04:00",
@@ -31,8 +31,8 @@
       "notes_en": null,
       "notes_fr": null,
       "source_url": "https://monccl.com/actualites/journee-portes-ouvertes-2026/",
-      "last_verified_at": "2026-09-13",
-      "status": "draft"
+      "last_verified_at": "2026-09-19",
+      "status": "published"
     }
   ]
 }
