@@ -149,8 +149,8 @@ describe('data/schools', () => {
         .map((event) => ({ school, event })),
     );
 
-    expect(publishedSchools).toHaveLength(12);
-    expect(publishedEvents).toHaveLength(14);
+    expect(publishedSchools).toHaveLength(13);
+    expect(publishedEvents).toHaveLength(15);
     expect(
       publishedEvents
         .filter(({ school }) => school.status !== 'published')
