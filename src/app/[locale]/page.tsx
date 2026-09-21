@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { AgendaClient } from '@/components/AgendaClient';
 import { Link } from '@/i18n/navigation';
 import { fetchAgendaEvents } from '@/lib/queries';
@@ -14,7 +14,6 @@ export default async function AgendaPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
-  setRequestLocale(locale);
 
   const [events, t, rawSearch] = await Promise.all([
     fetchAgendaEvents(),
