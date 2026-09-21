@@ -225,7 +225,7 @@ describe('data/schools', () => {
     const { ok } = validateSchoolFiles(loadAll());
 
     expect(schoolRows).toHaveLength(41);
-    expect(eventRows).toHaveLength(33);
+    expect(eventRows).toHaveLength(30);
 
     const schoolRowByFile = new Map(schoolRows.map((row) => [row.file, row]));
     const eventRowByIdentity = new Map(eventRows.map((row) => [`${row.file}|${row.identity}`, row]));
