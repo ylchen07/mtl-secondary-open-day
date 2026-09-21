@@ -31,35 +31,37 @@ export default async function AgendaPage({
   );
 
   return (
-    <main className="mx-auto max-w-[1060px] px-6 py-8 sm:py-10">
-      <header className="border-b border-(--rule) pb-6 sm:pb-7">
-        <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
-          <div>
-            <h1 className="max-w-[15ch] font-(--font-serif) text-[clamp(2rem,3.6vw,2.5rem)] font-medium leading-[1.08] tracking-[-0.02em]">
-              {t('heading')}
-            </h1>
-            <p className="mt-2.5 max-w-[52ch] text-sm leading-6 text-(--ink-2)">
-              {t('tagline')}
-            </p>
-          </div>
-          <div className="flex shrink-0 items-center gap-1 rounded-full border border-(--rule-strong) p-1 text-xs font-medium">
-            <Link
-              href="/"
-              locale={locale === 'en' ? 'fr' : 'en'}
-              className="locale-switch rounded-full bg-(--ink) px-3 py-1.5"
-            >
-              {locale === 'en' ? 'FR' : 'EN'}
-            </Link>
+    <div className="site-shell">
+      <a className="skip-link" href="#events">{t('skipToEvents')}</a>
+      <header className="site-header">
+        <Link href="/" className="site-brand">{t('siteName')}</Link>
+        <Link
+          href="/"
+          locale={locale === 'en' ? 'fr' : 'en'}
+          hrefLang={locale === 'en' ? 'fr' : 'en'}
+          className="locale-switch"
+        >
+          {locale === 'en' ? 'Français' : 'English'}
+        </Link>
+      </header>
+      <main>
+        <div className="page-intro">
+          <h1>{t('heading')}</h1>
+          <div className="intro-description">
+            <p>{t('tagline')}</p>
+            <p className="coverage">{events.length} {t('coverage')}</p>
           </div>
         </div>
-      </header>
-      <div className="border-b border-(--rule) py-3 text-[13px] text-(--ink-3)">
-        <span className="font-semibold text-(--ink)">{events.length}</span>{' '}
-        {t('coverage')}
-      </div>
-      <div className="pt-5">
-        <AgendaClient events={events} initialFilters={initialFilters} />
-      </div>
-    </main>
+        <AgendaClient
+          events={events}
+          initialFilters={initialFilters}
+          referenceTime={new Date().toISOString()}
+        />
+      </main>
+      <footer className="site-footer">
+        <span>{t('siteName')}</span>
+        <p>{t('footerNote')}</p>
+      </footer>
+    </div>
   );
 }

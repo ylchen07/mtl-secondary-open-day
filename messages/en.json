@@ -24,7 +24,11 @@
     "emptyFiltered": "No events match these filters.",
     "clearFilters": "Clear filters",
     "filtersLandmark": "Filters",
-    "eventsLandmark": "Events"
+    "eventsLandmark": "Events",
+    "siteName": "Montréal school agenda",
+    "skipToEvents": "Skip to events",
+    "footerNote": "Confirm dates and registration with each school before your visit.",
+    "schoolDetails": "School details"
   },
   "filters": {
     "search": "Search schools",
@@ -34,8 +38,16 @@
     "gender": "Student body",
     "type": "Event type"
   },
-  "language": { "fr": "French", "en": "English", "bilingual": "Bilingual" },
-  "gender": { "mixed": "Co-ed", "girls": "Girls", "boys": "Boys" },
+  "language": {
+    "fr": "French",
+    "en": "English",
+    "bilingual": "Bilingual"
+  },
+  "gender": {
+    "mixed": "Co-ed",
+    "girls": "Girls",
+    "boys": "Boys"
+  },
   "region": {
     "montreal_island": "Montreal Island",
     "west_island": "West Island",

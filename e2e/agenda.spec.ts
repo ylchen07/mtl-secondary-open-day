@@ -29,3 +29,36 @@ test('root redirects to the default locale', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveURL(/\/en$/);
 });
+
+test('mobile filters can be opened, applied, and cleared', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/en');
+  const toggle = page.getByRole('button', { name: 'Filters', exact: true });
+  const search = page.getByRole('searchbox', { name: 'Search schools' });
+  await expect(search).toBeHidden();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await search.fill('no matching school');
+  await expect(page.getByText('No events match these filters.')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear filters' }).first().click();
+  await expect(search).toHaveValue('');
+  await expect(page.getByRole('article').first()).toBeVisible();
+  await toggle.click();
+  await expect(search).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('hydration stays consistent when the browser clock differs', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error' && /hydrat|server rendered/i.test(message.text())) {
+      errors.push(message.text());
+    }
+  });
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.clock.setFixedTime(new Date('2100-01-01T00:00:00Z'));
+  await page.goto('/en');
+  await page.getByRole('button', { name: 'Girls', exact: true }).click();
+  await expect(page).toHaveURL(/gender=girls/);
+  expect(errors).toEqual([]);
+});
