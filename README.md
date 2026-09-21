@@ -18,9 +18,9 @@ the conflicts.
 
 The site features:
 - Agenda at `/en` and `/fr` listing upcoming open houses and entrance exams, with filters and conflict detection
-- Data for 3 schools and 4 events, hand-curated in `data/schools/`
-- Supabase Postgres schema with read-only public access
-- 38 unit tests + 4 Playwright e2e tests, CI on every push
+- School and event data hand-curated and verified against official sources in `data/schools/`
+- Reads directly from those git-committed JSON files — no database
+- Unit tests + Playwright e2e tests, CI on every push
 
 See [`docs/superpowers/specs/2026-08-30-mtl-private-secondary-open-days-design.md`](docs/superpowers/specs/2026-08-30-mtl-private-secondary-open-days-design.md)
 for the full design.
@@ -32,42 +32,32 @@ for the full design.
    pnpm install
    ```
 
-2. **Set up environment:**
-   ```sh
-   cp .env.local.example .env.local
-   ```
-   Then edit `.env.local` and fill in your Supabase credentials.
-
-3. **Seed the database:**
-   ```sh
-   pnpm seed
-   ```
-   This loads school data from `data/schools/*.json` into Supabase.
-
-4. **Start the dev server:**
+2. **Start the dev server:**
    ```sh
    pnpm dev
    ```
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-5. **Run tests:**
+3. **Run tests:**
    ```sh
    pnpm test          # Unit and integration tests
    pnpm test:e2e      # End-to-end tests
    ```
 
+No environment variables or external services are required.
+
 ## Approach in one diagram
 
 ```
-data/schools/*.json  ──validate──>  scripts/seed.ts  ──upsert──>  Supabase
-   (git, source of truth)             (zod + service key)             │
-                                                                     v
-                                                        Next.js on Vercel
+data/schools/*.json  ──validate──>  Next.js on Vercel
+   (git, source of truth)
 ```
 
-The school data lives in git and is hand-curated. Supabase is a
-queryable projection of the repository — if the database is wiped,
-`pnpm seed` rebuilds it.
+The school data lives in git and is hand-curated and verified against each
+school's own official website before publication. The site reads those
+files directly at build/request time — there is nothing to seed, migrate,
+or keep in sync. Every deploy already rebuilds from whatever was last
+merged to `main`.
 
 ## Scope
 
@@ -76,8 +66,7 @@ queryable projection of the repository — if the database is wiped,
 
 ## Stack
 
-Next.js 16 · React 19 · TypeScript · Tailwind v4 · Supabase Postgres ·
-Vercel · next-intl (EN/FR) · MapLibre + MapTiler
+Next.js 16 · React 19 · TypeScript · Tailwind v4 · Vercel · next-intl (EN/FR)
 
 ## Data corrections
 
