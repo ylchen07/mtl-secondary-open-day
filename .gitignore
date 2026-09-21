@@ -14,11 +14,6 @@ build/
 .env.local
 .env*.local
 
-# Supabase local dev
-.branches
-.temp
-supabase/.temp/
-
 # Testing
 coverage/
 test-results/
