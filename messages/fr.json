@@ -24,7 +24,14 @@
     "emptyFiltered": "Aucun événement ne correspond à ces filtres.",
     "clearFilters": "Effacer les filtres",
     "filtersLandmark": "Filtres",
-    "eventsLandmark": "Événements"
+    "eventsLandmark": "Événements",
+    "siteName": "Agenda scolaire de Montréal",
+    "skipToEvents": "Aller aux événements",
+    "footerNote": "Confirmez les dates et les inscriptions auprès de chaque école avant votre visite.",
+    "schoolDetails": "Informations sur l’école",
+    "showPast": "Afficher",
+    "hidePast": "Masquer",
+    "eventDetails": "Détails"
   },
   "filters": {
     "search": "Rechercher une école",

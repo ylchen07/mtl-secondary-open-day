@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { EmptyState } from './EmptyState';
 import { EventCard } from './EventCard';
+import { PastEvents } from './PastEvents';
 import { FilterBar } from './FilterBar';
 import { formatDayHeading, groupByDay, partitionAgendaEvents } from '@/lib/dates';
 import { EMPTY_FILTERS, applyFilters, serializeFilters, type FilterState } from '@/lib/filters';
@@ -14,12 +15,15 @@ import type { Locale } from '@/lib/constants';
 export function AgendaClient({
   events,
   initialFilters,
+  referenceTime,
 }: {
   events: AgendaEvent[];
   initialFilters: FilterState;
+  referenceTime: string;
 }) {
   const t = useTranslations('agenda');
   const locale = useLocale() as Locale;
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>(initialFilters);
 
   function update(next: FilterState): void {
@@ -33,9 +37,12 @@ export function AgendaClient({
   // Clashes are computed over ALL events, not the filtered subset: a conflict
   // with a school you filtered out is still a conflict on your calendar.
   const clashes = useMemo(() => findClashes(events), [events]);
-  const { upcoming, past } = useMemo(() => partitionAgendaEvents(visible), [visible]);
+  // A shared cutoff keeps server HTML and browser hydration consistent.
+  const { upcoming, past } = useMemo(
+    () => partitionAgendaEvents(visible, new Date(referenceTime)),
+    [visible, referenceTime],
+  );
   const upcomingDays = useMemo(() => groupByDay(upcoming), [upcoming]);
-  const pastDays = useMemo(() => groupByDay(past), [past]);
 
   const isFiltered =
     filters.q !== '' ||
@@ -43,77 +50,51 @@ export function AgendaClient({
     filters.language.length + filters.region.length + filters.gender.length + filters.type.length > 0;
 
   return (
-    <div className="grid gap-8 md:grid-cols-[16rem_1fr] md:gap-10">
-      <aside aria-label={t('filtersLandmark')} className="md:sticky md:top-6 md:self-start">
-        <FilterBar filters={filters} onChange={update} />
+    <div className="agenda-layout">
+      <aside aria-label={t('filtersLandmark')} className="filter-sidebar">
+        <div className="filter-heading">
+          <h2 className="desktop-filter-title">{t('filtersLandmark')}</h2>
+          <button
+            type="button"
+            className="mobile-filter-toggle"
+            aria-expanded={filtersOpen}
+            aria-controls="agenda-filters"
+            onClick={() => setFiltersOpen(!filtersOpen)}
+          >
+            {t('filtersLandmark')}
+            <span aria-hidden="true">{filtersOpen ? '−' : '+'}</span>
+          </button>
+          {isFiltered && (
+            <button type="button" className="text-button" onClick={() => update(EMPTY_FILTERS)}>
+              {t('clearFilters')}
+            </button>
+          )}
+        </div>
+        <div id="agenda-filters" className="filter-options" data-open={filtersOpen}>
+          <FilterBar filters={filters} onChange={update} />
+        </div>
       </aside>
 
-      <section aria-label={t('eventsLandmark')}>
-        <p className="mb-4 text-[13px] text-(--ink-3)">
-          {t('resultCount', { count: visible.length })}
-        </p>
-
+      <section id="events" aria-label={t('eventsLandmark')} className="agenda-results" tabIndex={-1}>
+        <p className="result-count" role="status">{t('resultCount', { count: visible.length })}</p>
         {visible.length === 0 ? (
           <EmptyState filtered={isFiltered} onClear={() => update(EMPTY_FILTERS)} />
         ) : (
-          <div className="space-y-12">
-            {pastDays.length > 0 && (
-              <section aria-labelledby="past-events-heading" className="border-t border-(--rule-strong) pt-5">
-                <div className="mb-4 flex items-baseline justify-between gap-4">
-                  <div>
-                    <h2 id="past-events-heading" className="font-(--font-serif) text-2xl font-medium tracking-[-0.01em]">
-                      {t('pastHeading')}
-                    </h2>
-                    <p className="mt-1 text-[13px] text-(--ink-3)">{t('pastDescription')}</p>
-                  </div>
-                  <span className="text-[12px] text-(--ink-3)">
-                    {t('dayCount', { count: past.length })}
-                  </span>
-                </div>
-                <div className="space-y-9 opacity-65">
-                  {pastDays.map((day) => (
-                    <div key={day.day}>
-                      <div className="flex items-baseline gap-3 border-b border-(--rule) pb-2">
-                        <h3 className="font-(--font-serif) text-[21px] font-medium leading-tight tracking-[-0.01em]">
-                          {formatDayHeading(day.day, locale)}
-                        </h3>
-                        <span className="ml-auto text-[12px] text-(--ink-3)">
-                          {t('dayCount', { count: day.events.length })}
-                        </span>
-                      </div>
-                      <div>
-                        {day.events.map((event) => (
-                          <EventCard key={event.id} event={event} clashes={[]} past />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
+          <div className="agenda-sections">
             {upcomingDays.length > 0 && (
-              <section aria-labelledby="upcoming-events-heading" className="border-t border-(--ink) pt-5">
-                <div className="mb-4 flex items-baseline justify-between gap-4">
-                  <h2 id="upcoming-events-heading" className="font-(--font-serif) text-2xl font-medium tracking-[-0.01em]">
-                    {t('upcomingHeading')}
-                  </h2>
-                  <span className="text-[12px] text-(--ink-3)">
-                    {t('dayCount', { count: upcoming.length })}
-                  </span>
+              <section aria-labelledby="upcoming-events-heading" className="agenda-section">
+                <div className="section-heading">
+                  <h2 id="upcoming-events-heading">{t('upcomingHeading')}</h2>
+                  <span className="section-count">{t('dayCount', { count: upcoming.length })}</span>
                 </div>
-                <div className="space-y-9">
+                <div className="agenda-days">
                   {upcomingDays.map((day) => (
-                    <div key={day.day}>
-                      <div className="flex items-baseline gap-3 border-b border-(--rule-strong) pb-2">
-                        <h3 className="font-(--font-serif) text-[23px] font-medium leading-tight tracking-[-0.01em]">
-                          {formatDayHeading(day.day, locale)}
-                        </h3>
-                        <span className="ml-auto text-[12px] text-(--ink-3)">
-                          {t('dayCount', { count: day.events.length })}
-                        </span>
+                    <div key={day.day} className="agenda-day">
+                      <div className="day-heading">
+                        <h3><time dateTime={day.day}>{formatDayHeading(day.day, locale)}</time></h3>
+                        <span>{t('dayCount', { count: day.events.length })}</span>
                       </div>
-                      <div>
+                      <div className="day-events">
                         {day.events.map((event) => (
                           <EventCard key={event.id} event={event} clashes={clashes.get(event.id) ?? []} />
                         ))}
@@ -123,6 +104,7 @@ export function AgendaClient({
                 </div>
               </section>
             )}
+            {past.length > 0 && <PastEvents events={past} />}
           </div>
         )}
       </section>

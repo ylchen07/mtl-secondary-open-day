@@ -29,3 +29,65 @@ test('root redirects to the default locale', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveURL(/\/en$/);
 });
+
+test('mobile filters can be opened, applied, and cleared', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/en');
+  const toggle = page.getByRole('button', { name: 'Filters', exact: true });
+  const search = page.getByRole('searchbox', { name: 'Search schools' });
+  await expect(search).toBeHidden();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await search.fill('no matching school');
+  await expect(page.getByText('No events match these filters.')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear filters' }).first().click();
+  await expect(search).toHaveValue('');
+  await expect(page.getByRole('article').first()).toBeVisible();
+  await toggle.click();
+  await expect(search).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('hydration stays consistent when the browser clock differs', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error' && /hydrat|server rendered/i.test(message.text())) {
+      errors.push(message.text());
+    }
+  });
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.clock.setFixedTime(new Date('2100-01-01T00:00:00Z'));
+  await page.goto('/en');
+  await page.getByRole('button', { name: 'Girls', exact: true }).click();
+  await expect(page).toHaveURL(/gender=girls/);
+  expect(errors).toEqual([]);
+});
+
+for (const locale of ['en', 'fr']) {
+  test(`past events use an accessible archive in ${locale}`, async ({ page }) => {
+    await page.goto(`/${locale}`);
+    const archive = page.getByRole('region', { name: locale === 'en' ? 'Past events' : 'Événements passés', exact: true });
+    const toggle = archive.getByRole('button');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(archive.locator('article').first()).toBeHidden();
+    await toggle.focus();
+    await page.keyboard.press('Enter');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    const event = archive.locator('article').first();
+    await expect(event).toBeVisible();
+    await expect(event.getByRole('link')).toHaveAttribute('href', /^https?:/);
+    await expect(archive.locator('.button-primary')).toHaveCount(0);
+    const evidence = event.locator('.event-evidence');
+    await expect(evidence).toBeHidden();
+    await event.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    await expect(evidence).toBeVisible();
+    await page.keyboard.press('Enter');
+    await expect(evidence).toBeHidden();
+    const school = await event.getByRole('heading').innerText();
+    await page.getByRole('searchbox').fill(school);
+    await expect(archive.locator('article').first().getByRole('heading')).toHaveText(school);
+    await toggle.click();
+    await expect(archive.locator('article').first()).toBeHidden();
+  });
+}
