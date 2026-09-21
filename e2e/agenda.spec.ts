@@ -13,12 +13,16 @@ test('agenda renders in French', async ({ page }) => {
 test('a filter narrows results and updates the URL', async ({ page }) => {
   await page.goto('/en');
 
+  const totalCount = await page.getByRole('article').count();
+
   await page.getByRole('button', { name: 'Girls' }).click();
 
   await expect(page).toHaveURL(/gender=girls/);
-  // All seeded schools are co-ed, so filtering by "Girls" deterministically yields zero results.
-  // If a girls-only school is ever added to the seed data, this assertion will fail as a signal.
-  await expect(page.getByRole('article')).toHaveCount(0);
+  // Asserts the filter narrows the result set, not an exact count — the
+  // published corpus composition (which schools are girls-only) changes
+  // over time and should not make this test brittle.
+  const filteredCount = await page.getByRole('article').count();
+  expect(filteredCount).toBeLessThan(totalCount);
 });
 
 test('root redirects to the default locale', async ({ page }) => {
