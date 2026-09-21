@@ -6,8 +6,8 @@
   "gender": "mixed",
   "region": "south_shore",
   "city": "Saint-Lambert",
-  "address": "857, rue Riverside",
-  "postal_code": "J4P 1C2",
+  "address": "375, rue Riverside",
+  "postal_code": "J4P 1B1",
   "location": null,
   "geocode_precision": "missing",
   "website_url": "https://cdsl.qc.ca/admission/portesouvertes",
@@ -18,8 +18,8 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://cdsl.qc.ca/portes-ouvertes/",
-  "last_verified_at": "2026-09-13",
-  "status": "draft",
+  "last_verified_at": "2026-09-19",
+  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:30:00-04:00",
@@ -29,10 +29,10 @@
       "registration_required": true,
       "registration_url": "https://www.eventbrite.ca/e/billets-portes-ouvertes-cdsl-2026-1997622390344",
       "notes_en": null,
-      "notes_fr": null,
+      "notes_fr": "Portes ouvertes au pavillon Saint-Lambert (375, rue Riverside), le campus du 1er cycle (1re et 2e secondaire) où le portail d'admission COBA dirige les candidatures de 1re secondaire.",
       "source_url": "https://cdsl.qc.ca/portes-ouvertes/",
-      "last_verified_at": "2026-09-13",
-      "status": "draft"
+      "last_verified_at": "2026-09-19",
+      "status": "published"
     }
   ]
 }

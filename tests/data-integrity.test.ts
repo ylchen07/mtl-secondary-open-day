@@ -149,8 +149,8 @@ describe('data/schools', () => {
         .map((event) => ({ school, event })),
     );
 
-    expect(publishedSchools).toHaveLength(5);
-    expect(publishedEvents).toHaveLength(7);
+    expect(publishedSchools).toHaveLength(13);
+    expect(publishedEvents).toHaveLength(15);
     expect(
       publishedEvents
         .filter(({ school }) => school.status !== 'published')
@@ -225,7 +225,7 @@ describe('data/schools', () => {
     const { ok } = validateSchoolFiles(loadAll());
 
     expect(schoolRows).toHaveLength(41);
-    expect(eventRows).toHaveLength(33);
+    expect(eventRows).toHaveLength(30);
 
     const schoolRowByFile = new Map(schoolRows.map((row) => [row.file, row]));
     const eventRowByIdentity = new Map(eventRows.map((row) => [`${row.file}|${row.identity}`, row]));
