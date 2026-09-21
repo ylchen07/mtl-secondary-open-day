@@ -62,3 +62,32 @@ test('hydration stays consistent when the browser clock differs', async ({ page 
   await expect(page).toHaveURL(/gender=girls/);
   expect(errors).toEqual([]);
 });
+
+for (const locale of ['en', 'fr']) {
+  test(`past events use an accessible archive in ${locale}`, async ({ page }) => {
+    await page.goto(`/${locale}`);
+    const archive = page.getByRole('region', { name: locale === 'en' ? 'Past events' : 'Événements passés', exact: true });
+    const toggle = archive.getByRole('button');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(archive.locator('article').first()).toBeHidden();
+    await toggle.focus();
+    await page.keyboard.press('Enter');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    const event = archive.locator('article').first();
+    await expect(event).toBeVisible();
+    await expect(event.getByRole('link')).toHaveAttribute('href', /^https?:/);
+    await expect(archive.locator('.button-primary')).toHaveCount(0);
+    const evidence = event.locator('.event-evidence');
+    await expect(evidence).toBeHidden();
+    await event.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    await expect(evidence).toBeVisible();
+    await page.keyboard.press('Enter');
+    await expect(evidence).toBeHidden();
+    const school = await event.getByRole('heading').innerText();
+    await page.getByRole('searchbox').fill(school);
+    await expect(archive.locator('article').first().getByRole('heading')).toHaveText(school);
+    await toggle.click();
+    await expect(archive.locator('article').first()).toBeHidden();
+  });
+}

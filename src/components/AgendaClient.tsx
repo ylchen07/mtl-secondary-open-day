@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { EmptyState } from './EmptyState';
 import { EventCard } from './EventCard';
+import { PastEvents } from './PastEvents';
 import { FilterBar } from './FilterBar';
 import { formatDayHeading, groupByDay, partitionAgendaEvents } from '@/lib/dates';
 import { EMPTY_FILTERS, applyFilters, serializeFilters, type FilterState } from '@/lib/filters';
@@ -42,7 +43,6 @@ export function AgendaClient({
     [visible, referenceTime],
   );
   const upcomingDays = useMemo(() => groupByDay(upcoming), [upcoming]);
-  const pastDays = useMemo(() => groupByDay(past), [past]);
 
   const isFiltered =
     filters.q !== '' ||
@@ -81,26 +81,14 @@ export function AgendaClient({
           <EmptyState filtered={isFiltered} onClear={() => update(EMPTY_FILTERS)} />
         ) : (
           <div className="agenda-sections">
-            {[
-              { days: upcomingDays, count: upcoming.length, isPast: false },
-              { days: pastDays, count: past.length, isPast: true },
-            ].filter(({ days }) => days.length > 0).map(({ days, count, isPast }) => (
-              <section
-                key={isPast ? 'past' : 'upcoming'}
-                aria-labelledby={isPast ? 'past-events-heading' : 'upcoming-events-heading'}
-                className="agenda-section"
-              >
+            {upcomingDays.length > 0 && (
+              <section aria-labelledby="upcoming-events-heading" className="agenda-section">
                 <div className="section-heading">
-                  <div>
-                    <h2 id={isPast ? 'past-events-heading' : 'upcoming-events-heading'}>
-                      {t(isPast ? 'pastHeading' : 'upcomingHeading')}
-                    </h2>
-                    {isPast && <p>{t('pastDescription')}</p>}
-                  </div>
-                  <span className="section-count">{t('dayCount', { count })}</span>
+                  <h2 id="upcoming-events-heading">{t('upcomingHeading')}</h2>
+                  <span className="section-count">{t('dayCount', { count: upcoming.length })}</span>
                 </div>
                 <div className="agenda-days">
-                  {days.map((day) => (
+                  {upcomingDays.map((day) => (
                     <div key={day.day} className="agenda-day">
                       <div className="day-heading">
                         <h3><time dateTime={day.day}>{formatDayHeading(day.day, locale)}</time></h3>
@@ -108,19 +96,15 @@ export function AgendaClient({
                       </div>
                       <div className="day-events">
                         {day.events.map((event) => (
-                          <EventCard
-                            key={event.id}
-                            event={event}
-                            clashes={isPast ? [] : clashes.get(event.id) ?? []}
-                            past={isPast}
-                          />
+                          <EventCard key={event.id} event={event} clashes={clashes.get(event.id) ?? []} />
                         ))}
                       </div>
                     </div>
                   ))}
                 </div>
               </section>
-            ))}
+            )}
+            {past.length > 0 && <PastEvents events={past} />}
           </div>
         )}
       </section>

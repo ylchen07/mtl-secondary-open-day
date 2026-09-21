@@ -28,7 +28,10 @@
     "siteName": "Montréal school agenda",
     "skipToEvents": "Skip to events",
     "footerNote": "Confirm dates and registration with each school before your visit.",
-    "schoolDetails": "School details"
+    "schoolDetails": "School details",
+    "showPast": "Show",
+    "hidePast": "Hide",
+    "eventDetails": "Details"
   },
   "filters": {
     "search": "Search schools",

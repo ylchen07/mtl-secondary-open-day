@@ -28,7 +28,10 @@
     "siteName": "Agenda scolaire de Montréal",
     "skipToEvents": "Aller aux événements",
     "footerNote": "Confirmez les dates et les inscriptions auprès de chaque école avant votre visite.",
-    "schoolDetails": "Informations sur l’école"
+    "schoolDetails": "Informations sur l’école",
+    "showPast": "Afficher",
+    "hidePast": "Masquer",
+    "eventDetails": "Détails"
   },
   "filters": {
     "search": "Rechercher une école",
