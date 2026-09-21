@@ -5,11 +5,11 @@ import { validateSchoolFiles } from '../src/lib/schema';
 
 const DATA_DIR = join(process.cwd(), 'data', 'schools');
 
-// Flat, `.json`-suffixed, non-recursive — the same shape `scripts/seed.ts` and
-// `tests/data-integrity.test.ts` read. A guard that searched more widely than
-// the seeder publishes would be checking a different data set than the one that
-// ships. If the layout ever shards into subdirectories, the empty-set check in
-// main() turns that into a loud failure instead of a silent pass.
+// Flat, `.json`-suffixed, non-recursive — the same shape `src/lib/queries.ts`
+// and `tests/data-integrity.test.ts` read. A guard that searched more widely
+// than the app serves would be checking a different data set than the one
+// that ships. If the layout ever shards into subdirectories, the empty-set
+// check in main() turns that into a loud failure instead of a silent pass.
 async function loadFiles() {
   const names = (await readdir(DATA_DIR)).filter((n) => n.endsWith('.json'));
 
