@@ -49,6 +49,21 @@ Removed events:
   resolves gender and language for any future LCC record without needing to
   re-derive them.
 
+## Group F — 4 events removed 2026-09-22 (corrected "still future" mistake)
+
+A prior turn told the owner these 4 records had future-dated events still awaiting evidence. That was wrong — all 4 were dated 2026-09-19, which had already passed by the time of that statement. Caught on the next "what's left" pass and corrected immediately. All four school records retained with confirmed facts, now `open_days: []`.
+
+| School | Original identity | Reason |
+|---|---|---|
+| `college-st-jean-vianney.json` | `2026-09-19T08:45:00-04:00 \| open_house` | Date passed. The official event page (`https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026`) now reads "Plages horaires maintenant complètes" (slots full, no future date posted). Both pre-existing blockers still stand: no closing time stated anywhere, and the privacy page (H1C 1B9) still contradicts the event page (H1C 1C1) on postal code. |
+| `college-boisbriand.json` | `2026-09-19T11:30:00-04:00 \| open_house` | Date passed. The homepage (`https://collegeboisbriand.qc.ca/`) still headlines the identical stale date/time ("PORTES OUVERTES 19 septembre 2026 de 11 h 30 à 15 h"), not refreshed for a new cycle. Gender still stated nowhere on the site. |
+| `loyola-high-school.json` | `2026-09-19T09:00:00-04:00 \| open_house` | Date passed. The official `/openhouse` page is unchanged — still states only "one-hour tour", never exact clock times (those exist only on the linked, off-domain Eventbrite page). No future date posted. |
+| `ecole-secondaire-marcellin-champagnat.json` | `2026-09-19T09:00:00-04:00 \| open_house` | Date passed. Instructional language, the sole pre-existing blocker, is still unstated anywhere on esmc.qc.ca. See the note below — this one has a real forward lead, unlike the other three. |
+
+**École secondaire Marcellin-Champagnat — a lead for the next harvest, not a dead end:** the same admission page (`https://esmc.qc.ca/admission/portes-ouvertes/`, backed by `https://esmc.qc.ca/admission/demandes-admission/`) now advertises "Les prochains tests d'admission auront lieu le samedi 26 septembre 2026, à 8 h 30 et à 13 h" — explicitly "pour l'entrée en 1re secondaire ... élèves de 6e année seulement", which resolves Secondary-1 relevance outright. This is a real, dated, official, in-scope entrance exam with two sessions. It could not be added as a draft event because the schema requires a non-nullable `ends_at` and no closing time is stated for either session anywhere on the school's site. Registration is clearly required (deadline "22 septembre à midi", i.e. essentially immediately) via the form on the demandes-admission page, but there is no session-specific booking URL beyond that page. **Next harvest: check `https://esmc.qc.ca/admission/portes-ouvertes/` and `https://esmc.qc.ca/admission/demandes-admission/` for an end time before the 2027-2028 cycle's exam date; instructional language is still separately unresolved and would also need to be found before this school could publish.**
+
+**What we learned along the way:** this whole group only got caught because a "what's left" status summary initially miscounted these as future-dated. Verifying "is this event still in the future" against the actual current date (not an assumption) needs to be a checked step, not an inference, before any large-context status report groups records by urgency.
+
 ## Out-of-scope school removed 2026-09-22: Campus Démosthène
 
 `data/schools/ecole-socrates-demosthene-campus-demosthene.json` deleted
