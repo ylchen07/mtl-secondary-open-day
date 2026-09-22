@@ -2,11 +2,11 @@
 
 Verification date: **2026-09-15**
 
-This ledger audits every nullable field introduced by the nullable-evidence model. It contains exactly 41 school rows (`has_boarding`) and 27 event rows (`registration_required`).
+This ledger audits every nullable field introduced by the nullable-evidence model. It contains exactly 40 school rows (`has_boarding`) and 26 event rows (`registration_required`).
 
 Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive`, `contradicted`.
 
-## School field audit rows (41)
+## School field audit rows (40)
 
 | File | Field | Identity | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -41,7 +41,6 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `ecole-marie-clarac.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://www.ecolemarie-clarac.qc.ca/lecole/historique/ ; https://www.ecolemarie-clarac.qc.ca/lecole/ | Historical pensionnat mentions are present but no explicit current boarding-status statement. |
 | `ecole-rudolf-steiner-de-montreal.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://ersm.org/notre-ecole/ ; https://ersm.org/admission-ecole/ | Official pages do not explicitly state boarding availability or unavailability. |
 | `ecole-secondaire-marcellin-champagnat.json` | `has_boarding` | — | `false` | `false` | `supported` | https://esmc.qc.ca/a-propos/valeurs-historique/ | Official history states the boarding house closed in 1985. |
-| `ecole-socrates-demosthene-campus-demosthene.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://www.socdem.org/ ; https://www.socdem.org/par-campus/demosthene/ | Official campus pages do not explicitly state boarding availability or unavailability. |
 | `ecole-socrates-demosthene-campus-socrates-ii.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://www.socdem.org/ ; https://hcgm.org/ecoles/socdem/index.html | Official pages reviewed do not explicitly state boarding availability or unavailability. |
 | `externat-sacre-coeur.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://www.externat.qc.ca/ ; https://www.externat.qc.ca/pourquoi-nous-choisir | Official pages do not explicitly state boarding availability or unavailability. |
 | `les-ecoles-azrieli-talmud-torah-herzliah.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://www.azrieli-tth.ca/fr ; https://www.azrieli-tth.ca/fr/admissions-herzliah | Official pages do not explicitly state boarding availability or unavailability. |
@@ -52,7 +51,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `villa-maria.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://villamaria.qc.ca/admission/ ; https://portesouvertes.villamaria.qc.ca/ | Official pages reviewed do not explicitly state boarding availability or unavailability. |
 | `villa-sainte-marcelline.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://villa.marcelline.qc.ca/ ; https://villa.marcelline.qc.ca/admissions/ | Official pages reviewed do not explicitly state boarding availability or unavailability. |
 
-## Event field audit rows (27)
+## Event field audit rows (26)
 
 | File | Field | Identity (`starts_at + type`) | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -76,7 +75,6 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-trinite.json` | `registration_required` | `2026-09-19T10:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://collegetrinite.ca/le-college/portes-ouvertes/ | Official page includes no-appointment wording, but the visible edition is 2025; polarity for the 2026 record is not explicit. |
 | `ecole-rudolf-steiner-de-montreal.json` | `registration_required` | `2026-10-03T10:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://ersm.org/admission-ecole/ ; https://ersm.org/calendrier-des-evenements/ | Official pages confirm event timing but do not explicitly state registration required or no-registration. |
 | `ecole-secondaire-marcellin-champagnat.json` | `registration_required` | `2026-09-19T09:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://esmc.qc.ca/admission/portes-ouvertes/ | Official page repeatedly instructs families to reserve a place and links to registration. |
-| `ecole-socrates-demosthene-campus-demosthene.json` | `registration_required` | `2026-10-03T09:00:00-04:00 + open_house` | `true` | `null` | `contradicted` | https://hcgm.org/schools/socdem/ ; https://hcgm.org/ecoles/socdem/index.html | Official materials include both “Aucune inscription requise” and registration CTA wording; requirement remains unresolved. |
 | `ecole-socrates-demosthene-campus-socrates-ii.json` | `registration_required` | `2026-10-03T09:00:00-04:00 + open_house` | `true` | `null` | `contradicted` | https://hcgm.org/schools/socdem/ ; https://hcgm.org/ecoles/socdem/index.html | Official materials include both “Aucune inscription requise” and registration CTA wording; requirement remains unresolved. |
 | `loyola-high-school.json` | `registration_required` | `2026-09-19T09:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://loyola.ca/openhouse | Official page invites families to register and links an Eventbrite registration destination. |
 | `study.json` | `registration_required` | `2026-10-01T08:30:00-04:00 + open_house` | `true` | `true` | `supported` | https://www.thestudy.qc.ca/fr/admission | Official admissions page provides “INSCRIVEZ-VOUS” for the listed open-house sessions. |
@@ -166,7 +164,7 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - Collège St-Jean-Vianney: https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026 ; https://www.csjv.ca/
 - Collège Trinité: https://collegetrinite.ca/le-college/portes-ouvertes/ ; https://collegetrinite.ca/le-college/admission/ ; https://collegetrinite.ca/le-college/a-propos/
 - École Rudolf Steiner de Montréal: https://ersm.org/calendrier-des-evenements/ ; https://ersm.org/admission-ecole/ ; https://ersm.org/notre-ecole/
-- École Socrates-Démosthène campuses: https://hcgm.org/ecoles/socdem/index.html ; https://www.socdem.org/par-campus/demosthene/
+- École Socrates-Démosthène, campus Socrates II: https://hcgm.org/ecoles/socdem/index.html ; https://www.socdem.org/par-campus/socrates-ii/
 - The Study: https://www.thestudy.qc.ca/fr/admission ; https://www.thestudy.qc.ca/academics ; https://www.thestudy.qc.ca/about/campus-location
 - Villa Sainte-Marcelline: https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ ; https://villa.marcelline.qc.ca/secondaire/ ; https://villa.marcelline.qc.ca/nous-joindre/
 
@@ -190,11 +188,12 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - **2026-09-19 structural-conflict recheck** targeted the seven remaining records with campus/address/identity conflicts. Collège Durocher Saint-Lambert was promoted: official evidence supports recasting the school record to the Pavillon Saint-Lambert address (375 Riverside, J4P 1B1), the campus the school's own Admission page routes incoming Secondary-1 applicants to, resolving the sole remaining blocker. The other six records remain draft with narrowed blockers: Collège St-Jean-Vianney (no official end time stated, plus a newly confirmed postal-code contradiction between csjv.ca and its own open-house subdomain), Collège International Marie de France (gender now resolved; language and open-house Secondary-1/6e relevance remain unresolved), École Rudolf Steiner de Montréal (language now resolved; gender remains unresolved), Collège Boisbriand (language now resolved; gender and Secondary-1 relevance remain unresolved, plus a newly found internal date contradiction on the school's own site), and both École Socrates-Démosthène campuses (identity, address, and language now resolved; gender and Secondary-1 relevance for the Oct 3 open house remain unresolved, with an additional unresolved conflict over whether Campus Démosthène offers a Secondaire program at all).
 - Reviewed totals after the 2026-09-19 structural-conflict recheck: **13 published schools and 15 published events**.
 - **2026-09-21 recheck of Collège Beaubois, Collège d'Anjou, and École Marie-Clarac**: all three had a single already-passed draft event (Sept 11–12, 2026) with no updated official date. Beaubois's page still headlines the same passed Sept 12 date; d'Anjou's page now states its next open house is "septembre 2027" with no day/time yet to build an event from; Marie-Clarac's page still shows the same passed Sept 11 Secondaire date; the only newer date it added (Oct 23) is for Garderie/Préscolaire/Primaire, out of this product's Secondary-1 scope. Same treatment as Lower Canada College: all 3 events removed as dead leads, school records retained with `open_days: []` for the next harvest. See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`.
+- **2026-09-22 resolution of the Campus Démosthène Secondaire-program question**: the 2026-09-19 structural-conflict recheck had flagged "an unresolved conflict over whether Campus Démosthène offers a Secondaire program at all." A direct check of every campus's own page content resolved it: Socrates II's page embeds both a Primaire and a Secondaire calendar image; Socrates III, IV, V, and Démosthène each embed only a Primaire calendar image. This is structural, cross-campus evidence (not a one-off gap) that École Socrates-Démosthène concentrates its Secondaire program at the Socrates II campus alone. `ecole-socrates-demosthene-campus-demosthene.json` was therefore removed entirely as out of this product's Secondary-1 scope, rather than kept as a blocked draft — the correct record for this institution is `ecole-socrates-demosthene-campus-socrates-ii.json`, which remains a normal Group C draft (gender still unresolved). See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`.
 
 ## Mechanical coverage summary
 
-- School rows: 41/41
-- Event rows: 27/27
+- School rows: 40/40
+- Event rows: 26/26
 - Missing identities: 0
 - Duplicate identities: 0
 

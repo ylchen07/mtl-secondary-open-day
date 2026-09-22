@@ -1,4 +1,4 @@
-# Removed / backlog: unverifiable events
+# Removed / backlog: unverifiable events and out-of-scope records
 
 Events removed from `data/schools/*.json` runtime data because their dates have
 passed and no current official-source evidence can verify them, per the
@@ -6,6 +6,9 @@ zero-draft-events objective (unverifiable events should not sit as permanent
 drafts — they should be resolved, published, or removed). Removed events are
 recorded here so a future harvest can re-add them if the school publishes a new
 cycle, and so removal reasoning stays auditable.
+
+This doc also records whole-school removals where the record itself turned out
+to be out of this product's scope (not just blocked on missing evidence).
 
 ## Lower Canada College — 3 events removed 2026-09-20
 
@@ -45,6 +48,50 @@ Removed events:
   (`https://www.lcc.ca/admissions/calendar` site footer, 2026-09-20). This
   resolves gender and language for any future LCC record without needing to
   re-derive them.
+
+## Out-of-scope school removed 2026-09-22: Campus Démosthène
+
+`data/schools/ecole-socrates-demosthene-campus-demosthene.json` deleted
+entirely (not just its event cleared) — this is a different kind of removal
+from everything else in this doc. It wasn't unverifiable; the evidence turned
+out to show the campus doesn't belong in this dataset at all.
+
+**Why:** École Socrates-Démosthène operates five physical campuses (Socrates
+II, III, IV, V, Démosthène) under one institution. The 2026-09-19
+structural-conflict recheck had already flagged doubt over whether Campus
+Démosthène offers a Secondaire program at all (its own page only ever
+published a Primaire calendar). A 2026-09-22 recheck of all five campus pages'
+own body content resolved this cleanly:
+
+| Campus | Calendar(s) embedded on its own page |
+|---|---|
+| Socrates II | Primaire **and** Secondaire |
+| Socrates III | Primaire only |
+| Socrates IV | Primaire only |
+| Socrates V | Primaire only |
+| Démosthène | Primaire only |
+
+Socrates II is the only campus that embeds a Secondaire calendar. This is
+consistent, structural, cross-campus evidence — not a one-off content gap —
+that the whole institution's Secondaire program is concentrated at the
+Socrates II campus alone. (A sitewide footer that lists all five campuses'
+contact info was checked and ruled out as evidence: it's generic and appears
+identically on every page regardless of what that campus actually offers.)
+
+**What this means for the dataset:** Campus Démosthène was never a
+Secondary-1-relevant school; it was a harvesting mistake, not a blocked
+record. The correct record for this institution is
+`ecole-socrates-demosthene-campus-socrates-ii.json`, which stays in the
+dataset as a normal Group C draft (gender still unresolved). No school record
+was retained for Campus Démosthène — unlike the removals below, there is
+nothing for a future harvest to re-attach events to at that address.
+
+**What we learned along the way, for the next harvest:** when a directory or
+FEEP-style source lists multiple "campuses" of one institution as separate
+entries, check each campus's own page content (not just its existence) for
+which programs/grade levels it actually offers before creating a separate
+school record for it. A shared sitewide nav or footer will make every campus
+look identical; only body content reliably distinguishes them.
 
 ## Group D — 3 events removed 2026-09-21
 
