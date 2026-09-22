@@ -18,21 +18,7 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://collegeboisbriand.qc.ca/",
-  "last_verified_at": "2026-09-13",
+  "last_verified_at": "2026-09-22",
   "status": "draft",
-  "open_days": [
-    {
-      "starts_at": "2026-09-19T11:30:00-04:00",
-      "ends_at": "2026-09-19T15:00:00-04:00",
-      "type": "open_house",
-      "academic_year": "2027-2028",
-      "registration_required": false,
-      "registration_url": null,
-      "notes_en": null,
-      "notes_fr": "Portes ouvertes le 19 septembre 2026, de 11h30 à 15h. Vous n’avez qu’à vous présenter.",
-      "source_url": "https://collegeboisbriand.qc.ca/visite-virtuelle/",
-      "last_verified_at": "2026-09-13",
-      "status": "draft"
-    }
-  ]
+  "open_days": []
 }
