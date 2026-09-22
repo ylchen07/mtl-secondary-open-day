@@ -46,9 +46,29 @@ Removed events:
   resolves gender and language for any future LCC record without needing to
   re-derive them.
 
-## Group D — dead leads (not yet processed)
+## Group D — 3 events removed 2026-09-21
 
-Three additional draft events with passed dates are known and pending the same
-treatment: École Marie-Clarac (Sep 11), Collège Beaubois (Sep 12), Collège
-d'Anjou (Sep 12, official page now advertises 2027). Not yet removed from
-`data/schools/*.json` as of this entry.
+All three school records retained (`has_boarding`, address, gender, and
+language already confirmed and kept), now with `open_days: []`.
+
+| School | Original identity | Reason |
+|---|---|---|
+| `college-beaubois.json` | `2026-09-12T08:30:00-04:00 \| open_house` | Date has passed. The official page (`https://collegebeaubois.qc.ca/portes-ouvertes/`) still headlines this exact same date ("PORTES OUVERTES — 12 SEPTEMBRE 2026") as of the 2026-09-21 recheck — the school has not published a next-cycle date. |
+| `college-danjou.json` | `2026-09-12T13:00:00-04:00 \| open_house` | Date has passed. The official page (`https://collegedanjou.qc.ca/portes-ouvertes-presentielles/`) now states "Les prochaines portes ouvertes auront lieu en septembre 2027" — an intent statement, not a scheduled event: no day or time is given, so no replacement event can be constructed yet. |
+| `ecole-marie-clarac.json` | `2026-09-11T17:00:00-04:00 \| open_house` | Date has passed. The official page (`https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/`) still shows the same passed Sept 11 date for the Secondaire (girls) open house. The page does list one newer date (Oct 23, 2026), but that session is explicitly "Garderie, Préscolaire et Primaire (mixte)" — outside this product's Secondary-1 scope, so it is not a valid replacement. |
+
+**What we learned along the way, for the next harvest:**
+
+- All three follow the same pattern as Lower Canada College: a harvested Sept
+  2026 event whose date passed before the site was refreshed, checked again
+  —roughly 9 days later— with no resolution available (either the page is
+  simply stale, or it only gives a vague future-year statement instead of a
+  bookable date).
+- Collège d'Anjou is the one case with a genuine forward signal ("septembre
+  2027"). Re-harvest this school first once fall 2027 approaches — the
+  school has told us in advance, on its own domain, that a new date is coming.
+- École Marie-Clarac publishes two separate open-house tracks (Secondaire
+  girls-only vs. Garderie/Préscolaire/Primaire mixed) on the same admission
+  page. Future harvests of this school must keep matching only the
+  Secondaire line to this product's Secondary-1 scope — the Primaire line
+  looks like a valid replacement at a glance but isn't.
