@@ -71,6 +71,10 @@ merged to `main`.
 
 Next.js 16 · React 19 · TypeScript · Tailwind v4 · Vercel · next-intl (EN/FR)
 
+## Keeping the data fresh
+
+`pnpm update:scan` watches each school's `admissions_url` without using any LLM tokens. It saves a normalized text snapshot per school in `data/watch/` (committed, so changes show up as git diffs), compares each fresh fetch against it, and writes `work/queue.md`: only the lines that gained a date or time. A changed page waits in `work/pending/` rather than replacing the baseline, so re-running the scan before reviewing never loses a change. Pages that fail to load, or return too little text (blocked or JS-rendered), are reported and never baselined.
+
 ## Data corrections
 
 Every date on the site links to the source it was taken from. If a date
