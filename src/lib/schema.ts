@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { GREATER_MONTREAL_BBOX } from './constants';
+import { EVENT_TYPES, GREATER_MONTREAL_BBOX } from './constants';
+import { eventBounds } from './dates';
 
 const httpsUrl = z
   .string()
@@ -22,26 +23,53 @@ const academicYear = z
 
 const EIGHTEEN_MONTHS_MS = 1000 * 60 * 60 * 24 * 550;
 
-const openDaySchema = z
+const eventFields = {
+  academic_year: academicYear,
+  registration_required: z.boolean().nullable(),
+  registration_url: httpsUrl.nullish(),
+  notes_en: z.string().nullish(),
+  notes_fr: z.string().nullish(),
+  source_url: httpsUrl,
+  last_verified_at: isoDate,
+  status: publicationStatus,
+};
+
+const timedEventSchema = z
   .object({
     starts_at: z.string().datetime({ offset: true }),
     ends_at: z.string().datetime({ offset: true }),
-    type: z.enum(['open_house', 'info_session', 'entrance_exam', 'tour', 'virtual']),
-    academic_year: academicYear,
-    registration_required: z.boolean().nullable(),
-    registration_url: httpsUrl.nullish(),
-    notes_en: z.string().nullish(),
-    notes_fr: z.string().nullish(),
-    source_url: httpsUrl,
-    last_verified_at: isoDate,
-    status: publicationStatus,
+    type: z.enum(EVENT_TYPES),
+    ...eventFields,
   })
+  .strict()
   .refine((e) => new Date(e.starts_at) < new Date(e.ends_at), {
     message: 'starts_at must be before ends_at',
     path: ['ends_at'],
+  });
+
+/**
+ * Interviews are often published as a day or a window ("week of 9 November")
+ * with each family's slot assigned privately. Those carry inclusive local
+ * dates instead of invented clock times. Every other type must stay timed:
+ * an open house without published hours is still omitted, not guessed.
+ */
+const dateOnlyEventSchema = z
+  .object({
+    starts_on: isoDate,
+    ends_on: isoDate,
+    type: z.literal('interview'),
+    ...eventFields,
   })
+  .strict()
+  .refine((e) => e.starts_on <= e.ends_on, {
+    message: 'starts_on must not be after ends_on',
+    path: ['ends_on'],
+  });
+
+const openDaySchema = z
+  .union([timedEventSchema, dateOnlyEventSchema])
   .refine(
-    (e) => new Date(e.starts_at).getTime() - Date.now() < EIGHTEEN_MONTHS_MS,
+    (e) => new Date(eventBounds(e).starts_at).getTime() - Date.now() < EIGHTEEN_MONTHS_MS,
     { message: 'event is more than 18 months out — likely a year typo', path: ['starts_at'] },
   )
   .superRefine((event, ctx) => {
@@ -111,6 +139,22 @@ export const schoolFileSchema = z
 export type SchoolFile = z.infer<typeof schoolFileSchema>;
 export type OpenDayInput = SchoolFile['open_days'][number];
 
+/**
+ * A failed event matches neither shape, and zod reports that as one opaque
+ * "Invalid input". The branch with the fewest issues is the shape the curator
+ * meant (a timed open house with a typo fails the date-only branch on every
+ * key), so its issues are the useful ones.
+ */
+function flattenIssues(issues: z.ZodIssue[]): z.ZodIssue[] {
+  return issues.flatMap((issue) => {
+    if (issue.code !== 'invalid_union') return [issue];
+    const closest = issue.unionErrors.reduce((best, candidate) =>
+      candidate.issues.length < best.issues.length ? candidate : best,
+    );
+    return flattenIssues(closest.issues);
+  });
+}
+
 export function validateSchoolFiles(
   files: { path: string; json: unknown }[],
 ): { ok: SchoolFile[]; errors: string[] } {
@@ -122,7 +166,7 @@ export function validateSchoolFiles(
     const parsed = schoolFileSchema.safeParse(file.json);
 
     if (!parsed.success) {
-      for (const issue of parsed.error.issues) {
+      for (const issue of flattenIssues(parsed.error.issues)) {
         const where = issue.path.join('.') || '(root)';
         errors.push(`${file.path}: ${where} — ${issue.message}`);
       }

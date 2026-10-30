@@ -6,11 +6,18 @@ import type { AgendaEvent } from './types';
  * not schedule against itself, and if it does, attending both was never
  * the plan.
  *
+ * All-day events never clash: they are interview days or windows where the
+ * school assigns each family a private slot, so there are no published hours
+ * to collide with, and flagging every timed event inside a two-week window
+ * would bury the real conflicts.
+ *
  * Events are sorted by start, so the inner loop can stop as soon as a
  * candidate starts after the current event ends.
  */
 export function findClashes(events: AgendaEvent[]): Map<string, AgendaEvent[]> {
-  const sorted = [...events].sort((a, b) => a.starts_at.localeCompare(b.starts_at));
+  const sorted = events
+    .filter((event) => !event.all_day)
+    .sort((a, b) => a.starts_at.localeCompare(b.starts_at));
   const clashes = new Map<string, AgendaEvent[]>();
 
   function record(a: AgendaEvent, b: AgendaEvent): void {

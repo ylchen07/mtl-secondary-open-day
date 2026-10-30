@@ -1,7 +1,8 @@
 # Montreal Private Secondary School Open Days
 
-Open house and entrance exam dates for private secondary schools in the
-Greater Montreal area, in one searchable place.
+Open house, entrance exam and admission interview dates for private
+secondary schools in the Greater Montreal area, in one searchable place,
+published by school year.
 
 Greater Montreal private schools each publish their admissions calendar
 independently — PDFs, news posts, Facebook events, registration portals.
@@ -17,7 +18,9 @@ the conflicts.
 **v1 implementation complete.**
 
 The site features:
-- Agenda at `/en` and `/fr` listing upcoming open houses and entrance exams, with filters and conflict detection
+- Agenda at `/en` and `/fr` listing upcoming open houses, entrance exams and admission interviews, with filters and conflict detection
+- One page per school year (entry cohort): `/en` shows the year currently recruiting, `/en/2027-2028` pins a year; unknown years 404
+- Admission interviews may be date-only (`starts_on`/`ends_on`, inclusive) when the school publishes a day or window but no clock times; every other event type still needs `starts_at`/`ends_at`
 - School and event data hand-curated and verified against official sources in `data/schools/`
 - Reads directly from those git-committed JSON files — no database
 - Unit tests + Playwright e2e tests, CI on every push

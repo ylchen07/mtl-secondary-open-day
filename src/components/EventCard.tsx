@@ -27,7 +27,7 @@ export function EventCard({
 
   return (
     <article className="agenda-event" data-past={past || undefined} aria-label={past ? t('pastEvent') : undefined}>
-      <p className="event-time">{formatEventRange(event.starts_at, event.ends_at, locale)}</p>
+      <p className="event-time">{formatEventRange(event, locale) ?? t('timeNotPublished')}</p>
       <div className="event-content">
         <div className="event-heading">
           <h4>{schoolName}</h4>

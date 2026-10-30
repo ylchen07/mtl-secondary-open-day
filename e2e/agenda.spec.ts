@@ -13,7 +13,9 @@ test('agenda renders in French', async ({ page }) => {
 test('a filter narrows results and updates the URL', async ({ page }) => {
   await page.goto('/en');
 
-  const totalCount = await page.getByRole('article').count();
+  // Counts archived (collapsed) events too: late in the season every event
+  // can be past, and filtering removes archived rows from the DOM as well.
+  const totalCount = await page.locator('article').count();
 
   await page.getByRole('button', { name: 'Girls' }).click();
 
@@ -21,13 +23,39 @@ test('a filter narrows results and updates the URL', async ({ page }) => {
   // Asserts the filter narrows the result set, not an exact count — the
   // published corpus composition (which schools are girls-only) changes
   // over time and should not make this test brittle.
-  const filteredCount = await page.getByRole('article').count();
+  const filteredCount = await page.locator('article').count();
   expect(filteredCount).toBeLessThan(totalCount);
 });
 
 test('root redirects to the default locale', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveURL(/\/en$/);
+});
+
+test('each school year has its own page and unknown years are not found', async ({ page }) => {
+  await page.goto('/en');
+  const nav = page.getByRole('navigation', { name: 'School years' });
+  const current = nav.locator('[aria-current="page"]');
+  await expect(current).toHaveCount(1);
+  const label = await current.innerText();
+  const year = label.replace('School year ', '').replace('–', '-');
+
+  await page.goto(`/fr/${year}`);
+  await expect(page.getByRole('navigation', { name: 'Années scolaires' }).locator('[aria-current="page"]'))
+    .toHaveText(`Année scolaire ${year.replace('-', '–')}`);
+  await expect(page.getByRole('heading', { name: 'À venir' }).or(page.getByRole('heading', { name: 'Événements passés' })).first()).toBeVisible();
+
+  const missing = await page.goto('/en/1999-2000');
+  expect(missing?.status()).toBe(404);
+});
+
+test('admission interviews are a filterable event type', async ({ page }) => {
+  await page.goto('/en');
+  await page.getByRole('button', { name: 'Admission interview', exact: true }).click();
+  await expect(page).toHaveURL(/type=interview/);
+  for (const type of await page.locator('.agenda-event .event-type').allInnerTexts()) {
+    expect(type).toBe('Admission interview');
+  }
 });
 
 test('mobile filters can be opened, applied, and cleared', async ({ page }) => {

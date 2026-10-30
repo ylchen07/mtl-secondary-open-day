@@ -1,4 +1,5 @@
 import type { ListingEntry, ListingEvent, SchoolFacts } from './types';
+import { academicYearFor } from '../dates';
 import type { SchoolFile } from '../schema';
 
 const ZONE = 'America/Toronto';
@@ -24,28 +25,6 @@ export function montrealOffset(date: string, time: string): string {
 /** A plain local date-time, converted to an ISO string with an explicit offset. */
 function localIso(date: string, time: string): string {
   return `${date}T${time}:00${montrealOffset(date, time)}`;
-}
-
-/**
- * Academic year a given open-house date feeds. FEEP open houses in the
- * second half of a calendar year (July onward) recruit for the intake that
- * starts the *following* September; open houses earlier in the year recruit
- * for the intake starting that same September.
- *
- * The July 1 boundary itself — not just the general one-year-ahead shape —
- * is confirmed against two real, checked-in FEEP entries that sit on the
- * *other* side of it from the three already-published files (which are all
- * September events and never exercised this boundary): Collège Reine-Marie's
- * open house on 17 avril 2027, which FEEP itself labels "Année scolaire
- * 2027-2028", and Académie Centennial's on 25 avril 2026, labelled "Année
- * scolaire 2026-2027" (both in `tests/fixtures/feep/listing-montreal.html`).
- * Both are April (`m=4 < 7`), so both take the `start = y` branch — and both
- * match FEEP's own stated academic year exactly.
- */
-export function academicYearFor(date: string): string {
-  const [y, m] = date.split('-').map(Number);
-  const start = m >= 7 ? y + 1 : y;
-  return `${start}-${start + 1}`;
 }
 
 /**

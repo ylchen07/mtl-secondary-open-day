@@ -46,7 +46,7 @@ export function PastEvents({ events }: { events: AgendaEvent[] }) {
                   <span className="archive-details-label">{t('eventDetails')}</span>
                 </summary>
                 <div className="archive-event-body">
-                  <p className="event-time">{formatEventRange(event.starts_at, event.ends_at, locale)}</p>
+                  <p className="event-time">{formatEventRange(event, locale) ?? t('timeNotPublished')}</p>
                   <ul className="event-details" aria-label={t('schoolDetails')}>
                     <li>{event.school.city}</li>
                     <li>{tLanguage(event.school.language)}</li>

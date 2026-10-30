@@ -55,7 +55,8 @@ export function findAggregatorSources(schools: SchoolFile[]): string[] {
       if (event.status !== 'published') continue;
       const problem = sourceProblem(event.source_url);
       if (problem) {
-        violations.push(`${school.slug} (${event.starts_at}): published event ${problem}`);
+        const when = 'starts_on' in event ? event.starts_on : event.starts_at;
+        violations.push(`${school.slug} (${when}): published event ${problem}`);
       }
     }
   }

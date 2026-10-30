@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { eventBounds } from '@/lib/dates';
 import { validateSchoolFiles } from '@/lib/schema';
 
 const DATA_DIR = join(process.cwd(), 'data', 'schools');
@@ -150,11 +151,11 @@ describe('data/schools', () => {
     );
 
     expect(publishedSchools).toHaveLength(13);
-    expect(publishedEvents).toHaveLength(15);
+    expect(publishedEvents).toHaveLength(16);
     expect(
       publishedEvents
         .filter(({ school }) => school.status !== 'published')
-        .map(({ school, event }) => `${school.slug}|${event.starts_at}|${event.type}`),
+        .map(({ school, event }) => `${school.slug}|${eventBounds(event).starts_at}|${event.type}`),
     ).toEqual([]);
   });
 
@@ -204,7 +205,7 @@ describe('data/schools', () => {
     const publishedEventIdentities = ok.flatMap((school) =>
       school.open_days
         .filter((event) => event.status === 'published')
-        .map((event) => `${school.slug}|${event.starts_at}|${event.type}`),
+        .map((event) => `${school.slug}|${eventBounds(event).starts_at}|${event.type}`),
     );
 
     const matrixSchoolIdentities = matrixRows
@@ -225,7 +226,7 @@ describe('data/schools', () => {
     const { ok } = validateSchoolFiles(loadAll());
 
     expect(schoolRows).toHaveLength(40);
-    expect(eventRows).toHaveLength(22);
+    expect(eventRows).toHaveLength(23);
 
     const schoolRowByFile = new Map(schoolRows.map((row) => [row.file, row]));
     const eventRowByIdentity = new Map(eventRows.map((row) => [`${row.file}|${row.identity}`, row]));
@@ -257,7 +258,7 @@ describe('data/schools', () => {
       }
 
       for (const event of school.open_days) {
-        const identity = `${event.starts_at} + ${event.type}`;
+        const identity = `${eventBounds(event).starts_at} + ${event.type}`;
         const eventKey = `${filename}|${identity}`;
         const eventRow = eventRowByIdentity.get(eventKey);
 
@@ -274,7 +275,7 @@ describe('data/schools', () => {
     const expectedSchoolFiles = new Set(ok.map((school) => `${school.slug}.json`));
     const expectedEvents = new Set(
       ok.flatMap((school) =>
-        school.open_days.map((event) => `${school.slug}.json|${event.starts_at} + ${event.type}`),
+        school.open_days.map((event) => `${school.slug}.json|${eventBounds(event).starts_at} + ${event.type}`),
       ),
     );
 

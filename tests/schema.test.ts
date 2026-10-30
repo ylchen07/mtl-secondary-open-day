@@ -142,6 +142,64 @@ describe('schoolFileSchema', () => {
   });
 });
 
+describe('date-only interviews', () => {
+  const { starts_at: _s, ends_at: _e, ...timedless } = valid.open_days[0];
+  const interview = {
+    ...timedless,
+    type: 'interview',
+    starts_on: '2026-11-02',
+    ends_on: '2026-11-20',
+    registration_required: null,
+    registration_url: null,
+  };
+
+  it('accepts an interview window with dates and no clock times', () => {
+    expect(schoolFileSchema.safeParse({ ...valid, open_days: [interview] }).success).toBe(true);
+  });
+
+  it('accepts a timed interview', () => {
+    const r = schoolFileSchema.safeParse({
+      ...valid,
+      open_days: [{ ...valid.open_days[0], type: 'interview' }],
+    });
+    expect(r.success).toBe(true);
+  });
+
+  it('rejects date-only events for every other type, so no open house gets a guessed time', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, open_days: [{ ...interview, type: 'open_house' }] });
+    expect(r.success).toBe(false);
+  });
+
+  it('rejects an event carrying both shapes', () => {
+    const r = schoolFileSchema.safeParse({
+      ...valid,
+      open_days: [{ ...interview, starts_at: '2026-11-02T09:00:00-05:00' }],
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it('rejects a window that ends before it starts', () => {
+    const r = schoolFileSchema.safeParse({ ...valid, open_days: [{ ...interview, ends_on: '2026-11-01' }] });
+    expect(r.success).toBe(false);
+  });
+
+  it('reports the issue from the shape the curator meant, not an opaque union error', () => {
+    const { errors } = validateSchoolFiles([
+      {
+        path: 'data/schools/villa-maria.json',
+        json: { ...valid, open_days: [{ ...interview, ends_on: '2026-11-01' }] },
+      },
+      {
+        path: 'data/schools/villa-maria.json',
+        json: { ...valid, open_days: [{ ...valid.open_days[0], type: 'interveiw' }] },
+      },
+    ]);
+    expect(errors).toHaveLength(2);
+    expect(errors[0]).toMatch(/open_days\.0\.ends_on — starts_on must not be after ends_on/);
+    expect(errors[1]).toMatch(/open_days\.0\.type — Invalid enum value/);
+  });
+});
+
 describe('description optionality', () => {
   it('accepts a school with both descriptions', () => {
     expect(schoolFileSchema.safeParse(valid).success).toBe(true);

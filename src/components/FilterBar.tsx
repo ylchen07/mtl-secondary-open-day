@@ -1,13 +1,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { EVENT_TYPES } from '@/lib/constants';
 import type { FilterState } from '@/lib/filters';
 
 const FACET_OPTIONS = {
   language: ['fr', 'en', 'bilingual'],
   region: ['montreal_island', 'west_island', 'laval', 'north_shore', 'south_shore'],
   gender: ['mixed', 'girls', 'boys'],
-  type: ['open_house', 'info_session', 'entrance_exam', 'tour', 'virtual'],
+  type: EVENT_TYPES,
 } as const;
 
 type Facet = keyof typeof FACET_OPTIONS;

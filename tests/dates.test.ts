@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  academicYearFor,
   agendaWindowEnd,
+  eventBounds,
   formatEventRange,
   formatEventTime,
   groupByDay,
@@ -8,6 +10,32 @@ import {
   partitionAgendaEvents,
   weekKey,
 } from '@/lib/dates';
+
+describe('eventBounds', () => {
+  it('spans whole Montreal days for a date-only window crossing the November DST change', () => {
+    expect(eventBounds({ starts_on: '2026-10-30', ends_on: '2026-11-02' })).toEqual({
+      starts_at: '2026-10-30T00:00:00-04:00',
+      ends_at: '2026-11-03T00:00:00-05:00',
+      all_day: true,
+    });
+  });
+
+  it('keeps a date-only interview upcoming until its last day is over', () => {
+    const day = eventBounds({ starts_on: '2026-11-04', ends_on: '2026-11-04' });
+    const { upcoming, past } = partitionAgendaEvents([day], new Date('2026-11-05T04:59:00.000Z'));
+    expect(upcoming).toHaveLength(1);
+    expect(past).toHaveLength(0);
+    expect(partitionAgendaEvents([day], new Date('2026-11-05T05:00:01.000Z')).past).toHaveLength(1);
+  });
+});
+
+describe('academicYearFor', () => {
+  it('assigns autumn dates to the following school year and spring dates to the same one', () => {
+    expect(academicYearFor('2026-10-29')).toBe('2027-2028');
+    expect(academicYearFor('2026-06-30')).toBe('2026-2027');
+    expect(academicYearFor('2026-07-01')).toBe('2027-2028');
+  });
+});
 
 describe('agendaWindowEnd', () => {
   it('ends three calendar months later at the end of the Montreal day across DST', () => {
@@ -53,8 +81,21 @@ describe('partitionAgendaEvents', () => {
 describe('formatEventRange', () => {
   it('renders only the Montreal time range for an agenda row', () => {
     expect(
-      formatEventRange('2026-09-26T17:00:00.000Z', '2026-09-26T20:00:00.000Z', 'en'),
+      formatEventRange(
+        { starts_at: '2026-09-26T17:00:00.000Z', ends_at: '2026-09-26T20:00:00.000Z', all_day: false },
+        'en',
+      ),
     ).toBe('1:00 PM – 4:00 PM');
+  });
+
+  it('has no clock range for a single date-only day', () => {
+    expect(formatEventRange(eventBounds({ starts_on: '2026-11-04', ends_on: '2026-11-04' }), 'en')).toBeNull();
+  });
+
+  it('renders the first and last day of a date-only window across DST', () => {
+    const window = eventBounds({ starts_on: '2026-10-26', ends_on: '2026-11-06' });
+    expect(formatEventRange(window, 'en')).toBe('Oct 26 – Nov 6');
+    expect(formatEventRange(window, 'fr')).toBe('26 oct. – 6 nov.');
   });
 });
 

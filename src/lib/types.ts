@@ -1,3 +1,5 @@
+import type { EventType } from './constants';
+
 export type SchoolRow = {
   id: string;
   slug: string;
@@ -27,9 +29,12 @@ export type SchoolRow = {
 export type OpenDayRow = {
   id: string;
   school_id: string;
+  /** Instants; for an all-day event, Montreal midnight to the midnight after its last day. */
   starts_at: string;
   ends_at: string;
-  type: 'open_house' | 'info_session' | 'entrance_exam' | 'tour' | 'virtual';
+  /** Date-only event: the school published days, not clock times. */
+  all_day: boolean;
+  type: EventType;
   academic_year: string;
   registration_required: boolean | null;
   registration_url: string | null;

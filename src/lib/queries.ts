@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { agendaWindowEnd } from './dates';
+import { agendaWindowEnd, eventBounds } from './dates';
 import { validateSchoolFiles, type SchoolFile } from './schema';
 import type { AgendaEvent, SchoolRow } from './types';
 
@@ -70,13 +70,15 @@ export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]
 
     for (const event of school.open_days) {
       if (event.status !== 'published') continue;
-      if (new Date(event.starts_at).getTime() > windowEndMs) continue;
+      const { starts_at, ends_at, all_day } = eventBounds(event);
+      if (new Date(starts_at).getTime() > windowEndMs) continue;
 
       events.push({
-        id: `${school.slug}|${event.starts_at}|${event.type}`,
+        id: `${school.slug}|${starts_at}|${event.type}`,
         school_id: school.slug,
-        starts_at: event.starts_at,
-        ends_at: event.ends_at,
+        starts_at,
+        ends_at,
+        all_day,
         type: event.type,
         academic_year: event.academic_year,
         registration_required: event.registration_required,
@@ -94,4 +96,14 @@ export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]
   return events.sort(
     (a, b) => new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime(),
   );
+}
+
+/**
+ * School years with published events, plus the year currently recruiting so
+ * the default page always has one to show, newest first.
+ */
+export function schoolYears(events: AgendaEvent[], current: string): string[] {
+  const years = new Set(events.map((event) => event.academic_year));
+  years.add(current);
+  return [...years].sort().reverse();
 }

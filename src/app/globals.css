@@ -55,6 +55,11 @@ button { cursor: pointer; }
 .locale-switch:hover { background: var(--surface); }
 .page-intro { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; gap: var(--space-12); padding-block: var(--space-section); }
 .page-intro h1 { max-width: 16ch; font-size: clamp(36px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 400; text-wrap: balance; }
+.intro-heading { display: grid; gap: var(--space-6); }
+.year-nav { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.year-link { padding: var(--space-1) var(--space-3); border: 1px solid var(--hairline-strong); border-radius: var(--radius-control); color: var(--body); font-size: 13px; text-decoration: none; }
+.year-link:hover { color: var(--ink); background: var(--surface); }
+.year-link[aria-current="page"] { color: var(--canvas); background: var(--ink); border-color: var(--ink); }
 .intro-description { display: grid; gap: var(--space-6); padding-bottom: var(--space-1); color: var(--body); max-width: 39ch; }
 .coverage { font-size: 13px; }
 .agenda-layout { display: grid; grid-template-columns: 224px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
