@@ -8,6 +8,7 @@ const FACET_OPTIONS = {
   language: ['fr', 'en', 'bilingual'],
   region: ['montreal_island', 'west_island', 'laval', 'north_shore', 'south_shore'],
   gender: ['mixed', 'girls', 'boys'],
+  sector: ['private', 'public'],
   type: EVENT_TYPES,
 } as const;
 
@@ -17,6 +18,7 @@ const NAMESPACE: Record<Facet, string> = {
   language: 'language',
   region: 'region',
   gender: 'gender',
+  sector: 'sector',
   type: 'eventType',
 };
 

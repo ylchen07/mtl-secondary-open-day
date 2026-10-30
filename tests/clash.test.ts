@@ -5,7 +5,7 @@ import type { AgendaEvent, SchoolRow } from '@/lib/types';
 function school(over: Partial<SchoolRow> = {}): SchoolRow {
   return {
     id: 's1', slug: 'brebeuf', name_en: 'Brébeuf', name_fr: 'Brébeuf',
-    language: 'fr', gender: 'mixed', region: 'montreal_island', city: 'Montréal',
+    language: 'fr', gender: 'mixed', sector: 'private', region: 'montreal_island', city: 'Montréal',
     address: 'a', postal_code: 'H1H 1H1', lat: null, lng: null, geocode_precision: 'missing',
     website_url: 'https://a.qc.ca', admissions_url: 'https://a.qc.ca',
     tuition_annual_cad: null, has_boarding: false, programs: [],

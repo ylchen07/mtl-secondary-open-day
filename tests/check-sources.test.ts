@@ -9,6 +9,7 @@ function school(over: Partial<SchoolFile>): SchoolFile {
     name_fr: 'S',
     language: 'fr',
     gender: 'mixed',
+    sector: 'private',
     region: 'montreal_island',
     city: 'Montreal',
     address: 'a',

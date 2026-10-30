@@ -11,7 +11,7 @@ import type { AgendaEvent, SchoolRow } from '@/lib/types';
 function school(over: Partial<SchoolRow> = {}): SchoolRow {
   return {
     id: 's1', slug: 'brebeuf', name_en: 'Brébeuf College', name_fr: 'Collège Jean-de-Brébeuf',
-    language: 'fr', gender: 'mixed', region: 'montreal_island', city: 'Montréal',
+    language: 'fr', gender: 'mixed', sector: 'private', region: 'montreal_island', city: 'Montréal',
     address: 'a', postal_code: 'H1H 1H1', lat: null, lng: null, geocode_precision: 'missing',
     website_url: 'https://a.qc.ca', admissions_url: 'https://a.qc.ca',
     tuition_annual_cad: null, has_boarding: false, programs: ['ib'],
@@ -103,6 +103,12 @@ describe('applyFilters', () => {
     const out = applyFilters(events, { ...EMPTY_FILTERS, boarding: true });
     expect(out).toEqual([boardingEvent]);
   });
+
+  it('narrows to public schools by sector', () => {
+    const publicEvent = event({ id: 'pub', school: school({ id: 's9', sector: 'public' }) });
+    const out = applyFilters([event(), publicEvent], { ...EMPTY_FILTERS, sector: ['public'] });
+    expect(out).toEqual([publicEvent]);
+  });
 });
 
 describe('filter URL round-trip', () => {
@@ -112,6 +118,7 @@ describe('filter URL round-trip', () => {
       language: ['fr'],
       region: [],
       gender: ['mixed'],
+      sector: ['public'],
       type: ['entrance_exam'],
       boarding: true,
     };

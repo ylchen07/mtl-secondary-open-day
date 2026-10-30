@@ -12,6 +12,7 @@ export function PastEvents({ events }: { events: AgendaEvent[] }) {
   const tType = useTranslations('eventType');
   const tLanguage = useTranslations('language');
   const tGender = useTranslations('gender');
+  const tSector = useTranslations('sector');
   const locale = useLocale() as Locale;
 
   return (
@@ -51,6 +52,7 @@ export function PastEvents({ events }: { events: AgendaEvent[] }) {
                     <li>{event.school.city}</li>
                     <li>{tLanguage(event.school.language)}</li>
                     <li>{tGender(event.school.gender)}</li>
+                    <li>{tSector(event.school.sector)}</li>
                   </ul>
                   {note && <p className="event-note">{note}</p>}
                   <p className="event-evidence">{t('verifiedOn', { date: formatVerifiedDate(event.last_verified_at, locale) })}</p>

@@ -1,10 +1,10 @@
-# Montreal Private Secondary School Open Days
+# Montreal Secondary School Open Days
 
-Open house, entrance exam and admission interview dates for private
-secondary schools in the Greater Montreal area, in one searchable place,
-published by school year.
+Open house, entrance exam and admission interview dates for private and
+public (selective-program) secondary schools in the Greater Montreal area,
+in one searchable place, published by school year.
 
-Greater Montreal private schools each publish their admissions calendar
+Greater Montreal secondary schools each publish their admissions calendar
 independently — PDFs, news posts, Facebook events, registration portals.
 Families applying for Secondary 1 track dozens of schools across a dense
 six-week season, then discover too late that two entrance exams fall on
@@ -64,8 +64,10 @@ merged to `main`.
 
 ## Scope
 
-- **v1:** private secondary schools, French and English, Greater Montreal
-- **Not v1:** public school boards, automated scraping, user accounts
+- **In scope:** private secondary schools and public schools with their own
+  Secondary 1 admission process (`sector: private | public`), French and
+  English, Greater Montreal
+- **Not in scope:** automated scraping, user accounts
 
 ## Stack
 

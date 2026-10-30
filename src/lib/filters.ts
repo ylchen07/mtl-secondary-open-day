@@ -5,6 +5,7 @@ export type FilterState = {
   language: string[];
   region: string[];
   gender: string[];
+  sector: string[];
   type: string[];
   boarding: boolean;
 };
@@ -14,6 +15,7 @@ export const EMPTY_FILTERS: FilterState = {
   language: [],
   region: [],
   gender: [],
+  sector: [],
   type: [],
   boarding: false,
 };
@@ -53,6 +55,7 @@ export function applyFilters(
       (filters.language.length > 0 && !filters.language.includes(event.school.language)) ||
       (filters.region.length > 0 && !filters.region.includes(event.school.region)) ||
       (filters.gender.length > 0 && !filters.gender.includes(event.school.gender)) ||
+      (filters.sector.length > 0 && !filters.sector.includes(event.school.sector)) ||
       (filters.type.length > 0 && !filters.type.includes(event.type))
     ) {
       return false;
@@ -66,7 +69,7 @@ export function applyFilters(
   });
 }
 
-const FACETS = ['language', 'region', 'gender', 'type'] as const;
+const FACETS = ['language', 'region', 'gender', 'sector', 'type'] as const;
 
 export function parseFilters(params: URLSearchParams): FilterState {
   const state: FilterState = {

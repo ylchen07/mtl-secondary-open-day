@@ -1,11 +1,11 @@
 {
   "site": {
-    "title": "Portes ouvertes des écoles secondaires privées de Montréal",
+    "title": "Portes ouvertes des écoles secondaires de Montréal",
     "tagline": "Portes ouvertes, examens et entrevues d'admission, au même endroit."
   },
   "agenda": {
     "heading": "Portes ouvertes, examens et entrevues d’admission",
-    "tagline": "Écoles secondaires privées du Grand Montréal. Chaque date renvoie à la page de l’école.",
+    "tagline": "Écoles secondaires privées et publiques du Grand Montréal. Chaque date renvoie à la page de l’école.",
     "coverage": "événements publiés",
     "resultCount": "{count, plural, =0 {Aucun événement} one {# événement} other {# événements}}",
     "dayCount": "{count, plural, one {# événement} other {# événements}}",
@@ -42,6 +42,7 @@
     "language": "Langue",
     "region": "Région",
     "gender": "Clientèle",
+    "sector": "Réseau",
     "type": "Type d'événement"
   },
   "language": {
@@ -53,6 +54,10 @@
     "mixed": "Mixte",
     "girls": "Filles",
     "boys": "Garçons"
+  },
+  "sector": {
+    "private": "Privé",
+    "public": "Public"
   },
   "region": {
     "montreal_island": "Île de Montréal",

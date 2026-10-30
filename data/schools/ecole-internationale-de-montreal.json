@@ -1,0 +1,39 @@
+{
+  "slug": "ecole-internationale-de-montreal",
+  "name_en": "École internationale de Montréal",
+  "name_fr": "École internationale de Montréal",
+  "language": "fr",
+  "gender": "mixed",
+  "sector": "public",
+  "region": "montreal_island",
+  "city": "Westmount",
+  "address": "11, chemin de la Côte-Saint-Antoine, Westmount, QC H3Y 2H7",
+  "postal_code": "H3Y 2H7",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://ecole-internationale.cssdm.gouv.qc.ca/",
+  "admissions_url": "https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/",
+  "tuition_annual_cad": null,
+  "has_boarding": null,
+  "programs": [],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/",
+  "last_verified_at": "2026-10-29",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-19T13:00:00-04:00",
+      "ends_at": "2026-09-19T16:00:00-04:00",
+      "type": "open_house",
+      "academic_year": "2027-2028",
+      "registration_required": null,
+      "registration_url": null,
+      "notes_en": "Secondary open house; optional and separate from the admission process. Information sessions at 1:30 p.m. and 2:30 p.m.",
+      "notes_fr": "Portes ouvertes du secondaire; facultatives et distinctes du processus d’admission. Séances d’information à 13 h 30 et 14 h 30.",
+      "source_url": "https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/",
+      "last_verified_at": "2026-10-29",
+      "status": "draft"
+    }
+  ]
+}

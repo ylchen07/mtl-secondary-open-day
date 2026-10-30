@@ -14,6 +14,7 @@ const published = (slug: string, nameFr: string): SchoolFile =>
     name_fr: nameFr,
     language: 'fr',
     gender: 'mixed',
+    sector: 'private',
     region: 'montreal_island',
     city: 'Montréal',
     address: '123 Rue Test',

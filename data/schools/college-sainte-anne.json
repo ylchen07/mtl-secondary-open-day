@@ -1,0 +1,63 @@
+{
+  "slug": "college-sainte-anne",
+  "name_en": "Collège Sainte-Anne",
+  "name_fr": "Collège Sainte-Anne",
+  "language": "fr",
+  "gender": "mixed",
+  "sector": "private",
+  "region": "montreal_island",
+  "city": "Lachine",
+  "address": "1250, boulevard Saint-Joseph, Lachine, QC H8S 2M8",
+  "postal_code": "H8S 2M8",
+  "location": null,
+  "geocode_precision": "missing",
+  "website_url": "https://secondaire.lachine.sainteanne.ca/",
+  "admissions_url": "https://secondaire.lachine.sainteanne.ca/admission/",
+  "tuition_annual_cad": 5982,
+  "has_boarding": null,
+  "programs": [
+    "langues_sainte_anne",
+    "arts_technologiques",
+    "danse",
+    "defimonde",
+    "defisports",
+    "dragons_plus",
+    "entrepreneuriat",
+    "scimatic",
+    "soccer_plus",
+    "sport_et_art_elite"
+  ],
+  "description_en": null,
+  "description_fr": null,
+  "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
+  "last_verified_at": "2026-10-29",
+  "status": "draft",
+  "open_days": [
+    {
+      "starts_at": "2026-09-27T09:00:00-04:00",
+      "ends_at": "2026-09-27T12:00:00-04:00",
+      "type": "entrance_exam",
+      "academic_year": "2027-2028",
+      "registration_required": null,
+      "registration_url": null,
+      "notes_en": "Admission session for Secondary 1, by invitation only (candidates selected after file review).",
+      "notes_fr": "Séance d'admission en 1re secondaire, sur convocation seulement (candidats sélectionnés après analyse des dossiers).",
+      "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
+      "last_verified_at": "2026-10-29",
+      "status": "draft"
+    },
+    {
+      "starts_at": "2026-09-27T13:00:00-04:00",
+      "ends_at": "2026-09-27T16:00:00-04:00",
+      "type": "entrance_exam",
+      "academic_year": "2027-2028",
+      "registration_required": null,
+      "registration_url": null,
+      "notes_en": "Admission session for Secondary 1, by invitation only (candidates selected after file review).",
+      "notes_fr": "Séance d'admission en 1re secondaire, sur convocation seulement (candidats sélectionnés après analyse des dossiers).",
+      "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
+      "last_verified_at": "2026-10-29",
+      "status": "draft"
+    }
+  ]
+}

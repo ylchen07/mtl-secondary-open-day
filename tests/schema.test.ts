@@ -7,6 +7,7 @@ const valid = {
   name_fr: 'Villa Maria',
   language: 'bilingual',
   gender: 'girls',
+  sector: 'private',
   region: 'montreal_island',
   city: 'Montreal',
   address: '4245 Decarie Blvd, Montreal, QC H4A 3K4',

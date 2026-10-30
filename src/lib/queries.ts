@@ -30,6 +30,7 @@ function toSchoolRow(school: SchoolFile): SchoolRow {
     name_fr: school.name_fr,
     language: school.language,
     gender: school.gender,
+    sector: school.sector,
     region: school.region,
     city: school.city,
     address: school.address,

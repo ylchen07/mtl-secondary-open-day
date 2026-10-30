@@ -20,6 +20,7 @@ export function EventCard({
   const tType = useTranslations('eventType');
   const tLanguage = useTranslations('language');
   const tGender = useTranslations('gender');
+  const tSector = useTranslations('sector');
   const locale = useLocale() as Locale;
   const schoolName = locale === 'fr' ? event.school.name_fr : event.school.name_en;
   const note = locale === 'fr' ? event.notes_fr : event.notes_en;
@@ -37,6 +38,7 @@ export function EventCard({
           <li>{event.school.city}</li>
           <li>{tLanguage(event.school.language)}</li>
           <li>{tGender(event.school.gender)}</li>
+          <li>{tSector(event.school.sector)}</li>
         </ul>
         {note && <p className="event-note">{note}</p>}
         {clashes.length > 0 && (

@@ -2,11 +2,11 @@
 
 Verification date: **2026-09-15**
 
-This ledger audits every nullable field introduced by the nullable-evidence model. It contains exactly 40 school rows (`has_boarding`) and 23 event rows (`registration_required`).
+This ledger audits every nullable field introduced by the nullable-evidence model. It contains exactly 45 school rows (`has_boarding`) and 26 event rows (`registration_required`).
 
 Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive`, `contradicted`.
 
-## School field audit rows (40)
+## School field audit rows (45)
 
 | File | Field | Identity | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -50,8 +50,13 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `study.json` | `has_boarding` | — | `false` | `false` | `supported` | https://www.thestudy.qc.ca/academics | Official page states The Study is an independent bilingual day school. |
 | `villa-maria.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://villamaria.qc.ca/admission/ ; https://portesouvertes.villamaria.qc.ca/ | Official pages reviewed do not explicitly state boarding availability or unavailability. |
 | `villa-sainte-marcelline.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://villa.marcelline.qc.ca/ ; https://villa.marcelline.qc.ca/admissions/ | Official pages reviewed do not explicitly state boarding availability or unavailability. |
+| `college-jean-eudes.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://www.cje.qc.ca/admission/ ; https://www.cje.qc.ca/a-propos-du-college/ | Added 2026-10-29. No boarding or pensionnat statement on official pages. |
+| `college-de-montreal.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://college-montreal.qc.ca/ ; https://college-montreal.qc.ca/college/frais-de-scolarite/ | Added 2026-10-29. No boarding or internat statement on official pages or prospectus. |
+| `college-sainte-anne.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://secondaire.lachine.sainteanne.ca/admission/ | Added 2026-10-29. No current boarding statement; "pensionnat" appears only in the 1861–1960 history on sainteanne.ca/qui-sommes-nous/. |
+| `college-saint-louis.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://collegesaintlouis.ecolelachine.com/historique/ ; https://collegesaintlouis.ecolelachine.com/admission/ | Added 2026-10-29. No boarding statement on official pages. |
+| `ecole-internationale-de-montreal.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/ | Added 2026-10-29. No boarding statement on official pages. |
 
-## Event field audit rows (23)
+## Event field audit rows (26)
 
 | File | Field | Identity (`starts_at + type`) | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -78,6 +83,9 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `villa-maria.json` | `registration_required` | `2026-09-12T10:00:00-04:00 + open_house` | `false` | `false` | `supported` | https://portesouvertes.villamaria.qc.ca/ | Official page explicitly says no registration or appointment is necessary. |
 | `villa-sainte-marcelline.json` | `registration_required` | `2026-10-03T10:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ | Official page says “Réservez votre place” for the open house and provides the registration form. |
 | `villa-sainte-marcelline.json` | `registration_required` | `2026-11-04T00:00:00-05:00 + interview` | `null` | `null` | `unsupported-negative` | https://villa.marcelline.qc.ca/admissions/ | Added 2026-10-29. Applicants with a complete file are invited by the school; the page states no booking step or no-registration wording for the interview itself. |
+| `college-sainte-anne.json` | `registration_required` | `2026-09-27T09:00:00-04:00 + entrance_exam` | `null` | `null` | `unsupported-negative` | https://secondaire.lachine.sainteanne.ca/admission/ | Added 2026-10-29. « seuls les candidats sélectionnés seront convoqués » — attendance by invitation; no booking URL. |
+| `college-sainte-anne.json` | `registration_required` | `2026-09-27T13:00:00-04:00 + entrance_exam` | `null` | `null` | `unsupported-negative` | https://secondaire.lachine.sainteanne.ca/admission/ | Added 2026-10-29. « seuls les candidats sélectionnés seront convoqués » — attendance by invitation; no booking URL. |
+| `ecole-internationale-de-montreal.json` | `registration_required` | `2026-09-19T13:00:00-04:00 + open_house` | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/ | Added 2026-10-29. « Étape 1 (facultative) Assister à nos portes ouvertes du 19 septembre 2026 Heures : de 13 h à 16 h »; no booking requirement stated. |
 
 ## Publication-critical matrix
 
@@ -189,11 +197,12 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - **2026-09-22 resolution of the Campus Démosthène Secondaire-program question**: the 2026-09-19 structural-conflict recheck had flagged "an unresolved conflict over whether Campus Démosthène offers a Secondaire program at all." A direct check of every campus's own page content resolved it: Socrates II's page embeds both a Primaire and a Secondaire calendar image; Socrates III, IV, V, and Démosthène each embed only a Primaire calendar image. This is structural, cross-campus evidence (not a one-off gap) that École Socrates-Démosthène concentrates its Secondaire program at the Socrates II campus alone. `ecole-socrates-demosthene-campus-demosthene.json` was therefore removed entirely as out of this product's Secondary-1 scope, rather than kept as a blocked draft — the correct record for this institution is `ecole-socrates-demosthene-campus-socrates-ii.json`, which remains a normal Group C draft (gender still unresolved). See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`.
 - **2026-10-29 admission-interview research** (all 40 school records): one verified interview date published — Villa Sainte-Marcelline, Wednesday 4 November 2026, date-only. Every other school either does not mention interviews or schedules them privately without published dates. Full per-school ledger: `docs/data-audits/2026-10-29-interview-schedule-research.md`.
 - Reviewed totals after the 2026-10-29 interview research: **13 published schools and 16 published events**.
+- **2026-10-29 school-list expansion**: five schools added — Collège Jean-Eudes, Collège de Montréal, Collège Sainte-Anne (Lachine), and the public schools Collège Saint-Louis (CSSMB) and École internationale de Montréal (CSSDM); `sector` (`private` | `public`) added to every record. All five are draft, and Collège Sainte-Marcelline, Collège Regina Assumpta, PSNM and CIMF stay draft after recheck. Blockers and evidence: `docs/data-audits/2026-10-29-school-list-expansion.md`. Totals unchanged: **13 published schools and 16 published events**.
 
 ## Mechanical coverage summary
 
-- School rows: 40/40
-- Event rows: 23/23
+- School rows: 45/45
+- Event rows: 26/26
 - Missing identities: 0
 - Duplicate identities: 0
 

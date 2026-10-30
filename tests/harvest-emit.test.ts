@@ -180,6 +180,7 @@ describe('serialise', () => {
           name_fr: 'Collège international Marie de France',
           language: 'fr',
           gender: 'mixed',
+          sector: 'private',
           region: 'montreal_island',
           city: 'Montréal',
           address: '4635, chemin Queen-Mary',

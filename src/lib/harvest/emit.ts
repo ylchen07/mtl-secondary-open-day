@@ -77,6 +77,8 @@ export function toDraftSchool(
     name_fr: entry.nameFr,
     language: facts.language ?? 'fr',
     gender: facts.genderGuess,
+    // FEEP is the federation of private schools: everything it lists is private.
+    sector: 'private',
     region,
     city: facts.city ?? 'Montréal',
     address: facts.address ?? 'UNVERIFIED — transcribe from the school\u2019s own page',
@@ -119,7 +121,7 @@ export function toDraftSchool(
  * byte no-op instead of diff noise.
  */
 const KEY_ORDER: (keyof SchoolFile)[] = [
-  'slug', 'name_en', 'name_fr', 'language', 'gender', 'region', 'city',
+  'slug', 'name_en', 'name_fr', 'language', 'gender', 'sector', 'region', 'city',
   'address', 'postal_code', 'location', 'geocode_precision', 'website_url',
   'admissions_url', 'tuition_annual_cad', 'has_boarding', 'programs',
   'description_en', 'description_fr', 'source_url', 'last_verified_at',

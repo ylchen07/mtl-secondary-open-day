@@ -7,6 +7,7 @@ export type SchoolRow = {
   name_fr: string;
   language: 'fr' | 'en' | 'bilingual';
   gender: 'mixed' | 'girls' | 'boys';
+  sector: 'private' | 'public';
   region: 'montreal_island' | 'west_island' | 'laval' | 'north_shore' | 'south_shore';
   city: string;
   address: string;

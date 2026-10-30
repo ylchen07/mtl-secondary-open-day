@@ -4,13 +4,14 @@
   "name_fr": "Collège international Marie de France",
   "language": "fr",
   "gender": "mixed",
+  "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
-  "address": "4635, chemin Queen Mary",
+  "address": "4635, chemin Queen Mary, Montréal, QC H3W 1W3",
   "postal_code": "H3W 1W3",
   "location": null,
   "geocode_precision": "missing",
-  "website_url": "https://www.cimf.ca/admission/sinscrire/",
+  "website_url": "https://www.cimf.ca/",
   "admissions_url": "https://www.cimf.ca/admission/sinscrire/",
   "tuition_annual_cad": null,
   "has_boarding": null,
@@ -18,7 +19,7 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
-  "last_verified_at": "2026-09-15",
+  "last_verified_at": "2026-10-29",
   "status": "draft",
   "open_days": [
     {
@@ -31,7 +32,7 @@
       "notes_en": null,
       "notes_fr": "Le Collège ouvrira ses portes le samedi 26 septembre 2026 de 9h à 13h.",
       "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
-      "last_verified_at": "2026-09-15",
+      "last_verified_at": "2026-10-29",
       "status": "draft"
     }
   ]

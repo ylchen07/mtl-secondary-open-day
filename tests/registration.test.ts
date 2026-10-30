@@ -25,6 +25,7 @@ function event(overrides: Partial<AgendaEvent> = {}): AgendaEvent {
       name_fr: 'École 1',
       language: 'fr',
       gender: 'mixed',
+      sector: 'private',
       region: 'montreal_island',
       city: 'Montréal',
       address: '123 rue Test',

@@ -97,6 +97,7 @@ export const schoolFileSchema = z
     name_fr: nonEmpty,
     language: z.enum(['fr', 'en', 'bilingual']),
     gender: z.enum(['mixed', 'girls', 'boys']),
+    sector: z.enum(['private', 'public']),
     region: z.enum([
       'montreal_island',
       'west_island',

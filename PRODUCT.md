@@ -3,7 +3,7 @@
 ## What this is
 
 A public, bilingual (FR/EN) listing of open houses, entrance exams and admission
-interviews for private secondary schools in Greater Montreal, published by
+interviews for private and public secondary schools in Greater Montreal, published by
 school year (the Secondary 1 entry cohort, e.g. 2027–2028). One page answers one
 question: **what can I still attend, and does it clash with anything else I care
 about?**
