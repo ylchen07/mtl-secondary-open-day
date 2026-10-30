@@ -23,7 +23,7 @@ function school(over: Partial<SchoolRow> = {}): SchoolRow {
 function event(over: Partial<AgendaEvent> = {}): AgendaEvent {
   return {
     id: 'e1', school_id: 's1', starts_at: '2026-09-26T17:00:00.000Z',
-    ends_at: '2026-09-26T20:00:00.000Z', type: 'open_house', academic_year: '2027-2028',
+    ends_at: '2026-09-26T20:00:00.000Z', all_day: false, type: 'open_house', academic_year: '2027-2028',
     registration_required: false, registration_url: null, notes_en: null, notes_fr: null,
     source_url: 'https://a.qc.ca', last_verified_at: '2026-08-30', status: 'published',
     school: school(), ...over,

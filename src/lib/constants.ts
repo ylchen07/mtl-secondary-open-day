@@ -11,3 +11,14 @@ export const LOCALES = ['en', 'fr'] as const;
 export const DEFAULT_LOCALE = 'en';
 
 export type Locale = (typeof LOCALES)[number];
+
+export const EVENT_TYPES = [
+  'open_house',
+  'info_session',
+  'entrance_exam',
+  'interview',
+  'tour',
+  'virtual',
+] as const;
+
+export type EventType = (typeof EVENT_TYPES)[number];

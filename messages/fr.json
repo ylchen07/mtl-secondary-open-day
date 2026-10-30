@@ -1,10 +1,10 @@
 {
   "site": {
     "title": "Portes ouvertes des écoles secondaires privées de Montréal",
-    "tagline": "Portes ouvertes et examens d'admission, au même endroit."
+    "tagline": "Portes ouvertes, examens et entrevues d'admission, au même endroit."
   },
   "agenda": {
-    "heading": "Portes ouvertes et examens d’admission",
+    "heading": "Portes ouvertes, examens et entrevues d’admission",
     "tagline": "Écoles secondaires privées du Grand Montréal. Chaque date renvoie à la page de l’école.",
     "coverage": "événements publiés",
     "resultCount": "{count, plural, =0 {Aucun événement} one {# événement} other {# événements}}",
@@ -31,7 +31,10 @@
     "schoolDetails": "Informations sur l’école",
     "showPast": "Afficher",
     "hidePast": "Masquer",
-    "eventDetails": "Détails"
+    "eventDetails": "Détails",
+    "timeNotPublished": "Heure non publiée",
+    "schoolYear": "Année scolaire {year}",
+    "schoolYearNav": "Années scolaires"
   },
   "filters": {
     "search": "Rechercher une école",
@@ -62,6 +65,7 @@
     "open_house": "Portes ouvertes",
     "info_session": "Séance d'information",
     "entrance_exam": "Examen d'admission",
+    "interview": "Entrevue d'admission",
     "tour": "Visite guidée",
     "virtual": "Événement virtuel"
   }

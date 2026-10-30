@@ -16,7 +16,7 @@ function school(over: Partial<SchoolRow> = {}): SchoolRow {
 
 function event(id: string, startsAt: string, endsAt: string, over: Partial<AgendaEvent> = {}): AgendaEvent {
   return {
-    id, school_id: over.school?.id ?? 's1', starts_at: startsAt, ends_at: endsAt,
+    id, school_id: over.school?.id ?? 's1', starts_at: startsAt, ends_at: endsAt, all_day: false,
     type: 'open_house', academic_year: '2027-2028', registration_required: false,
     registration_url: null, notes_en: null, notes_fr: null,
     source_url: 'https://a.qc.ca', last_verified_at: '2026-08-30', status: 'published',
@@ -55,5 +55,20 @@ describe('findClashes', () => {
       school: school({ id: 's2' }),
     });
     expect(findClashes([a, b]).size).toBe(0);
+  });
+
+  it('never flags a date-only interview window, while timed events inside it still clash', () => {
+    const window = event('w', '2026-09-26T04:00:00Z', '2026-10-03T04:00:00Z', {
+      all_day: true,
+      type: 'interview',
+      school: school({ id: 's3' }),
+    });
+    const a = event('a', '2026-09-26T17:00:00Z', '2026-09-26T20:00:00Z');
+    const b = event('b', '2026-09-26T18:00:00Z', '2026-09-26T21:00:00Z', {
+      school: school({ id: 's2' }),
+    });
+    const clashes = findClashes([window, a, b]);
+    expect(clashes.has('w')).toBe(false);
+    expect(clashes.get('a')?.map((e) => e.id)).toEqual(['b']);
   });
 });

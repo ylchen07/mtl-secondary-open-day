@@ -2,7 +2,7 @@
 
 Verification date: **2026-09-15**
 
-This ledger audits every nullable field introduced by the nullable-evidence model. It contains exactly 40 school rows (`has_boarding`) and 22 event rows (`registration_required`).
+This ledger audits every nullable field introduced by the nullable-evidence model. It contains exactly 40 school rows (`has_boarding`) and 23 event rows (`registration_required`).
 
 Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive`, `contradicted`.
 
@@ -51,7 +51,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `villa-maria.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://villamaria.qc.ca/admission/ ; https://portesouvertes.villamaria.qc.ca/ | Official pages reviewed do not explicitly state boarding availability or unavailability. |
 | `villa-sainte-marcelline.json` | `has_boarding` | — | `false` | `null` | `unsupported-negative` | https://villa.marcelline.qc.ca/ ; https://villa.marcelline.qc.ca/admissions/ | Official pages reviewed do not explicitly state boarding availability or unavailability. |
 
-## Event field audit rows (22)
+## Event field audit rows (23)
 
 | File | Field | Identity (`starts_at + type`) | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -77,6 +77,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `study.json` | `registration_required` | `2026-10-01T17:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://www.thestudy.qc.ca/fr/admission | Official admissions page provides “INSCRIVEZ-VOUS” for the listed open-house sessions. |
 | `villa-maria.json` | `registration_required` | `2026-09-12T10:00:00-04:00 + open_house` | `false` | `false` | `supported` | https://portesouvertes.villamaria.qc.ca/ | Official page explicitly says no registration or appointment is necessary. |
 | `villa-sainte-marcelline.json` | `registration_required` | `2026-10-03T10:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ | Official page says “Réservez votre place” for the open house and provides the registration form. |
+| `villa-sainte-marcelline.json` | `registration_required` | `2026-11-04T00:00:00-05:00 + interview` | `null` | `null` | `unsupported-negative` | https://villa.marcelline.qc.ca/admissions/ | Added 2026-10-29. Applicants with a complete file are invited by the school; the page states no booking step or no-registration wording for the interview itself. |
 
 ## Publication-critical matrix
 
@@ -114,6 +115,7 @@ This matrix resolves the no-grandfathering review for every record that was publ
 | event | `college-saint-maurice|2026-09-20T09:00:00-04:00|open_house` | PASS | https://portesouvertes.csm.qc.ca/ | Official open-house microsite states "Dimanche 20 septembre | 9 h à 13 h" and ties admission to "1 re secondaire"; parent school's gender and Secondary 1 blockers are now resolved. |
 | school | `villa-sainte-marcelline` | PASS | https://villa.marcelline.qc.ca/la-villa/ ; https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ | Published (2026-09-19 recheck): official "Qui sommes-nous" page states "La Villa Sainte-Marcelline est une école d'origine catholique de langue française pour filles établie depuis 1959", resolving the instructional-language blocker. Girls' student body, address, and exact event were already established. |
 | event | `villa-sainte-marcelline|2026-10-03T10:00:00-04:00|open_house` | PASS | https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ | Official page states Saturday, October 3, 2026, 10h–15h, open house for preschool/primary/secondary with an embedded reservation form; parent school's language blocker is now resolved. |
+| event | `villa-sainte-marcelline|2026-11-04T00:00:00-05:00|interview` | PASS | https://villa.marcelline.qc.ca/admissions/ | Published 2026-10-29: official admissions page states "Date limite 30 octobre pour les entretiens d'admission du mercredi 4 novembre" under a banner opening "1re à 3e secondaire" for 2027–2028, and its Secondaire section says complete files are invited to "une rencontre d'admission". No clock time is published, so the event is date-only. See `docs/data-audits/2026-10-29-interview-schedule-research.md`. |
 | school | `ecole-secondaire-marcellin-champagnat` | FAIL | https://esmc.qc.ca/ ; https://esmc.qc.ca/nous-joindre/ ; https://esmc.qc.ca/a-propos/valeurs-historique/ ; https://esmc.qc.ca/admission/portes-ouvertes/ ; https://esmc.qc.ca/admission/demandes-admission/ | 2026-09-22: the Sept 19 open-house date passed with instructional language still unresolved. Removed as a dead lead — record stays draft with zero events. The same admission page now advertises a Sept 26, 2026 entrance exam (two sessions, 8h30 and 13h, explicitly for incoming 1re secondaire / 6e année), but no end time is stated for either session, so it cannot be added as a draft event under the schema's required `ends_at` field. Logged as a lead for the next harvest rather than fabricated. See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`. |
 
 
@@ -185,11 +187,13 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - **2026-09-22 recheck of Collège St-Jean-Vianney, Collège Boisbriand, Loyola High School, and École secondaire Marcellin-Champagnat**: all four had a single already-passed Sept 19, 2026 draft event, discovered only after a corrected "today" check (a prior turn had incorrectly assumed these were still future). Each was rechecked directly: CSJV's event page now reads "Plages horaires maintenant complètes" with both blockers (no end time, postal-code contradiction) still standing; Boisbriand's homepage still shows the identical stale passed date/time; Loyola's `/openhouse` page is unchanged (still no clock times); Marcellin-Champagnat's own admission page has moved on to a genuinely new Sept 26, 2026 entrance exam (two sessions, explicitly for incoming 1re secondaire) but states no end time for either session, so it cannot be added as a draft event under the schema's required `ends_at` field — logged as a lead rather than fabricated. All 4 passed events removed as dead leads; all 4 school records retained with `open_days: []`. See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`.
 - **2026-09-21 recheck of Collège Beaubois, Collège d'Anjou, and École Marie-Clarac**: all three had a single already-passed draft event (Sept 11–12, 2026) with no updated official date. Beaubois's page still headlines the same passed Sept 12 date; d'Anjou's page now states its next open house is "septembre 2027" with no day/time yet to build an event from; Marie-Clarac's page still shows the same passed Sept 11 Secondaire date; the only newer date it added (Oct 23) is for Garderie/Préscolaire/Primaire, out of this product's Secondary-1 scope. Same treatment as Lower Canada College: all 3 events removed as dead leads, school records retained with `open_days: []` for the next harvest. See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`.
 - **2026-09-22 resolution of the Campus Démosthène Secondaire-program question**: the 2026-09-19 structural-conflict recheck had flagged "an unresolved conflict over whether Campus Démosthène offers a Secondaire program at all." A direct check of every campus's own page content resolved it: Socrates II's page embeds both a Primaire and a Secondaire calendar image; Socrates III, IV, V, and Démosthène each embed only a Primaire calendar image. This is structural, cross-campus evidence (not a one-off gap) that École Socrates-Démosthène concentrates its Secondaire program at the Socrates II campus alone. `ecole-socrates-demosthene-campus-demosthene.json` was therefore removed entirely as out of this product's Secondary-1 scope, rather than kept as a blocked draft — the correct record for this institution is `ecole-socrates-demosthene-campus-socrates-ii.json`, which remains a normal Group C draft (gender still unresolved). See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`.
+- **2026-10-29 admission-interview research** (all 40 school records): one verified interview date published — Villa Sainte-Marcelline, Wednesday 4 November 2026, date-only. Every other school either does not mention interviews or schedules them privately without published dates. Full per-school ledger: `docs/data-audits/2026-10-29-interview-schedule-research.md`.
+- Reviewed totals after the 2026-10-29 interview research: **13 published schools and 16 published events**.
 
 ## Mechanical coverage summary
 
 - School rows: 40/40
-- Event rows: 22/22
+- Event rows: 23/23
 - Missing identities: 0
 - Duplicate identities: 0
 

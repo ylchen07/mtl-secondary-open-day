@@ -1,10 +1,10 @@
 {
   "site": {
     "title": "Montreal Private Secondary Open Days",
-    "tagline": "Open houses and entrance exams, in one place."
+    "tagline": "Open houses, entrance exams and admission interviews, in one place."
   },
   "agenda": {
-    "heading": "Open houses & entrance exams",
+    "heading": "Open houses, entrance exams & interviews",
     "tagline": "Private secondary schools across Greater Montreal. Every date links to the school’s own page.",
     "coverage": "published events",
     "resultCount": "Showing {count, plural, =0 {no events} one {# event} other {# events}}",
@@ -31,7 +31,10 @@
     "schoolDetails": "School details",
     "showPast": "Show",
     "hidePast": "Hide",
-    "eventDetails": "Details"
+    "eventDetails": "Details",
+    "timeNotPublished": "Time not published",
+    "schoolYear": "School year {year}",
+    "schoolYearNav": "School years"
   },
   "filters": {
     "search": "Search schools",
@@ -62,6 +65,7 @@
     "open_house": "Open house",
     "info_session": "Info session",
     "entrance_exam": "Entrance exam",
+    "interview": "Admission interview",
     "tour": "Guided tour",
     "virtual": "Virtual event"
   }

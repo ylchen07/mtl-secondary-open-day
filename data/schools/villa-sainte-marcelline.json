@@ -33,6 +33,19 @@
       "source_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
       "last_verified_at": "2026-09-19",
       "status": "published"
+    },
+    {
+      "starts_on": "2026-11-04",
+      "ends_on": "2026-11-04",
+      "type": "interview",
+      "academic_year": "2027-2028",
+      "registration_required": null,
+      "registration_url": null,
+      "notes_en": "Admission interviews for applicants with a complete file; file deadline October 30. Applicants write a short text and solve a math problem. Next interviews in February/March 2027.",
+      "notes_fr": "Entretiens d'admission pour les candidates ayant déposé un dossier complet; date limite le 30 octobre. L'élève rédige un court texte et résout une situation-problème en mathématiques. Prochains entretiens en février/mars 2027.",
+      "source_url": "https://villa.marcelline.qc.ca/admissions/",
+      "last_verified_at": "2026-10-29",
+      "status": "published"
     }
   ]
 }

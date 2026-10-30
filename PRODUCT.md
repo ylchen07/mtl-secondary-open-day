@@ -2,9 +2,11 @@
 
 ## What this is
 
-A public, bilingual (FR/EN) listing of open houses and entrance exams for
-private secondary schools in Greater Montreal. One page answers one question:
-**what can I still attend, and does it clash with anything else I care about?**
+A public, bilingual (FR/EN) listing of open houses, entrance exams and admission
+interviews for private secondary schools in Greater Montreal, published by
+school year (the Secondary 1 entry cohort, e.g. 2027–2028). One page answers one
+question: **what can I still attend, and does it clash with anything else I care
+about?**
 
 ## Who it is for
 
@@ -33,8 +35,12 @@ its work.
 
 Corollary: the site would rather show **less** than guess. Events with a
 published date but no published time are omitted rather than given an invented
-start time. Deadlines are not listed as events because you cannot attend a
-deadline.
+start time. The one exception is admission interviews: schools publish an
+interview day or window and assign each family a private slot, so an interview
+may carry dates only and renders as "Time not published". Date-only interviews
+never raise clash warnings. Deadlines are not listed as events because you
+cannot attend a deadline; an interview that is only "we will contact you" is
+not an event either.
 
 ## Content truth
 

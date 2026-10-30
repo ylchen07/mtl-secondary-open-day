@@ -8,6 +8,7 @@ function event(overrides: Partial<AgendaEvent> = {}): AgendaEvent {
     school_id: 'school-1',
     starts_at: '2026-09-24T22:00:00.000Z',
     ends_at: '2026-09-25T01:00:00.000Z',
+    all_day: false,
     type: 'open_house',
     academic_year: '2027-2028',
     registration_required: false,

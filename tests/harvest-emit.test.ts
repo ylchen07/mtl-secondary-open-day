@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { toDraftSchool, serialise, montrealOffset, academicYearFor } from '@/lib/harvest/emit';
+import { toDraftSchool, serialise, montrealOffset } from '@/lib/harvest/emit';
+import { academicYearFor } from '@/lib/dates';
 import { schoolFileSchema } from '@/lib/schema';
 import type { ListingEntry, SchoolFacts } from '@/lib/harvest/types';
 
@@ -90,14 +91,16 @@ describe('toDraftSchool', () => {
   it('converts local Montreal time to an explicit offset', () => {
     const draft = toDraftSchool(entry, facts, TODAY);
     // 26 Sep is EDT (-04:00)
-    expect(draft.open_days[0].starts_at).toBe('2026-09-26T09:00:00-04:00');
-    expect(draft.open_days[0].ends_at).toBe('2026-09-26T13:15:00-04:00');
+    expect(draft.open_days[0]).toMatchObject({
+      starts_at: '2026-09-26T09:00:00-04:00',
+      ends_at: '2026-09-26T13:15:00-04:00',
+    });
   });
 
   it('uses EST (-05:00) for a date after the DST changeover', () => {
     const winter = { ...entry, events: [{ ...entry.events[0], date: '2026-11-21' }] };
     const draft = toDraftSchool(winter, facts, TODAY);
-    expect(draft.open_days[0].starts_at).toBe('2026-11-21T09:00:00-05:00');
+    expect(draft.open_days[0]).toMatchObject({ starts_at: '2026-11-21T09:00:00-05:00' });
   });
 
   it('maps every event in entry.events to its own open_days row, in order', () => {
@@ -110,8 +113,8 @@ describe('toDraftSchool', () => {
     };
     const draft = toDraftSchool(multi, facts, TODAY);
     expect(draft.open_days).toHaveLength(2);
-    expect(draft.open_days[0].starts_at).toBe('2026-10-10T09:00:00-04:00');
-    expect(draft.open_days[1].starts_at).toBe('2026-11-14T13:00:00-05:00');
+    expect(draft.open_days[0]).toMatchObject({ starts_at: '2026-10-10T09:00:00-04:00' });
+    expect(draft.open_days[1]).toMatchObject({ starts_at: '2026-11-14T13:00:00-05:00' });
   });
 
   it('carries geocode_precision "missing" with a null location', () => {
