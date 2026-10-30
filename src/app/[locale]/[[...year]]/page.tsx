@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { AgendaClient } from '@/components/AgendaClient';
 import { Link } from '@/i18n/navigation';
 import { academicYearFor, dayKey } from '@/lib/dates';
-import { fetchAgendaEvents, schoolYears } from '@/lib/queries';
+import { fetchAgendaEvents, fetchSchoolListings, schoolYears } from '@/lib/queries';
 import { parseFilters } from '@/lib/filters';
 
 export const revalidate = 3600;
@@ -58,6 +58,7 @@ export default async function AgendaPage({
   );
 
   const yearPath = year === current ? '/' : `/${year}`;
+  const schools = fetchSchoolListings();
 
   return (
     <div className="site-shell">
@@ -76,6 +77,10 @@ export default async function AgendaPage({
       <main>
         <div className="page-intro">
           <div className="intro-heading">
+            <h1>{t('heading')}</h1>
+            <p className="lead">{t('tagline')}</p>
+          </div>
+          <div className="intro-meta">
             <nav aria-label={t('schoolYearNav')} className="year-nav">
               {years.map((y) => (
                 <Link
@@ -88,16 +93,14 @@ export default async function AgendaPage({
                 </Link>
               ))}
             </nav>
-            <h1>{t('heading')}</h1>
-          </div>
-          <div className="intro-description">
-            <p>{t('tagline')}</p>
-            <p className="coverage">{events.length} {t('coverage')}</p>
+            <p className="coverage">{t('coverage', { schools: schools.length, events: events.length })}</p>
           </div>
         </div>
         <AgendaClient
           events={events}
+          schools={schools}
           initialFilters={initialFilters}
+          initialView={rawSearch.view === 'calendar' ? 'calendar' : 'schools'}
           referenceTime={now.toISOString()}
         />
       </main>

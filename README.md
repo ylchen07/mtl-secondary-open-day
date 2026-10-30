@@ -18,7 +18,8 @@ the conflicts.
 **v1 implementation complete.**
 
 The site features:
-- Agenda at `/en` and `/fr` listing upcoming open houses, entrance exams and admission interviews, with filters and conflict detection
+- `/en` and `/fr` open on a **Schools** list: every school on file, published or draft, with its next confirmed event or "No upcoming event observed" and a link to its admissions page. Draft schools show only confirmed facts (name, city, sector); their unconfirmed language and student body are hidden and never match a filter
+- A **Calendar** tab (`?view=calendar`) lists upcoming open houses, entrance exams and admission interviews by day, with conflict detection and the past-events archive; filters apply to both tabs and live in the URL
 - One page per school year (entry cohort): `/en` shows the year currently recruiting, `/en/2027-2028` pins a year; unknown years 404
 - Admission interviews may be date-only (`starts_on`/`ends_on`, inclusive) when the school publishes a day or window but no clock times; every other event type still needs `starts_at`/`ends_at`
 - School and event data hand-curated and verified against official sources in `data/schools/`

@@ -1,4 +1,4 @@
-import type { AgendaEvent } from './types';
+import type { AgendaEvent, SchoolListing } from './types';
 
 export type FilterState = {
   q: string;
@@ -29,44 +29,46 @@ export function normalize(value: string): string {
     .trim();
 }
 
-function matchesQuery(event: AgendaEvent, q: string): boolean {
+/** The school facts a filter can test; a null fact is unconfirmed. */
+type FilterableSchool = Pick<
+  SchoolListing,
+  'name_en' | 'name_fr' | 'city' | 'programs' | 'region' | 'sector' | 'language' | 'gender' | 'has_boarding'
+>;
+
+function matchesQuery(school: FilterableSchool, q: string): boolean {
   if (!q) return true;
   const haystack = normalize(
-    [
-      event.school.name_en,
-      event.school.name_fr,
-      event.school.city,
-      ...event.school.programs,
-    ].join(' '),
+    [school.name_en, school.name_fr, school.city, ...school.programs].join(' '),
   );
   return normalize(q)
     .split(/\s+/)
     .every((term) => haystack.includes(term));
 }
 
-/** Within a facet, values are OR'd. Across facets, they are AND'd. */
+function matchesFacet(selected: string[], value: string | null): boolean {
+  // An unconfirmed fact never satisfies a filter: a guess must not answer "girls only?".
+  return selected.length === 0 || (value !== null && selected.includes(value));
+}
+
+/** Within a facet, values are OR'd. Across facets, they are AND'd. The event-type facet is not a school fact. */
+export function matchesSchool(school: FilterableSchool, filters: FilterState): boolean {
+  return (
+    matchesQuery(school, filters.q) &&
+    matchesFacet(filters.language, school.language) &&
+    matchesFacet(filters.region, school.region) &&
+    matchesFacet(filters.gender, school.gender) &&
+    matchesFacet(filters.sector, school.sector) &&
+    (!filters.boarding || school.has_boarding === true)
+  );
+}
+
 export function applyFilters(
   events: AgendaEvent[],
   filters: FilterState,
 ): AgendaEvent[] {
-  return events.filter((event) => {
-    if (
-      !matchesQuery(event, filters.q) ||
-      (filters.language.length > 0 && !filters.language.includes(event.school.language)) ||
-      (filters.region.length > 0 && !filters.region.includes(event.school.region)) ||
-      (filters.gender.length > 0 && !filters.gender.includes(event.school.gender)) ||
-      (filters.sector.length > 0 && !filters.sector.includes(event.school.sector)) ||
-      (filters.type.length > 0 && !filters.type.includes(event.type))
-    ) {
-      return false;
-    }
-
-    if (filters.boarding && event.school.has_boarding !== true) {
-      return false;
-    }
-
-    return true;
-  });
+  return events.filter(
+    (event) => matchesSchool(event.school, filters) && matchesFacet(filters.type, event.type),
+  );
 }
 
 const FACETS = ['language', 'region', 'gender', 'sector', 'type'] as const;

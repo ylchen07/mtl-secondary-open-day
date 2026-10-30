@@ -1,0 +1,21 @@
+:root {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.2rem; --text-xl: 1.44rem; --text-2xl: 1.728rem; --text-3xl: 2.074rem;
+  --text-display-s: 1.44rem; --text-display: 2.074rem; --text-section: 1.44rem; --text-title: 1.2rem; --text-lead: 1rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: #cf2d56; --color-success: #1f8a65;
+  /* DESIGN.md: content caps at 1200px. */
+  --container: 1264px; --gutter: 32px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  /* The brand palette from DESIGN.md: warm cream paper, warm ink, one orange. */
+  --color-paper: #f7f7f4; --color-paper-2: #efeee8; --color-paper-3: #e6e5e0; --color-surface: #ffffff;
+  --color-ink: #26251e; --color-ink-2: #5a5852; --color-muted: #807d72;
+  --color-rule: #e6e5e0; --color-rule-strong: #cfcdc4;
+  --color-accent: #f54e00; --color-accent-strong: #d04200; --color-accent-ink: #ffffff; --color-focus: #d04200;
+  /* Inter stands in for CursorGothic (DESIGN.md, Known Gaps); one family, display at 400. */
+  --font-display: var(--font-sans), system-ui, "Helvetica Neue", Arial, sans-serif; --font-body: var(--font-sans), system-ui, "Helvetica Neue", Arial, sans-serif; --font-outlier: var(--font-body);
+  --display-weight: 400;
+  --radius-card: 12px; --radius-control: 8px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.02em;
+}

@@ -4,9 +4,11 @@ import { useTranslations } from 'next-intl';
 
 export function EmptyState({
   filtered,
+  message,
   onClear,
 }: {
   filtered: boolean;
+  message?: string;
   onClear: () => void;
 }) {
   const t = useTranslations('agenda');
@@ -14,7 +16,7 @@ export function EmptyState({
   if (filtered) {
     return (
       <div className="empty-state">
-        <p className="empty-message">{t('emptyFiltered')}</p>
+        <p className="empty-message">{message ?? t('emptyFiltered')}</p>
         <button
           type="button"
           onClick={onClear}

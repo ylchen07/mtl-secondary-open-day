@@ -2,11 +2,11 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { agendaWindowEnd, eventBounds } from './dates';
 import { validateSchoolFiles, type SchoolFile } from './schema';
-import type { AgendaEvent, SchoolRow } from './types';
+import type { AgendaEvent, SchoolListing, SchoolRow } from './types';
 
 const DATA_DIR = join(process.cwd(), 'data', 'schools');
 
-function loadPublishedSchools(): SchoolFile[] {
+function loadSchools(): SchoolFile[] {
   const files = readdirSync(DATA_DIR)
     .filter((name) => name.endsWith('.json'))
     .map((name) => {
@@ -19,7 +19,37 @@ function loadPublishedSchools(): SchoolFile[] {
     throw new Error(`Invalid school data:\n${errors.join('\n')}`);
   }
 
-  return ok.filter((school) => school.status === 'published');
+  return ok;
+}
+
+/**
+ * Every school on file except archived ones, published or not, so the list
+ * can say "nothing observed yet" instead of hiding a school a family asked
+ * about. Only facts a published record verified are carried; a draft's
+ * language, student body and boarding stay unknown.
+ */
+export function fetchSchoolListings(): SchoolListing[] {
+  return loadSchools()
+    .filter((school) => school.status !== 'archived')
+    .map((school) => {
+      const confirmed = school.status === 'published';
+      return {
+        id: school.slug,
+        slug: school.slug,
+        name_en: school.name_en,
+        name_fr: school.name_fr,
+        city: school.city,
+        region: school.region,
+        sector: school.sector,
+        admissions_url: school.admissions_url,
+        programs: school.programs,
+        last_verified_at: school.last_verified_at,
+        confirmed,
+        language: confirmed ? school.language : null,
+        gender: confirmed ? school.gender : null,
+        has_boarding: confirmed ? school.has_boarding : null,
+      };
+    });
 }
 
 function toSchoolRow(school: SchoolFile): SchoolRow {
@@ -63,7 +93,7 @@ function toSchoolRow(school: SchoolFile): SchoolRow {
  */
 export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]> {
   const windowEndMs = agendaWindowEnd(now).getTime();
-  const schools = loadPublishedSchools();
+  const schools = loadSchools().filter((school) => school.status === 'published');
 
   const events: AgendaEvent[] = [];
   for (const school of schools) {

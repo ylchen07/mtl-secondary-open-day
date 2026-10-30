@@ -20,7 +20,10 @@ name in an English interface is normal and expected, and vice versa.
 
 ## The job it does
 
-1. Show what is still attendable, soonest first.
+1. List every school a family is considering, with its next confirmed date or
+   "No upcoming event observed", so a school with nothing published yet does
+   not disappear. The calendar of what is still attendable, soonest first, is
+   one tab away.
 2. Surface time conflicts between schools — especially **entrance exams**, which
    are hard deadlines. Two exams on the same Saturday morning is the single most
    expensive thing a family can fail to notice.

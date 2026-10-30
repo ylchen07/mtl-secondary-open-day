@@ -1,30 +1,38 @@
 import { expect, test } from '@playwright/test';
 
-test('agenda renders in English', async ({ page }) => {
-  await page.goto('/en');
-  await expect(page.getByRole('heading', { name: 'Upcoming' })).toBeVisible();
-});
+for (const [locale, upcoming] of [['en', 'Upcoming'], ['fr', 'À venir']]) {
+  test(`the school list leads and the calendar is one tab away in ${locale}`, async ({ page }) => {
+    await page.goto(`/${locale}`);
+    const tabs = page.getByRole('tab');
+    await expect(tabs.first()).toHaveAttribute('aria-selected', 'true');
+    await expect(page.locator('.school-table tbody tr').first()).toBeVisible();
+    await tabs.nth(1).click();
+    await expect(page).toHaveURL(/view=calendar/);
+    await expect(page.getByRole('heading', { name: upcoming }).or(page.locator('.past-archive')).first()).toBeVisible();
+    await expect(page.locator('.school-table')).toBeHidden();
+  });
+}
 
-test('agenda renders in French', async ({ page }) => {
-  await page.goto('/fr');
-  await expect(page.getByRole('heading', { name: 'À venir' })).toBeVisible();
+test('a school with no published events is still listed', async ({ page }) => {
+  await page.goto('/en?q=jean-eudes');
+  const row = page.locator('.school-table tbody tr');
+  await expect(row).toHaveCount(1);
+  await expect(row).toContainText('Collège Jean-Eudes');
+  await expect(row).toContainText('No upcoming event observed');
+  await expect(row.getByRole('link', { name: /Admissions page/ })).toHaveAttribute('href', /^https:/);
 });
 
 test('a filter narrows results and updates the URL', async ({ page }) => {
   await page.goto('/en');
-
-  // Counts archived (collapsed) events too: late in the season every event
-  // can be past, and filtering removes archived rows from the DOM as well.
-  const totalCount = await page.locator('article').count();
+  const rows = page.locator('.school-table tbody tr');
+  const totalCount = await rows.count();
 
   await page.getByRole('button', { name: 'Girls' }).click();
 
   await expect(page).toHaveURL(/gender=girls/);
-  // Asserts the filter narrows the result set, not an exact count — the
-  // published corpus composition (which schools are girls-only) changes
-  // over time and should not make this test brittle.
-  const filteredCount = await page.locator('article').count();
-  expect(filteredCount).toBeLessThan(totalCount);
+  // Asserts the filter narrows the list, not an exact count: which schools
+  // are confirmed girls-only changes as records are verified.
+  await expect.poll(() => rows.count()).toBeLessThan(totalCount);
 });
 
 test('root redirects to the default locale', async ({ page }) => {
@@ -43,14 +51,14 @@ test('each school year has its own page and unknown years are not found', async 
   await page.goto(`/fr/${year}`);
   await expect(page.getByRole('navigation', { name: 'Années scolaires' }).locator('[aria-current="page"]'))
     .toHaveText(`Année scolaire ${year.replace('-', '–')}`);
-  await expect(page.getByRole('heading', { name: 'À venir' }).or(page.getByRole('heading', { name: 'Événements passés' })).first()).toBeVisible();
+  await expect(page.locator('.school-table tbody tr').first()).toBeVisible();
 
   const missing = await page.goto('/en/1999-2000');
   expect(missing?.status()).toBe(404);
 });
 
 test('admission interviews are a filterable event type', async ({ page }) => {
-  await page.goto('/en');
+  await page.goto('/en?view=calendar');
   await page.getByRole('button', { name: 'Admission interview', exact: true }).click();
   await expect(page).toHaveURL(/type=interview/);
   for (const type of await page.locator('.agenda-event .event-type').allInnerTexts()) {
@@ -67,10 +75,10 @@ test('mobile filters can be opened, applied, and cleared', async ({ page }) => {
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await search.fill('no matching school');
-  await expect(page.getByText('No events match these filters.')).toBeVisible();
+  await expect(page.getByText('No schools match these filters.')).toBeVisible();
   await page.getByRole('button', { name: 'Clear filters' }).first().click();
   await expect(search).toHaveValue('');
-  await expect(page.getByRole('article').first()).toBeVisible();
+  await expect(page.locator('.school-table tbody tr').first()).toBeVisible();
   await toggle.click();
   await expect(search).toBeHidden();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -93,7 +101,7 @@ test('hydration stays consistent when the browser clock differs', async ({ page 
 
 for (const locale of ['en', 'fr']) {
   test(`past events use an accessible archive in ${locale}`, async ({ page }) => {
-    await page.goto(`/${locale}`);
+    await page.goto(`/${locale}?view=calendar`);
     const archive = page.getByRole('region', { name: locale === 'en' ? 'Past events' : 'Événements passés', exact: true });
     const toggle = archive.getByRole('button');
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
