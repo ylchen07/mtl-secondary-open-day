@@ -22,34 +22,52 @@ function loadSchools(): SchoolFile[] {
   return ok;
 }
 
+function toSchoolListing(school: SchoolFile): SchoolListing {
+  const confirmed = school.status === 'published';
+  const location =
+    confirmed && school.location && school.geocode_precision !== 'missing'
+      ? { lat: school.location.lat, lng: school.location.lng, precision: school.geocode_precision }
+      : null;
+  return {
+    id: school.slug,
+    slug: school.slug,
+    name_en: school.name_en,
+    name_fr: school.name_fr,
+    city: school.city,
+    region: school.region,
+    sector: school.sector,
+    admissions_url: school.admissions_url,
+    website_url: school.website_url,
+    programs: school.programs,
+    last_verified_at: school.last_verified_at,
+    confirmed,
+    language: confirmed ? school.language : null,
+    gender: confirmed ? school.gender : null,
+    has_boarding: confirmed ? school.has_boarding : null,
+    description_en: confirmed ? (school.description_en ?? null) : null,
+    description_fr: confirmed ? (school.description_fr ?? null) : null,
+    address: confirmed ? school.address : null,
+    location,
+    tuition_annual_cad: confirmed ? (school.tuition_annual_cad ?? null) : null,
+  };
+}
+
 /**
  * Every school on file except archived ones, published or not, so the list
  * can say "nothing observed yet" instead of hiding a school a family asked
  * about. Only facts a published record verified are carried; a draft's
- * language, student body and boarding stay unknown.
+ * language, student body, boarding, description and street address stay unknown.
  */
 export function fetchSchoolListings(): SchoolListing[] {
   return loadSchools()
     .filter((school) => school.status !== 'archived')
-    .map((school) => {
-      const confirmed = school.status === 'published';
-      return {
-        id: school.slug,
-        slug: school.slug,
-        name_en: school.name_en,
-        name_fr: school.name_fr,
-        city: school.city,
-        region: school.region,
-        sector: school.sector,
-        admissions_url: school.admissions_url,
-        programs: school.programs,
-        last_verified_at: school.last_verified_at,
-        confirmed,
-        language: confirmed ? school.language : null,
-        gender: confirmed ? school.gender : null,
-        has_boarding: confirmed ? school.has_boarding : null,
-      };
-    });
+    .map(toSchoolListing);
+}
+
+/** One school on file by slug, or null when there is none or it is archived. */
+export function fetchSchool(slug: string): SchoolListing | null {
+  const school = loadSchools().find((s) => s.slug === slug && s.status !== 'archived');
+  return school ? toSchoolListing(school) : null;
 }
 
 function toSchoolRow(school: SchoolFile): SchoolRow {

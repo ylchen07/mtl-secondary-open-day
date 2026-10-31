@@ -1,537 +1,292 @@
 ---
-version: alpha
-name: Cursor-design-analysis
-description: An AI-first code editor whose marketing site reads like a quietly-confident developer-tools brand with a warm-cream editorial canvas (`#f7f7f4`) instead of the typical dark IDE atmosphere. Near-black warm ink (`#26251e`) carries body and display alike — display sits at weight 400 with negative letter-spacing for a magazine feel rather than a bold tech voice. The single brand voltage is **Cursor Orange** (`#f54e00`) reserved for primary CTAs and the wordmark. A signature pastel timeline palette (peach, mint, blue, lavender, gold) marks AI-action stages (Thinking / Reading / Editing / Grepping / Done) — only inside in-product timeline visualizations. Cards use minimal hairlines, no shadows, generous 80px section rhythm. CursorGothic for display/body, JetBrains Mono on every code surface (which is roughly half the page).
-
+name: Montreal Secondary Open Days
+description: Greater Montreal drawn as the archipelago it is; schools sit on flat-colour land and the rivers do the dividing.
 colors:
-  primary: "#f54e00"
-  primary-active: "#d04200"
-  ink: "#26251e"
-  body: "#5a5852"
-  body-strong: "#26251e"
-  muted: "#807d72"
-  muted-soft: "#a09c92"
-  hairline: "#e6e5e0"
-  hairline-soft: "#efeee8"
-  hairline-strong: "#cfcdc4"
-  canvas: "#f7f7f4"
-  canvas-soft: "#fafaf7"
-  surface-card: "#ffffff"
-  surface-strong: "#e6e5e0"
-  on-primary: "#ffffff"
-  timeline-thinking: "#dfa88f"
-  timeline-grep: "#9fc9a2"
-  timeline-read: "#9fbbe0"
-  timeline-edit: "#c0a8dd"
-  timeline-done: "#c08532"
-  semantic-error: "#cf2d56"
-  semantic-success: "#1f8a65"
-
+  water-cream: "#F5F1E4"
+  water-shade: "#ECE5CF"
+  ink: "#2C2E2A"
+  ink-secondary: "#575A50"
+  rule-sand: "#D9D1B8"
+  muted-reed: "#8C8A7C"
+  coral: "#FF705D"
+  land-island: "#8ED462"
+  land-laval: "#F5E211"
+  land-north: "#EBC1FF"
+  land-south: "#2BA0FF"
+  land-other: "#E2DBC4"
 typography:
-  display-mega:
-    fontFamily: "'CursorGothic', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif"
-    fontSize: 72px
-    fontWeight: 400
+  display:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "clamp(2.5rem, 2.2rem + 2.6vw, 4.5rem)"
+    fontWeight: 700
+    lineHeight: 0.95
+    letterSpacing: "-0.03em"
+  display-band:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "clamp(2.75rem, 1.8rem + 4vw, 5.5rem)"
+    fontWeight: 700
+    lineHeight: 0.95
+    letterSpacing: "-0.03em"
+  headline:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "2rem"
+    fontWeight: 700
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
+  title:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 600
     lineHeight: 1.1
-    letterSpacing: -2.16px
-  display-lg:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 36px
-    fontWeight: 400
-    lineHeight: 1.2
-    letterSpacing: -0.72px
-  display-md:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 26px
-    fontWeight: 400
-    lineHeight: 1.25
-    letterSpacing: -0.325px
-  display-sm:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 22px
-    fontWeight: 400
-    lineHeight: 1.3
-    letterSpacing: -0.11px
-  title-md:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 18px
-    fontWeight: 600
-    lineHeight: 1.4
-    letterSpacing: 0
+    letterSpacing: "-0.03em"
   title-sm:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 16px
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "1.1875rem"
     fontWeight: 600
-    lineHeight: 1.4
-    letterSpacing: 0
-  body-md:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 16px
+    lineHeight: 1.2
+    letterSpacing: "-0.03em"
+  body:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0
-  body-tracked:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 16px
+    lineHeight: 1.55
+  lead:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "1.1875rem"
     fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0.08px
-  body-sm:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0
-  caption:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 13px
-    fontWeight: 400
-    lineHeight: 1.4
-    letterSpacing: 0
-  caption-uppercase:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 11px
-    fontWeight: 600
-    lineHeight: 1.4
-    letterSpacing: 0.88px
-    textTransform: uppercase
-  code:
-    fontFamily: "'JetBrains Mono', 'Fira Code', monospace"
-    fontSize: 13px
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0
-  button:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 14px
+    lineHeight: 1.45
+  label:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "0.875rem"
     fontWeight: 500
-    lineHeight: 1.0
-    letterSpacing: 0
-  nav-link:
-    fontFamily: "'CursorGothic', sans-serif"
-    fontSize: 14px
+    lineHeight: 1.3
+  label-xs:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
+    fontSize: "0.75rem"
     fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: 0
-
+    lineHeight: 1
 rounded:
-  none: 0px
-  xs: 4px
-  sm: 6px
-  md: 8px
-  lg: 12px
-  xl: 16px
-  pill: 9999px
-  full: 9999px
-
+  card: "16px"
+  pill: "999px"
 spacing:
-  xxs: 4px
-  xs: 8px
-  sm: 12px
-  base: 16px
-  md: 20px
-  lg: 24px
-  xl: 32px
-  xxl: 48px
-  section: 80px
-
+  3xs: "2px"
+  2xs: "4px"
+  xs: "8px"
+  sm: "12px"
+  md: "16px"
+  lg: "24px"
+  xl: "40px"
+  2xl: "64px"
+  3xl: "96px"
 components:
-  top-nav:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.nav-link}"
-    height: 64px
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.button}"
-    rounded: "{rounded.md}"
-    padding: 10px 18px
-    height: 40px
-  button-primary-active:
-    backgroundColor: "{colors.primary-active}"
-    textColor: "{colors.on-primary}"
-    rounded: "{rounded.md}"
+    backgroundColor: "{colors.land-island}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+    padding: "0 24px"
+    height: "48px"
   button-secondary:
-    backgroundColor: "{colors.surface-card}"
+    backgroundColor: "{colors.water-cream}"
     textColor: "{colors.ink}"
-    typography: "{typography.button}"
-    rounded: "{rounded.md}"
-    padding: 9px 17px
-    height: 40px
-  button-tertiary-text:
-    backgroundColor: transparent
+    rounded: "{rounded.pill}"
+    padding: "0 24px"
+    height: "48px"
+  button-secondary-hover:
+    backgroundColor: "{colors.water-shade}"
+  facet-capsule:
+    backgroundColor: "{colors.water-cream}"
     textColor: "{colors.ink}"
-    typography: "{typography.button}"
-  button-download:
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 12px"
+    height: "36px"
+  facet-capsule-selected:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.canvas}"
-    typography: "{typography.button}"
-    rounded: "{rounded.md}"
-    padding: 12px 20px
-    height: 44px
-  hero-band:
-    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.water-cream}"
+  region-pin:
+    backgroundColor: "{colors.water-cream}"
     textColor: "{colors.ink}"
-    typography: "{typography.display-mega}"
-    padding: 80px
-  ide-mockup-card:
-    backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: 0
-  ide-pane:
-    backgroundColor: "{colors.canvas-soft}"
-    textColor: "{colors.body}"
-    typography: "{typography.code}"
-    rounded: "{rounded.md}"
-    padding: 16px
-  feature-card:
-    backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.ink}"
-    typography: "{typography.title-md}"
-    rounded: "{rounded.lg}"
-    padding: 24px
-  comparison-card:
-    backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.lg}"
-    padding: 24px
-  timeline-pill-thinking:
-    backgroundColor: "{colors.timeline-thinking}"
-    textColor: "{colors.ink}"
-    typography: "{typography.caption-uppercase}"
     rounded: "{rounded.pill}"
-    padding: 4px 10px
-  timeline-pill-grep:
-    backgroundColor: "{colors.timeline-grep}"
-    textColor: "{colors.ink}"
-    typography: "{typography.caption-uppercase}"
-    rounded: "{rounded.pill}"
-    padding: 4px 10px
-  timeline-pill-read:
-    backgroundColor: "{colors.timeline-read}"
-    textColor: "{colors.ink}"
-    typography: "{typography.caption-uppercase}"
-    rounded: "{rounded.pill}"
-    padding: 4px 10px
-  timeline-pill-edit:
-    backgroundColor: "{colors.timeline-edit}"
-    textColor: "{colors.ink}"
-    typography: "{typography.caption-uppercase}"
-    rounded: "{rounded.pill}"
-    padding: 4px 10px
-  timeline-pill-done:
-    backgroundColor: "{colors.timeline-done}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.caption-uppercase}"
-    rounded: "{rounded.pill}"
-    padding: 4px 10px
-  code-block:
-    backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.ink}"
-    typography: "{typography.code}"
-    rounded: "{rounded.lg}"
-    padding: 20px
-  pricing-tier-card:
-    backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  pricing-tier-featured:
+    padding: "0 4px 0 16px"
+    height: "40px"
+  region-pin-pressed:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.canvas}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  text-input:
-    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.water-cream}"
+  search-input:
+    backgroundColor: "{colors.water-cream}"
     textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.md}"
-    padding: 12px 16px
-    height: 44px
-  badge-pill:
-    backgroundColor: "{colors.surface-strong}"
-    textColor: "{colors.ink}"
-    typography: "{typography.caption-uppercase}"
     rounded: "{rounded.pill}"
-    padding: 4px 10px
-  cta-band:
-    backgroundColor: "{colors.canvas}"
+    padding: "0 16px 0 40px"
+    height: "44px"
+  nav-link:
     textColor: "{colors.ink}"
-    typography: "{typography.display-lg}"
-    padding: 96px
-  testimonial-card:
-    backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.body}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.lg}"
-    padding: 24px
-  footer:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.body}"
-    typography: "{typography.body-sm}"
-    padding: 64px 48px
-  footer-link:
-    backgroundColor: transparent
-    textColor: "{colors.body}"
-    typography: "{typography.body-sm}"
+    rounded: "{rounded.pill}"
+    padding: "0 16px"
+    height: "40px"
+  nav-link-active:
+    backgroundColor: "{colors.land-island}"
+  type-cap:
+    textColor: "{colors.ink}"
+    typography: "{typography.label-xs}"
+    rounded: "{rounded.pill}"
+    padding: "0 8px"
+    height: "24px"
+  type-cap-entrance-exam:
+    backgroundColor: "{colors.coral}"
+  event-card:
+    backgroundColor: "{colors.water-cream}"
+    rounded: "{rounded.card}"
+    padding: "16px 24px"
+  clash-flag:
+    backgroundColor: "{colors.coral}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+    padding: "4px 12px"
 ---
+
+# Design System: Montreal Secondary Open Days
 
 ## Overview
 
-Cursor's marketing site reads as a quietly-confident developer brand that believes in editorial calm over IDE-darkness. The base canvas is **warm cream** (`{colors.canvas}` — #f7f7f4) holding warm near-black ink (`{colors.ink}` — #26251e) for body and display alike. The single brand voltage is **Cursor Orange** (`{colors.primary}` — #f54e00) reserved for primary CTAs and the wordmark — used scarcely.
+**Creative North Star: "Archipel"**
 
-Type runs **CursorGothic** as the single sans family. Display sits at weight 400 with negative letter-spacing — a magazine-editorial voice rather than tech-bombastic. JetBrains Mono carries every code surface (and code surfaces are roughly half the page).
+The page is water. Greater Montreal is drawn as the archipelago it actually is, from OSM geometry rendered as a self-drawn SVG: flat, unmodulated land lobes, one colour per region, separated by cream rivers. Schools live on that land. The map is not an illustration bolted onto a directory; it *is* the region filter, and every other surface (rows, swatches, counts, the school page band) inherits its colour by region.
 
-The brand's strongest visual signature is the **AI-timeline pill palette**: five pastel pills (peach `{colors.timeline-thinking}`, mint `{colors.timeline-grep}`, blue `{colors.timeline-read}`, lavender `{colors.timeline-edit}`, gold `{colors.timeline-done}`) marking AI-action stages inside in-product timeline visualizations. Used only in product UI — never as system action colors.
+Everything around the map is quiet and ink-drawn: one grotesk family set tight and heavy for titles, hairline sand rules between rows, and capsule controls outlined in ink at 1.5px. Colour is spent almost entirely on land. Coral is the only alarm in the system and it is rationed to what a parent must not miss: entrance exams, clashes, and the school pin. Motion has one voice, a 0.4s overshoot, so selecting a region feels like the land swelling into place rather than a tab switching.
+
+Gaps are shown as gaps. A draft school renders only what is known (name, city, region, sector) with a dashed-outline note, never filler.
 
 **Key Characteristics:**
-- Warm cream canvas, not white. Ink is warm (#26251e), not pure black.
-- Single CTA color: `{colors.primary}` (Cursor Orange #f54e00). Used scarcely.
-- Display weight stays at 400 — never bold. Magazine voice.
-- AI timeline pastels: 5 dedicated tokens for in-product agent action stages.
-- Compact 8px CTA radius — developer dialect.
-- Hairline-only depth; no drop shadows.
-- 80px section rhythm.
+- Cream water ground; flat colour land per region; no gradients, no texture on land.
+- The map is the region filter; region capsules mirror it as the accessible control.
+- Capsule-shaped everything interactive, 1.5px ink outlines, no shadows.
+- One family (Bricolage Grotesque, optical size axis) for display and body.
+- Coral rationed to entrance exams, clashes and the map pin.
+- One motion grammar: 0.4s with a single overshoot.
 
 ## Colors
 
-### Brand & Accent
-- **Cursor Orange** (`{colors.primary}` — #f54e00): Primary CTA pills, wordmark, hero accent. Used scarcely.
-- **Cursor Orange Active** (`{colors.primary-active}` — #d04200): Press state.
+A cream-water ground with four saturated, flat land colours that carry region identity, one ink, and one rationed coral.
 
-### Surface
-- **Canvas** (`{colors.canvas}` — #f7f7f4): Warm cream page floor.
-- **Canvas Soft** (`{colors.canvas-soft}` — #fafaf7): IDE-pane background inside mockups.
-- **Surface Card** (`{colors.surface-card}` — #ffffff): Pure white card surface — slight contrast against the cream canvas.
-- **Surface Strong** (`{colors.surface-strong}` — #e6e5e0): Badges, tag pills.
+### Primary
+- **Ink** (`ink`): text, 1.5px control outlines, selected capsule fill (ink ground, cream text), the strong rule above each agenda day, focus ring.
 
-### Hairlines
-- **Hairline** (`{colors.hairline}` — #e6e5e0): 1px divider.
-- **Hairline Soft** (`{colors.hairline-soft}` — #efeee8): Lighter divider.
-- **Hairline Strong** (`{colors.hairline-strong}` — #cfcdc4): Stronger panel outline.
+### Secondary
+- **Coral** (`coral`): entrance-exam type cap fill, clash flags, clash card outline with a 10% coral wash, the school map pin dot. Nothing else.
 
-### Text
-- **Ink** (`{colors.ink}` — #26251e): Display, body emphasis. Warm near-black.
-- **Body** (`{colors.body}` — #5a5852): Default running-text.
-- **Body Strong** (`{colors.body-strong}` — #26251e): Same as ink.
-- **Muted** (`{colors.muted}` — #807d72): Sub-titles.
-- **Muted Soft** (`{colors.muted-soft}` — #a09c92): Disabled text.
-- **On Primary** (`{colors.on-primary}` — #ffffff): White text on Cursor Orange.
+### Tertiary: the land
+- **Island Green** (`land-island`): Montreal island. Also the primary-button fill and active nav capsule (see the Island Action Rule).
+- **Laval Sun** (`land-laval`): Laval only.
+- **North Shore Lilac** (`land-north`): North Shore only.
+- **South Shore Pond** (`land-south`): South Shore only.
+- **Other Land** (`land-other`): context land outside the four regions; never selectable, never drained.
 
-### Timeline (AI-action signature)
-- **Thinking** (`{colors.timeline-thinking}` — #dfa88f): Peach. Used inside in-product agent timeline only.
-- **Grep** (`{colors.timeline-grep}` — #9fc9a2): Mint.
-- **Read** (`{colors.timeline-read}` — #9fbbe0): Pastel blue.
-- **Edit** (`{colors.timeline-edit}` — #c0a8dd): Lavender.
-- **Done** (`{colors.timeline-done}` — #c08532): Warm gold.
+Region colour travels through a `data-region` attribute that sets `--land`; map lobes, row swatches, pin counts and the school band all read it. Unselected lobes drain to a 42% mix of their land colour into cream (`--drain: 42%`); hovered lobes darken with 12% ink.
 
-### Semantic
-- **Success** (`{colors.semantic-success}` — #1f8a65): Confirmation indicators.
-- **Error** (`{colors.semantic-error}` — #cf2d56): Validation errors.
+### Neutral
+- **Water Cream** (`water-cream`): page ground, the water between lobes, capsule and input fills, pin halo.
+- **Water Shade** (`water-shade`): hover wash for rows, nav, secondary buttons and text buttons; empty-state ground.
+- **Secondary Ink** (`ink-secondary`): lead text, metadata, legends, descriptions, placeholders.
+- **Sand Rule** (`rule-sand`): 1px hairlines between rows and the filter band; resting outline of facet and year capsules and past caps.
+- **Reed** (`muted-reed`): scrollbar thumb only.
+
+### Named Rules
+**The Land Is Identity Rule.** The four land colours mean "this region". Don't use them as decoration, status or category colour.
+
+**The Island Action Rule.** The one sanctioned exception: island green fills the primary button and the active nav capsule. No other land colour does action work.
+
+**The Coral Ration Rule.** Coral marks only entrance exams, clashes and the map pin. If something else turns coral, the alarm stops meaning anything.
+
+**The Cream-Only Secondary Ink Rule.** Secondary ink is legal only on cream grounds (`water-cream`, `water-shade`, the coral wash). It fails contrast on land colours; text on land is always full ink.
 
 ## Typography
 
-### Font Family
-**CursorGothic** is the licensed display + body family. Fallback: `system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif`. Code surfaces switch to **JetBrains Mono**.
+**Display Font:** Bricolage Grotesque (via next/font, `opsz` axis, with system-ui fallback)
+**Body Font:** Bricolage Grotesque (same family)
+
+**Character:** One grotesk carries everything. Optical sizing (`font-optical-sizing: auto`) lets the same family go condensed-and-punchy at display size and open at text size, so no second face is needed.
 
 ### Hierarchy
+- **Display** (700, `clamp(2.5rem, 2.2rem + 2.6vw, 4.5rem)`, 0.95, -0.03em): directory and events page h1, max ~13ch, balanced.
+- **Display Band** (700, `clamp(2.75rem, 1.8rem + 4vw, 5.5rem)`, 0.95): the school name set on its swollen region lobe, max 16ch.
+- **Headline** (700, 2rem, 1.05): section h2 on school and events pages, agenda day headings.
+- **Title** (600, 1.5rem, 1.1): school row names in the directory list.
+- **Title Small** (600, 1.1875rem, 1.2): event headings, year-group headings.
+- **Body** (400, 1rem, 1.55): running text, max 65ch; descriptions 68ch.
+- **Lead** (400, 1.1875rem, 1.45): intro paragraphs in secondary ink, max 44ch.
+- **Label** (500, 0.875rem): capsules, metadata rows, counts. **Label XS** (500, 0.75rem, leading 1) for type caps.
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-mega}` | 72px | 400 | 1.1 | -2.16px | Homepage hero h1 |
-| `{typography.display-lg}` | 36px | 400 | 1.2 | -0.72px | Section heads |
-| `{typography.display-md}` | 26px | 400 | 1.25 | -0.325px | Sub-section heads |
-| `{typography.display-sm}` | 22px | 400 | 1.3 | -0.11px | Card group titles |
-| `{typography.title-md}` | 18px | 600 | 1.4 | 0 | Component titles |
-| `{typography.title-sm}` | 16px | 600 | 1.4 | 0 | List labels |
-| `{typography.body-md}` | 16px | 400 | 1.5 | 0 | Default body |
-| `{typography.body-tracked}` | 16px | 400 | 1.5 | 0.08px | Tracked editorial body |
-| `{typography.body-sm}` | 14px | 400 | 1.5 | 0 | Footer body |
-| `{typography.caption}` | 13px | 400 | 1.4 | 0 | Photo captions |
-| `{typography.caption-uppercase}` | 11px | 600 | 1.4 | 0.88px | Section labels, timeline pill labels |
-| `{typography.code}` | 13px | 400 | 1.5 | 0 | Code blocks — JetBrains Mono |
-| `{typography.button}` | 14px | 500 | 1.0 | 0 | CTA pill labels |
-| `{typography.nav-link}` | 14px | 500 | 1.4 | 0 | Top-nav menu |
+Dates, counts and times use tabular numerals.
 
-### Principles
-- **Display weight stays at 400.** Magazine voice, never bold.
-- **Negative letter-spacing on display only.** -0.11px to -2.16px tracking.
-- **JetBrains Mono on every code surface.**
-
-### Note on Font Substitutes
-CursorGothic is licensed. Open-source substitute: **Inter** at weight 400 with letter-spacing -1.5%. Or **GT Sectra** for a more editorial feel.
+### Named Rules
+**The Two-Step Weight Rule.** h1 and h2 sit at 700 with -0.03em tracking; h3 and list headings drop to 600 so long lists scan. Interface labels are 500. Never synthesize weights (`font-synthesis: none`).
 
 ## Layout
 
-### Spacing System
-- **Base unit:** 4px.
-- **Tokens:** `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.base}` 16px · `{spacing.md}` 20px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 80px.
-- **Section padding:** 80px.
+A 1320px container with a fluid gutter (`clamp(16px, 4vw, 48px)`). The directory opens on a band: intro (5fr) beside the archipelago (7fr), with the map bleeding to the right viewport edge. Below it a hairline-ruled filter strip (search capsule, facet capsule groups), then the school list as full-width rows on a three-column grid (name/description, place, next event at 190px/290px).
 
-### Grid & Container
-- Max content width: ~1200px.
-- Editorial body: 12-column grid.
-- Feature card grids: 2-up at desktop for splits, 3-up for benefits.
-- Footer: 5-column at desktop.
+The school page breaks the container entirely: a full-bleed band (`clamp(340px, 30vw, 440px)` tall) where the school's region lobe swells across and the h1 sits bottom-left on it, aligned to the container's gutter. Below, a main column plus a 340px aside. Events are an agenda: a 240px sticky day heading beside a stack of event cards, each day divided by a 1.5px ink rule.
 
-### Whitespace Philosophy
-Generous editorial pacing — closer to a print magazine than a tech site. The cream canvas has plenty of breathing room; cards within bands sit close (16-24px gap).
+Spacing runs on a 2/4/8/12/16/24/40/64/96 scale; sections are separated by 64-96px, rows breathe at 24px.
+
+Responsive: at 1080px the school row folds to two columns; at 860px the band stacks, region pins leave the map and become a wrapping capsule row under it, school body and agenda go single-column; at 720px the header wraps nav to its own line, filters collapse behind a capsule toggle with a rotating chevron, and the school band becomes a 220px map above a static title.
 
 ## Elevation & Depth
 
-The system uses **hairline-only depth**. No drop shadows, no elevation tiers. Cards float above the canvas via 1px hairlines and the slight white-on-cream contrast.
+Flat. There are no shadows anywhere. Depth comes from the map metaphor itself: land sits on water by colour alone, selected land floods while the rest drains toward cream, and the coral pin sits on a cream halo with an ink stroke. Hover is a tonal wash (`water-shade`) or an outline darkening from sand to ink, never a lift.
 
-| Level | Treatment | Use |
-|---|---|---|
-| Flat (canvas) | `{colors.canvas}` (#f7f7f4) | Body bands, footer |
-| Card | `{colors.surface-card}` (#ffffff) | Content cards |
-| Hairline border | 1px `{colors.hairline}` | Card outlines, dividers |
-| IDE pane | `{colors.canvas-soft}` (#fafaf7) | Inside IDE mockup cards |
-
-### Decorative Depth
-- **IDE-mockup cards** are the only "elevated" element. White card on cream canvas with internal pane structure mimicking the actual Cursor editor.
-- **Timeline pastel pills** add chromatic depth without surface elevation.
+### Named Rules
+**The Flat Land Rule.** Land and surfaces are flat colour. No drop shadows, no gradients, no relief shading on lobes.
 
 ## Shapes
 
-### Border Radius Scale
-
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Reserved |
-| `{rounded.xs}` | 4px | Inline tags |
-| `{rounded.sm}` | 6px | Compact rows |
-| `{rounded.md}` | 8px | CTA buttons, form inputs |
-| `{rounded.lg}` | 12px | Cards, IDE panes |
-| `{rounded.xl}` | 16px | Larger feature cards (rare) |
-| `{rounded.pill}` | 9999px | Timeline pills, badges |
-| `{rounded.full}` | 9999px | Avatars (rare) |
+Two radii: capsules (999px) for every control, cap, flag and pin, and a gently rounded card (16px) for event cards, the draft note and the empty state. Rows are square-edged and divided by hairlines. Outlines are 1.5px (ink when active or primary, sand at rest); rules are 1px sand, except the 1.5px ink rule that opens each agenda day and the past archive. The one organic form is the region swatch: a 14×12px blob with uneven radii, a tiny land lobe beside each school's place.
 
 ## Components
 
-### Top Navigation
-
-**`top-nav`** — Background `{colors.canvas}`, text `{colors.ink}`, height 64px. Layout: Cursor wordmark left, primary horizontal menu (Pricing / Features / Enterprise / Blog / Forum / Careers), Sign In + Download primary CTA right.
-
 ### Buttons
+- **Shape:** capsule (999px), 48px tall, 1.5px ink outline.
+- **Primary:** island-green fill, ink text, weight 500, with a trailing 32px ink circle holding a cream arrow icon that overhangs the right padding.
+- **Hover / Active:** primary darkens 14% toward ink and its arrow chip nudges right and tilts (-8deg) on the overshoot; press scales to 0.97.
+- **Secondary:** transparent with ink outline; hover washes `water-shade`.
+- **Text button:** underlined label, capsule hover wash.
 
-**`button-primary`** — The signature Cursor Orange CTA. Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button}` (14px / 500), padding 10px × 18px, height 40px, rounded `{rounded.md}` (8px).
+### Chips
+- **Facet capsules:** 36px, sand outline, transparent; hover outline turns ink; pressed fills ink with cream text; press scales 0.96.
+- **Year links:** the same grammar at 40px; the current year is ink-filled.
+- **Type caps:** 24px, ink outline, 0.75rem; entrance exams fill coral. Past events revert to sand outline and secondary ink.
+- **Fact caps (school band):** cream capsules sitting on the land; the region cap is ink-filled.
 
-**`button-primary-active`** — Press state. Background `{colors.primary-active}`.
+### Cards / Containers
+- **Event card:** 16px corners, 1.5px sand outline turning ink on hover, 16px/24px padding, no shadow. A clash gets a coral outline and a 10% coral wash plus coral pill flags naming the clashing schools.
+- **Draft note:** 16px corners, 1.5px dashed ink outline.
+- **Empty state:** 16px corners on `water-shade`.
 
-**`button-secondary`** — White card pill on cream canvas. Background `{colors.surface-card}`, text `{colors.ink}`, 1px `{colors.hairline-strong}` border.
+### Inputs / Fields
+- **Search:** 44px capsule, 1.5px ink outline, cream fill, leading 16px search icon in secondary ink.
+- **Focus:** global 2px ink outline, 2px offset. Caret is coral.
 
-**`button-tertiary-text`** — Inline ink text link.
+### Navigation
+- Wordmark at 1.1875rem/500, -0.02em. Nav links are 40px capsules; hover washes `water-shade`, the active page fills island green. The locale switch is an ink-outlined capsule pushed to the right. At 720px nav wraps to its own row.
 
-**`button-download`** — Larger ink-canvas CTA. Background `{colors.ink}`, text `{colors.canvas}`, padding 12px × 20px, height 44px. Used for "Download for macOS" type CTAs.
+### Archipelago Map (signature)
+The SVG map is the region filter. Each region lobe is clickable; selecting one floods it with full land colour and drains the others to 42% into cream, transitioned on `fill` over 0.4s. Region pins sit over the lobes as cream capsules (ink outline, label plus a 30px land-coloured count disc); a pressed pin inverts to ink and its count disc scales to 1.12 on the overshoot. Below 860px the pins leave the map and wrap as a capsule row. On the school page the same map renders the school's region swelled across the band with a coral pin when coordinates exist. Credit for OSM geometry sits in the footer.
 
-### Hero & IDE Mockups
-
-**`hero-band`** — Background `{colors.canvas}`, full-width display headline in `{typography.display-mega}` (72px / 400 / -2.16px), subhead in `{typography.body-md}`, two CTAs (`button-download` + `button-tertiary-text`), and a centered IDE-mockup card below the hero copy.
-
-**`ide-mockup-card`** — A white card containing a multi-pane IDE mockup (sidebar + main editor + chat panel + terminal). Background `{colors.surface-card}`, rounded `{rounded.lg}` (12px), 1px `{colors.hairline}` border, no padding (panes fill the card edge-to-edge).
-
-**`ide-pane`** — Individual IDE pane inside the mockup. Background `{colors.canvas-soft}`, text `{colors.body}` in `{typography.code}` (JetBrains Mono 13px), rounded `{rounded.md}` (8px), padding 16px.
-
-### Cards
-
-**`feature-card`** — Background `{colors.surface-card}`, text `{colors.ink}`, type `{typography.title-md}`, rounded `{rounded.lg}`, padding 24px. 1px `{colors.hairline}` border.
-
-**`comparison-card`** — Side-by-side "Cursor vs other tools" card. Same surface and rounding; internally split into 2 columns.
-
-**`testimonial-card`** — Quote card. Background `{colors.surface-card}`, text `{colors.body}`, rounded `{rounded.lg}`, padding 24px.
-
-### AI Timeline (signature)
-
-**`timeline-pill-thinking`** — Peach pill. Background `{colors.timeline-thinking}`, text `{colors.ink}`, type `{typography.caption-uppercase}` (11px / 600 / 0.88px tracking, uppercase), rounded `{rounded.pill}`, padding 4px × 10px. Marks "Thinking" stage in product timeline.
-
-**`timeline-pill-grep`** — Mint pill. Same shape, background `{colors.timeline-grep}`. Marks "Grepping" stage.
-
-**`timeline-pill-read`** — Pastel-blue pill. Background `{colors.timeline-read}`. Marks "Reading" stage.
-
-**`timeline-pill-edit`** — Lavender pill. Background `{colors.timeline-edit}`. Marks "Editing" stage.
-
-**`timeline-pill-done`** — Gold pill. Background `{colors.timeline-done}`, text `{colors.on-primary}` white. Marks "Done" stage.
-
-### Code
-
-**`code-block`** — Inline code block. Background `{colors.surface-card}`, text `{colors.ink}` in `{typography.code}`, rounded `{rounded.lg}`, padding 20px, 1px `{colors.hairline}` border.
-
-### Pricing
-
-**`pricing-tier-card`** — Background `{colors.surface-card}`, rounded `{rounded.lg}`, padding 32px, 1px `{colors.hairline}` border.
-
-**`pricing-tier-featured`** — Featured tier inverts to ink. Background `{colors.ink}`, text `{colors.canvas}`. Same shape, dark inversion signals "highlighted" without colored ribbon.
-
-### Forms & Tags
-
-**`text-input`** — Background `{colors.surface-card}`, text `{colors.ink}`, rounded `{rounded.md}` (8px), padding 12px × 16px, height 44px.
-
-**`badge-pill`** — Small uppercase pill. Background `{colors.surface-strong}`, text `{colors.ink}`, type `{typography.caption-uppercase}`, rounded `{rounded.pill}`, padding 4px × 10px.
-
-### CTA / Footer
-
-**`cta-band`** — Pre-footer "Try Cursor now" band. Background `{colors.canvas}`, centered display headline in `{typography.display-lg}`, single Cursor Orange CTA. 96px vertical padding.
-
-**`footer`** — Closing footer. Background `{colors.canvas}`, text `{colors.body}`. 5-column link list. 64×48px padding.
-
-**`footer-link`** — Background transparent, text `{colors.body}`, type `{typography.body-sm}`.
+### School Row
+A full-width, hairline-topped row with a stretched link on the name; hover and focus-within wash `water-shade`, focus adds an inset ink outline. Name in Title, two-line clamped description, place with a region swatch blob, and the next event with its type cap and source link.
 
 ## Do's and Don'ts
 
-### Do
-- Reserve `{colors.primary}` (Cursor Orange) for primary CTAs and brand wordmark.
-- Keep display weight at 400. The editorial voice depends on this.
-- Use the cream `{colors.canvas}` page floor — never pure white.
-- Render every code surface (inline, blocks, IDE panes) in JetBrains Mono.
-- Use timeline pastels only inside in-product agent visualizations — never as system action colors.
+### Do:
+- **Do** route all motion through the overshoot easing (`cubic-bezier(0.34, 1.56, 0.64, 1)`) at 0.4s for transforms; colour and fill changes use plain ease at the same 0.4s.
+- **Do** set region colour through `data-region` so lobes, swatches, counts and bands stay in sync.
+- **Do** make every interactive control a capsule with a 1.5px outline: sand at rest, ink when active.
+- **Do** put full ink, never secondary ink, on any land colour.
+- **Do** show missing data as an honest gap in secondary ink.
 
-### Don't
-- Don't introduce a secondary brand action color. Cursor Orange is the only one.
-- Don't drop display to bold weights (700+). Magazine voice depends on 400.
-- Don't add drop shadows. Hairlines + ink-on-cream contrast carry the depth.
-- Don't use timeline pastels on non-timeline UI. They're scoped to the agent timeline only.
-- Don't extract a CTA color from a third-party widget (cookie consent, OneTrust). The brand's CTA is what appears on actual product CTAs.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 640px | Hero h1 72→32px; IDE mockup collapses to single pane preview; feature grid 1-up; nav hamburger. |
-| Tablet | 640–1024px | Hero h1 56px; IDE mockup compresses; feature grid 2-up. |
-| Desktop | 1024–1280px | Full hero h1 72px; full multi-pane IDE mockup; feature grid 3-up. |
-| Wide | > 1280px | Content caps at 1200px. |
-
-### Touch Targets
-- Primary CTA at 40px height — at WCAG AA, padded for AAA.
-- Download CTA at 44px — at AAA.
-
-### Collapsing Strategy
-- Top nav switches to hamburger below 768px.
-- IDE mockup multi-pane collapses to a single primary pane preview on mobile.
-- Feature grid: 3-up → 2-up → 1-up.
-
-## Iteration Guide
-
-1. Focus on a single component at a time.
-2. CTAs default to `{rounded.md}` (8px). Cards use `{rounded.lg}` (12px).
-3. Variants live as separate entries inside `components:`.
-4. Use `{token.refs}` everywhere — never inline hex.
-5. Hover state never documented.
-6. CursorGothic 400 for display, 400/500/600 for body. JetBrains Mono on every code surface.
-7. Cursor Orange stays scarce.
-8. Timeline pastels stay scoped to in-product agent visualizations.
-
-## Known Gaps
-
-- CursorGothic is a licensed typeface; Inter is the substitute.
-- Animation timings (timeline pill entrance, IDE pane reveal) out of scope.
-- In-app surfaces (code editor, chat panel, agent timeline) only partially captured via marketing IDE mockups.
-- Form validation states beyond focus not visible on captured surfaces.
+### Don't:
+- **Don't** use coral for anything but entrance exams, clashes and the map pin.
+- **Don't** use land colours for non-region meaning; island green's button/nav role is the only exception.
+- **Don't** add shadows, gradients or texture to land or surfaces.
+- **Don't** bring in map tiles or a third-party map widget; the archipelago is self-drawn from OSM geometry.
+- **Don't** add a second typeface; Bricolage Grotesque's optical sizes cover display and text.

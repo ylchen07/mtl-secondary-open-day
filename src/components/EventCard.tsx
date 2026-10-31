@@ -2,7 +2,9 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { ClashIcon } from './ClashIcon';
+import { Link } from '@/i18n/navigation';
 import { formatEventRange, formatVerifiedDate } from '@/lib/dates';
+import { mapRegionFor } from '@/lib/regions';
 import { registrationAction } from '@/lib/registration';
 import type { AgendaEvent } from '@/lib/types';
 import type { Locale } from '@/lib/constants';
@@ -27,15 +29,21 @@ export function EventCard({
   const registration = registrationAction(event, past);
 
   return (
-    <article className="agenda-event" data-past={past || undefined} aria-label={past ? t('pastEvent') : undefined}>
+    <article
+      className="agenda-event"
+      data-past={past || undefined}
+      data-clash={clashes.length > 0 || undefined}
+      data-region={mapRegionFor(event.school.region)}
+      aria-label={past ? t('pastEvent') : undefined}
+    >
       <p className="event-time">{formatEventRange(event, locale) ?? t('timeNotPublished')}</p>
       <div className="event-content">
         <div className="event-heading">
-          <h4>{schoolName}</h4>
-          <span className="event-type">{past ? t('pastEvent') : tType(event.type)}</span>
+          <h4><Link href={`/schools/${event.school.slug}`}>{schoolName}</Link></h4>
+          <span className="event-type type-cap" data-type={past ? undefined : event.type}>{past ? t('pastEvent') : tType(event.type)}</span>
         </div>
         <ul className="event-details" aria-label={t('schoolDetails')}>
-          <li>{event.school.city}</li>
+          <li className="event-place"><span className="region-swatch" aria-hidden="true" />{event.school.city}</li>
           <li>{tLanguage(event.school.language)}</li>
           <li>{tGender(event.school.gender)}</li>
           <li>{tSector(event.school.sector)}</li>

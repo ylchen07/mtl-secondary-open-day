@@ -18,9 +18,10 @@ the conflicts.
 **v1 implementation complete.**
 
 The site features:
-- `/en` and `/fr` open on a **Schools** list: every school on file, published or draft, with its next confirmed event or "No upcoming event observed" and a link to its admissions page. Draft schools show only confirmed facts (name, city, sector); their unconfirmed language and student body are hidden and never match a filter
-- A **Calendar** tab (`?view=calendar`) lists upcoming open houses, entrance exams and admission interviews by day, with conflict detection and the past-events archive; filters apply to both tabs and live in the URL
-- One page per school year (entry cohort): `/en` shows the year currently recruiting, `/en/2027-2028` pins a year; unknown years 404
+- `/en` and `/fr` open on the **school directory**: every school on file, published or draft, over a map of Greater Montreal whose regions (Montreal Island, Laval, North Shore, South Shore) filter the list. Each row shows the school's short description when one exists, its city and region, and its next confirmed event or "No upcoming event observed". Draft schools show only confirmed facts (name, city, region, sector); their unconfirmed language, student body, description and address are hidden and never match a filter
+- `/en/schools/<slug>`: one page per school with its region on the map (a pin when coordinates are confirmed), description, address, admissions and website links, and every published event grouped by school year, with clashes flagged
+- `/en/events`: admissions events for the school year currently recruiting, by day, with conflict detection and the past-events archive; `/en/events/2027-2028` pins a year and unknown years 404. Filters live in the URL. Old links (`/en/2027-2028`, `/en?view=calendar`) redirect here
+- The map is drawn from committed OpenStreetMap geometry in `data/geo/greater-montreal.json` (regenerate with `pnpm map:build`); visitors' browsers never contact a map tile server
 - Admission interviews may be date-only (`starts_on`/`ends_on`, inclusive) when the school publishes a day or window but no clock times; every other event type still needs `starts_at`/`ends_at`
 - School and event data hand-curated and verified against official sources in `data/schools/`
 - Reads directly from those git-committed JSON files — no database

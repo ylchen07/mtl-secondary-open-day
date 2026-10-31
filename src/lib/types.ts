@@ -28,18 +28,24 @@ export type SchoolRow = {
 };
 
 /**
- * A school on file, as the school list shows it. Language, student body and
- * boarding are only confirmed on a published record; on a draft they hold the
+ * A school on file, as the directory and school page show it. Language,
+ * student body, boarding, description, street address, coordinates and tuition
+ * are only confirmed on a published record; on a draft they hold the
  * curator's best guess, so they are null here rather than shown as fact.
  */
 export type SchoolListing = Pick<
   SchoolRow,
-  'id' | 'slug' | 'name_en' | 'name_fr' | 'city' | 'region' | 'sector' | 'admissions_url' | 'programs' | 'last_verified_at'
+  'id' | 'slug' | 'name_en' | 'name_fr' | 'city' | 'region' | 'sector' | 'admissions_url' | 'website_url' | 'programs' | 'last_verified_at'
 > & {
   confirmed: boolean;
   language: SchoolRow['language'] | null;
   gender: SchoolRow['gender'] | null;
   has_boarding: boolean | null;
+  description_en: string | null;
+  description_fr: string | null;
+  address: string | null;
+  location: { lat: number; lng: number; precision: 'exact' | 'approximate' } | null;
+  tuition_annual_cad: number | null;
 };
 
 export type OpenDayRow = {

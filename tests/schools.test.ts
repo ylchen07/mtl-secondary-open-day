@@ -8,9 +8,10 @@ const NOW = new Date('2026-10-29T12:00:00Z');
 function listing(over: Partial<SchoolListing> = {}): SchoolListing {
   return {
     id: 'a', slug: 'a', name_en: 'Alpha', name_fr: 'Alpha', city: 'Montréal',
-    region: 'montreal_island', sector: 'private', admissions_url: 'https://a.qc.ca',
+    region: 'montreal_island', sector: 'private', admissions_url: 'https://a.qc.ca', website_url: 'https://a.qc.ca',
     programs: [], last_verified_at: '2026-10-29', confirmed: true,
-    language: 'fr', gender: 'girls', has_boarding: null, ...over,
+    language: 'fr', gender: 'girls', has_boarding: null, description_en: null, description_fr: null,
+    address: null, location: null, tuition_annual_cad: null, ...over,
   };
 }
 

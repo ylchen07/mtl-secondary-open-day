@@ -1,0 +1,383 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-31T00:00:00Z",
+  "title": "Design System: Montreal Secondary Open Days",
+  "extensions": {
+    "colorMeta": {
+      "water-cream": {
+        "role": "neutral",
+        "displayName": "Water Cream",
+        "canonical": "#F5F1E4",
+        "tonalRamp": [
+          "#302C1C",
+          "#544B2B",
+          "#7B6B38",
+          "#A48D41",
+          "#C0AB67",
+          "#D0C49F",
+          "#E3DECF",
+          "#F5F4F0"
+        ]
+      },
+      "water-shade": {
+        "role": "neutral",
+        "displayName": "Water Shade",
+        "canonical": "#ECE5CF",
+        "tonalRamp": [
+          "#302B1D",
+          "#534A2C",
+          "#796A3A",
+          "#A18B44",
+          "#BEAA6A",
+          "#CEC3A1",
+          "#E2DECF",
+          "#F5F4F0"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "#2C2E2A",
+        "tonalRamp": [
+          "#262725",
+          "#40423E",
+          "#595D56",
+          "#73786E",
+          "#94988F",
+          "#B8BAB5",
+          "#D9DAD8",
+          "#F2F3F2"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#575A50",
+        "tonalRamp": [
+          "#272825",
+          "#41423D",
+          "#5B5E55",
+          "#75796C",
+          "#969A8E",
+          "#B9BBB5",
+          "#D9DAD7",
+          "#F2F3F2"
+        ]
+      },
+      "rule-sand": {
+        "role": "neutral",
+        "displayName": "Sand Rule",
+        "canonical": "#D9D1B8",
+        "tonalRamp": [
+          "#2D2A20",
+          "#4D4732",
+          "#6F6543",
+          "#938452",
+          "#B1A377",
+          "#C8C0A8",
+          "#DFDCD2",
+          "#F4F3F0"
+        ]
+      },
+      "muted-reed": {
+        "role": "neutral",
+        "displayName": "Reed",
+        "canonical": "#8C8A7C",
+        "tonalRamp": [
+          "#282725",
+          "#43423D",
+          "#5E5D54",
+          "#7A786C",
+          "#9A998E",
+          "#BBBAB4",
+          "#DADAD7",
+          "#F3F3F2"
+        ]
+      },
+      "coral": {
+        "role": "secondary",
+        "displayName": "Coral",
+        "canonical": "#FF705D",
+        "tonalRamp": [
+          "#3C1510",
+          "#6C1E13",
+          "#A22110",
+          "#DF2007",
+          "#F54A33",
+          "#EC8F83",
+          "#EFC8C3",
+          "#F8EEEC"
+        ]
+      },
+      "land-island": {
+        "role": "tertiary",
+        "displayName": "Island Green",
+        "canonical": "#8ED462",
+        "tonalRamp": [
+          "#23331A",
+          "#3A5926",
+          "#508330",
+          "#65B035",
+          "#87CB5D",
+          "#B1D69A",
+          "#D6E5CC",
+          "#F1F6EF"
+        ]
+      },
+      "land-laval": {
+        "role": "tertiary",
+        "displayName": "Laval Sun",
+        "canonical": "#F5E211",
+        "tonalRamp": [
+          "#3B3712",
+          "#696217",
+          "#9D9116",
+          "#D6C510",
+          "#EDDE3B",
+          "#E8E087",
+          "#EDEAC4",
+          "#F8F7ED"
+        ]
+      },
+      "land-north": {
+        "role": "tertiary",
+        "displayName": "North Shore Lilac",
+        "canonical": "#EBC1FF",
+        "tonalRamp": [
+          "#2E103C",
+          "#50136C",
+          "#7310A2",
+          "#9907DF",
+          "#B633F5",
+          "#CA83EC",
+          "#E1C3EF",
+          "#F4ECF8"
+        ]
+      },
+      "land-south": {
+        "role": "tertiary",
+        "displayName": "South Shore Pond",
+        "canonical": "#2BA0FF",
+        "tonalRamp": [
+          "#10293C",
+          "#13446C",
+          "#1061A2",
+          "#077EDF",
+          "#339EF5",
+          "#83BDEC",
+          "#C3DBEF",
+          "#ECF3F8"
+        ]
+      },
+      "land-other": {
+        "role": "tertiary",
+        "displayName": "Other Land",
+        "canonical": "#E2DBC4",
+        "tonalRamp": [
+          "#2E2A1F",
+          "#4F4831",
+          "#726740",
+          "#98864E",
+          "#B5A673",
+          "#CAC1A6",
+          "#E0DDD1",
+          "#F4F3F0"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Directory and events h1."
+      },
+      "display-band": {
+        "displayName": "Display Band",
+        "purpose": "School name set on its region lobe."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section h2, agenda day headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "School row names."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "Event and year-group headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, 65ch."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Intro paragraphs in secondary ink."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Capsules, metadata, counts."
+      },
+      "label-xs": {
+        "displayName": "Label XS",
+        "purpose": "Type caps."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-overshoot",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "The world's one motion grammar: transforms on pins, buttons, capsules, chevrons."
+      },
+      {
+        "name": "move",
+        "value": "0.4s",
+        "purpose": "Duration for every transition; colour/fill changes use plain ease."
+      },
+      {
+        "name": "drain",
+        "value": "42%",
+        "purpose": "Land-into-cream mix for unselected lobes."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1080px"
+      },
+      {
+        "name": "tablet",
+        "value": "860px"
+      },
+      {
+        "name": "mobile",
+        "value": "720px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Island-green capsule with trailing ink arrow chip; the main action.",
+      "html": "<button class=\"ds-btn-primary\">Admissions page<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-btn-primary{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:0 24px;border:1.5px solid var(--color-ink);border-radius:999px;background:var(--land-island);color:var(--color-ink);font:500 1rem/1 inherit;cursor:pointer;transition:transform var(--move) var(--ease-overshoot),background-color var(--move) ease;}.ds-btn-primary svg{width:32px;height:32px;margin-right:-16px;padding:7px;border-radius:50%;background:var(--color-ink);color:var(--color-paper);transition:transform var(--move) var(--ease-overshoot);}.ds-btn-primary:hover{background:color-mix(in oklab,var(--land-island) 86%,var(--color-ink));}.ds-btn-primary:hover svg{transform:translateX(3px) rotate(-8deg);}.ds-btn-primary:active{transform:scale(0.97);} :focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ink-outlined transparent capsule.",
+      "html": "<button class=\"ds-btn-secondary\">Add to calendar</button>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-btn-secondary{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border:1.5px solid var(--color-ink);border-radius:999px;background:transparent;color:var(--color-ink);font:500 1rem/1 inherit;cursor:pointer;transition:transform var(--move) var(--ease-overshoot),background-color var(--move) ease;}.ds-btn-secondary:hover{background:var(--color-paper-2);}.ds-btn-secondary:active{transform:scale(0.97);} :focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "search-input",
+      "description": "Capsule search with leading icon.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M20 20l-4-4\"/></svg><input class=\"ds-search-input\" placeholder=\"Search schools\"></label>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-search{position:relative;display:block;width:300px;}.ds-search svg{position:absolute;left:16px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--color-ink-2);}.ds-search-input{width:100%;box-sizing:border-box;min-height:44px;padding:0 16px 0 40px;border:1.5px solid var(--color-ink);border-radius:999px;background:var(--color-paper);color:var(--color-ink);font:inherit;caret-color:var(--color-coral);}.ds-search-input::placeholder{color:var(--color-ink-2);} :focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Wordmark, capsule nav links (active = island green), outlined locale switch.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-wordmark\">Open Days</span><a class=\"ds-nav-link\" data-active href=\"#\">Schools</a><a class=\"ds-nav-link\" href=\"#\">Events</a><a class=\"ds-locale\" href=\"#\">FR</a></nav>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-nav{display:flex;align-items:center;gap:4px;min-height:72px;color:var(--color-ink);}.ds-wordmark{margin-right:20px;font-size:1.1875rem;font-weight:500;letter-spacing:-0.02em;}.ds-nav-link,.ds-locale{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;font-weight:500;color:inherit;text-decoration:none;transition:background-color var(--move) ease;}.ds-nav-link:hover,.ds-locale:hover{background:var(--color-paper-2);}.ds-nav-link[data-active]{background:var(--land-island);}.ds-locale{margin-left:auto;border:1.5px solid var(--color-ink);} :focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}"
+    },
+    {
+      "name": "Facet Capsules",
+      "kind": "chip",
+      "refersTo": "facet-capsule",
+      "description": "Sand-outlined filter capsules; pressed fills ink.",
+      "html": "<div class=\"ds-facets\"><button class=\"ds-facet\" aria-pressed=\"true\">Public</button><button class=\"ds-facet\" aria-pressed=\"false\">Private</button></div>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-facets{display:flex;gap:4px;}.ds-facet{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1.5px solid var(--color-rule);border-radius:999px;background:transparent;color:var(--color-ink);font:0.875rem/1 inherit;cursor:pointer;transition:border-color var(--move) ease,background-color var(--move) ease,transform var(--move) var(--ease-overshoot);}.ds-facet:hover{border-color:var(--color-ink);}.ds-facet:active{transform:scale(0.96);}.ds-facet[aria-pressed=\"true\"]{border-color:var(--color-ink);background:var(--color-ink);color:var(--color-paper);} :focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}"
+    },
+    {
+      "name": "Type Caps",
+      "kind": "chip",
+      "refersTo": "type-cap",
+      "description": "Event-type capsule; entrance exams fill coral.",
+      "html": "<span class=\"ds-cap\">Open house</span> <span class=\"ds-cap\" data-type=\"entrance_exam\">Entrance exam</span>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-cap{display:inline-flex;align-items:center;min-height:24px;padding:0 8px;border:1.5px solid var(--color-ink);border-radius:999px;font-size:0.75rem;font-weight:500;line-height:1;color:var(--color-ink);}.ds-cap[data-type=\"entrance_exam\"]{border-color:var(--color-coral);background:var(--color-coral);}"
+    },
+    {
+      "name": "Region Pin",
+      "kind": "custom",
+      "refersTo": "region-pin",
+      "description": "Map-overlaid region capsule with land-coloured count disc; mirrors the lobe filter.",
+      "html": "<button class=\"ds-pin\" aria-pressed=\"false\" style=\"--land:#F5E211\">Laval<span class=\"ds-pin-count\">4</span></button> <button class=\"ds-pin\" aria-pressed=\"true\" style=\"--land:#8ED462\">Montreal<span class=\"ds-pin-count\">28</span></button>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-pin{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 4px 0 16px;border:1.5px solid var(--color-ink);border-radius:999px;background:var(--color-paper);color:var(--color-ink);font:500 1rem/1 inherit;cursor:pointer;transition:transform var(--move) var(--ease-overshoot),background-color var(--move) ease,color var(--move) ease;}.ds-pin:hover{transform:scale(1.05);}.ds-pin:active{transform:scale(0.97);}.ds-pin[aria-pressed=\"true\"]{background:var(--color-ink);color:var(--color-paper);}.ds-pin-count{display:grid;place-items:center;min-width:30px;height:30px;padding:0 4px;box-sizing:border-box;border-radius:999px;background:var(--land);color:var(--color-ink);font-size:0.875rem;font-variant-numeric:tabular-nums;transition:transform var(--move) var(--ease-overshoot);}.ds-pin[aria-pressed=\"true\"] .ds-pin-count{transform:scale(1.12);} :focus-visible{outline:2px solid var(--color-ink);outline-offset:2px;}"
+    },
+    {
+      "name": "Event Card (clash)",
+      "kind": "card",
+      "refersTo": "event-card",
+      "description": "Agenda event card; a clash gets coral outline, 10% wash and coral flag.",
+      "html": "<article class=\"ds-event\"><span class=\"ds-time\">9:00</span><div><h4>Open house, Collège Exemple</h4><span class=\"ds-clash\">Clashes with École Modèle</span></div></article><article class=\"ds-event\" data-clash><span class=\"ds-time\">9:30</span><div><h4>Entrance exam, École Modèle</h4><span class=\"ds-clash\">Clashes with Collège Exemple</span></div></article>",
+      "css": ":host{--color-paper:#F5F1E4;--color-paper-2:#ECE5CF;--color-ink:#2C2E2A;--color-ink-2:#575A50;--color-rule:#D9D1B8;--color-coral:#FF705D;--land-island:#8ED462;--land-laval:#F5E211;--land-north:#EBC1FF;--land-south:#2BA0FF;--ease-overshoot:cubic-bezier(0.34,1.56,0.64,1);--move:0.4s;font-family:'Bricolage Grotesque',system-ui,sans-serif;} .ds-event{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:16px 24px;margin-bottom:12px;border:1.5px solid var(--color-rule);border-radius:16px;background:var(--color-paper);color:var(--color-ink);transition:border-color var(--move) ease;}.ds-event:hover{border-color:var(--color-ink);}.ds-event h4{margin:0 0 8px;font-size:1.1875rem;font-weight:600;letter-spacing:-0.03em;}.ds-time{font-weight:600;font-variant-numeric:tabular-nums;}.ds-clash{display:none;padding:4px 12px;border-radius:999px;background:var(--color-coral);font-size:0.875rem;font-weight:500;}.ds-event[data-clash]{border-color:var(--color-coral);background:color-mix(in oklab,var(--color-coral) 10%,var(--color-paper));}.ds-event[data-clash] .ds-clash{display:inline-flex;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Archipel",
+    "overview": "The page is water. Greater Montreal is drawn as the archipelago it actually is, from OSM geometry rendered as a self-drawn SVG: flat, unmodulated land lobes, one colour per region, separated by cream rivers. Schools live on that land. The map is not an illustration bolted onto a directory; it *is* the region filter, and every other surface (rows, swatches, counts, the school page band) inherits its colour by region.\n\nEverything around the map is quiet and ink-drawn: one grotesk family set tight and heavy for titles, hairline sand rules between rows, and capsule controls outlined in ink at 1.5px. Colour is spent almost entirely on land. Coral is the only alarm in the system and it is rationed to what a parent must not miss: entrance exams, clashes, and the school pin. Motion has one voice, a 0.4s overshoot, so selecting a region feels like the land swelling into place rather than a tab switching.\n\nGaps are shown as gaps. A draft school renders only what is known (name, city, region, sector) with a dashed-outline note, never filler.",
+    "keyCharacteristics": [
+      "Cream water ground; flat colour land per region; no gradients, no texture on land.",
+      "The map is the region filter; region capsules mirror it as the accessible control.",
+      "Capsule-shaped everything interactive, 1.5px ink outlines, no shadows.",
+      "One family (Bricolage Grotesque, optical size axis) for display and body.",
+      "Coral rationed to entrance exams, clashes and the map pin.",
+      "One motion grammar: 0.4s with a single overshoot."
+    ],
+    "rules": [
+      {
+        "name": "The Land Is Identity Rule",
+        "body": "The four land colours mean \"this region\". Don't use them as decoration, status or category colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Island Action Rule",
+        "body": "The one sanctioned exception: island green fills the primary button and the active nav capsule. No other land colour does action work.",
+        "section": "colors"
+      },
+      {
+        "name": "The Coral Ration Rule",
+        "body": "Coral marks only entrance exams, clashes and the map pin. If something else turns coral, the alarm stops meaning anything.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cream-Only Secondary Ink Rule",
+        "body": "Secondary ink is legal only on cream grounds (`water-cream`, `water-shade`, the coral wash). It fails contrast on land colours; text on land is always full ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Step Weight Rule",
+        "body": "h1 and h2 sit at 700 with -0.03em tracking; h3 and list headings drop to 600 so long lists scan. Interface labels are 500. Never synthesize weights (`font-synthesis: none`).",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Land Rule",
+        "body": "Land and surfaces are flat colour. No drop shadows, no gradients, no relief shading on lobes.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** route all motion through the overshoot easing (`cubic-bezier(0.34, 1.56, 0.64, 1)`) at 0.4s for transforms; colour and fill changes use plain ease at the same 0.4s.",
+      "**Do** set region colour through `data-region` so lobes, swatches, counts and bands stay in sync.",
+      "**Do** make every interactive control a capsule with a 1.5px outline: sand at rest, ink when active.",
+      "**Do** put full ink, never secondary ink, on any land colour.",
+      "**Do** show missing data as an honest gap in secondary ink."
+    ],
+    "donts": [
+      "**Don't** use coral for anything but entrance exams, clashes and the map pin.",
+      "**Don't** use land colours for non-region meaning; island green's button/nav role is the only exception.",
+      "**Don't** add shadows, gradients or texture to land or surfaces.",
+      "**Don't** bring in map tiles or a third-party map widget; the archipelago is self-drawn from OSM geometry.",
+      "**Don't** add a second typeface; Bricolage Grotesque's optical sizes cover display and text."
+    ]
+  }
+}

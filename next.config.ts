@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     '/*': ['./data/schools/**/*.json'],
   },
+  // School years used to live at /en/2027-2028; they moved under /events.
+  async redirects() {
+    return [
+      {
+        source: '/:locale(en|fr)/:year(\\d{4}-\\d{4})',
+        destination: '/:locale/events/:year',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

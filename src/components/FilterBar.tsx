@@ -12,7 +12,7 @@ const FACET_OPTIONS = {
   type: EVENT_TYPES,
 } as const;
 
-type Facet = keyof typeof FACET_OPTIONS;
+export type Facet = keyof typeof FACET_OPTIONS;
 
 const NAMESPACE: Record<Facet, string> = {
   language: 'language',
@@ -24,9 +24,11 @@ const NAMESPACE: Record<Facet, string> = {
 
 export function FilterBar({
   filters,
+  facets,
   onChange,
 }: {
   filters: FilterState;
+  facets: Facet[];
   onChange: (next: FilterState) => void;
 }) {
   const t = useTranslations('filters');
@@ -58,7 +60,7 @@ export function FilterBar({
         />
       </label>
 
-      {(Object.keys(FACET_OPTIONS) as Facet[]).map((facet) => (
+      {facets.map((facet) => (
         <FacetGroup
           key={facet}
           facet={facet}

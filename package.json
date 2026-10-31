@@ -14,7 +14,8 @@
     "check:sources": "tsx scripts/check-sources.ts",
     "harvest": "tsx scripts/harvest-feep.ts",
     "test:e2e": "playwright test",
-    "update:scan": "tsx scripts/update-scan.ts"
+    "update:scan": "tsx scripts/update-scan.ts",
+    "map:build": "tsx scripts/build-map.ts"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,8 @@
     "@eslint/eslintrc": "^3.3.6",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
+    "@turf/turf": "^7.4.0",
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^26.4.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
@@ -41,6 +44,7 @@
     "dotenv": "^17.4.2",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.3",
+    "osmtogeojson": "3.0.0-beta.5",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
