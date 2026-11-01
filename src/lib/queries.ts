@@ -1,20 +1,10 @@
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
 import { agendaWindowEnd, eventBounds } from './dates';
+import { SCHOOL_FILES } from './school-files.generated';
 import { validateSchoolFiles, type SchoolFile } from './schema';
 import type { AgendaEvent, SchoolListing, SchoolRow } from './types';
 
-const DATA_DIR = join(process.cwd(), 'data', 'schools');
-
 function loadSchools(): SchoolFile[] {
-  const files = readdirSync(DATA_DIR)
-    .filter((name) => name.endsWith('.json'))
-    .map((name) => {
-      const path = join(DATA_DIR, name);
-      return { path, json: JSON.parse(readFileSync(path, 'utf8')) as unknown };
-    });
-
-  const { ok, errors } = validateSchoolFiles(files);
+  const { ok, errors } = validateSchoolFiles(SCHOOL_FILES);
   if (errors.length > 0) {
     throw new Error(`Invalid school data:\n${errors.join('\n')}`);
   }
@@ -104,10 +94,11 @@ function toSchoolRow(school: SchoolFile): SchoolRow {
  * three-calendar-month Montreal window, each with its published school.
  * The result is shipped to the browser once; filtering happens there.
  *
- * Git is the only source of truth: this reads data/schools/*.json directly,
- * the same files scripts/check-sources.ts and the data-integrity tests
- * validate. There is no database — every deploy already rebuilds from
- * whatever was last merged, so there is nothing to seed or keep in sync.
+ * Git is the only source of truth: this reads data/schools/*.json, compiled
+ * into the bundle through school-files.generated.ts, the same files
+ * scripts/check-sources.ts and the data-integrity tests validate. There is no
+ * database — every deploy already rebuilds from whatever was last merged, so
+ * there is nothing to seed or keep in sync.
  */
 export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]> {
   const windowEndMs = agendaWindowEnd(now).getTime();

@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "pnpm data:index && next dev",
+    "build": "pnpm data:index && next build",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "preview:cloudflare": "opennextjs-cloudflare build && wrangler dev",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "typecheck": "pnpm data:index && tsc --noEmit",
+    "test": "pnpm data:index && vitest run",
+    "data:index": "tsx scripts/build-school-index.ts",
+    "test:watch": "pnpm data:index && vitest",
     "check:sources": "tsx scripts/check-sources.ts",
     "harvest": "tsx scripts/harvest-feep.ts",
     "test:e2e": "playwright test",
@@ -24,7 +27,7 @@
   "dependencies": {
     "@date-fns/tz": "^1.5.0",
     "date-fns": "^4.4.0",
-    "next": "^16.3.3",
+    "next": "^16.4.3",
     "next-intl": "^4.14.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -32,6 +35,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
+    "@opennextjs/cloudflare": "1.20.15",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@turf/turf": "^7.4.0",
@@ -43,13 +47,14 @@
     "cheerio": "^1.2.0",
     "dotenv": "^17.4.2",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.3.3",
+    "eslint-config-next": "^16.4.3",
     "osmtogeojson": "3.0.0-beta.5",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
     "typescript": "^6.0.3",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.11",
+    "wrangler": "4.156.0"
   }
 }

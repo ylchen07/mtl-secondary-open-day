@@ -8,6 +8,8 @@ const config = [
       'out/**',
       'dist/**',
       '.superpowers/**',
+      '.open-next/**',
+      '.wrangler/**',
     ],
   },
   ...nextConfig,
