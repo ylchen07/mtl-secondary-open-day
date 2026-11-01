@@ -77,8 +77,14 @@ Next.js 16 · React 19 · TypeScript · Tailwind v4 · next-intl (EN/FR) · depl
 
 ## Deploying
 
-- **Vercel** builds every push to `main` with `pnpm build`.
-- **Cloudflare Workers** (Workers Builds, connected to this repo) uses the [OpenNext adapter](https://opennext.js.org/cloudflare): build command `pnpm build:cloudflare`, deploy command `npx wrangler deploy` (config in `wrangler.jsonc` and `open-next.config.ts`). Preview the Worker locally with `pnpm preview:cloudflare`.
+Every host runs `pnpm` scripts only; the app itself is always built by `pnpm build`.
+
+| Host | Install | Build | Deploy |
+|---|---|---|---|
+| Vercel (set in `vercel.json`) | `pnpm install --frozen-lockfile` | `pnpm build` | automatic |
+| Cloudflare Workers Builds (set in the dashboard: Worker → Settings → Build) | automatic (pnpm, from the lockfile) | `pnpm build:cloudflare` | `pnpm deploy:cloudflare` |
+
+- `pnpm build:cloudflare` runs the [OpenNext adapter](https://opennext.js.org/cloudflare), which calls `pnpm build` and packages the result as a Worker (config in `wrangler.jsonc` and `open-next.config.ts`). Preview the Worker locally with `pnpm preview:cloudflare`.
 - A Worker has no filesystem, so school data is compiled into the bundle: `pnpm data:index` writes `src/lib/school-files.generated.ts` (gitignored) from `data/schools/*.json`, and runs automatically before `dev`, `build`, `typecheck` and `test`.
 - `src/middleware.ts` stays on Next's older `middleware` convention on purpose: Next 16's `proxy.ts` runs on Node.js, which OpenNext supports on Cloudflare only experimentally.
 
