@@ -42,7 +42,7 @@ main:focus { outline: none; }
 .map-pin-dot { fill: var(--color-coral); stroke: var(--color-ink); stroke-width: 2px; vector-effect: non-scaling-stroke; }
 
 /* Directory: the map is the region filter */
-.directory-band { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-xl); align-items: center; margin-right: calc(50% - 50vw); }
+.directory-band { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-xl); align-items: center; }
 .band-intro { display: grid; gap: var(--space-lg); padding-block: var(--space-xl); }
 .band-intro h1 { font-size: var(--text-display); line-height: 0.95; max-width: 13ch; text-wrap: balance; }
 .lead { color: var(--color-ink-2); max-width: 44ch; }
