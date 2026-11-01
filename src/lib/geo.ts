@@ -13,12 +13,16 @@ export function project(lat: number, lng: number): { x: number; y: number } {
   return { x: (lng - minLng) * kx, y: (maxLat - lat) * ky };
 }
 
-/** Where each region's name sits: an inland point clear of the coast. */
+/**
+ * Where each region's name sits: an inland point clear of the coast. The
+ * shores sit far enough from the directory map's edges that their buttons
+ * stay inside it at every desktop width, in both languages.
+ */
 const REGION_ANCHORS: Record<MapRegion, { x: number; y: number }> = {
   montreal_island: project(45.505, -73.7),
   laval: project(45.6, -73.76),
-  north_shore: project(45.705, -73.93),
-  south_shore: project(45.455, -73.4),
+  north_shore: project(45.705, -73.844),
+  south_shore: project(45.455, -73.454),
 };
 
 /** Each region's label position inside `view`, as CSS percentages. */
