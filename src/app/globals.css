@@ -2,12 +2,7 @@
 @import "./tokens.css";
 @import "./base.css";
 
-html, body { overflow-x: clip; }
 body { font-optical-sizing: auto; }
-/* Page and section titles carry the display weight; list headings stay a step lighter to scan. */
-h3 { font-weight: 600; }
-::selection { background: var(--color-sun); color: var(--color-ink); }
-.sr-only, .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* Region colour travels with data-region: map lobes, rows, pins, swatches. */
 [data-region="montreal_island"] { --land: var(--land-island); }
@@ -271,9 +266,12 @@ main:focus { outline: none; }
   .day-heading { position: static; }
   .archive-summary { grid-template-columns: minmax(0, 1fr) auto; }
   .archive-summary time { grid-column: 1 / -1; }
-  .school-band { height: auto; display: grid; }
-  .band-map { position: relative; inset: auto; height: 220px; }
-  .band-title { position: static; padding: var(--space-md) var(--gutter) 0; }
+  /* Zoom into the crop: the school (or region centre) sits near the top, the name on the land below it.
+     The geometry runs past the crop, so the map draws outside its box and the band clips it: a tall
+     name never runs off the land. */
+  .school-band { --zoom: 4.4; display: grid; align-content: end; height: auto; min-height: 380px; padding: 172px var(--gutter) var(--space-lg); overflow: hidden; }
+  .band-map { inset: auto; overflow: visible; width: calc(100% * var(--zoom)); height: calc(100vw * var(--zoom) / var(--view-aspect)); left: calc(50% - 100% * var(--zoom) * var(--focus-x)); top: calc(88px - 100vw * var(--zoom) / var(--view-aspect) * var(--focus-y)); }
+  .band-title { position: relative; left: auto; right: auto; bottom: auto; }
   .school-event { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
   .map-credit { margin-left: 0; }
 }

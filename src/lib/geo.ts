@@ -43,16 +43,22 @@ function pathBox(d: string): Box {
 
 /**
  * A crop of the map at `aspect` (width / height) that lets one region swell
- * across the frame, its coast leaving the edges, centred on `focus` when the
- * school's position is known. Clamped so the frame never shows past the data.
+ * across the frame, its coast leaving the edges, centred on the school when
+ * its position is known. Clamped so the frame never shows past the data.
+ * `focus` is where that centre lands inside the crop, as fractions of its
+ * width and height, so a narrow screen can zoom in around it.
  */
-export function regionCrop(region: MapRegion, aspect: number, focus?: { x: number; y: number }): Box {
+export function regionCrop(
+  region: MapRegion,
+  aspect: number,
+  location?: { lat: number; lng: number } | null,
+): { view: Box; focus: { x: number; y: number } } {
   const box = pathBox(MAP_PATHS[region]);
   // The shores run off the data's edge, so their visible land is smaller than their box.
   const w = Math.min(MAP_W, region === 'montreal_island' || region === 'laval' ? box.w * 1.15 : box.w * 0.8);
   const h = Math.min(MAP_H, w / aspect);
-  const centre = focus ?? REGION_ANCHORS[region];
+  const centre = location ? project(location.lat, location.lng) : REGION_ANCHORS[region];
   const x = Math.max(0, Math.min(MAP_W - w, centre.x - w / 2));
   const y = Math.max(0, Math.min(MAP_H - h, centre.y - h / 2));
-  return { x, y, w, h };
+  return { view: { x, y, w, h }, focus: { x: (centre.x - x) / w, y: (centre.y - y) / h } };
 }

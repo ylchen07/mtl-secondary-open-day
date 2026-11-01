@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ClashIcon } from '@/components/ClashIcon';
@@ -7,13 +8,16 @@ import { routing } from '@/i18n/routing';
 import { findClashes } from '@/lib/clash';
 import type { Locale } from '@/lib/constants';
 import { dayKey, formatDayHeading, formatEventRange, formatVerifiedDate, isPastEvent } from '@/lib/dates';
-import { project, regionCrop } from '@/lib/geo';
+import { regionCrop } from '@/lib/geo';
 import { fetchAgendaEvents, fetchSchool, fetchSchoolListings } from '@/lib/queries';
 import { mapRegionFor } from '@/lib/regions';
 
 export const revalidate = 3600;
 
-/** The band is three times wider than tall; narrow screens crop it around the same centre. */
+/**
+ * The band is three times wider than tall. Phones zoom into it around the
+ * school (or the region's centre) so the name sits on the land beneath it.
+ */
 const BAND_ASPECT = 3;
 
 type Params = Promise<{ locale: string; slug: string }>;
@@ -47,13 +51,14 @@ export default async function SchoolPage({ params }: { params: Params }) {
   const name = locale === 'fr' ? school.name_fr : school.name_en;
   const description = locale === 'fr' ? school.description_fr : school.description_en;
   const region = mapRegionFor(school.region);
-  const view = regionCrop(region, BAND_ASPECT, school.location ? project(school.location.lat, school.location.lng) : undefined);
+  const { view, focus } = regionCrop(region, BAND_ASPECT, school.location);
+  const bandFrame = { '--focus-x': focus.x, '--focus-y': focus.y, '--view-aspect': view.w / view.h } as CSSProperties;
   const yearLabel = (y: string) => y.replace('-', '–');
   const money = new Intl.NumberFormat(locale === 'fr' ? 'fr-CA' : 'en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
 
   return (
     <article className="school-page" data-region={region}>
-      <header className="school-band">
+      <header className="school-band" style={bandFrame}>
         <RegionMap view={view} highlight={region} pin={school.location} label={`${t(`region.${school.region}`)} · ${name}`} className="band-map" />
         <div className="band-title">
           <Link href="/" className="back-link">
