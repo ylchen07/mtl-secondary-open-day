@@ -37,7 +37,7 @@ export default async function DirectoryPage({
   // The calendar used to be a tab here; old shared links land on the events page.
   if (rawSearch.view === 'calendar') {
     const rest = serializeFilters(filters).toString();
-    redirect({ href: rest ? `/events?${rest}` : '/events', locale });
+    redirect({ href: rest ? `/events/current?${rest}` : '/events/current', locale });
   }
 
   const now = new Date();

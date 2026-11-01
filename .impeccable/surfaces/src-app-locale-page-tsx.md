@@ -2,12 +2,12 @@
 version: 1
 slug: "src-app-locale-page-tsx"
 primary_target: "src/app/[locale]/page.tsx"
-related_targets: ["src/app/[locale]/schools/[slug]/page.tsx","src/app/[locale]/events/[[...year]]/page.tsx"]
+related_targets: ["src/app/[locale]/schools/[slug]/page.tsx","src/app/[locale]/events/[year]/page.tsx"]
 ---
 
 # Schools directory, school pages, events by year
 
-Scope: `/[locale]` school directory, `/[locale]/schools/[slug]` school page, `/[locale]/events/[[...year]]` events by school year. Mode: Operate.
+Scope: `/[locale]` school directory, `/[locale]/schools/[slug]` school page, `/[locale]/events/[year]` events by school year (`current` or a pinned year). Mode: Operate.
 
 Audience and job: parents choosing Secondary 1 schools; find schools by where they are, read what each one is and where, check every admissions date against its source, spot clashes across the season.
 

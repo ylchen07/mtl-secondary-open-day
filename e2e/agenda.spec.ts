@@ -7,7 +7,7 @@ for (const [locale, schools, events] of [['en', 'Schools', 'Events'], ['fr', 'É
     await expect(nav.getByRole('link', { name: schools })).toHaveAttribute('aria-current', 'page');
     await expect(page.locator('.school-row').first()).toBeVisible();
     await nav.getByRole('link', { name: events }).click();
-    await expect(page).toHaveURL(new RegExp(`/${locale}/events$`));
+    await expect(page).toHaveURL(new RegExp(`/${locale}/events/current$`));
     await expect(nav.getByRole('link', { name: events })).toHaveAttribute('aria-current', 'page');
   });
 }
@@ -74,34 +74,38 @@ test('root redirects to the default locale', async ({ page }) => {
   await expect(page).toHaveURL(/\/en$/);
 });
 
-test('each school year has its own events page and unknown years are not found', async ({ page }) => {
-  await page.goto('/en/events');
+test('events/current names the recruiting year, and each year has its own page', async ({ page }) => {
+  await page.goto('/en/events/current');
   const nav = page.getByRole('navigation', { name: 'School years' });
   const current = nav.locator('[aria-current="page"]');
   await expect(current).toHaveCount(1);
+  await expect(current).toHaveAttribute('href', '/en/events/current');
   const label = await current.innerText();
   const year = label.replace('School year ', '').replace('–', '-');
 
+  // The same year pinned by number shows the same page and stays shareable.
   await page.goto(`/fr/events/${year}`);
   await expect(page.getByRole('navigation', { name: 'Années scolaires' }).locator('[aria-current="page"]'))
     .toHaveText(`Année scolaire ${year.replace('-', '–')}`);
 
-  const missing = await page.goto('/en/events/1999-2000');
-  expect(missing?.status()).toBe(404);
+  for (const path of ['/en/events/1999-2000', '/en/events/latest']) {
+    expect((await page.goto(path))?.status()).toBe(404);
+  }
 });
 
-test('old school-year and calendar links land on the events page', async ({ page }) => {
-  await page.goto('/en/events');
-  const label = await page.getByRole('navigation', { name: 'School years' }).locator('[aria-current="page"]').innerText();
-  const year = label.replace('School year ', '').replace('–', '-');
-  await page.goto(`/fr/${year}`);
-  await expect(page).toHaveURL(new RegExp(`/fr/events/${year}$`));
+test('bare, old school-year and calendar links land on the events page', async ({ page }) => {
+  await page.goto('/fr/events?type=interview');
+  await expect(page).toHaveURL(/\/fr\/events\/current\?type=interview$/);
+  const label = await page.getByRole('navigation', { name: 'Années scolaires' }).locator('[aria-current="page"]').innerText();
+  const year = label.replace('Année scolaire ', '').replace('–', '-');
+  await page.goto(`/en/${year}`);
+  await expect(page).toHaveURL(new RegExp(`/en/events/${year}$`));
   await page.goto('/en?view=calendar&type=interview');
-  await expect(page).toHaveURL(/\/en\/events\?type=interview$/);
+  await expect(page).toHaveURL(/\/en\/events\/current\?type=interview$/);
 });
 
 test('admission interviews are a filterable event type', async ({ page }) => {
-  await page.goto('/en/events');
+  await page.goto('/en/events/current');
   await page.getByRole('button', { name: 'Admission interview', exact: true }).click();
   await expect(page).toHaveURL(/type=interview/);
   for (const type of await page.locator('.agenda-event .event-type').allInnerTexts()) {
@@ -144,7 +148,7 @@ test('hydration stays consistent when the browser clock differs', async ({ page 
 
 for (const locale of ['en', 'fr']) {
   test(`past events use an accessible archive in ${locale}`, async ({ page }) => {
-    await page.goto(`/${locale}/events`);
+    await page.goto(`/${locale}/events/current`);
     const archive = page.getByRole('region', { name: locale === 'en' ? 'Past events' : 'Événements passés', exact: true });
     const toggle = archive.getByRole('button');
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');

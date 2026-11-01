@@ -17,7 +17,7 @@ export function SiteHeader() {
         <Link href="/" className="nav-link" data-active={section === 'schools' || undefined} aria-current={pathname === '/' ? 'page' : undefined}>
           {t('schools')}
         </Link>
-        <Link href="/events" className="nav-link" data-active={section === 'events' || undefined} aria-current={pathname === '/events' ? 'page' : undefined}>
+        <Link href="/events/current" className="nav-link" data-active={section === 'events' || undefined} aria-current={pathname === '/events/current' ? 'page' : undefined}>
           {t('events')}
         </Link>
       </nav>

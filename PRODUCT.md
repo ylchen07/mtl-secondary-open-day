@@ -66,9 +66,9 @@ away.
 - Next.js App Router, server-rendered, filtered client-side; no client data
   fetching. No database: the site reads the committed JSON directly.
 - Three surfaces: the school directory (`/en`), one page per school
-  (`/en/schools/<slug>`), and events by school year (`/en/events` shows the
-  year currently recruiting, `/en/events/2027-2028` pins a year; unknown years
-  404).
+  (`/en/schools/<slug>`), and events by school year
+  (`/en/events/current` always shows the year currently recruiting,
+  `/en/events/2027-2028` pins a year; unknown years 404).
 - Times always render in `America/Toronto`, never the visitor's zone.
 - Filters live in the URL so a filtered view is shareable.
 - Location is drawn from committed OpenStreetMap geometry; no map tiles or

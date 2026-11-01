@@ -11,13 +11,20 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     '/*': ['./data/schools/**/*.json'],
   },
-  // School years used to live at /en/2027-2028; they moved under /events.
   async redirects() {
     return [
+      // School years used to live at /en/2027-2028; they moved under /events.
       {
         source: '/:locale(en|fr)/:year(\\d{4}-\\d{4})',
         destination: '/:locale/events/:year',
         permanent: true,
+      },
+      // The events page always names its year; `current` follows the season.
+      // Temporary, so /events stays free to become something else later.
+      {
+        source: '/:locale(en|fr)/events',
+        destination: '/:locale/events/current',
+        permanent: false,
       },
     ];
   },

@@ -8,27 +8,31 @@ import { fetchAgendaEvents, schoolYears } from '@/lib/queries';
 
 export const revalidate = 3600;
 
-type Params = Promise<{ locale: string; year?: string[] }>;
+/** The path segment that always means the school year currently recruiting. */
+const CURRENT = 'current';
+
+type Params = Promise<{ locale: string; year: string }>;
 
 /**
- * `/[locale]/events` shows the school year currently recruiting;
- * `/[locale]/events/2027-2028` pins one cohort so its schedule stays shareable
- * after the season turns over. Any other path, including a year with no
- * published events, is a 404.
+ * `/[locale]/events/current` shows the school year currently recruiting and
+ * moves on by itself when the season turns over; `/[locale]/events/2027-2028`
+ * pins one cohort so its schedule stays shareable afterwards. Any other
+ * segment, including a year with no published events, is a 404. Bare
+ * `/[locale]/events` redirects to `current` (next.config.ts).
  */
-async function resolveSchoolYear(segments: string[] | undefined, now: Date) {
+async function resolveSchoolYear(segment: string, now: Date) {
   const events = await fetchAgendaEvents(now);
   const current = academicYearFor(dayKey(now.toISOString()));
   const years = schoolYears(events, current);
-  if (segments && (segments.length !== 1 || !years.includes(segments[0]))) notFound();
-  const year = segments?.[0] ?? current;
+  const year = segment === CURRENT ? current : segment;
+  if (!years.includes(year)) notFound();
   return { year, current, years, events: events.filter((event) => event.academic_year === year) };
 }
 
 export async function generateMetadata({ params }: { params: Params }) {
-  const { locale, year: segments } = await params;
+  const { locale, year: segment } = await params;
   const [{ year }, t] = await Promise.all([
-    resolveSchoolYear(segments, new Date()),
+    resolveSchoolYear(segment, new Date()),
     getTranslations({ locale }),
   ]);
   return { title: `${t('events.heading')} · ${t('agenda.schoolYear', { year: year.replace('-', '–') })} · ${t('site.title')}` };
@@ -41,11 +45,11 @@ export default async function EventsPage({
   params: Params;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const { year: segments } = await params;
+  const { year: segment } = await params;
   const now = new Date();
 
   const [{ year, current, years, events }, t, rawSearch] = await Promise.all([
-    resolveSchoolYear(segments, now),
+    resolveSchoolYear(segment, now),
     getTranslations(),
     searchParams,
   ]);
@@ -70,7 +74,7 @@ export default async function EventsPage({
           {years.map((y) => (
             <Link
               key={y}
-              href={y === current ? '/events' : `/events/${y}`}
+              href={y === current ? `/events/${CURRENT}` : `/events/${y}`}
               aria-current={y === year ? 'page' : undefined}
               className="year-link"
             >
