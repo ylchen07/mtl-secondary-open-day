@@ -18,8 +18,9 @@ export type PackEntry = {
  */
 const INSTRUCTIONS = `Answer in work/research/answers.json, then run \`pnpm research:apply\`.
 Only facts this pack states explicitly; skip anything implied. Every answer carries
-"quote" (verbatim text from that page, one line) and "page" (the p-number); apply
-rejects a quote it cannot find in the fetched page.
+"quote" (verbatim text from that page; adjacent lines such as a fees label and its
+amount join with a space) and "page" (the p-number); apply rejects a quote it cannot
+find in the fetched page.
 { "<slug>": {
   "language": { "value": "fr|en|bilingual", "quote": "…", "page": 2 },
   "gender": { "value": "mixed|girls|boys", "quote": "…", "page": 2 },

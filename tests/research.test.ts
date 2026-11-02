@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { applyAnswers, type Manifest } from '@/lib/research/apply';
 import { collectEvidence, datesIn, gapsFor, hashEvidence } from '@/lib/research/evidence';
-import { pickGeocode } from '@/lib/research/geocode';
+import { geocodeQueries, pickGeocode } from '@/lib/research/geocode';
 import { addLedgerRows } from '@/lib/research/ledger';
-import { isAllowed, parseRobots, pickLinks } from '@/lib/research/links';
+import { isAllowed, parseRobots, pickLinks, readSitemap, sitemapsIn } from '@/lib/research/links';
 import { htmlToLines } from '@/lib/research/normalize';
 import { readPage, type PageFacts } from '@/lib/research/page';
 import type { SchoolFile } from '@/lib/schema';
@@ -54,6 +54,12 @@ describe('readPage', () => {
     expect(facts.jsonLdEvents).toEqual([{ name: 'Portes ouvertes', startDate: '2027-04-17T11:00:00-04:00', endDate: null }]);
     expect(facts.links).toEqual([{ href: 'https://test.qc.ca/admission/', text: 'Admission' }]);
   });
+
+  it('recovers text a Next.js page streams for a closed accordion, without its references and props', () => {
+    const push = (s: string) => `<script>self.__next_f.push([1,${JSON.stringify(s)}])</script>`;
+    const html = `<body><p>Frais</p>${push('73:T1fb6,')}${push('Frais de scolarité :')}${push('aa:T233d,')}${push(' 8\u200b 100 $')}${push('Tuition: $8,100')}${push('["$","div",null,{}]')}</body>`;
+    expect(readPage(html, 'https://test.qc.ca/').lines).toEqual(['Frais', 'Frais de scolarité :', '8 100 $', 'Tuition: $8,100']);
+  });
 });
 
 describe('pickLinks', () => {
@@ -64,12 +70,23 @@ describe('pickLinks', () => {
     { href: 'https://other.ca/portes-ouvertes/', text: 'Portes ouvertes' },
     { href: 'https://test.qc.ca/calendrier-admission.pdf', text: 'Calendrier admission' },
     { href: 'https://test.qc.ca/sports/', text: 'Sports' },
+    { href: 'https://test.qc.ca/droits-de-scolarite/', text: 'Droits de scolarité' },
   ];
+  const seen = new Set(['https://test.qc.ca/nous-joindre/']);
 
-  it('ranks admission pages first, keeps subdomains, and lists documents without fetching them', () => {
-    const picked = pickLinks(links, 'https://www.test.qc.ca/', new Set(['https://test.qc.ca/nous-joindre/']), 2);
+  it('ranks admission pages first, keeps subdomains, and returns documents apart', () => {
+    const picked = pickLinks(links, 'https://www.test.qc.ca/', seen, 2, ['events']);
     expect(picked.pages).toEqual(['https://test.qc.ca/portes-ouvertes/', 'https://portes.test.qc.ca/inscription']);
     expect(picked.documents).toEqual(['https://test.qc.ca/calendrier-admission.pdf']);
+  });
+
+  it('reserves a slot for each open gap before filling by score', () => {
+    const picked = pickLinks(links, 'https://www.test.qc.ca/', seen, 2, ['events', 'tuition']);
+    expect(picked.pages).toEqual(['https://test.qc.ca/portes-ouvertes/', 'https://test.qc.ca/droits-de-scolarite/']);
+  });
+
+  it('ignores links that only serve a fact already on file', () => {
+    expect(pickLinks(links, 'https://www.test.qc.ca/', new Set(), 5, ['tuition']).pages).not.toContain('https://test.qc.ca/nous-joindre/');
   });
 });
 
@@ -161,6 +178,19 @@ describe('collectEvidence', () => {
     const items = collectEvidence(draft(), [page('https://test.qc.ca/', [paragraph])], TODAY).items;
     expect(items.filter((i) => i.fact === 'language').map((i) => i.lines)).toEqual([['La langue d’enseignement est le français.']]);
   });
+
+  it('reads a fees table: label and amount rows under a Secondary 1 heading, other levels dropped', () => {
+    const fees = [
+      'Kindergarten', 'Tuition: $18,000',
+      'Grade 7', 'Tuition & Fees', 'Tuition: $28,830',
+      'Préscolaire Primaire Secondaire', 'Droits de scolarité¹', '(services éducatifs) 7 050 $ 4 510 $ 5 335 $',
+    ];
+    const items = collectEvidence(draft(), [page('https://test.qc.ca/frais/', fees)], TODAY).items;
+    expect(items.filter((i) => i.fact === 'tuition').map((i) => i.lines)).toEqual([
+      ['Grade 7', 'Tuition: $28,830'],
+      ['Préscolaire Primaire Secondaire', 'Droits de scolarité¹', '(services éducatifs) 7 050 $ 4 510 $ 5 335 $'],
+    ]);
+  });
 });
 
 describe('applyAnswers', () => {
@@ -213,8 +243,30 @@ describe('applyAnswers', () => {
   });
 });
 
+describe('geocodeQueries', () => {
+  it('always names the city, once', () => {
+    expect(geocodeQueries({ address: '12630, boulevard Gouin Est', city: 'Montréal', postal_code: 'H1C 1C1' })).toEqual([
+      '12630, boulevard Gouin Est, Montréal H1C 1C1',
+      '12630, boulevard Gouin Est, Montréal',
+    ]);
+    expect(geocodeQueries({ address: '9155, boulevard Gouin Ouest, Montréal, QC H4K 1C3', city: 'Montréal', postal_code: 'H4K 1C3' })[1]).toBe(
+      '9155, boulevard Gouin Ouest, Montréal, QC',
+    );
+  });
+});
+
+describe('readSitemap', () => {
+  it('follows page sitemaps of an index, skips news and taxonomies, and drops dated posts', () => {
+    expect(sitemapsIn('User-agent: *\nSitemap: https://test.qc.ca/sitemap_index.xml\n')).toEqual(['https://test.qc.ca/sitemap_index.xml']);
+    const index = '<sitemapindex><sitemap><loc>https://test.qc.ca/page-sitemap.xml</loc></sitemap><sitemap><loc>https://test.qc.ca/post-sitemap.xml</loc></sitemap><sitemap><loc>https://test.qc.ca/wp-sitemap-taxonomies-category-1.xml</loc></sitemap></sitemapindex>';
+    expect(readSitemap(index)).toEqual({ pages: [], sitemaps: ['https://test.qc.ca/page-sitemap.xml'] });
+    const pages = '<urlset><url><loc>https://test.qc.ca/frais-de-scolarite/</loc></url><url><loc>https://test.qc.ca/2018/03/01/tirage-de-droits-de-scolarite/</loc></url></urlset>';
+    expect(readSitemap(pages)).toEqual({ pages: ['https://test.qc.ca/frais-de-scolarite/'], sitemaps: [] });
+  });
+});
+
 describe('pickGeocode', () => {
-  const school = { postal_code: 'H1X 1K7' };
+  const school = { address: '3535, rue Test', city: 'Montréal', postal_code: 'H1X 1K7' };
 
   it('refuses results outside Greater Montreal or in another postal area', () => {
     expect(pickGeocode([{ lat: '46.8', lon: '-71.2', address: { postcode: 'H1X 1K7' } }], school)).toEqual({ ok: false, reason: 'result outside Greater Montreal' });
@@ -225,6 +277,13 @@ describe('pickGeocode', () => {
     const exact = pickGeocode([{ lat: '45.556789', lon: '-73.58', address: { house_number: '3535', postcode: 'H1X1K7' } }], school);
     expect(exact).toMatchObject({ ok: true, precision: 'exact', location: { lat: 45.55679, lng: -73.58 } });
     expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: { postcode: 'H1X 2B2' } }], school)).toMatchObject({ ok: true, precision: 'approximate' });
+  });
+
+  it('accepts the same building under a postal code OSM got wrong, as approximate', () => {
+    const building = { house_number: '3535;3545', road: 'Rue Test', city: 'Montréal', postcode: 'J6V 1B5' };
+    expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: building }], school)).toMatchObject({ ok: true, precision: 'approximate' });
+    expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: { ...building, city: 'Laval' } }], school).ok).toBe(false);
+    expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: { ...building, house_number: '3536' } }], school).ok).toBe(false);
   });
 });
 

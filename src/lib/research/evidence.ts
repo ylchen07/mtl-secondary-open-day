@@ -73,12 +73,54 @@ function isCandidateEvent(group: readonly string[], dateLine: string): boolean {
 }
 const TIME_ONLY = /\b\d{1,2}\s?h(?:\s?\d{2})?\b|\b\d{1,2}:\d{2}\b|\b\d{1,2}\s?[ap]\.?m\.?(?!\w)/i;
 
-const PATTERNS: Record<Exclude<Fact, 'events' | 'address' | 'description'>, (text: string) => boolean> = {
+const PATTERNS: Record<'language' | 'gender', (text: string) => boolean> = {
   language: (t) =>
     /langue\s+d['’]enseignement|francophone|anglophone|bilingue|bilingual|english[-\s]language|french[-\s]language|enseignement\s+(?:en|du)\s+(?:fran[çc]ais|anglais)|instruction\s+in\s+(?:english|french)|langue\s+fran[çc]aise/i.test(t),
   gender: (t) => /\bfilles\b|\bgar[çc]ons\b|\bmixte\b|\bgirls\b|\bboys\b|\bco-?ed(?:ucational)?\b|co[ée]ducation/i.test(t),
-  tuition: (t) => /scolarit|tuition|frais\s+annuels/i.test(t) && /\d[\d\s ]*\$|\$\s*\d/.test(t),
 };
+
+const TUITION_WORD = /scolarit|tuition|frais\s+annuels/i;
+const AMOUNT = /\d[\d\s  ,.]*\s?\$|\$\s?\d/;
+const LEVEL =
+  /secondaire|secondary|high\s+school|grade\s+(?:\d{1,2})\b|primaire|pr[ée]scolaire|maternelle|kindergarten|elementary/i;
+const SECONDARY_ONE = /secondaire|secondary|high\s+school|grade\s+7\b/i;
+/** How far above a fees row its level heading may sit. */
+const LEVEL_LOOKBACK = 12;
+
+/**
+ * Fees are usually a table: a label row, amount-only rows under it, and the
+ * level as a heading above. A hit keeps that shape (level, label, amounts)
+ * and is dropped when its level is only another one, so kindergarten and
+ * Grade 12 rows never reach the reviewer.
+ */
+function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
+  const { lines } = page;
+  const out: Evidence[] = [];
+  lines.forEach((line, i) => {
+    if (!TUITION_WORD.test(line)) return;
+    const groups = sentencesMatching(line, (s) => TUITION_WORD.test(s) && AMOUNT.test(s)).map((s) => [s]);
+    if (groups.length === 0 && line.length <= 120) {
+      // A label row: its amounts are the short lines just below it.
+      const amounts = lines.slice(i + 1, i + 4).filter((l) => l.length <= 60 && AMOUNT.test(l) && !TUITION_WORD.test(l));
+      if (amounts.length > 0) groups.push([line, ...amounts]);
+    }
+    for (const group of groups) {
+      const text = group.join(' ');
+      if (LEVEL.test(text)) {
+        if (!SECONDARY_ONE.test(text)) continue;
+      } else {
+        const heading = lines
+          .slice(Math.max(0, i - LEVEL_LOOKBACK), i)
+          .reverse()
+          .find((l) => l.length <= 120 && LEVEL.test(l));
+        if (heading && !SECONDARY_ONE.test(heading)) continue;
+        if (heading) group.unshift(heading);
+      }
+      out.push({ fact: 'tuition', lines: group, page: index, hash: hashEvidence('tuition', group) });
+    }
+  });
+  return out;
+}
 
 const SELF_REFERENCE = /\b(?:[ée]cole|coll[èe]ge|school|college|[ée]tablissement|institution)\b/i;
 const ABOUT_URL = /[àa]-?propos|about|qui-sommes|mission|histori|notre-/i;
@@ -197,6 +239,10 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
       }
       return;
     }
+    if (fact === 'tuition') {
+      out.push(...tuitionEvidence(page, index));
+      return;
+    }
     const test = fact === 'address' ? (t: string) => POSTAL.test(t) : PATTERNS[fact];
     for (const line of page.lines) {
       for (const s of sentencesMatching(line, test)) {
@@ -204,7 +250,10 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
       }
     }
   });
-  return out;
+  if (fact !== 'tuition') return out;
+  // Rows that name Secondary 1 are the strongest; they fill the cap first.
+  const named = (item: Evidence) => SECONDARY_ONE.test(item.lines.join(' '));
+  return [...out.filter(named), ...out.filter((item) => !named(item))];
 }
 
 const compactPostal = (text: string): string => text.replace(/\s+/g, '').toUpperCase();

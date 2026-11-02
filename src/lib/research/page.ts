@@ -21,7 +21,28 @@ export type PageFacts = {
   links: PageLink[];
 };
 
-const squash = (text: string): string => text.replace(/\s+/g, ' ').trim();
+const squash = (text: string): string => text.replace(/[\u200B-\u200D\u2060\uFEFF]/g, '').replace(/\s+/g, ' ').trim();
+
+/**
+ * A Next.js App Router page streams its content as `self.__next_f.push([1,"…"])`
+ * chunks, and text inside a closed accordion or tab exists only there (a
+ * school's fees table, say). Plain-text chunks are kept, in order; component
+ * references and serialised props are not.
+ */
+function streamedText(html: string): string[] {
+  const out: string[] = [];
+  for (const m of html.matchAll(/self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)/g)) {
+    let text: string;
+    try {
+      text = squash(JSON.parse(m[1]) as string);
+    } catch {
+      continue;
+    }
+    if (text === '' || /^[0-9a-f]+:[A-Z]?[0-9a-f]*,?$/.test(text) || /[[\]{}<>]/.test(text) || text.startsWith('$')) continue;
+    if (text !== out[out.length - 1]) out.push(text);
+  }
+  return out;
+}
 
 function collectEvents(node: unknown, out: JsonLdEvent[]): void {
   if (Array.isArray(node)) {
@@ -76,5 +97,5 @@ export function readPage(html: string, url: string): PageFacts {
     links.push({ href, text: squash($(el).text()) });
   });
 
-  return { url, lines: htmlToLines(html), description, jsonLdEvents, links };
+  return { url, lines: [...htmlToLines(html), ...streamedText(html)], description, jsonLdEvents, links };
 }

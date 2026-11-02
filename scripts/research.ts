@@ -13,17 +13,18 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 import type { Browser } from '@playwright/test';
+import { extractText, getDocumentProxy } from 'unpdf';
 import { AGGREGATOR_HOSTS } from '../src/lib/check-sources';
 import { GREATER_MONTREAL_BBOX } from '../src/lib/constants';
 import { serialise } from '../src/lib/harvest/emit';
 import { loadExistingSchools, todayInMontreal } from '../src/lib/harvest/orchestrate';
 import { answersSchema, applyAnswers, type Manifest } from '../src/lib/research/apply';
-import { collectEvidence } from '../src/lib/research/evidence';
+import { collectEvidence, gapsFor } from '../src/lib/research/evidence';
 import { geocodeQueries, pickGeocode, type GeocodePick, type NominatimResult } from '../src/lib/research/geocode';
 import { addLedgerRows } from '../src/lib/research/ledger';
-import { isAllowed, isSameSite, parseRobots, pickLinks } from '../src/lib/research/links';
+import { isAllowed, isSameSite, parseRobots, pickLinks, readSitemap, sitemapsIn } from '../src/lib/research/links';
 import { renderPack, type PackEntry } from '../src/lib/research/pack';
-import { readPage, type PageFacts } from '../src/lib/research/page';
+import { readPage, type PageFacts, type PageLink } from '../src/lib/research/page';
 import type { SchoolFile } from '../src/lib/schema';
 
 const ROOT = process.cwd();
@@ -43,8 +44,14 @@ const TIMEOUT_MS = 20_000;
 const REQUEST_DELAY_MS = 400;
 /** Different schools are different hosts, so a few can be read at once. */
 const PARALLEL_SCHOOLS = 4;
-/** Seeds plus the best links found on them. */
-const MAX_PAGES = 8;
+/** Pages per school: seeds plus the best links found on them, over two hops. */
+const MAX_PAGES = 10;
+/** Fees grids and admission guides are often PDFs; a school's best two are read. */
+const MAX_DOCUMENTS = 2;
+/** A larger PDF is a brochure or yearbook, not a fees grid. */
+const MAX_DOCUMENT_BYTES = 5_000_000;
+/** Sitemap files read per school: an index and a few of its children. */
+const MAX_SITEMAPS = 4;
 /** Below this, a page is a JS shell or an error page: try a real browser. */
 const MIN_TEXT_CHARS = 200;
 /** Nominatim's usage policy: at most one request per second. */
@@ -79,20 +86,44 @@ async function loadSchools(): Promise<SchoolFile[]> {
 // ---------------------------------------------------------------- fetching
 
 let browser: Promise<Browser> | null = null;
-const robots = new Map<string, Promise<string[]>>();
+type Robots = { disallow: string[]; sitemaps: string[] };
+const robots = new Map<string, Promise<Robots>>();
 
-function disallowed(origin: string): Promise<string[]> {
+function robotsFor(origin: string): Promise<Robots> {
   let rules = robots.get(origin);
   if (!rules) {
     rules = fetch(`${origin}/robots.txt`, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(TIMEOUT_MS) })
       .then((res) => (res.ok ? res.text() : ''))
-      .then(parseRobots, () => []);
+      .then(
+        (text) => ({ disallow: parseRobots(text), sitemaps: sitemapsIn(text) }),
+        () => ({ disallow: [], sitemaps: [] }),
+      );
     robots.set(origin, rules);
   }
   return rules;
 }
 
-type Fetched = { ok: true; html: string; rendered: boolean } | { ok: false; reason: string };
+/** Every standing page a site's sitemap lists, as links with no anchor text. */
+async function sitemapLinks(site: string): Promise<PageLink[]> {
+  const origin = new URL(site).origin;
+  const { disallow, sitemaps } = await robotsFor(origin);
+  const queue = sitemaps.length > 0 ? [...sitemaps] : [`${origin}/sitemap.xml`];
+  const pages: string[] = [];
+  for (let i = 0, read = 0; i < queue.length && read < MAX_SITEMAPS; i++) {
+    if (!isAllowed(queue[i], disallow)) continue;
+    read++;
+    await sleep(REQUEST_DELAY_MS);
+    const xml = await fetch(queue[i], { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(TIMEOUT_MS) })
+      .then((res) => (res.ok ? res.text() : ''))
+      .catch(() => '');
+    const found = readSitemap(xml);
+    pages.push(...found.pages);
+    queue.push(...found.sitemaps);
+  }
+  return pages.map((href) => ({ href, text: '' }));
+}
+
+type Fetched = { ok: true; page: PageFacts; rawChars: number; rendered: boolean } | { ok: false; reason: string };
 
 async function render(url: string): Promise<string | null> {
   if (flag('no-render')) return null;
@@ -109,16 +140,33 @@ async function render(url: string): Promise<string | null> {
   }
 }
 
+/** A PDF's text, one line per text run end, read like a page that has no links. */
+async function readPdf(bytes: ArrayBuffer, url: string): Promise<PageFacts> {
+  const { text } = await extractText(await getDocumentProxy(new Uint8Array(bytes)), { mergePages: false });
+  const lines = text
+    .flatMap((p) => p.split('\n'))
+    .map((l) => l.replace(/\s+/g, ' ').trim())
+    .filter((l) => l.length > 0);
+  return { url, lines, description: null, jsonLdEvents: [], links: [] };
+}
+
 async function fetchPage(url: string): Promise<Fetched> {
-  if (!isAllowed(url, await disallowed(new URL(url).origin))) return { ok: false, reason: 'disallowed by robots.txt' };
+  if (!isAllowed(url, (await robotsFor(new URL(url).origin)).disallow)) return { ok: false, reason: 'disallowed by robots.txt' };
   let reason: string;
   try {
     const res = await fetch(url, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(TIMEOUT_MS) });
     const type = res.headers.get('content-type') ?? '';
+    if (res.ok && type.includes('pdf')) {
+      const bytes = await res.arrayBuffer();
+      if (bytes.byteLength > MAX_DOCUMENT_BYTES) return { ok: false, reason: 'PDF too large' };
+      const page = await readPdf(bytes, url).catch(() => null);
+      return page ? { ok: true, page, rawChars: bytes.byteLength, rendered: false } : { ok: false, reason: 'unreadable PDF' };
+    }
     if (res.ok && !type.includes('html')) return { ok: false, reason: `not HTML (${type || 'no type'})` };
     if (res.ok) {
       const html = await res.text();
-      if (readPage(html, url).lines.join(' ').length >= MIN_TEXT_CHARS) return { ok: true, html, rendered: false };
+      const page = readPage(html, url);
+      if (page.lines.join(' ').length >= MIN_TEXT_CHARS) return { ok: true, page, rawChars: html.length, rendered: false };
       reason = 'thin page';
     } else {
       reason = `HTTP ${res.status}`;
@@ -128,7 +176,10 @@ async function fetchPage(url: string): Promise<Fetched> {
   }
   // A JS-rendered or bot-shy site still has the facts once a browser runs it.
   const html = await render(url);
-  if (html && readPage(html, url).lines.join(' ').length >= MIN_TEXT_CHARS) return { ok: true, html, rendered: true };
+  const page = html ? readPage(html, url) : null;
+  if (html && page && page.lines.join(' ').length >= MIN_TEXT_CHARS) {
+    return { ok: true, page, rawChars: html.length, rendered: true };
+  }
   return { ok: false, reason };
 }
 
@@ -149,7 +200,9 @@ type SchoolRun = { entry: PackEntry; rawChars: number; textChars: number; render
 
 async function researchSchool(school: SchoolFile, today: string, reviewed: ReadonlySet<string>): Promise<SchoolRun> {
   const site = school.website_url;
-  const seeds = [...new Set([school.admissions_url, school.source_url, site])].filter(
+  const gaps = gapsFor(school);
+  // The home page carries the school's own summary even when the record points at a deeper page.
+  const seeds = [...new Set([school.admissions_url, school.source_url, site, `${new URL(site).origin}/`])].filter(
     (url) => !isAggregator(url) && (isSameSite(url, site) || url === school.admissions_url),
   );
   const pages: PageFacts[] = [];
@@ -168,21 +221,31 @@ async function researchSchool(school: SchoolFile, today: string, reviewed: Reado
       failures.push(`${url} (${result.reason})`);
       return;
     }
-    rawChars += result.html.length;
+    rawChars += result.rawChars;
     if (result.rendered) rendered++;
-    const page = readPage(result.html, url);
-    pages.push(page);
-    await writeFile(pageFile(url), cachedText(page), 'utf8');
+    pages.push(result.page);
+    await writeFile(pageFile(url), cachedText(result.page), 'utf8');
   };
 
   for (const url of seeds) await visit(url);
-  const picked = pickLinks(pages.flatMap((p) => p.links), site, seen, MAX_PAGES - pages.length);
-  documents = picked.documents;
-  for (const url of picked.pages) await visit(url);
+  // Menus often hide the fees or about page; the sitemap lists it.
+  const listed = await sitemapLinks(site);
+  // Two hops: the fees page is often linked from the admission page, not the home page.
+  for (let hop = 0; hop < 2 && pages.length < MAX_PAGES; hop++) {
+    const links = [...pages.flatMap((p) => p.links), ...listed];
+    const picked = pickLinks(links, site, seen, MAX_PAGES - pages.length, gaps);
+    documents = [...new Set([...documents, ...picked.documents])];
+    if (picked.pages.length === 0) break;
+    for (const url of picked.pages) await visit(url);
+  }
+  for (const url of documents.filter((d) => /\.pdf$/i.test(new URL(d).pathname)).slice(0, MAX_DOCUMENTS)) {
+    await visit(url);
+  }
 
   const evidence = collectEvidence(school, pages, today, reviewed);
   return {
-    entry: { school, evidence, pages: pages.map((p) => p.url), documents, failures },
+    // Documents left unread stay listed for a human.
+    entry: { school, evidence, pages: pages.map((p) => p.url), documents: documents.filter((d) => !seen.has(d)), failures },
     rawChars,
     textChars: pages.reduce((sum, p) => sum + p.lines.join('\n').length, 0),
     rendered,

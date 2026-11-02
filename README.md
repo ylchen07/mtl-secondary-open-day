@@ -99,28 +99,29 @@ pnpm research:apply     # check every quote against the fetched page, write data
 pnpm research:geocode   # place schools on the map from their street address (no model)
 ```
 
-**`pnpm research`** reads up to 8 pages per school: its admissions, source and home pages, then the most relevant links found on them (open house, exam, admission, contact, about, tuition). It respects `robots.txt`, pauses between requests to the same site, and opens JS-rendered or bot-blocked pages in headless Chromium. It never sends a page to a model. For each school it looks only for what the record is missing: events always; description and tuition when empty; address, language and student body while the school is a draft. It keeps only the lines that can answer those, as verbatim quotes in `pack.md`. It drops:
+**`pnpm research`** reads up to 10 pages per school: its admissions, source and home pages and the site root, then, over two hops, the best links for what the record is missing. Candidates come from the pages read and from the site's sitemap, which lists the fees and about pages menus often hide. Each open gap first reserves its own best link (open house and exam pages for events, the fees page for tuition, the about page for description, language and student body, the contact page for the address), so a strong open-house link cannot crowd out the one fees page. The school's two best PDFs (fees grids, admission guides) are read as text too. It respects `robots.txt`, pauses between requests to the same site, opens JS-rendered or bot-blocked pages in headless Chromium, and recovers the text a Next.js site streams for closed tabs and accordions. It never sends a page to a model. For each school it looks only for what the record is missing: events always; description and tuition when empty; address, language and student body while the school is a draft. It keeps only the lines that can answer those, as verbatim quotes in `pack.md`. Fees tables keep their shape: the level heading, the label row and the amounts under it, with kindergarten, primary and Grade 8+ rows dropped. It drops:
 
 - dates already past, yearless dates that just passed, and events already on file;
 - deadlines and replies (you cannot attend a deadline), and other levels (primaire, collégial, Secondary 2–5);
 - lines repeated across pages, long paragraphs beyond the matching sentence, and lines already reviewed (`data/research/reviewed.json`, committed).
 
-A draft's address is settled without review when its postal code appears on the school's own site. PDFs are listed, not read.
+A draft's address is settled without review when its postal code appears on the school's own site.
 
-**Review** answers in `answers.json` (format at the top of `pack.md`). Every fact carries a verbatim `quote` and the `page` it came from. A school with nothing usable is listed as `{}` so its lines are never shown again.
+**Review** answers in `answers.json` (format at the top of `pack.md`). Every fact carries a verbatim `quote` and the `page` it came from; a table row is quoted as its label and amount joined by a space. A school with nothing usable is listed as `{}` so its lines are never shown again.
 
 **`pnpm research:apply`** rejects a school's whole answer if any quote is not in the fetched page text or the result fails the schema. That makes a hallucinated date or fact impossible to write. It does not publish schools: promoting a draft stays a human decision against the publication bar.
 
-**`pnpm research:geocode`** asks OpenStreetMap Nominatim (one request per second) for each school without a location. It keeps a result only inside Greater Montreal and with the school's own postal code (`exact` for a numbered building with the full code, else `approximate`).
+**`pnpm research:geocode`** asks OpenStreetMap Nominatim (one request per second) for each school without a location, naming the street and city. It keeps a result only inside Greater Montreal, and only if it carries the school's own postal code (`exact` for a numbered building with the full code, else `approximate`) or is the record's own building (same house number, street and city) under a postal code OpenStreetMap got wrong (`approximate`).
 
-First run, 2026-11-01, 45 schools. Token counts are estimates at 4 characters per token:
+Token counts are estimates at 4 characters per token:
 
-| Stage | Tokens |
-|---|---|
-| Raw HTML of the 252 pages read | ≈10.9M |
-| Their visible text | ≈324k |
-| Review pack, first run | ≈14k (247 lines) |
-| Review pack, next run with nothing changed | 0 lines |
+| Stage | First run, 2026-11-01 | Second run, 2026-11-02 |
+|---|---|---|
+| Pages read | 252 | ≈375, with sitemaps and PDFs |
+| Raw HTML | ≈10.9M | ≈15.9M |
+| Visible text | ≈324k | ≈529k |
+| Review pack | ≈14k (247 lines) | ≈5.7k (50 lines), then 4 follow-up packs totalling ≈4k |
+| Re-run with nothing changed | 0 lines | 0 lines |
 
 ## Data corrections
 
