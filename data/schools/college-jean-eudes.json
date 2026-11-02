@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "3535, boulevard Rosemont, Montréal, QC H1X 1K7",
   "postal_code": "H1X 1K7",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.5554,
+    "lng": -73.57918
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.cje.qc.ca/",
   "admissions_url": "https://www.cje.qc.ca/admission/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5285,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Jean-Eudes is a secondary school in Montreal's Rosemont district, involved in its local community.",
+  "description_fr": "Le Collège Jean-Eudes est un établissement d’enseignement secondaire du quartier Rosemont, à Montréal, qui s’investit dans sa communauté.",
   "source_url": "https://www.cje.qc.ca/nous-joindre/",
-  "last_verified_at": "2026-10-29",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

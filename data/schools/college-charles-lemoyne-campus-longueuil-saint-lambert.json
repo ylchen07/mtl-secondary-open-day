@@ -9,8 +9,11 @@
   "city": "Longueuil",
   "address": "901, chemin Tiffin",
   "postal_code": "J4P 3G6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.51279,
+    "lng": -73.50697
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://monccl.com",
   "admissions_url": "https://monccl.com",
   "tuition_annual_cad": null,

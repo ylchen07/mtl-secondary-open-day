@@ -9,17 +9,20 @@
   "city": "Montreal",
   "address": "5475, avenue Mountain Sights",
   "postal_code": "H3W 2Y8",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.48779,
+    "lng": -73.63351
+  },
+  "geocode_precision": "exact",
   "website_url": "https://www.azrieli-tth.ca/fr",
   "admissions_url": "https://www.azrieli-tth.ca/fr/admissions-herzliah",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 16800,
   "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.azrieli-tth.ca/fr/admissions-herzliah",
-  "last_verified_at": "2026-09-12",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

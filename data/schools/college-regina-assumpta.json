@@ -9,8 +9,11 @@
   "city": "Montréal",
   "address": "1750, rue Sauriol Est, Montréal, QC H2C 1X4",
   "postal_code": "H2C 1X4",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.56527,
+    "lng": -73.6502
+  },
+  "geocode_precision": "exact",
   "website_url": "https://reginaassumpta.qc.ca/",
   "admissions_url": "https://reginaassumpta.qc.ca/procedure-admission/",
   "tuition_annual_cad": null,

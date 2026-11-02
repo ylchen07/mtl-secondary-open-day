@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "4855, avenue de Kensington",
   "postal_code": "H3X 3S6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.4716,
+    "lng": -73.63542
+  },
+  "geocode_precision": "exact",
   "website_url": "https://ersm.org/",
   "admissions_url": "https://ersm.org/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "École Rudolf Steiner de Montréal is a private, subsidized French-language school with an alternative approach based on Waldorf education.",
+  "description_fr": "L’École Rudolf Steiner de Montréal est une école privée francophone et subventionnée qui propose une approche alternative basée sur la pédagogie Waldorf.",
   "source_url": "https://ersm.org/",
-  "last_verified_at": "2026-09-15",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": [
     {

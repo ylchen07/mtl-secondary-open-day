@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "4090, avenue Royal",
   "postal_code": "H4A 2M5",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.47098,
+    "lng": -73.62351
+  },
+  "geocode_precision": "exact",
   "website_url": "https://www.lcc.ca",
   "admissions_url": "https://www.lcc.ca/admissions/openhouse-info",
   "tuition_annual_cad": null,
   "has_boarding": false,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Lower Canada College is an independent, co-educational day school in Montreal for students from kindergarten to Pre-University.",
+  "description_fr": "Le Lower Canada College est une école de jour indépendante et mixte de Montréal, de la maternelle au préuniversitaire.",
   "source_url": "https://www.lcc.ca/admissions/openhouse-info",
-  "last_verified_at": "2026-09-20",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

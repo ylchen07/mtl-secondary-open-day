@@ -13,13 +13,13 @@
   "geocode_precision": "missing",
   "website_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
   "admissions_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 4815,
   "has_boarding": false,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
-  "last_verified_at": "2026-09-22",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

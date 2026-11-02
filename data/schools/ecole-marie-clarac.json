@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "3641, boulevard Gouin Est",
   "postal_code": "H1H 5L8",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.59216,
+    "lng": -73.64947
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.ecolemarie-clarac.qc.ca/",
   "admissions_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "École Marie-Clarac is a private French-language school from daycare to secondary; its secondary school is for girls only.",
+  "description_fr": "L’École Marie-Clarac est une école privée de langue française, de la garderie au secondaire; son secondaire accueille uniquement des filles.",
   "source_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/",
-  "last_verified_at": "2026-09-21",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

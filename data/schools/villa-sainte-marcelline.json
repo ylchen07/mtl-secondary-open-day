@@ -9,8 +9,11 @@
   "city": "Montréal",
   "address": "815, avenue Upper Belmont",
   "postal_code": "H3Y 1K5",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.4898,
+    "lng": -73.6176
+  },
+  "geocode_precision": "exact",
   "website_url": "https://villa.marcelline.qc.ca/",
   "admissions_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
   "tuition_annual_cad": null,

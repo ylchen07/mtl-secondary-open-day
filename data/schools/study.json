@@ -9,8 +9,11 @@
   "city": "Westmount",
   "address": "3233, The Boulevard",
   "postal_code": "H3Y 1S4",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.49081,
+    "lng": -73.60061
+  },
+  "geocode_precision": "exact",
   "website_url": "https://www.thestudy.qc.ca/fr",
   "admissions_url": "https://www.thestudy.qc.ca/fr/admission",
   "tuition_annual_cad": null,

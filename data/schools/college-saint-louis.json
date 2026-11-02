@@ -9,17 +9,20 @@
   "city": "Lachine",
   "address": "275, 36e Avenue, Lachine, QC H8T 2A4",
   "postal_code": "H8T 2A4",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.4364,
+    "lng": -73.69726
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://collegesaintlouis.ecolelachine.com/",
   "admissions_url": "https://collegesaintlouis.ecolelachine.com/admission/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Saint-Louis is an international education public school of the Centre de services scolaire Marguerite-Bourgeoys in Lachine, opened in 1988, with an enriched programme from Secondary 1 to 5.",
+  "description_fr": "Le Collège Saint-Louis est une école d’éducation internationale du Centre de services scolaire Marguerite-Bourgeoys, à Lachine, ouverte en 1988, qui offre un programme enrichi de la 1re à la 5e secondaire.",
   "source_url": "https://collegesaintlouis.ecolelachine.com/historique/",
-  "last_verified_at": "2026-10-29",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

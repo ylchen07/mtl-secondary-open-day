@@ -9,17 +9,20 @@
   "city": "Boisbriand",
   "address": "4747, rue Ambroise-Lafortune",
   "postal_code": "J7H 0A4",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.63987,
+    "lng": -73.87429
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://collegeboisbriand.qc.ca/",
   "admissions_url": "https://collegeboisbriand.qc.ca/procedure-dadmission/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Boisbriand is a French-language, secular, private and subsidized secondary school on Montreal's North Shore. It offers a programme that builds perseverance and academic success through daily physical activity.",
+  "description_fr": "Le Collège Boisbriand est un établissement d’enseignement secondaire francophone, laïc, privé et subventionné de la Rive-Nord de Montréal. Il offre un programme de motivation à la persévérance et à la réussite scolaire par la pratique quotidienne d’activité physique.",
   "source_url": "https://collegeboisbriand.qc.ca/",
-  "last_verified_at": "2026-09-22",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

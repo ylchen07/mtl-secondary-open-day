@@ -9,8 +9,11 @@
   "city": "Montréal",
   "address": "4635, chemin Queen Mary, Montréal, QC H3W 1W3",
   "postal_code": "H3W 1W3",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.49016,
+    "lng": -73.62437
+  },
+  "geocode_precision": "exact",
   "website_url": "https://www.cimf.ca/",
   "admissions_url": "https://www.cimf.ca/admission/sinscrire/",
   "tuition_annual_cad": null,

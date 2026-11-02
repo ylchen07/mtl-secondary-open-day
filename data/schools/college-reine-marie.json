@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "9300, boulevard Saint-Michel",
   "postal_code": "H1Z 3H1",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.57283,
+    "lng": -73.63305
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.reine-marie.qc.ca/",
   "admissions_url": "https://www.reine-marie.qc.ca/admission/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Reine-Marie is a private secondary school on the island of Montreal, where each student chooses a profile on entry.",
+  "description_fr": "Le Collège Reine-Marie est un établissement d'enseignement secondaire privé situé sur l'île de Montréal, où chaque élève choisit un profil dès son entrée.",
   "source_url": "https://www.reine-marie.qc.ca/admission/",
-  "last_verified_at": "2026-09-12",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": [
     {

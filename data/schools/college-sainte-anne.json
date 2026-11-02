@@ -9,8 +9,11 @@
   "city": "Lachine",
   "address": "1250, boulevard Saint-Joseph, Lachine, QC H8S 2M8",
   "postal_code": "H8S 2M8",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.43259,
+    "lng": -73.67409
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://secondaire.lachine.sainteanne.ca/",
   "admissions_url": "https://secondaire.lachine.sainteanne.ca/admission/",
   "tuition_annual_cad": 5982,

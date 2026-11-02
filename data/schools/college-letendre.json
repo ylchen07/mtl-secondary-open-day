@@ -9,17 +9,20 @@
   "city": "Laval",
   "address": "1000, boulevard de l'Avenir",
   "postal_code": "H7N 6J6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.56053,
+    "lng": -73.7225
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.collegeletendre.qc.ca/journee-portes-ouvertes/",
   "admissions_url": "https://www.collegeletendre.qc.ca/journee-portes-ouvertes/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 4965,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Letendre is a private secondary school offering a French-language, secular learning environment.",
+  "description_fr": "Le Collège Letendre est un établissement privé d’enseignement secondaire qui offre un milieu éducatif francophone et laïc.",
   "source_url": "https://www.collegeletendre.qc.ca/journee-portes-ouvertes/",
-  "last_verified_at": "2026-09-13",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

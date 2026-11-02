@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "3791, chemin Queen Mary",
   "postal_code": "H3V 1A8",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.49373,
+    "lng": -73.62201
+  },
+  "geocode_precision": "exact",
   "website_url": "https://www.collegenotredame.com/",
   "admissions_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5625,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Notre-Dame is a private, co-educational, French-language Catholic secondary school in Montreal's Côte-des-Neiges–Notre-Dame-de-Grâce borough, founded in 1869 by the Congregation of Holy Cross.",
+  "description_fr": "Le Collège Notre-Dame est un collège secondaire privé, mixte, francophone et catholique de l'arrondissement Côte-des-Neiges–Notre-Dame-de-Grâce, à Montréal, fondé en 1869 par la Congrégation de Sainte-Croix.",
   "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
-  "last_verified_at": "2026-09-15",
+  "last_verified_at": "2026-11-01",
   "status": "published",
   "open_days": [
     {

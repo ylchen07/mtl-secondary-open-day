@@ -9,17 +9,20 @@
   "city": "Laval",
   "address": "1275, avenue du Collège",
   "postal_code": "H7C 1W8",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.61515,
+    "lng": -73.65132
+  },
+  "geocode_precision": "exact",
   "website_url": "https://collegelaval.ca/journee-portes-ouvertes/",
   "admissions_url": "https://collegelaval.ca/journee-portes-ouvertes/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5196,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Laval is a private secondary school in Laval, in education since 1888.",
+  "description_fr": "Le Collège Laval est une école secondaire privée à Laval qui œuvre dans l'éducation depuis 1888.",
   "source_url": "https://collegelaval.ca/journee-portes-ouvertes/",
-  "last_verified_at": "2026-09-13",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

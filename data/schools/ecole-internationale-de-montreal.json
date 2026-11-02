@@ -9,8 +9,11 @@
   "city": "Westmount",
   "address": "11, chemin de la Côte-Saint-Antoine, Westmount, QC H3Y 2H7",
   "postal_code": "H3Y 2H7",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.48678,
+    "lng": -73.59565
+  },
+  "geocode_precision": "exact",
   "website_url": "https://ecole-internationale.cssdm.gouv.qc.ca/",
   "admissions_url": "https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/",
   "tuition_annual_cad": null,

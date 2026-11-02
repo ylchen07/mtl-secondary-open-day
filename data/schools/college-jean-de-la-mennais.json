@@ -9,8 +9,11 @@
   "city": "La Prairie",
   "address": "870, chemin de Saint-Jean",
   "postal_code": "J5R 2L5",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.41282,
+    "lng": -73.48146
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://jdlm.qc.ca/",
   "admissions_url": "https://jdlm.qc.ca/",
   "tuition_annual_cad": null,

@@ -9,8 +9,11 @@
   "city": "Saint-Lambert",
   "address": "375, rue Riverside",
   "postal_code": "J4P 1B1",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.50467,
+    "lng": -73.51649
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://cdsl.qc.ca/admission/portesouvertes",
   "admissions_url": "https://cdsl.qc.ca/admission/portesouvertes",
   "tuition_annual_cad": null,

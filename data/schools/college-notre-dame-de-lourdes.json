@@ -9,17 +9,20 @@
   "city": "Longueuil",
   "address": "845, chemin Tiffin",
   "postal_code": "J4P 3G5",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.51549,
+    "lng": -73.51246
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.ndl.qc.ca/portes-ouvertes/",
   "admissions_url": "https://www.ndl.qc.ca/portes-ouvertes/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5188,
   "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.ndl.qc.ca/portes-ouvertes/",
-  "last_verified_at": "2026-09-22",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": [
     {

@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "2165, rue Baldwin",
   "postal_code": "H1L 5A7",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.59912,
+    "lng": -73.51601
+  },
+  "geocode_precision": "exact",
   "website_url": "https://collegemont-royal.qc.ca/",
   "admissions_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5050,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Mont-Royal is a private, co-educational secondary school that teaches in French.",
+  "description_fr": "Le Collège Mont-Royal est une institution privée et mixte d’enseignement secondaire, qui offre un enseignement en français.",
   "source_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
-  "last_verified_at": "2026-09-15",
+  "last_verified_at": "2026-11-01",
   "status": "published",
   "open_days": [
     {

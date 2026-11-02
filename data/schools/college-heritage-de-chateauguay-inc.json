@@ -9,17 +9,20 @@
   "city": "Châteauguay",
   "address": "270, boulevard D'Youville",
   "postal_code": "J6J 4R6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.37418,
+    "lng": -73.754
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.collegeheritage.ca/",
   "admissions_url": "https://www.collegeheritage.ca/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Héritage de Châteauguay is a private French-language school for students from Grade 5 to Secondary 5.",
+  "description_fr": "Le Collège Héritage de Châteauguay est une école privée francophone accueillant les élèves de la 5e année à la 5e secondaire.",
   "source_url": "https://www.collegeheritage.ca/fr",
-  "last_verified_at": "2026-09-13",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "12345, avenue de la Miséricorde",
   "postal_code": "H4J 2E8",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.53417,
+    "lng": -73.71852
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://collegepasteur.ca/portes-ouvertes-college-pasteur.php",
   "admissions_url": "https://collegepasteur.ca/portes-ouvertes-college-pasteur.php",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Pasteur, founded in 1956, is licensed to teach in French from kindergarten through elementary and secondary school.",
+  "description_fr": "Fondé en 1956, le Collège Pasteur détient un permis pour dispenser en français un enseignement de la maternelle au primaire et au secondaire.",
   "source_url": "https://collegepasteur.ca/portes-ouvertes-college-pasteur.php",
-  "last_verified_at": "2026-09-22",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": [
     {

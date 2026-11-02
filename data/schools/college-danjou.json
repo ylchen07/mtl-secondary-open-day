@@ -9,8 +9,11 @@
   "city": "Montréal",
   "address": "11000, rue Renaude-Lapointe",
   "postal_code": "H1J 2V7",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.6116,
+    "lng": -73.59227
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://collegedanjou.qc.ca/portes-ouvertes-presentielles/",
   "admissions_url": "https://collegedanjou.qc.ca/portes-ouvertes-presentielles/",
   "tuition_annual_cad": null,
@@ -19,7 +22,7 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://collegedanjou.qc.ca/portes-ouvertes-presentielles/",
-  "last_verified_at": "2026-09-21",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

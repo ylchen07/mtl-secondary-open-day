@@ -16,10 +16,10 @@
   "tuition_annual_cad": null,
   "has_boarding": true,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège St-Jean-Vianney is a private French-language elementary and secondary school set in a large natural estate in Rivière-des-Prairies, in east-end Montreal.",
+  "description_fr": "Le Collège St-Jean-Vianney est un établissement privé de langue française, du primaire au secondaire, ancré dans un vaste domaine naturel à Rivière-des-Prairies, dans l’est de Montréal.",
   "source_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
-  "last_verified_at": "2026-09-22",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

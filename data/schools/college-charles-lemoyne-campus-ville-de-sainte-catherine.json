@@ -9,8 +9,11 @@
   "city": "Sainte-Catherine",
   "address": "125, place Charles-Lemoyne",
   "postal_code": "J5C 0A1",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.39994,
+    "lng": -73.54756
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://monccl.com",
   "admissions_url": "https://monccl.com",
   "tuition_annual_cad": null,

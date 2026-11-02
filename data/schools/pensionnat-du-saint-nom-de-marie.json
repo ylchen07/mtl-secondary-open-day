@@ -9,8 +9,11 @@
   "city": "Montréal",
   "address": "628, chemin de la Côte-Sainte-Catherine, Outremont, QC H2V 2C5",
   "postal_code": "H2V 2C5",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.51196,
+    "lng": -73.6128
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.psnm.qc.ca/",
   "admissions_url": "https://www.psnm.qc.ca/admission",
   "tuition_annual_cad": null,

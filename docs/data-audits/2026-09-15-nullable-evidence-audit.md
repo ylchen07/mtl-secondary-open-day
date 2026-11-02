@@ -56,7 +56,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-saint-louis.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://collegesaintlouis.ecolelachine.com/historique/ ; https://collegesaintlouis.ecolelachine.com/admission/ | Added 2026-10-29. No boarding statement on official pages. |
 | `ecole-internationale-de-montreal.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/ | Added 2026-10-29. No boarding statement on official pages. |
 
-## Event field audit rows (26)
+## Event field audit rows (27)
 
 | File | Field | Identity (`starts_at + type`) | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -86,6 +86,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-sainte-anne.json` | `registration_required` | `2026-09-27T09:00:00-04:00 + entrance_exam` | `null` | `null` | `unsupported-negative` | https://secondaire.lachine.sainteanne.ca/admission/ | Added 2026-10-29. « seuls les candidats sélectionnés seront convoqués » — attendance by invitation; no booking URL. |
 | `college-sainte-anne.json` | `registration_required` | `2026-09-27T13:00:00-04:00 + entrance_exam` | `null` | `null` | `unsupported-negative` | https://secondaire.lachine.sainteanne.ca/admission/ | Added 2026-10-29. « seuls les candidats sélectionnés seront convoqués » — attendance by invitation; no booking URL. |
 | `ecole-internationale-de-montreal.json` | `registration_required` | `2026-09-19T13:00:00-04:00 + open_house` | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/ | Added 2026-10-29. « Étape 1 (facultative) Assister à nos portes ouvertes du 19 septembre 2026 Heures : de 13 h à 16 h »; no booking requirement stated. |
+| `college-saint-sacrement.json` | `registration_required` | `2027-09-18T10:00:00-04:00 + open_house` | `null` | `null` | `unsupported-negative` | https://collegesaintsacrement.qc.ca/portes-ouvertes/ | Research apply 2026-11-01: «Samedi 18 septembre 2027 de 10h à 14 h» |
 
 ## Publication-critical matrix
 
@@ -125,6 +126,7 @@ This matrix resolves the no-grandfathering review for every record that was publ
 | event | `villa-sainte-marcelline|2026-10-03T10:00:00-04:00|open_house` | PASS | https://villa.marcelline.qc.ca/admissions/portes-ouvertes/ | Official page states Saturday, October 3, 2026, 10h–15h, open house for preschool/primary/secondary with an embedded reservation form; parent school's language blocker is now resolved. |
 | event | `villa-sainte-marcelline|2026-11-04T00:00:00-05:00|interview` | PASS | https://villa.marcelline.qc.ca/admissions/ | Published 2026-10-29: official admissions page states "Date limite 30 octobre pour les entretiens d'admission du mercredi 4 novembre" under a banner opening "1re à 3e secondaire" for 2027–2028, and its Secondaire section says complete files are invited to "une rencontre d'admission". No clock time is published, so the event is date-only. See `docs/data-audits/2026-10-29-interview-schedule-research.md`. |
 | school | `ecole-secondaire-marcellin-champagnat` | FAIL | https://esmc.qc.ca/ ; https://esmc.qc.ca/nous-joindre/ ; https://esmc.qc.ca/a-propos/valeurs-historique/ ; https://esmc.qc.ca/admission/portes-ouvertes/ ; https://esmc.qc.ca/admission/demandes-admission/ | 2026-09-22: the Sept 19 open-house date passed with instructional language still unresolved. Removed as a dead lead — record stays draft with zero events. The same admission page now advertises a Sept 26, 2026 entrance exam (two sessions, 8h30 and 13h, explicitly for incoming 1re secondaire / 6e année), but no end time is stated for either session, so it cannot be added as a draft event under the schema's required `ends_at` field. Logged as a lead for the next harvest rather than fabricated. See `docs/data-audits/2026-09-20-removed-unverifiable-events.md`. |
+| event | `college-saint-sacrement|2027-09-18T10:00:00-04:00|open_house` | PASS | https://collegesaintsacrement.qc.ca/portes-ouvertes/ | Research apply 2026-11-01: «Samedi 18 septembre 2027 de 10h à 14 h» |
 
 
 All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time** were rechecked against current school-owned pages. `has_boarding: null` and `registration_required: null` were not treated as blockers. A check mark means the required fact is supported by the cited official pages; a cross means the named non-nullable blocker remains.
@@ -198,6 +200,7 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - **2026-10-29 admission-interview research** (all 40 school records): one verified interview date published — Villa Sainte-Marcelline, Wednesday 4 November 2026, date-only. Every other school either does not mention interviews or schedules them privately without published dates. Full per-school ledger: `docs/data-audits/2026-10-29-interview-schedule-research.md`.
 - Reviewed totals after the 2026-10-29 interview research: **13 published schools and 16 published events**.
 - **2026-10-29 school-list expansion**: five schools added — Collège Jean-Eudes, Collège de Montréal, Collège Sainte-Anne (Lachine), and the public schools Collège Saint-Louis (CSSMB) and École internationale de Montréal (CSSDM); `sector` (`private` | `public`) added to every record. All five are draft, and Collège Sainte-Marcelline, Collège Regina Assumpta, PSNM and CIMF stay draft after recheck. Blockers and evidence: `docs/data-audits/2026-10-29-school-list-expansion.md`. Totals unchanged: **13 published schools and 16 published events**.
+- **2026-11-01 research pipeline, first run** (`2026-11-01-research-pipeline-first-run.md`): one event published — Collège Saint-Sacrement open house, Saturday 18 September 2027, 10h–14h. Reviewed totals: **13 published schools and 17 published events**.
 
 ## Mechanical coverage summary
 

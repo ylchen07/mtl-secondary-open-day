@@ -9,17 +9,20 @@
   "city": "Rosemère",
   "address": "535, rue Lefrançois",
   "postal_code": "J7A 4R5",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.65116,
+    "lng": -73.78829
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.externat.qc.ca/",
   "admissions_url": "https://www.externat.qc.ca/demarche-admission",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5280,
   "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.externat.qc.ca/",
-  "last_verified_at": "2026-09-13",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": []
 }

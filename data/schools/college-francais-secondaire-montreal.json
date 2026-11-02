@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "185, avenue Fairmount Ouest",
   "postal_code": "H2T 2M6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.52182,
+    "lng": -73.59666
+  },
+  "geocode_precision": "exact",
   "website_url": "https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/",
   "admissions_url": "https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/",
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Français is a private French-language secondary school, and the first secular co-educational college in Quebec.",
+  "description_fr": "Le Collège Français est un établissement privé d'enseignement secondaire de langue française, et le premier collège laïque et mixte au Québec.",
   "source_url": "https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/",
-  "last_verified_at": "2026-09-22",
+  "last_verified_at": "2026-11-01",
   "status": "draft",
   "open_days": [
     {
