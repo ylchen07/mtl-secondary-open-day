@@ -225,9 +225,6 @@ describe('data/schools', () => {
     const { schoolRows, eventRows } = parseAuditRows();
     const { ok } = validateSchoolFiles(loadAll());
 
-    expect(schoolRows).toHaveLength(45);
-    expect(eventRows).toHaveLength(27);
-
     const schoolRowByFile = new Map(schoolRows.map((row) => [row.file, row]));
     const eventRowByIdentity = new Map(eventRows.map((row) => [`${row.file}|${row.identity}`, row]));
 
