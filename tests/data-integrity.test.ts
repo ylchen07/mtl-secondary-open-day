@@ -133,14 +133,6 @@ describe('data/schools', () => {
     expect(errors).toEqual([]);
   });
 
-  it('every published school has at least one event', () => {
-    const { ok } = validateSchoolFiles(loadAll());
-    const barren = ok
-      .filter((s) => s.status === 'published' && s.open_days.length === 0)
-      .map((s) => s.slug);
-    expect(barren).toEqual([]);
-  });
-
   it('has the reviewed publication counts and no published event under a draft school', () => {
     const { ok } = validateSchoolFiles(loadAll());
     const publishedSchools = ok.filter((school) => school.status === 'published');
@@ -150,8 +142,8 @@ describe('data/schools', () => {
         .map((event) => ({ school, event })),
     );
 
-    expect(publishedSchools).toHaveLength(13);
-    expect(publishedEvents).toHaveLength(17);
+    expect(publishedSchools).toHaveLength(18);
+    expect(publishedEvents).toHaveLength(18);
     expect(
       publishedEvents
         .filter(({ school }) => school.status !== 'published')

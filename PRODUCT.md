@@ -81,11 +81,13 @@ away.
 
 ### Content truth
 
-- A school is `draft` until a human confirms it against the school's own site.
-  Draft schools appear in the directory with only their confirmed facts
+- A school is `draft` until a human confirms its address, language of
+  instruction, student body and Secondary 1 admission on the school's own
+  site. Draft schools appear in the directory with only their confirmed facts
   (name, city, region, sector); unconfirmed facts such as language, student
   body, description and street address are hidden and never match a filter.
-  Draft events are never shown.
+  A confirmed school is published even before it posts any event: its page
+  says no admissions event has been observed yet. Draft events are never shown.
 - Descriptions, tuition and coordinates are optional. A verified date with a
   source link is the whole product; everything else is decoration.
 - Events with a published date but no published time are omitted rather than
@@ -98,8 +100,8 @@ away.
 
 ### Scale to design for
 
-As of 2026-10-31: 45 schools on file (13 published, 32 draft; 43 private,
-2 public) and 16 published events. Target per season: ~40+ schools and 60+
+As of 2026-11-02: 45 schools on file (18 published, 27 draft; 43 private,
+2 public) and 18 published events. Target per season: ~40+ schools and 60+
 events, clustered heavily into four or five Saturdays. **The design must be
 judged at 60 events, not at today's count**: density and conflict legibility
 are the real test.
