@@ -191,6 +191,26 @@ describe('collectEvidence', () => {
       ['Préscolaire Primaire Secondaire', 'Droits de scolarité¹', '(services éducatifs) 7 050 $ 4 510 $ 5 335 $'],
     ]);
   });
+
+  it('reads a flattened fees header row as one heading', () => {
+    const fees = ['Items', 'Grades 7 – 10', 'Grade 11', 'Tuition', '$10,050', 'Ancillary Fee', '$5,300'];
+    const items = collectEvidence(draft(), [page('https://test.qc.ca/fees/', fees)], TODAY).items;
+    expect(items.filter((i) => i.fact === 'tuition').map((i) => i.lines)).toEqual([['Grades 7 – 10', 'Grade 11', 'Tuition', '$10,050']]);
+  });
+
+  it('takes a school saying what it is from any page, ahead of other summaries', () => {
+    const about = page('https://test.qc.ca/a-propos/', ['Le Collège Test est un milieu de vie dynamique et stimulant pour tous les élèves du secondaire.']);
+    const admission = page('https://test.qc.ca/admission/', [
+      'Le Collège Test est un établissement d’enseignement secondaire privé francophone situé au pied du mont.',
+      'Un établissement privé francophone mixte d’enseignement reconnu par le ministère de l’Éducation',
+    ]);
+    const items = collectEvidence(draft(), [about, admission], TODAY).items.filter((i) => i.fact === 'description');
+    expect(items.map((i) => i.lines[0])).toEqual([
+      'Le Collège Test est un établissement d’enseignement secondaire privé francophone situé au pied du mont.',
+      'Un établissement privé francophone mixte d’enseignement reconnu par le ministère de l’Éducation',
+      'Le Collège Test est un milieu de vie dynamique et stimulant pour tous les élèves du secondaire.',
+    ]);
+  });
 });
 
 describe('applyAnswers', () => {

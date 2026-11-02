@@ -82,8 +82,8 @@ const PATTERNS: Record<'language' | 'gender', (text: string) => boolean> = {
 const TUITION_WORD = /scolarit|tuition|frais\s+annuels/i;
 const AMOUNT = /\d[\d\s  ,.]*\s?\$|\$\s?\d/;
 const LEVEL =
-  /secondaire|secondary|high\s+school|grade\s+(?:\d{1,2})\b|primaire|pr[ée]scolaire|maternelle|kindergarten|elementary/i;
-const SECONDARY_ONE = /secondaire|secondary|high\s+school|grade\s+7\b/i;
+  /secondaire|secondary|high\s+school|grades?\s+(?:\d{1,2})\b|primaire|pr[ée]scolaire|maternelle|kindergarten|elementary/i;
+const SECONDARY_ONE = /secondaire|secondary|high\s+school|grades?\s+7\b/i;
 /** How far above a fees row its level heading may sit. */
 const LEVEL_LOOKBACK = 12;
 
@@ -100,8 +100,14 @@ function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
     if (!TUITION_WORD.test(line)) return;
     const groups = sentencesMatching(line, (s) => TUITION_WORD.test(s) && AMOUNT.test(s)).map((s) => [s]);
     if (groups.length === 0 && line.length <= 120) {
-      // A label row: its amounts are the short lines just below it.
-      const amounts = lines.slice(i + 1, i + 4).filter((l) => l.length <= 60 && AMOUNT.test(l) && !TUITION_WORD.test(l));
+      // A label row: its amounts are the short lines just below it, up to the
+      // next row; a note line («Date limite…») may sit before the first amount.
+      const amounts: string[] = [];
+      for (const next of lines.slice(i + 1, i + 4)) {
+        const isAmount = next.length <= 60 && AMOUNT.test(next) && !TUITION_WORD.test(next);
+        if (isAmount) amounts.push(next);
+        else if (amounts.length > 0) break;
+      }
       if (amounts.length > 0) groups.push([line, ...amounts]);
     }
     for (const group of groups) {
@@ -109,12 +115,18 @@ function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
       if (LEVEL.test(text)) {
         if (!SECONDARY_ONE.test(text)) continue;
       } else {
-        const heading = lines
-          .slice(Math.max(0, i - LEVEL_LOOKBACK), i)
-          .reverse()
-          .find((l) => l.length <= 120 && LEVEL.test(l));
-        if (heading && !SECONDARY_ONE.test(heading)) continue;
-        if (heading) group.unshift(heading);
+        // The nearest level heading, with the heading cells just above it: a
+        // flattened header row («Grades 7 – 10» / «Grade 11») is one heading.
+        const start = Math.max(0, i - LEVEL_LOOKBACK);
+        let last = i - 1;
+        while (last >= start && !(lines[last].length <= 120 && LEVEL.test(lines[last]))) last--;
+        if (last >= start) {
+          let first = last;
+          while (first - 1 >= start && lines[first - 1].length <= 120 && LEVEL.test(lines[first - 1])) first--;
+          const heading = lines.slice(first, last + 1);
+          if (!heading.some((l) => SECONDARY_ONE.test(l))) continue;
+          group.unshift(...heading);
+        }
       }
       out.push({ fact: 'tuition', lines: group, page: index, hash: hashEvidence('tuition', group) });
     }
@@ -122,9 +134,17 @@ function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
   return out;
 }
 
-const SELF_REFERENCE = /\b(?:[ée]cole|coll[èe]ge|school|college|[ée]tablissement|institution)\b/i;
+const SELF_REFERENCE = /(?<!\p{L})(?:[ée]cole|coll[èe]ge|school|college|[ée]tablissement|institution)(?!\p{L})/iu;
 const ABOUT_URL = /[àa]-?propos|about|qui-sommes|mission|histori|notre-/i;
 const POSTAL = /\b[A-Z]\d[A-Z]\s?\d[A-Z]\d\b/i;
+/**
+ * A school saying what it is: «X est un établissement…», «we are an independent … institution».
+ * Letter lookarounds, not `\b`: `\b` treats «é» as a non-word character, so `\bétablissement` never matches.
+ */
+const IDENTITY =
+  /(?<!\p{L})(?:est|is|are|sommes)\s+(?:un|une|a|an)(?!\p{L}).{0,120}?(?<!\p{L})(?:[ée]tablissement|[ée]cole|coll[èe]ge|school|institution|college|organisme)(?!\p{L})|^(?:un|une)\s+(?:[ée]tablissement|[ée]cole)(?!\p{L})/iu;
+/** A site's home page, in any language root. */
+const HOME_PATH = /^\/(?:fr|en)?\/?$/;
 
 /** Long paragraphs are cut to the sentences that match, so a hit costs a sentence, not a page section. */
 function sentencesMatching(line: string, test: (s: string) => boolean): string[] {
@@ -225,13 +245,19 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
   const out: Evidence[] = [];
   pages.forEach((page, index) => {
     if (fact === 'description') {
-      // The school's summary of itself lives on its home and about pages; an
-      // admission page's summary describes that page, not the school.
-      if (page.url !== school.website_url && !ABOUT_URL.test(page.url)) return;
+      // A school saying what it is counts on any page; other summaries only
+      // on its home and about pages, since an admission page's summary
+      // describes that page, not the school.
+      for (const line of page.lines) {
+        for (const s of sentencesMatching(line, (t) => t.length >= 60 && IDENTITY.test(t))) {
+          out.push({ fact, lines: [s], page: index, hash: hashEvidence(fact, [s]) });
+        }
+      }
+      const home = page.url === school.website_url || HOME_PATH.test(new URL(page.url).pathname);
+      if (!home && !ABOUT_URL.test(page.url)) return;
       if (page.description && page.description.length >= 40 && SELF_REFERENCE.test(page.description)) {
         out.push({ fact, lines: [page.description], page: index, hash: hashEvidence(fact, [page.description]) });
       }
-      if (!ABOUT_URL.test(page.url)) return;
       for (const line of page.lines) {
         for (const s of sentencesMatching(line, (t) => t.length >= 80 && SELF_REFERENCE.test(t))) {
           out.push({ fact, lines: [s], page: index, hash: hashEvidence(fact, [s]) });
@@ -250,10 +276,15 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
       }
     }
   });
-  if (fact !== 'tuition') return out;
-  // Rows that name Secondary 1 are the strongest; they fill the cap first.
-  const named = (item: Evidence) => SECONDARY_ONE.test(item.lines.join(' '));
-  return [...out.filter(named), ...out.filter((item) => !named(item))];
+  // The strongest lines fill the cap first: fees rows that name Secondary 1,
+  // and a school's own statement of what it is.
+  const strong =
+    fact === 'tuition'
+      ? (item: Evidence) => SECONDARY_ONE.test(item.lines.join(' '))
+      : fact === 'description'
+        ? (item: Evidence) => IDENTITY.test(item.lines.join(' '))
+        : null;
+  return strong ? [...out.filter(strong), ...out.filter((item) => !strong(item))] : out;
 }
 
 const compactPostal = (text: string): string => text.replace(/\s+/g, '').toUpperCase();
