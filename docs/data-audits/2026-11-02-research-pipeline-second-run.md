@@ -73,9 +73,29 @@ Not promoted, pending a decision: École Marie-Clarac states « SECONDAIRE – 1
 
 Totals: 18 published schools, 27 drafts, 18 published events.
 
+## Published schools with missing facts
+
+After the promotions, 7 of 18 published schools had no description and 6 had no tuition. Three causes were in the pipeline, not on the sites:
+
+- Descriptions were looked for only on the record's own website URL (often a deep page, such as Trinité's `/portes-ouvertes/`) and on about-style URLs. Sentences where a school states what it is, on any page, are now taken first.
+- `\b` in JavaScript regexes treats accented letters as non-word characters, so `\bétablissement` and `\bécole` never matched after a space. The self-reference and identity patterns now use Unicode letter boundaries. This had hidden sentences such as Trinité's « est un établissement d’enseignement secondaire privé francophone » since the first run.
+- North Star's fees header row « Grades 7 – 10 / Grade 11 » flattened into two lines, and the nearest one (Grade 11) dropped the row. A run of heading cells is now read as one heading. The amount collector also stops at the end of its row.
+
+Applied, all quote-verified: descriptions for North Star, both Charles-Lemoyne campuses, d'Anjou, Durocher and Trinité (published), and for Beaubois, Citoyen, Notre-Dame-de-Lourdes, Externat Sacré-Coeur, Azrieli and Marcellin-Champagnat (drafts); North Star tuition $10,050 (Canadian students, Grades 7–11, 2026-2027); Beaubois language `fr` (« offerts en français »).
+
+What published schools still lack, and why:
+
+| School | Missing | Why |
+|---|---|---|
+| Collège Saint-Sacrement | description | Its site has promotional text only (« programmes d’études secondaires de qualité, des installations exceptionnelles ») and history |
+| d'Anjou, Collège Français Montréal, Trinité, Villa Sainte-Marcelline | tuition | No annual fee is published on any page the crawl reached, sitemap included |
+| Collège Saint-Maurice | tuition | Its fees page lists other fees and payment plans, but no annual tuition amount |
+| Collège Saint-Maurice | map position | Saint-Hyacinthe is outside the Greater Montreal map |
+| Collège Trinité | map position | OpenStreetMap has rang des Vingt with no house number; a street-level pin was refused |
+
 ## Still open
 
 - **Upcoming events:** 4 events on file are today or later. Most schools publish next fall's open houses in spring or summer, so the next run should be then.
-- **Tuition (20) and descriptions (19):** their sites have no fees page or about summary the crawl can reach. Several are public schools (École internationale, Saint-Louis), which charge no private tuition.
+- **Tuition (19) and descriptions (7):** their sites have no fees page or factual summary the crawl can reach. Several are public schools (École internationale, Saint-Louis), which charge no private tuition.
 - **Pensionnat du Saint-Nom-de-Marie:** its site answers every request with Vercel's bot checkpoint (HTTP 429). The pipeline does not get around a site's bot protection; this school needs a person.
 - **Admission portals** (PedNet, Pluriportail) are application forms with no public facts.

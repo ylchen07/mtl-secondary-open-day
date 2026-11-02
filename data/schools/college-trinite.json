@@ -16,10 +16,10 @@
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Trinité is a private French-language secondary school in Montérégie, at the foot of Mont Saint-Bruno.",
+  "description_fr": "Le Collège Trinité est un établissement d’enseignement secondaire privé francophone situé en Montérégie, au pied du mont Saint-Bruno.",
   "source_url": "https://collegetrinite.ca/portes-ouvertes/",
-  "last_verified_at": "2026-09-19",
+  "last_verified_at": "2026-11-02",
   "status": "published",
   "open_days": [
     {

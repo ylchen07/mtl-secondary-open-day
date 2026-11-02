@@ -1,8 +1,13 @@
 {
   "academie-etoile-du-nord-laval-north-star-academy-laval": [
+    "03486d8d36",
     "0821cec446",
     "139b5ff71a",
+    "1bb05708af",
+    "25c266581b",
     "336726b57a",
+    "4f16248b74",
+    "94a95b6e9e",
     "c903889809"
   ],
   "college-beaubois": [
@@ -12,6 +17,7 @@
     "16d8b68aac",
     "1e1dd503a3",
     "2c171a3292",
+    "36e92834df",
     "617f0ee51f",
     "63a7ceb61a",
     "657db34be3",
@@ -23,9 +29,12 @@
     "bf2ff98d33",
     "c5816d052e",
     "c6ed99c7fa",
+    "ddc1cb444a",
     "e3da723d2a",
     "e644f6e00d",
-    "f0363dd183"
+    "eedd45851c",
+    "f0363dd183",
+    "f1b18efc0e"
   ],
   "college-boisbriand": [
     "2bde6cf6db",
@@ -37,6 +46,9 @@
   ],
   "college-charles-lemoyne-campus-longueuil-saint-lambert": [
     "008b03ac81",
+    "40747f5859",
+    "52e883b1ce",
+    "5e7b682b44",
     "a2cada9464",
     "aed861d92d",
     "b24a81f4cf",
@@ -45,6 +57,9 @@
   ],
   "college-charles-lemoyne-campus-ville-de-sainte-catherine": [
     "008b03ac81",
+    "40747f5859",
+    "52e883b1ce",
+    "5e7b682b44",
     "a2cada9464",
     "aed861d92d",
     "b24a81f4cf",
@@ -55,19 +70,27 @@
     "355611afe1",
     "3ee227bd5a",
     "41a993c95e",
+    "7968ecf92c",
     "87d3f281ce",
+    "8a0e324b7d",
     "96dea25b63",
     "cf9a1d0469",
+    "d0d3173ba6",
     "d1cdaea124",
+    "e0372c6b10",
+    "e7cc67a4d3",
     "f73994a026",
     "f7ef61d466",
     "f8e2597944"
   ],
   "college-danjou": [
     "2ddcb24749",
+    "c7d0cd57bc",
+    "cc889f8fc9",
     "cf79cc7b43",
     "dd4fc4b60c",
-    "e75f0ad3c3"
+    "e75f0ad3c3",
+    "f497111813"
   ],
   "college-de-montreal": [
     "4b23a15bb5",
@@ -81,6 +104,7 @@
     "e572763751"
   ],
   "college-durocher-saint-lambert": [
+    "75dc6fb1f9",
     "81ad0fdf01",
     "bc1f1dc7e6",
     "cae7441fd6",
@@ -102,8 +126,11 @@
   ],
   "college-francais-secondaire-longueuil": [
     "33c9cd1556",
+    "38b2b0f7a5",
     "405462846b",
+    "7135955e41",
     "8bf08e40f7",
+    "9e4f352b90",
     "b9e87b0a17",
     "cc8578dee5",
     "f0432aac61"
@@ -138,9 +165,12 @@
   "college-jean-de-la-mennais": [
     "08afe0af1f",
     "7009e99267",
+    "813cd934ec",
+    "88c751a080",
     "9d49564455",
     "c6ab9b2751",
     "c93f347d9f",
+    "ec5f55dbaa",
     "f6f54413d8"
   ],
   "college-jean-eudes": [
@@ -187,11 +217,18 @@
   "college-notre-dame-de-lourdes": [
     "0773843fbf",
     "100752b4b3",
+    "2559a08031",
     "2ed50d9159",
     "2fa4cfe918",
+    "397b027bfa",
     "3c243085af",
+    "4ca36a664f",
+    "7ab3422120",
     "87275a1ba0",
+    "8d9af07389",
     "a5d41f81a8",
+    "b728b25338",
+    "d7eb46d319",
     "edf87e5f51",
     "f4bfd8c103",
     "fea7fa6e04"
@@ -205,8 +242,10 @@
   "college-regina-assumpta": [
     "069661185c",
     "157421be8d",
+    "3c94ced881",
     "5d76cdd16b",
-    "69320d80da"
+    "69320d80da",
+    "8a83d23faa"
   ],
   "college-reine-marie": [
     "4d67c80379",
@@ -236,12 +275,16 @@
     "3a7c12688b",
     "3dba33df8c",
     "518d474403",
-    "82746bff39"
+    "55c619bb63",
+    "82746bff39",
+    "8f78a86151"
   ],
   "college-sainte-anne": [
     "230db92786",
+    "49d12ef4e0",
     "52c4969111",
     "6641d13cfe",
+    "7250ccf097",
     "770b631d17",
     "8309a8fea2",
     "8fede9f615",
@@ -249,6 +292,7 @@
     "c17c34f293",
     "ca97d53f13",
     "d0dac6b50f",
+    "d1b1b327d4",
     "f9069b50e1"
   ],
   "college-sainte-marcelline": [
@@ -267,10 +311,12 @@
     "8d81d1ab13",
     "93cdfa5ba1",
     "9c87d375bd",
+    "b2ec7f74e7",
     "b49993e585",
     "bca0968e1a",
     "c6952116ca",
     "ca94e6673b",
+    "d9ed32d79b",
     "fbdb979e38"
   ],
   "college-st-jean-vianney": [
@@ -291,9 +337,14 @@
   "college-trinite": [
     "10a4285672",
     "282b759a78",
+    "82e610603b",
+    "93d9c3ef0f",
     "a3032e3a1c",
     "adffb45461",
-    "cbd8aba257"
+    "babd7c97da",
+    "c8b979768b",
+    "cbd8aba257",
+    "d952cab151"
   ],
   "ecole-internationale-de-montreal": [
     "1b620e416d",
@@ -321,7 +372,11 @@
     "1996f86032"
   ],
   "ecole-secondaire-marcellin-champagnat": [
+    "0bc1ad98b4",
+    "0fc6d269d9",
+    "355dc98ee9",
     "382e019bab",
+    "7632da112e",
     "7c9e0df2de"
   ],
   "ecole-socrates-demosthene-campus-socrates-ii": [
@@ -336,12 +391,14 @@
     "dabd9624cb"
   ],
   "externat-sacre-coeur": [
+    "20cd359c56",
     "21412b68e1",
     "2492146e35",
     "49ebffcdf4",
     "5539ab145d",
     "89850bd5da",
     "ad67abc702",
+    "b2a151360d",
     "bfbf1bf1ec",
     "c6c4adfc92",
     "cc9aa032e2",
@@ -358,6 +415,7 @@
     "924266be37",
     "a84ad10072",
     "c1ddf71614",
+    "db00000594",
     "f3cb5f1158"
   ],
   "lower-canada-college": [
@@ -373,6 +431,7 @@
     "4d49d9f93a",
     "58a74e784a",
     "95adb4a516",
+    "c5cc3ee814",
     "c68bf780a1",
     "c9cb810261",
     "e957955914",
