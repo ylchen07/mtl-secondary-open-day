@@ -90,7 +90,37 @@ Every host runs `pnpm` scripts only; the app itself is always built by `pnpm bui
 
 ## Keeping the data fresh
 
-`pnpm update:scan` watches each school's `admissions_url` without using any LLM tokens. It saves a normalized text snapshot per school in `data/watch/` (committed, so changes show up as git diffs), compares each fresh fetch against it, and writes `work/queue.md`: only the lines that gained a date or time. A changed page waits in `work/pending/` rather than replacing the baseline, so re-running the scan before reviewing never loses a change. Pages that fail to load, or return too little text (blocked or JS-rendered), are reported and never baselined.
+School data is filled and kept current by a research pipeline built to spend as few model tokens as possible: scripts do all the reading, and a model (or a person) reviews only the few lines that can answer an open question.
+
+```sh
+pnpm research           # fetch each school's site, write work/research/pack.md (no model)
+# review pack.md, write work/research/answers.json
+pnpm research:apply     # check every quote against the fetched page, write data/schools/*.json
+pnpm research:geocode   # place schools on the map from their street address (no model)
+```
+
+**`pnpm research`** reads up to 8 pages per school: its admissions, source and home pages, then the most relevant links found on them (open house, exam, admission, contact, about, tuition). It respects `robots.txt`, pauses between requests to the same site, and opens JS-rendered or bot-blocked pages in headless Chromium. It never sends a page to a model. For each school it looks only for what the record is missing: events always; description and tuition when empty; address, language and student body while the school is a draft. It keeps only the lines that can answer those, as verbatim quotes in `pack.md`. It drops:
+
+- dates already past, yearless dates that just passed, and events already on file;
+- deadlines and replies (you cannot attend a deadline), and other levels (primaire, collégial, Secondary 2–5);
+- lines repeated across pages, long paragraphs beyond the matching sentence, and lines already reviewed (`data/research/reviewed.json`, committed).
+
+A draft's address is settled without review when its postal code appears on the school's own site. PDFs are listed, not read.
+
+**Review** answers in `answers.json` (format at the top of `pack.md`). Every fact carries a verbatim `quote` and the `page` it came from. A school with nothing usable is listed as `{}` so its lines are never shown again.
+
+**`pnpm research:apply`** rejects a school's whole answer if any quote is not in the fetched page text or the result fails the schema. That makes a hallucinated date or fact impossible to write. It does not publish schools: promoting a draft stays a human decision against the publication bar.
+
+**`pnpm research:geocode`** asks OpenStreetMap Nominatim (one request per second) for each school without a location. It keeps a result only inside Greater Montreal and with the school's own postal code (`exact` for a numbered building with the full code, else `approximate`).
+
+First run, 2026-11-01, 45 schools. Token counts are estimates at 4 characters per token:
+
+| Stage | Tokens |
+|---|---|
+| Raw HTML of the 252 pages read | ≈10.9M |
+| Their visible text | ≈324k |
+| Review pack, first run | ≈14k (247 lines) |
+| Review pack, next run with nothing changed | 0 lines |
 
 ## Data corrections
 

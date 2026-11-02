@@ -27,7 +27,8 @@ export function htmlToLines(html: string): string[] {
 
   const lines: string[] = [];
   for (const raw of $('body').text().split(BREAK)) {
-    const line = raw.replace(/\s+/g, ' ').trim();
+    // Zero-width characters are invisible padding some site builders inject; they carry no text.
+    const line = raw.replace(/[\u200B-\u200D\u2060\uFEFF]/g, '').replace(/\s+/g, ' ').trim();
     if (line === '' || line === lines[lines.length - 1]) continue;
     lines.push(line);
   }

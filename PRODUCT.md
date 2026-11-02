@@ -54,9 +54,11 @@ away.
   validated on every build (`pnpm check:sources`, Zod schema). Candidate schools
   come from the FEEP directory (`pnpm harvest`) and stay `draft` until a human
   confirms them against the school's own site.
-- **Freshness:** `pnpm update:scan` watches each school's `admissions_url`,
-  keeps text snapshots in `data/watch/`, and queues only lines that gained a
-  date or time for human review.
+- **Freshness:** `pnpm research` reads each school's own site with scripts
+  only and hands a reviewer just the quotable lines that answer what the record
+  is missing; `pnpm research:apply` writes an answer only if its quote is in
+  the fetched page. Lines once reviewed are never shown again, so an unchanged
+  site costs nothing to re-check.
 - **Corrections:** if a date disagrees with the school, the school is right;
   corrections arrive as GitHub issues.
 - **Delivery:** Next.js on Vercel, deployed from `main` after CI passes.
@@ -113,7 +115,8 @@ are the real test.
 
 - `data/schools/*.json`: 45 school records with per-event `source_url` and
   `last_verified_at`.
-- `data/watch/`: text snapshots of each school's admissions page.
+- `data/research/reviewed.json`: which evidence lines have been reviewed per
+  school.
 - `docs/data-audits/`: dated audits of what was verified, removed and why.
 - No logo, imagery, testimonials, usage figures or school endorsements exist.
   Do not fabricate any of them.
