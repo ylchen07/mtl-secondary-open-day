@@ -9,17 +9,20 @@
   "city": "Montréal",
   "address": "12630, boulevard Gouin Est",
   "postal_code": "H1C 1C1",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.69255,
+    "lng": -73.52005
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.csjv.ca/fr",
   "admissions_url": "https://www.csjv.ca/fr/admission-secondaire-1",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 8525,
   "has_boarding": true,
   "programs": [],
   "description_en": "Collège St-Jean-Vianney is a private French-language elementary and secondary school set in a large natural estate in Rivière-des-Prairies, in east-end Montreal.",
   "description_fr": "Le Collège St-Jean-Vianney est un établissement privé de langue française, du primaire au secondaire, ancré dans un vaste domaine naturel à Rivière-des-Prairies, dans l’est de Montréal.",
   "source_url": "https://portesouvertes.csjv.ca/event-details/portes-ouvertes-csjv-visite-le-samedi-19-septembre-2026",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
   "open_days": []
 }

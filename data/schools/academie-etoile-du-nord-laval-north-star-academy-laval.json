@@ -9,8 +9,11 @@
   "city": "Laval",
   "address": "950, rue Élodie-Boucher",
   "postal_code": "H7W 0C6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.52551,
+    "lng": -73.77427
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://northstaracademy.ca/en/",
   "admissions_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
   "tuition_annual_cad": null,

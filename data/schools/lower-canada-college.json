@@ -16,13 +16,13 @@
   "geocode_precision": "exact",
   "website_url": "https://www.lcc.ca",
   "admissions_url": "https://www.lcc.ca/admissions/openhouse-info",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 27615,
   "has_boarding": false,
   "programs": [],
   "description_en": "Lower Canada College is an independent, co-educational day school in Montreal for students from kindergarten to Pre-University.",
   "description_fr": "Le Lower Canada College est une école de jour indépendante et mixte de Montréal, de la maternelle au préuniversitaire.",
   "source_url": "https://www.lcc.ca/admissions/openhouse-info",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
   "open_days": []
 }

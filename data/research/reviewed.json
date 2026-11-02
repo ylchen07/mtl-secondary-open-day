@@ -9,11 +9,17 @@
     "0423d8e9e1",
     "0ca872007e",
     "1268f2d66b",
+    "16d8b68aac",
+    "1e1dd503a3",
     "2c171a3292",
     "617f0ee51f",
     "63a7ceb61a",
+    "657db34be3",
     "6aa3668f40",
+    "79b081dc01",
+    "8d3d4e1b0b",
     "9d4dd3df26",
+    "afa32faa73",
     "bf2ff98d33",
     "c5816d052e",
     "c6ed99c7fa",
@@ -30,25 +36,35 @@
     "d90f7f6cfe"
   ],
   "college-charles-lemoyne-campus-longueuil-saint-lambert": [
+    "008b03ac81",
     "a2cada9464",
     "aed861d92d",
     "b24a81f4cf",
-    "c3b9ef6f74"
+    "c3b9ef6f74",
+    "f60de4c953"
   ],
   "college-charles-lemoyne-campus-ville-de-sainte-catherine": [
+    "008b03ac81",
     "a2cada9464",
     "aed861d92d",
     "b24a81f4cf",
-    "c3b9ef6f74"
+    "c3b9ef6f74",
+    "f60de4c953"
   ],
   "college-citoyen": [
+    "355611afe1",
     "3ee227bd5a",
     "41a993c95e",
+    "87d3f281ce",
+    "96dea25b63",
+    "cf9a1d0469",
     "d1cdaea124",
     "f73994a026",
+    "f7ef61d466",
     "f8e2597944"
   ],
   "college-danjou": [
+    "2ddcb24749",
     "cf79cc7b43",
     "dd4fc4b60c",
     "e75f0ad3c3"
@@ -65,6 +81,9 @@
     "e572763751"
   ],
   "college-durocher-saint-lambert": [
+    "81ad0fdf01",
+    "bc1f1dc7e6",
+    "cae7441fd6",
     "cc7a802f20",
     "d7f340eb80",
     "e2b9f45e59",
@@ -74,8 +93,12 @@
     "05d8bcaa99",
     "094a88d987",
     "1a144a7600",
+    "5008029d7b",
+    "8101bedbed",
     "8642b21d7d",
-    "b18b4f9878"
+    "ade4689c80",
+    "b18b4f9878",
+    "f1945c3b1a"
   ],
   "college-francais-secondaire-longueuil": [
     "33c9cd1556",
@@ -94,12 +117,23 @@
     "f0432aac61"
   ],
   "college-heritage-de-chateauguay-inc": [
+    "8344d2f758",
     "cacf04b5c6"
   ],
   "college-international-marie-de-france": [
+    "0ba607dcd4",
     "2118c19839",
     "3394bfe0c2",
+    "74e783b909",
+    "a1457f9b65",
     "c4b3463743"
+  ],
+  "college-jean-de-brebeuf": [
+    "489cfb9dd8",
+    "8227f85ab2",
+    "c0993caeae",
+    "e388a8191f",
+    "e8c9dde688"
   ],
   "college-jean-de-la-mennais": [
     "08afe0af1f",
@@ -125,7 +159,8 @@
     "39d1f037a9",
     "44e0d0a74e",
     "4558a61c7d",
-    "4632a64635"
+    "4632a64635",
+    "908eea6a0e"
   ],
   "college-letendre": [
     "0a774c9c74",
@@ -153,6 +188,7 @@
     "0773843fbf",
     "100752b4b3",
     "2ed50d9159",
+    "2fa4cfe918",
     "3c243085af",
     "87275a1ba0",
     "a5d41f81a8",
@@ -168,6 +204,7 @@
   ],
   "college-regina-assumpta": [
     "069661185c",
+    "157421be8d",
     "5d76cdd16b",
     "69320d80da"
   ],
@@ -180,9 +217,11 @@
     "f7e5624ea2"
   ],
   "college-saint-louis": [
+    "14fb649028",
     "1fef88804a",
     "5263d3fe9e",
     "bfceb15e58",
+    "c223ed8f63",
     "f2a2c345b7"
   ],
   "college-saint-maurice": [
@@ -192,6 +231,7 @@
     "6a269236aa"
   ],
   "college-saint-sacrement": [
+    "117b4f8546",
     "1af9874934",
     "3a7c12688b",
     "3dba33df8c",
@@ -199,14 +239,20 @@
     "82746bff39"
   ],
   "college-sainte-anne": [
+    "230db92786",
     "52c4969111",
     "6641d13cfe",
+    "770b631d17",
     "8309a8fea2",
     "8fede9f615",
+    "9cc6154b5c",
     "c17c34f293",
-    "d0dac6b50f"
+    "ca97d53f13",
+    "d0dac6b50f",
+    "f9069b50e1"
   ],
   "college-sainte-marcelline": [
+    "1ae9efce68",
     "20092a79b7",
     "2ecc4cdf06",
     "33717e3587",
@@ -222,13 +268,23 @@
     "93cdfa5ba1",
     "9c87d375bd",
     "b49993e585",
+    "bca0968e1a",
+    "c6952116ca",
+    "ca94e6673b",
     "fbdb979e38"
   ],
   "college-st-jean-vianney": [
     "2e2fd4b5f8",
+    "3c2874a45d",
     "40040578df",
+    "463c66a4bf",
     "4af98e13a4",
+    "5cbdb4d0c9",
+    "78901b72e2",
+    "81ea9ed233",
     "86ad3daddd",
+    "9e435694b6",
+    "a4967b841c",
     "cf99040dd4",
     "fd68299018"
   ],
@@ -241,8 +297,11 @@
   ],
   "ecole-internationale-de-montreal": [
     "1b620e416d",
+    "279e12c4ec",
+    "ba81ea9a98",
     "c5451c70f2",
-    "e82edb9716"
+    "e82edb9716",
+    "f6bc588058"
   ],
   "ecole-marie-clarac": [
     "024bc6dab0",
@@ -282,8 +341,10 @@
     "49ebffcdf4",
     "5539ab145d",
     "89850bd5da",
+    "ad67abc702",
     "bfbf1bf1ec",
     "c6c4adfc92",
+    "cc9aa032e2",
     "e1cb9dd03e",
     "e28f1c5c74",
     "e3bd30c4e1"
@@ -291,15 +352,19 @@
   "les-ecoles-azrieli-talmud-torah-herzliah": [
     "68698c40f3",
     "6936817da6",
+    "77789180a2",
     "7d863f4e7d",
     "8fdf9364a3",
     "924266be37",
+    "a84ad10072",
     "c1ddf71614",
     "f3cb5f1158"
   ],
   "lower-canada-college": [
     "02c81b97b7",
+    "03c6931dee",
     "0640d5043d",
+    "069dedb73a",
     "0b862b8389",
     "21f3064693",
     "22541c35cb",
@@ -307,8 +372,10 @@
     "3cc3994045",
     "4d49d9f93a",
     "58a74e784a",
+    "95adb4a516",
     "c68bf780a1",
     "c9cb810261",
+    "e957955914",
     "eb1eae02c7"
   ],
   "loyola-high-school": [
@@ -321,11 +388,24 @@
     "d4f185f32c"
   ],
   "study": [
+    "0951aca8a6",
+    "0992187976",
+    "0ca63bab09",
     "1590c4b5f2",
+    "188681a6e2",
     "4b34d8df35",
     "537e15ea17",
+    "5c470c25cf",
+    "67ca7832d3",
     "6da48dd454",
+    "af5ac2fc91",
     "dda698dd3f",
     "fb91e6a1ce"
+  ],
+  "villa-sainte-marcelline": [
+    "4bc71e930a",
+    "d56b2353aa",
+    "dd05fa10dc",
+    "f3b8b401b6"
   ]
 }

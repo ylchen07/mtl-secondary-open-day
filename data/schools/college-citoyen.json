@@ -9,8 +9,11 @@
   "city": "Laval",
   "address": "4001, boulevard Sainte-Rose",
   "postal_code": "H7R 1W6",
-  "location": null,
-  "geocode_precision": "missing",
+  "location": {
+    "lat": 45.55091,
+    "lng": -73.87158
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://www.collegecitoyen.ca/portes-ouvertes/",
   "admissions_url": "https://www.collegecitoyen.ca/portes-ouvertes/",
   "tuition_annual_cad": null,
@@ -19,7 +22,7 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.collegecitoyen.ca/portes-ouvertes/",
-  "last_verified_at": "2026-09-13",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
   "open_days": []
 }

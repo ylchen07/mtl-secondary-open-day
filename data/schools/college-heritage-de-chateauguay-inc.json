@@ -22,7 +22,20 @@
   "description_en": "Collège Héritage de Châteauguay is a private French-language school for students from Grade 5 to Secondary 5.",
   "description_fr": "Le Collège Héritage de Châteauguay est une école privée francophone accueillant les élèves de la 5e année à la 5e secondaire.",
   "source_url": "https://www.collegeheritage.ca/fr",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
-  "open_days": []
+  "open_days": [
+    {
+      "starts_at": "2027-01-23T09:00:00-05:00",
+      "ends_at": "2027-01-23T11:30:00-05:00",
+      "type": "entrance_exam",
+      "academic_year": "2027-2028",
+      "registration_required": null,
+      "notes_en": null,
+      "notes_fr": null,
+      "source_url": "https://www.collegeheritage.ca/fr/admission/admissions-secondaire",
+      "last_verified_at": "2026-11-02",
+      "status": "draft"
+    }
+  ]
 }

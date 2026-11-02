@@ -16,13 +16,13 @@
   "geocode_precision": "exact",
   "website_url": "https://www.thestudy.qc.ca/fr",
   "admissions_url": "https://www.thestudy.qc.ca/fr/admission",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 35005,
   "has_boarding": false,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "The Study is a private girls’ school from Kindergarten to Grade 11.",
+  "description_fr": "The Study est une école privée pour filles, de la maternelle à la 11e année.",
   "source_url": "https://www.thestudy.qc.ca/fr/admission",
-  "last_verified_at": "2026-09-15",
+  "last_verified_at": "2026-11-02",
   "status": "published",
   "open_days": [
     {

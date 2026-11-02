@@ -16,13 +16,13 @@
   "geocode_precision": "exact",
   "website_url": "https://reginaassumpta.qc.ca/",
   "admissions_url": "https://reginaassumpta.qc.ca/procedure-admission/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5450,
   "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://reginaassumpta.qc.ca/admission/",
-  "last_verified_at": "2026-10-29",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
   "open_days": []
 }

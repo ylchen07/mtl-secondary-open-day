@@ -8,18 +8,21 @@
   "region": "montreal_island",
   "city": "Montréal",
   "address": "4901, rue du Collège - Beaubois",
-  "postal_code": "H0H 0H0",
-  "location": null,
-  "geocode_precision": "missing",
+  "postal_code": "H8Y 3T4",
+  "location": {
+    "lat": 45.50741,
+    "lng": -73.77895
+  },
+  "geocode_precision": "approximate",
   "website_url": "https://collegebeaubois.qc.ca/portes-ouvertes/",
   "admissions_url": "https://collegebeaubois.qc.ca/portes-ouvertes/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 6196,
   "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-beaubois",
-  "last_verified_at": "2026-09-21",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
   "open_days": []
 }

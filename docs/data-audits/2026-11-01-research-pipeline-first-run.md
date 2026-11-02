@@ -47,3 +47,5 @@ No school was promoted. Drafts still show only name, city, region and sector unt
 | `college-citoyen` | H7R 1W6 | H7L 4A4 | site confirms H7R 1W6; Nominatim result wrong |
 | `college-st-jean-vianney` | H1C 1C1 | J6V 1B5 | site confirms H1C 1C1; Nominatim result wrong |
 | `college-saint-maurice`, `ecole-secondaire-marcellin-champagnat` | | no result | address not in OpenStreetMap |
+
+Corrected on 2026-11-02 (`2026-11-02-research-pipeline-second-run.md`): only Beaubois' record was wrong. The other refusals were geocoder misses, and five of them are now placed.

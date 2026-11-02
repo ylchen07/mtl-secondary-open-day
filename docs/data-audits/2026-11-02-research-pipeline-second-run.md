@@ -1,0 +1,65 @@
+# Research pipeline, second run — 2026-11-02
+
+Second full run of `pnpm research` → review → `pnpm research:apply`, plus `pnpm research:geocode`, over all 45 schools. Re-running the first run's crawl found 0 new lines, because the remaining gaps sat on pages it never reached. This run widened the crawl first, then reviewed what it found. How the pipeline works is in the README ("Keeping the data fresh").
+
+## Crawl changes
+
+| Change | Why | What it found |
+|---|---|---|
+| Seed the site root | Danjou and Saint-Maurice's records point at one deep page | Home-page summaries |
+| Gap-aware link picking, two hops, 10 pages | Open-house links (weight 5) crowded out fees (1) and about (2) pages | Fees pages for Beaubois, LCC, The Study, Durocher and others |
+| Sitemap links | Menus hide the fees page; the sitemap lists it | CSJV's fees page, Brébeuf and Herzliah admission pages |
+| Read the 2 best PDFs | Fees grids are PDFs | Regina Assumpta and Sainte-Marcelline fees, Notre-Dame-de-Lourdes admission policy |
+| Fees tables kept as level, label and amounts | Amounts sit on their own rows under a label and a level heading | Every tuition below |
+| Next.js streamed text | CSJV's fees are in a closed accordion, present only in the RSC payload | CSJV tuition |
+
+## Cost
+
+About 375 pages read per full run (7 rendered in headless Chromium). Token figures are estimates at 4 characters per token.
+
+| Stage | Tokens |
+|---|---|
+| Raw HTML | ≈15.9M |
+| Visible page text | ≈529k |
+| Main review pack | ≈5.7k: 50 lines; 29 draft addresses settled by postal code without review |
+| Follow-up packs, after each crawl change | ≈4k in total: 8, 9, 5 and 4 lines |
+| Re-run right after applying | 0 lines to review |
+
+## Applied
+
+Every fact below was applied by `research:apply` after its quote was found in the cited page. One answer was rejected and corrected: Durocher's fees label and amount are not adjacent on the page, so the quote became the `Scolarité 4595 $` row.
+
+- **Tuition (10):** Beaubois 6 196 $ (secondary column, 2027-2028); Charles-Lemoyne, both campuses, 5 390 $ (one secondary fee table on the shared site); Durocher 4 595 $; Regina Assumpta 5 450 $ (fees PDF, all students); Saint-Sacrement 5 325 $; Sainte-Marcelline 5 335 $ (secondary admission page); St-Jean-Vianney 8 525 $ (secondary, 2027-2028); Lower Canada College $27,615 (Grade 7); The Study 35 005 $.
+- **Descriptions (4):** Collège international Marie de France and École internationale de Montréal (drafts); The Study and Villa Sainte-Marcelline (published). Promotional wording in the quotes ("exceptional natural setting") was left out.
+- **Confirmed on the school's own site, value unchanged:** language `fr` for Citoyen, Esther-Blondin, Notre-Dame-de-Lourdes and St-Jean-Vianney; St-Jean-Vianney `mixed`, from « un environnement mixte, inclusif et francophone ».
+- **Event (1, draft):** Collège Héritage de Châteauguay entrance exam, « 23 janvier 2027 de 9h à 11h30 », for 2027-2028. Apply wrote its ledger row in `2026-09-15-nullable-evidence-audit.md`.
+- **Record fix:** Collège Beaubois' postal code was the placeholder `H0H 0H0`; its contact page gives « 4901 rue du Collège-Beaubois, Pierrefonds (Québec) H8Y 3T4 ».
+
+No school was promoted.
+
+## Not applied, by design
+
+- **Other levels:** the Brébeuf « portes ouvertes le 6 novembre » line is a 2019 contest for the college (cégep) program, and its 11 November 2026 evening is on the college admission pages. Azrieli's « du 4 au 6 novembre 2026 » open house is Talmud Torah's elementary admission (grades 1–6), not Herzliah's.
+- **Past or unrelated dates:** Brébeuf hockey open houses (April–May 2026), Collège Laval term exams (2–5 November 2026).
+- **Historical or implied statements:** Esther-Blondin « ouvre ses portes sur la mixité » (1998), Externat « filles et garçons » (founding year), Sainte-Anne « École mixte » (timeline, level unclear), LCC English proficiency, Saint-Louis evaluation of francophone applicants.
+- **Promotional text as description:** Collège d'Anjou « à la fine pointe de la technologie ».
+
+## Geocoding
+
+Five more schools placed, all `approximate`: Beaubois (after the postal fix), Citoyen, North Star Academy, Sainte-Marcelline and St-Jean-Vianney. The first run's refusals came from the geocoder, not the records: queries without a city matched a namesake street, and OpenStreetMap tags some buildings with a wrong postal code (St-Jean-Vianney `J6V 1B5`, Sainte-Marcelline `H7W 5J6`). Queries now name the city, and the same house number, street and city vouch for a building whose OSM postal code disagrees. Esther-Blondin's and Sainte-Marcelline's record postal codes match their own sites; the first run's « record postal code wrong » was mistaken.
+
+41 of 45 schools are on the map. The four left:
+
+| School | Why |
+|---|---|
+| `college-esther-blondin` (Saint-Jacques) | Outside the Greater Montreal map |
+| `college-saint-maurice` (Saint-Hyacinthe) | Outside the Greater Montreal map |
+| `ecole-secondaire-marcellin-champagnat` (Saint-Jean-sur-Richelieu) | Outside the Greater Montreal map |
+| `college-trinite` | OpenStreetMap has rang des Vingt with no house number; a street-only pin was refused |
+
+## Still open
+
+- **Upcoming events:** 4 events on file are today or later. Most schools publish next fall's open houses in spring or summer, so the next run should be then.
+- **Tuition (20) and descriptions (19):** their sites have no fees page or about summary the crawl can reach. Several are public schools (École internationale, Saint-Louis), which charge no private tuition.
+- **Pensionnat du Saint-Nom-de-Marie:** its site answers every request with Vercel's bot checkpoint (HTTP 429). The pipeline does not get around a site's bot protection; this school needs a person.
+- **Admission portals** (PedNet, Pluriportail) are application forms with no public facts.

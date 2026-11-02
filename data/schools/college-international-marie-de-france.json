@@ -19,10 +19,10 @@
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège international Marie de France offers a well-rounded education focused on excellence, combining logic and creativity, well-being and openness to the world.",
+  "description_fr": "Le Collège international Marie de France offre une formation globale, tournée vers l’excellence, qui allie logique et créativité, bien-être et ouverture sur le monde.",
   "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
-  "last_verified_at": "2026-10-29",
+  "last_verified_at": "2026-11-02",
   "status": "draft",
   "open_days": [
     {

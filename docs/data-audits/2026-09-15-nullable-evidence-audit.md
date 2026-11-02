@@ -56,7 +56,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-saint-louis.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://collegesaintlouis.ecolelachine.com/historique/ ; https://collegesaintlouis.ecolelachine.com/admission/ | Added 2026-10-29. No boarding statement on official pages. |
 | `ecole-internationale-de-montreal.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/ | Added 2026-10-29. No boarding statement on official pages. |
 
-## Event field audit rows (27)
+## Event field audit rows (28)
 
 | File | Field | Identity (`starts_at + type`) | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -87,6 +87,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-sainte-anne.json` | `registration_required` | `2026-09-27T13:00:00-04:00 + entrance_exam` | `null` | `null` | `unsupported-negative` | https://secondaire.lachine.sainteanne.ca/admission/ | Added 2026-10-29. « seuls les candidats sélectionnés seront convoqués » — attendance by invitation; no booking URL. |
 | `ecole-internationale-de-montreal.json` | `registration_required` | `2026-09-19T13:00:00-04:00 + open_house` | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/ | Added 2026-10-29. « Étape 1 (facultative) Assister à nos portes ouvertes du 19 septembre 2026 Heures : de 13 h à 16 h »; no booking requirement stated. |
 | `college-saint-sacrement.json` | `registration_required` | `2027-09-18T10:00:00-04:00 + open_house` | `null` | `null` | `unsupported-negative` | https://collegesaintsacrement.qc.ca/portes-ouvertes/ | Research apply 2026-11-01: «Samedi 18 septembre 2027 de 10h à 14 h» |
+| `college-heritage-de-chateauguay-inc.json` | `registration_required` | `2027-01-23T09:00:00-05:00 + entrance_exam` | `null` | `null` | `unsupported-negative` | https://www.collegeheritage.ca/fr/admission/admissions-secondaire | Research apply 2026-11-02: «L’examen d’admission aura lieu le 23 janvier 2027 de 9h à 11h30 (Fermeture le 18 janvier à 8h)» |
 
 ## Publication-critical matrix
 

@@ -16,13 +16,13 @@
   "geocode_precision": "approximate",
   "website_url": "https://collegesaintsacrement.qc.ca/",
   "admissions_url": "https://collegesaintsacrement.qc.ca/procedures-admission",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 5325,
   "has_boarding": null,
   "programs": [],
   "description_en": null,
   "description_fr": null,
   "source_url": "https://collegesaintsacrement.qc.ca/portes-ouvertes/",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-02",
   "status": "published",
   "open_days": [
     {
