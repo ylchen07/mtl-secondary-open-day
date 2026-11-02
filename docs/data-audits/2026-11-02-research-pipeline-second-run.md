@@ -57,6 +57,22 @@ Five more schools placed, all `approximate`: Beaubois (after the postal fix), Ci
 | `ecole-secondaire-marcellin-champagnat` (Saint-Jean-sur-Richelieu) | Outside the Greater Montreal map |
 | `college-trinite` | OpenStreetMap has rang des Vingt with no house number; a street-only pin was refused |
 
+## Promotions
+
+The publication bar changed on 2026-11-02: a school whose address, language of instruction, whole-school student body and Secondary 1 admission are confirmed on its own site is published even before it posts an event. Its page says no admissions event has been observed yet. Event requirements are unchanged. Evidence for each promotion is in the publication matrix of `2026-09-15-nullable-evidence-audit.md`.
+
+| School | Event | Note |
+|---|---|---|
+| Collège Français Montréal | Open house, Sunday 4 October 2026, 13h–16h (past) | The event's only blocker since 2026-09-15 was whole-school gender, confirmed by « Premier Collège laïque et mixte au Québec » |
+| Collège d'Anjou | none yet | « Un établissement privé francophone mixte » |
+| Lower Canada College | none yet | « independent, coed, global day school … the only English high school in Quebec » |
+| Collège St-Jean-Vianney | none yet | « de langue française »; « une école secondaire et primaire mixte » |
+| Loyola High School | none yet | Co-ed per its FAQ; English instruction per « Applicants must have an English Eligibility Certificate ». Postal code corrected to H4B 1R2 from its contact page; description trimmed to what loyola.ca states |
+
+Not promoted, pending a decision: École Marie-Clarac states « SECONDAIRE – 100 % FILLES » but « GARDERIE, PRÉSCOLAIRE et PRIMAIRE – MIXTE ». The bar asks for the whole school's student body, which is the same blocker that keeps Collège Sainte-Marcelline in draft.
+
+Totals: 18 published schools, 27 drafts, 18 published events.
+
 ## Still open
 
 - **Upcoming events:** 4 events on file are today or later. Most schools publish next fall's open houses in spring or summer, so the next run should be then.

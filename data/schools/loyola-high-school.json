@@ -7,8 +7,8 @@
   "sector": "private",
   "region": "montreal_island",
   "city": "Montreal",
-  "address": "7272, rue Sherbrooke Ouest, Montréal, QC H4B 1R6",
-  "postal_code": "H4B 1R6",
+  "address": "7272, rue Sherbrooke Ouest",
+  "postal_code": "H4B 1R2",
   "location": {
     "lat": 45.4582,
     "lng": -73.6404
@@ -21,10 +21,10 @@
   "programs": [
     "jesuit_education"
   ],
-  "description_en": "Loyola High School is a Jesuit Catholic co-educational university preparatory school in Montreal's Notre-Dame-de-Grâce neighbourhood, founded in 1896. The school provides English-language education and follows the Jesuit educational tradition, focusing on academic excellence while forming students who are intellectually competent, compassionate, conscientious, and committed to justice. Students must hold an English Eligibility Certificate to attend.",
-  "description_fr": "L'École secondaire Loyola est une école secondaire jésuite catholique mixte et préparatoire à l'université située dans le quartier Notre-Dame-de-Grâce à Montréal, fondée en 1896. L'école offre un enseignement en anglais et suit la tradition éducative jésuite, en mettant l'accent sur l'excellence académique tout en formant des élèves intellectuellement compétents, compatissants, guidés par leur conscience et engagés envers la justice. Les élèves doivent détenir un certificat d'admissibilité à l'enseignement en anglais.",
+  "description_en": "Loyola High School is a Jesuit, Catholic, co-educational school in Montreal, founded in 1896, with a university-preparatory program. Students must hold an English Eligibility Certificate to attend.",
+  "description_fr": "L'École secondaire Loyola est une école jésuite et catholique mixte de Montréal, fondée en 1896, qui offre un programme préparatoire à l'université. Les élèves doivent détenir un certificat d'admissibilité à l'enseignement en anglais.",
   "source_url": "https://loyola.ca/admissions",
-  "last_verified_at": "2026-11-01",
-  "status": "draft",
+  "last_verified_at": "2026-11-02",
+  "status": "published",
   "open_days": []
 }
