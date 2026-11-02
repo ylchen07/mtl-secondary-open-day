@@ -39,16 +39,18 @@ test('a school page shows its description, address and sourced events', async ({
   await expect(page.getByRole('link', { name: /Admissions page/ })).toHaveAttribute('href', /^https:/);
 });
 
-test('a draft school is listed but shows only confirmed facts', async ({ page }) => {
+test('a draft school shows its site-confirmed facts but no guessed ones', async ({ page }) => {
   await page.goto('/en?q=jean-eudes');
   const row = page.locator('.school-row');
   await expect(row).toHaveCount(1);
   await expect(row).toContainText('No upcoming event observed');
   await row.getByRole('link', { name: 'Collège Jean-Eudes' }).click();
-  await expect(page.getByText('Not yet checked against the school’s own website')).toBeVisible();
-  await expect(page.getByText('No description yet.')).toBeVisible();
-  await expect(page.getByText('Street address not yet confirmed.')).toBeVisible();
-  await expect(page.locator('.map-pin')).toHaveCount(0);
+  await expect(page.getByText('Not fully checked yet')).toBeVisible();
+  // Region, city and sector only: language and student body stay hidden until published.
+  await expect(page.locator('.fact-caps li')).toHaveCount(3);
+  await expect(page.locator('.school-description')).toBeVisible();
+  await expect(page.locator('.address')).toContainText('3535, boulevard Rosemont');
+  await expect(page.locator('.map-pin')).toHaveCount(1);
 });
 
 test('unknown schools are not found', async ({ page }) => {

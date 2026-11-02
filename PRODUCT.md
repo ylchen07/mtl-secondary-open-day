@@ -83,11 +83,13 @@ away.
 
 - A school is `draft` until a human confirms its address, language of
   instruction, student body and Secondary 1 admission on the school's own
-  site. Draft schools appear in the directory with only their confirmed facts
-  (name, city, region, sector); unconfirmed facts such as language, student
-  body, description and street address are hidden and never match a filter.
-  A confirmed school is published even before it posts any event: its page
-  says no admissions event has been observed yet. Draft events are never shown.
+  site. A draft appears in the directory with the facts its own site
+  confirms: name, city, region, sector, and, once quote-verified, its
+  description and tuition, plus its street address and pin once its postal
+  code is found on its site. Its language, student body and boarding are
+  hidden and never match a filter. A confirmed school is published even
+  before it posts any event: its page says no admissions event has been
+  observed yet. Draft events are never shown.
 - Descriptions, tuition and coordinates are optional. A verified date with a
   source link is the whole product; everything else is decoration.
 - Events with a published date but no published time are omitted rather than

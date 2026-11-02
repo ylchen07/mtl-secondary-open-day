@@ -28,10 +28,10 @@ export type SchoolRow = {
 };
 
 /**
- * A school on file, as the directory and school page show it. Language,
- * student body, boarding, description, street address, coordinates and tuition
- * are only confirmed on a published record; on a draft they hold the
- * curator's best guess, so they are null here rather than shown as fact.
+ * A school on file, as the directory and school page show it. On a draft,
+ * language, student body and boarding are the curator's best guess, so they
+ * are null here rather than shown as fact; its description, tuition, street
+ * address and coordinates are carried only when confirmed on its own site.
  */
 export type SchoolListing = Pick<
   SchoolRow,

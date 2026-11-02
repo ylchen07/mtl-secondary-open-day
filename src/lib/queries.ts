@@ -14,8 +14,10 @@ function loadSchools(): SchoolFile[] {
 
 function toSchoolListing(school: SchoolFile): SchoolListing {
   const confirmed = school.status === 'published';
+  // A draft is only placed once its postal code is on its own site
+  // (research:geocode), so a pin and its street address are confirmed facts.
   const location =
-    confirmed && school.location && school.geocode_precision !== 'missing'
+    school.location && school.geocode_precision !== 'missing'
       ? { lat: school.location.lat, lng: school.location.lng, precision: school.geocode_precision }
       : null;
   return {
@@ -34,19 +36,21 @@ function toSchoolListing(school: SchoolFile): SchoolListing {
     language: confirmed ? school.language : null,
     gender: confirmed ? school.gender : null,
     has_boarding: confirmed ? school.has_boarding : null,
-    description_en: confirmed ? (school.description_en ?? null) : null,
-    description_fr: confirmed ? (school.description_fr ?? null) : null,
-    address: confirmed ? school.address : null,
+    // Only research:apply writes these on a draft, from a quote verified on the school's site.
+    description_en: school.description_en ?? null,
+    description_fr: school.description_fr ?? null,
+    address: confirmed || location ? school.address : null,
     location,
-    tuition_annual_cad: confirmed ? (school.tuition_annual_cad ?? null) : null,
+    tuition_annual_cad: school.tuition_annual_cad ?? null,
   };
 }
 
 /**
  * Every school on file except archived ones, published or not, so the list
  * can say "nothing observed yet" instead of hiding a school a family asked
- * about. Only facts a published record verified are carried; a draft's
- * language, student body, boarding, description and street address stay unknown.
+ * about. A draft carries the facts confirmed on its own site (description,
+ * tuition, and the street address once it is on the map); its language,
+ * student body and boarding stay unknown until it is published.
  */
 export function fetchSchoolListings(): SchoolListing[] {
   return loadSchools()

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { fetchAgendaEvents } from '@/lib/queries';
+import { fetchAgendaEvents, fetchSchoolListings } from '@/lib/queries';
 import { agendaWindowEnd } from '@/lib/dates';
 
 // Integration-style: reads the real data/schools/*.json files, the same way
@@ -55,6 +55,18 @@ describe('fetchAgendaEvents', () => {
         expect(event.school.lat).not.toBeNull();
         expect(event.school.lng).not.toBeNull();
       }
+    }
+  });
+});
+
+describe('fetchSchoolListings', () => {
+  it('never shows a draft guess, and shows a draft street address only once it is on the map', () => {
+    const drafts = fetchSchoolListings().filter((school) => !school.confirmed);
+
+    expect(drafts.length).toBeGreaterThan(0);
+    for (const school of drafts) {
+      expect([school.language, school.gender, school.has_boarding]).toEqual([null, null, null]);
+      if (school.location === null) expect(school.address).toBeNull();
     }
   });
 });

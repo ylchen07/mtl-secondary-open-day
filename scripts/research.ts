@@ -364,12 +364,31 @@ async function nominatim(query: string): Promise<NominatimResult[]> {
   return (await res.json()) as NominatimResult[];
 }
 
+/**
+ * Whether a draft's postal code is printed on its own site, per the last
+ * scan's pages. A draft's pin and street address are shown on the site, so a
+ * directory address the school never confirmed is not geocoded.
+ */
+async function postalOnOwnSite(school: SchoolFile, manifest: Manifest | null): Promise<boolean> {
+  const want = school.postal_code.replace(/\s+/g, '').toUpperCase();
+  for (const url of manifest?.schools[school.slug]?.pages ?? []) {
+    const text = await readFile(pageFile(url), 'utf8').catch(() => '');
+    if (text.replace(/\s+/g, '').toUpperCase().includes(want)) return true;
+  }
+  return false;
+}
+
 async function geocode(): Promise<void> {
+  const manifest = await readJson<Manifest | null>(MANIFEST_PATH, null);
   const schools = (await loadSchools()).filter((s) => s.location == null);
   console.log(`Geocoding ${schools.length} school(s) without a location (OpenStreetMap Nominatim)…`);
   let placed = 0;
   let first = true;
   for (const school of schools) {
+    if (school.status !== 'published' && !(await postalOnOwnSite(school, manifest))) {
+      console.log(`  SKIP  ${school.slug}: draft whose postal code the last scan did not find on its site`);
+      continue;
+    }
     let pick: GeocodePick = { ok: false, reason: 'no query' };
     for (const query of geocodeQueries(school)) {
       if (!first) await sleep(GEOCODE_DELAY_MS);
