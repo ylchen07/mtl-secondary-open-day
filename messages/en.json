@@ -26,8 +26,6 @@
     "location": "Location",
     "events": "Admissions events",
     "noDescription": "No description yet.",
-    "draftNote": "Not fully checked yet: language, student body and admissions events appear once the school’s own website confirms them.",
-    "addressUnconfirmed": "Street address not yet confirmed.",
     "approximate": "Approximate position",
     "positionUnknown": "Exact position not on file; the region is shown.",
     "website": "School website",

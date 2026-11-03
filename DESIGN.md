@@ -154,7 +154,7 @@ The page is water. Greater Montreal is drawn as the archipelago it actually is, 
 
 Everything around the map is quiet and ink-drawn: one grotesk family set tight and heavy for titles, hairline sand rules between rows, and capsule controls outlined in ink at 1.5px. Colour is spent almost entirely on land. Coral is the only alarm in the system and it is rationed to what a parent must not miss: entrance exams, clashes, and the school pin. Motion has one voice, a 0.4s overshoot, so selecting a region feels like the land swelling into place rather than a tab switching.
 
-Gaps are shown as gaps. A draft school renders only what is known (name, city, region, sector) with a dashed-outline note, never filler.
+Gaps are shown as gaps. A school renders only what is confirmed: an unknown language or student body leaves its cap out, a missing description says so, never filler.
 
 **Key Characteristics:**
 - Cream water ground; flat colour land per region; no gradients, no texture on land.
@@ -240,7 +240,7 @@ Flat. There are no shadows anywhere. Depth comes from the map metaphor itself: l
 
 ## Shapes
 
-Two radii: capsules (999px) for every control, cap, flag and pin, and a gently rounded card (16px) for event cards, the draft note and the empty state. Rows are square-edged and divided by hairlines. Outlines are 1.5px (ink when active or primary, sand at rest); rules are 1px sand, except the 1.5px ink rule that opens each agenda day and the past archive. The one organic form is the region swatch: a 14×12px blob with uneven radii, a tiny land lobe beside each school's place.
+Two radii: capsules (999px) for every control, cap, flag and pin, and a gently rounded card (16px) for event cards and the empty state. Rows are square-edged and divided by hairlines. Outlines are 1.5px (ink when active or primary, sand at rest); rules are 1px sand, except the 1.5px ink rule that opens each agenda day and the past archive. The one organic form is the region swatch: a 14×12px blob with uneven radii, a tiny land lobe beside each school's place.
 
 ## Components
 
@@ -259,7 +259,6 @@ Two radii: capsules (999px) for every control, cap, flag and pin, and a gently r
 
 ### Cards / Containers
 - **Event card:** 16px corners, 1.5px sand outline turning ink on hover, 16px/24px padding, no shadow. A clash gets a coral outline and a 10% coral wash plus coral pill flags naming the clashing schools.
-- **Draft note:** 16px corners, 1.5px dashed ink outline.
 - **Empty state:** 16px corners on `water-shade`.
 
 ### Inputs / Fields

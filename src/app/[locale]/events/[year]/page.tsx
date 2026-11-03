@@ -17,7 +17,7 @@ type Params = Promise<{ locale: string; year: string }>;
  * `/[locale]/events/current` shows the school year currently recruiting and
  * moves on by itself when the season turns over; `/[locale]/events/2027-2028`
  * pins one cohort so its schedule stays shareable afterwards. Any other
- * segment, including a year with no published events, is a 404. Bare
+ * segment, including a year with no events on file, is a 404. Bare
  * `/[locale]/events` redirects to `current` (next.config.ts).
  */
 async function resolveSchoolYear(segment: string, now: Date) {

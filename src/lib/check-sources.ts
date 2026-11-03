@@ -9,7 +9,7 @@ import type { SchoolFile } from './schema';
 export const AGGREGATOR_HOSTS: readonly string[] = ['feep.qc.ca'];
 
 /**
- * Why `url` is unacceptable as a published row's source, or null if it is fine.
+ * Why `url` is unacceptable as a row's source, or null if it is fine.
  *
  * Fails closed: a URL that will not parse counts as a violation, because a
  * safety predicate must never answer "allowed" when it means "I could not tell".
@@ -36,27 +36,23 @@ function sourceProblem(url: string): string | null {
 }
 
 /**
- * One human-readable violation per published row whose `source_url` is not
- * demonstrably the school's own. An empty array means clean.
- *
- * Drafts and archived rows are exempt by design: citing an aggregator is what
- * a draft is for. Fails closed on a `source_url` that will not parse.
+ * One human-readable violation per row whose `source_url` is not
+ * demonstrably the school's own. An empty array means clean. Every school
+ * and event on file is shown, so none is exempt. Fails closed on a
+ * `source_url` that will not parse.
  */
 export function findAggregatorSources(schools: SchoolFile[]): string[] {
   const violations: string[] = [];
 
   for (const school of schools) {
-    if (school.status === 'published') {
-      const problem = sourceProblem(school.source_url);
-      if (problem) violations.push(`${school.slug}: published school ${problem}`);
-    }
+    const problem = sourceProblem(school.source_url);
+    if (problem) violations.push(`${school.slug}: school ${problem}`);
 
     for (const event of school.open_days) {
-      if (event.status !== 'published') continue;
       const problem = sourceProblem(event.source_url);
       if (problem) {
         const when = 'starts_on' in event ? event.starts_on : event.starts_at;
-        violations.push(`${school.slug} (${when}): published event ${problem}`);
+        violations.push(`${school.slug} (${when}): event ${problem}`);
       }
     }
   }

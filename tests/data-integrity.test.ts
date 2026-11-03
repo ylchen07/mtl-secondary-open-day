@@ -133,24 +133,6 @@ describe('data/schools', () => {
     expect(errors).toEqual([]);
   });
 
-  it('has the reviewed publication counts and no published event under a draft school', () => {
-    const { ok } = validateSchoolFiles(loadAll());
-    const publishedSchools = ok.filter((school) => school.status === 'published');
-    const publishedEvents = ok.flatMap((school) =>
-      school.open_days
-        .filter((event) => event.status === 'published')
-        .map((event) => ({ school, event })),
-    );
-
-    expect(publishedSchools).toHaveLength(18);
-    expect(publishedEvents).toHaveLength(18);
-    expect(
-      publishedEvents
-        .filter(({ school }) => school.status !== 'published')
-        .map(({ school, event }) => `${school.slug}|${eventBounds(event).starts_at}|${event.type}`),
-    ).toEqual([]);
-  });
-
   it('enforces tri-state values and registration URL invariants across all records', () => {
     const { ok } = validateSchoolFiles(loadAll());
 
@@ -167,50 +149,6 @@ describe('data/schools', () => {
         }
       }
     }
-  });
-
-  it('covers every currently published identity exactly once in the publication-critical matrix', () => {
-    const lines = readFileSync(AUDIT_PATH, 'utf8').split('\n');
-    const matrixRows: { kind: 'school' | 'event'; identity: string; result: string }[] = [];
-    let inMatrix = false;
-
-    for (const line of lines) {
-      if (line.startsWith('## Publication-critical matrix')) {
-        inMatrix = true;
-        continue;
-      }
-      if (inMatrix && line.startsWith('## ')) break;
-      if (!inMatrix || !line.startsWith('|') || line.startsWith('|---') || line.startsWith('| Kind |')) {
-        continue;
-      }
-
-      const match = line.match(/^\| (school|event) \| `([^`]+)` \| (PASS|FAIL) \|/);
-      if (!match) continue;
-      const [, kind, identity, result] = match!;
-      matrixRows.push({ kind: kind as 'school' | 'event', identity, result });
-    }
-
-    const { ok } = validateSchoolFiles(loadAll());
-    const publishedSchoolIdentities = ok
-      .filter((school) => school.status === 'published')
-      .map((school) => school.slug);
-    const publishedEventIdentities = ok.flatMap((school) =>
-      school.open_days
-        .filter((event) => event.status === 'published')
-        .map((event) => `${school.slug}|${eventBounds(event).starts_at}|${event.type}`),
-    );
-
-    const matrixSchoolIdentities = matrixRows
-      .filter((row) => row.kind === 'school' && row.result === 'PASS')
-      .map((row) => row.identity);
-    const matrixEventIdentities = matrixRows
-      .filter((row) => row.kind === 'event' && row.result === 'PASS')
-      .map((row) => row.identity);
-
-    expect(new Set(matrixSchoolIdentities).size).toBe(matrixSchoolIdentities.length);
-    expect(new Set(matrixEventIdentities).size).toBe(matrixEventIdentities.length);
-    expect(matrixSchoolIdentities.sort()).toEqual(publishedSchoolIdentities.sort());
-    expect(matrixEventIdentities.sort()).toEqual(publishedEventIdentities.sort());
   });
 
   it('covers every nullable field exactly once in the audit ledger', () => {

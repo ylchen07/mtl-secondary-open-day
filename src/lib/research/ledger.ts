@@ -10,7 +10,6 @@ export type AddedEvent = {
 };
 
 const EVENT_TABLE = '## Event field audit rows';
-const MATRIX_TABLE = '## Publication-critical matrix';
 
 /** Insert rows after the last row of the first table under `heading`, bumping a "(N)" count in the heading. */
 function appendToTable(lines: string[], heading: string, rows: readonly string[]): void {
@@ -31,9 +30,9 @@ const literal = (value: boolean | null): string => (value === null ? 'null' : St
 
 /**
  * The nullable-evidence audit (docs/data-audits/2026-09-15-…) must cover
- * every event on file, and its publication matrix every published event;
- * tests/data-integrity.test.ts enforces both. Apply records each event it
- * adds there, with the quote that justified it, so the ledger never drifts.
+ * every event on file; tests/data-integrity.test.ts enforces it. Apply
+ * records each event it adds there, with the quote that justified it, so the
+ * ledger never drifts.
  */
 export function addLedgerRows(markdown: string, added: readonly AddedEvent[], today: string): string {
   const lines = markdown.split('\n');
@@ -44,10 +43,6 @@ export function addLedgerRows(markdown: string, added: readonly AddedEvent[], to
     const identity = `${eventBounds(event).starts_at} + ${event.type}`;
     return `| \`${slug}.json\` | \`registration_required\` | \`${identity}\` | \`${value}\` | \`${value}\` | \`${disposition}\` | ${url} | ${cite(quote)} |`;
   });
-  const matrixRows = added
-    .filter(({ event }) => event.status === 'published')
-    .map(({ slug, event, quote, url }) => `| event | \`${slug}|${eventBounds(event).starts_at}|${event.type}\` | PASS | ${url} | ${cite(quote)} |`);
   appendToTable(lines, EVENT_TABLE, eventRows);
-  appendToTable(lines, MATRIX_TABLE, matrixRows);
   return lines.join('\n');
 }

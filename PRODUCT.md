@@ -51,9 +51,8 @@ away.
   admissions process (entrance exams, interviews, special programmes). Public
   schools without a selective process are out of scope.
 - **Curation:** data is hand-curated JSON in git (`data/schools/*.json`),
-  validated on every build (`pnpm check:sources`, Zod schema). Candidate schools
-  come from the FEEP directory (`pnpm harvest`) and stay `draft` until a human
-  confirms them against the school's own site.
+  validated on every build (`pnpm check:sources`, Zod schema). A new school is
+  added by hand from its own site; there is no unverified staging state.
 - **Freshness:** `pnpm research` reads each school's own site with scripts
   only and hands a reviewer just the quotable lines that answer what the record
   is missing; `pnpm research:apply` writes an answer only if its quote is in
@@ -81,15 +80,12 @@ away.
 
 ### Content truth
 
-- A school is `draft` until a human confirms its address, language of
-  instruction, student body and Secondary 1 admission on the school's own
-  site. A draft appears in the directory with the facts its own site
-  confirms: name, city, region, sector, and, once quote-verified, its
-  description and tuition, plus its street address and pin once its postal
-  code is found on its site. Its language, student body and boarding are
-  hidden and never match a filter. A confirmed school is published even
-  before it posts any event: its page says no admissions event has been
-  observed yet. Draft events are never shown.
+- Every value on file is confirmed on the school's own site, or it is `null`.
+  There is no draft state: a school is shown with whatever is confirmed, and an
+  unknown language, student body or boarding is not shown and never matches a
+  filter. A school with no event yet says no admissions event has been
+  observed. An event is on file only once it meets the event bar (exact date
+  with year, start and end, Secondary 1 relevance, school-owned source).
 - Descriptions, tuition and coordinates are optional. A verified date with a
   source link is the whole product; everything else is decoration.
 - Events with a published date but no published time are omitted rather than
@@ -102,8 +98,8 @@ away.
 
 ### Scale to design for
 
-As of 2026-11-02: 45 schools on file (18 published, 27 draft; 43 private,
-2 public) and 18 published events. Target per season: ~40+ schools and 60+
+As of 2026-11-02: 45 schools on file (43 private, 2 public) and 25 events.
+Target per season: ~40+ schools and 60+
 events, clustered heavily into four or five Saturdays. **The design must be
 judged at 60 events, not at today's count**: density and conflict legibility
 are the real test.

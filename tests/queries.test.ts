@@ -1,19 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { fetchAgendaEvents, fetchSchoolListings } from '@/lib/queries';
+import { fetchAgendaEvents } from '@/lib/queries';
 import { agendaWindowEnd } from '@/lib/dates';
 
 // Integration-style: reads the real data/schools/*.json files, the same way
 // the app does. There is no database to mock — git is the source of truth.
 
 describe('fetchAgendaEvents', () => {
-  it('returns only published events belonging to published schools', async () => {
-    const events = await fetchAgendaEvents();
+  it('returns events from every school on file', async () => {
+    const events = await fetchAgendaEvents(new Date('2026-09-20T12:00:00.000Z'));
+    const slugs = new Set(events.map((e) => e.school.slug));
 
-    expect(events.length).toBeGreaterThan(0);
-    for (const event of events) {
-      expect(event.status).toBe('published');
-      expect(event.school.status).toBe('published');
-    }
+    // A school that is not fully confirmed still shows its events.
+    expect(slugs.has('college-sainte-anne')).toBe(true);
   });
 
   it('excludes events starting after the rolling three-month window', async () => {
@@ -55,18 +53,6 @@ describe('fetchAgendaEvents', () => {
         expect(event.school.lat).not.toBeNull();
         expect(event.school.lng).not.toBeNull();
       }
-    }
-  });
-});
-
-describe('fetchSchoolListings', () => {
-  it('never shows a draft guess, and shows a draft street address only once it is on the map', () => {
-    const drafts = fetchSchoolListings().filter((school) => !school.confirmed);
-
-    expect(drafts.length).toBeGreaterThan(0);
-    for (const school of drafts) {
-      expect([school.language, school.gender, school.has_boarding]).toEqual([null, null, null]);
-      if (school.location === null) expect(school.address).toBeNull();
     }
   });
 });

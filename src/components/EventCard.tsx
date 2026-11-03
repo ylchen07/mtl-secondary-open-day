@@ -44,8 +44,8 @@ export function EventCard({
         </div>
         <ul className="event-details" aria-label={t('schoolDetails')}>
           <li className="event-place"><span className="region-swatch" aria-hidden="true" />{event.school.city}</li>
-          <li>{tLanguage(event.school.language)}</li>
-          <li>{tGender(event.school.gender)}</li>
+          {event.school.language && <li>{tLanguage(event.school.language)}</li>}
+          {event.school.gender && <li>{tGender(event.school.gender)}</li>}
           <li>{tSector(event.school.sector)}</li>
         </ul>
         {note && <p className="event-note">{note}</p>}

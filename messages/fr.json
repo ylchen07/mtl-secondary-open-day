@@ -26,8 +26,6 @@
     "location": "Emplacement",
     "events": "Événements d’admission",
     "noDescription": "Pas encore de description.",
-    "draftNote": "Vérification incomplète : la langue, la clientèle et les événements d’admission s’afficheront une fois confirmés par le site de l’école.",
-    "addressUnconfirmed": "Adresse pas encore confirmée.",
     "approximate": "Position approximative",
     "positionUnknown": "Position exacte non disponible; la région est indiquée.",
     "website": "Site de l’école",

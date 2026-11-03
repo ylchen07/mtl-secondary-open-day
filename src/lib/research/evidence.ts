@@ -7,14 +7,13 @@ import type { PageFacts } from './page';
  * The facts research looks for. Each is only looked for when the school's
  * record is missing it, so a complete record costs nothing to re-check.
  */
-export const FACTS = ['events', 'address', 'language', 'gender', 'tuition', 'description'] as const;
+export const FACTS = ['events', 'language', 'gender', 'tuition', 'description'] as const;
 export type Fact = (typeof FACTS)[number];
 
 export function gapsFor(school: SchoolFile): Fact[] {
   const gaps: Fact[] = ['events'];
-  // A draft's address, language and student body came from a directory or a
-  // guess; the publication bar needs each stated on the school's own pages.
-  if (school.status !== 'published') gaps.push('address', 'language', 'gender');
+  if (school.language == null) gaps.push('language');
+  if (school.gender == null) gaps.push('gender');
   if (school.tuition_annual_cad == null) gaps.push('tuition');
   if (school.description_fr == null) gaps.push('description');
   return gaps;
@@ -136,7 +135,6 @@ function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
 
 const SELF_REFERENCE = /(?<!\p{L})(?:[ée]cole|coll[èe]ge|school|college|[ée]tablissement|institution)(?!\p{L})/iu;
 const ABOUT_URL = /[àa]-?propos|about|qui-sommes|mission|histori|notre-/i;
-const POSTAL = /\b[A-Z]\d[A-Z]\s?\d[A-Z]\d\b/i;
 /**
  * A school saying what it is: «X est un établissement…», «we are an independent … institution».
  * Letter lookarounds, not `\b`: `\b` treats «é» as a non-word character, so `\bétablissement` never matches.
@@ -168,17 +166,15 @@ export type Evidence = {
 export type SchoolEvidence = {
   gaps: Fact[];
   items: Evidence[];
-  /** Facts settled by a deterministic check; shown as one line, no review needed. */
-  settled: string[];
 };
 
-const CAP: Record<Fact, number> = { events: 20, address: 3, language: 5, gender: 5, tuition: 4, description: 4 };
+const CAP: Record<Fact, number> = { events: 20, language: 5, gender: 5, tuition: 4, description: 4 };
 
 export function hashEvidence(fact: Fact, lines: readonly string[]): string {
   return createHash('sha1').update(`${fact}|${lines.join('\n')}`).digest('hex').slice(0, 10);
 }
 
-/** Dates of events already on file for this school, draft or published: lines repeating them are not news. */
+/** Dates of events already on file for this school: lines repeating them are not news. */
 function knownDays(school: SchoolFile): Set<string> {
   return new Set(school.open_days.map((e) => dayKey(eventBounds(e).starts_at)));
 }
@@ -269,7 +265,7 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
       out.push(...tuitionEvidence(page, index));
       return;
     }
-    const test = fact === 'address' ? (t: string) => POSTAL.test(t) : PATTERNS[fact];
+    const test = PATTERNS[fact];
     for (const line of page.lines) {
       for (const s of sentencesMatching(line, test)) {
         out.push({ fact, lines: [s], page: index, hash: hashEvidence(fact, [s]) });
@@ -287,8 +283,6 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
   return strong ? [...out.filter(strong), ...out.filter((item) => !strong(item))] : out;
 }
 
-const compactPostal = (text: string): string => text.replace(/\s+/g, '').toUpperCase();
-
 /**
  * The evidence a reviewer needs for this school's open gaps, and nothing
  * else: lines already reviewed, repeated across pages, dated in the past, or
@@ -301,19 +295,9 @@ export function collectEvidence(
   reviewed: ReadonlySet<string> = new Set(),
 ): SchoolEvidence {
   const gaps = gapsFor(school);
-  const settled: string[] = [];
   const items: Evidence[] = [];
 
   for (const fact of gaps) {
-    if (fact === 'address') {
-      // Deterministic: the record's postal code printed on the school's own site settles it.
-      const postal = compactPostal(school.postal_code);
-      const page = pages.findIndex((p) => p.lines.some((l) => compactPostal(l).includes(postal)));
-      if (page >= 0) {
-        settled.push(`address: postal code ${school.postal_code} appears on [p${page + 1}]`);
-        continue;
-      }
-    }
     const found = fact === 'events' ? eventEvidence(pages, school, today) : factEvidence(fact, pages, school);
     const seen = new Set<string>();
     let kept = 0;
@@ -329,5 +313,5 @@ export function collectEvidence(
       if (!reviewed.has(item.hash)) items.push(item);
     }
   }
-  return { gaps, items, settled };
+  return { gaps, items };
 }

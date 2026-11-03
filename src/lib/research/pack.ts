@@ -28,7 +28,7 @@ find in the fetched page.
   "description": { "en": "1-2 factual sentences", "fr": "1-2 phrases", "quote": "…", "page": 1 },
   "events": [{ "type": "open_house", "starts_at": "2027-04-17T11:00:00-04:00", "ends_at": "…",
     "academic_year": "2027-2028", "registration_required": null, "notes_en": null,
-    "notes_fr": null, "status": "draft", "quote": "…", "page": 1 }] } }
+    "notes_fr": null, "quote": "…", "page": 1 }] } }
 Date-only interviews use "starts_on"/"ends_on" instead. List a slug with {} when it has
 nothing usable: its lines are then never shown again.`;
 
@@ -48,9 +48,8 @@ export function renderPack(entries: readonly PackEntry[], today: string): string
       quiet.push(school.slug);
       continue;
     }
-    out.push(`## ${school.slug} · ${school.name_fr} · ${school.status}`);
+    out.push(`## ${school.slug} · ${school.name_fr}`);
     out.push(`gaps: ${evidence.gaps.join(' ')}`);
-    for (const note of evidence.settled) out.push(`✓ ${note}`);
     out.push(pages.map((url, i) => `p${i + 1} ${url}`).join(' | '));
     if (documents.length > 0) out.push(`not read: ${documents.join(' ')}`);
     if (failures.length > 0) out.push(`unreadable: ${failures.map((f) => clip(f, 90)).join('; ')}`);

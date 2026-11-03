@@ -13,13 +13,6 @@ function loadSchools(): SchoolFile[] {
 }
 
 function toSchoolListing(school: SchoolFile): SchoolListing {
-  const confirmed = school.status === 'published';
-  // A draft is only placed once its postal code is on its own site
-  // (research:geocode), so a pin and its street address are confirmed facts.
-  const location =
-    school.location && school.geocode_precision !== 'missing'
-      ? { lat: school.location.lat, lng: school.location.lng, precision: school.geocode_precision }
-      : null;
   return {
     id: school.slug,
     slug: school.slug,
@@ -32,35 +25,28 @@ function toSchoolListing(school: SchoolFile): SchoolListing {
     website_url: school.website_url,
     programs: school.programs,
     last_verified_at: school.last_verified_at,
-    confirmed,
-    language: confirmed ? school.language : null,
-    gender: confirmed ? school.gender : null,
-    has_boarding: confirmed ? school.has_boarding : null,
-    // Only research:apply writes these on a draft, from a quote verified on the school's site.
+    language: school.language,
+    gender: school.gender,
+    has_boarding: school.has_boarding,
     description_en: school.description_en ?? null,
     description_fr: school.description_fr ?? null,
-    address: confirmed || location ? school.address : null,
-    location,
+    address: school.address,
+    location:
+      school.location && school.geocode_precision !== 'missing'
+        ? { lat: school.location.lat, lng: school.location.lng, precision: school.geocode_precision }
+        : null,
     tuition_annual_cad: school.tuition_annual_cad ?? null,
   };
 }
 
-/**
- * Every school on file except archived ones, published or not, so the list
- * can say "nothing observed yet" instead of hiding a school a family asked
- * about. A draft carries the facts confirmed on its own site (description,
- * tuition, and the street address once it is on the map); its language,
- * student body and boarding stay unknown until it is published.
- */
+/** Every school on file, with nothing upcoming as a normal state. */
 export function fetchSchoolListings(): SchoolListing[] {
-  return loadSchools()
-    .filter((school) => school.status !== 'archived')
-    .map(toSchoolListing);
+  return loadSchools().map(toSchoolListing);
 }
 
-/** One school on file by slug, or null when there is none or it is archived. */
+/** One school on file by slug, or null when there is none. */
 export function fetchSchool(slug: string): SchoolListing | null {
-  const school = loadSchools().find((s) => s.slug === slug && s.status !== 'archived');
+  const school = loadSchools().find((s) => s.slug === slug);
   return school ? toSchoolListing(school) : null;
 }
 
@@ -89,13 +75,12 @@ function toSchoolRow(school: SchoolFile): SchoolRow {
     description_fr: school.description_fr ?? null,
     source_url: school.source_url,
     last_verified_at: school.last_verified_at,
-    status: school.status,
   };
 }
 
 /**
- * Published historical events and upcoming events within the rolling
- * three-calendar-month Montreal window, each with its published school.
+ * Historical events and upcoming events within the rolling
+ * three-calendar-month Montreal window, each with its school.
  * The result is shipped to the browser once; filtering happens there.
  *
  * Git is the only source of truth: this reads data/schools/*.json, compiled
@@ -106,14 +91,13 @@ function toSchoolRow(school: SchoolFile): SchoolRow {
  */
 export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]> {
   const windowEndMs = agendaWindowEnd(now).getTime();
-  const schools = loadSchools().filter((school) => school.status === 'published');
+  const schools = loadSchools();
 
   const events: AgendaEvent[] = [];
   for (const school of schools) {
     const schoolRow = toSchoolRow(school);
 
     for (const event of school.open_days) {
-      if (event.status !== 'published') continue;
       const { starts_at, ends_at, all_day } = eventBounds(event);
       if (new Date(starts_at).getTime() > windowEndMs) continue;
 
@@ -131,7 +115,6 @@ export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]
         notes_fr: event.notes_fr ?? null,
         source_url: event.source_url,
         last_verified_at: event.last_verified_at,
-        status: event.status,
         school: schoolRow,
       });
     }
@@ -143,7 +126,7 @@ export async function fetchAgendaEvents(now = new Date()): Promise<AgendaEvent[]
 }
 
 /**
- * School years with published events, plus the year currently recruiting so
+ * School years with events, plus the year currently recruiting so
  * the default page always has one to show, newest first.
  */
 export function schoolYears(events: AgendaEvent[], current: string): string[] {

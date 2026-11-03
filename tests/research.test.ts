@@ -10,15 +10,16 @@ import type { SchoolFile } from '@/lib/schema';
 
 const TODAY = '2026-11-01';
 
-function draft(over: Partial<SchoolFile> = {}): SchoolFile {
+/** A record with every optional fact still unknown. */
+function school(over: Partial<SchoolFile> = {}): SchoolFile {
   return {
-    slug: 'college-test', name_en: 'Collège Test', name_fr: 'Collège Test', language: 'fr', gender: 'mixed',
+    slug: 'college-test', name_en: 'Collège Test', name_fr: 'Collège Test', language: null, gender: null,
     sector: 'private', region: 'montreal_island', city: 'Montréal',
     address: '3535, boulevard Rosemont, Montréal, QC H1X 1K7', postal_code: 'H1X 1K7',
     location: null, geocode_precision: 'missing', website_url: 'https://test.qc.ca/',
     admissions_url: 'https://test.qc.ca/admission/', tuition_annual_cad: null, has_boarding: null,
     programs: [], description_en: null, description_fr: null, source_url: 'https://test.qc.ca/',
-    last_verified_at: '2026-10-01', status: 'draft', open_days: [], ...over,
+    last_verified_at: '2026-10-01', open_days: [], ...over,
   } as SchoolFile;
 }
 
@@ -112,18 +113,17 @@ describe('datesIn', () => {
 
 describe('gapsFor', () => {
   it('only looks for what the record is missing', () => {
-    expect(gapsFor(draft())).toEqual(['events', 'address', 'language', 'gender', 'tuition', 'description']);
-    expect(gapsFor(draft({ status: 'published', tuition_annual_cad: 5000, description_en: 'x', description_fr: 'y' }))).toEqual(['events']);
+    expect(gapsFor(school())).toEqual(['events', 'language', 'gender', 'tuition', 'description']);
+    expect(gapsFor(school({ language: 'fr', gender: 'mixed', tuition_annual_cad: 5000, description_en: 'x', description_fr: 'y' }))).toEqual(['events']);
   });
 });
 
 describe('collectEvidence', () => {
-  const published = draft({
-    status: 'published',
+  const withEvent = school({
     open_days: [{
       starts_at: '2027-04-17T11:00:00-04:00', ends_at: '2027-04-17T14:00:00-04:00', type: 'open_house',
       academic_year: '2028-2029', registration_required: null, source_url: 'https://test.qc.ca/',
-      last_verified_at: TODAY, status: 'published',
+      last_verified_at: TODAY,
     }],
   });
   const lines = [
@@ -141,7 +141,7 @@ describe('collectEvidence', () => {
   ];
 
   it('keeps only future dates not already on file, joined to their heading and times', () => {
-    const items = collectEvidence(published, [page('https://test.qc.ca/po/', lines)], TODAY).items;
+    const items = collectEvidence(withEvent, [page('https://test.qc.ca/po/', lines)], TODAY).items;
     expect(items.map((i) => i.lines)).toEqual([
       ['Examen d’admission', 'Samedi 3 octobre 2027', 'De 8 h 30 à 12 h'],
       ['Visite du 28 novembre'],
@@ -150,32 +150,30 @@ describe('collectEvidence', () => {
 
   it('does not backfill a reviewed fact with weaker lines', () => {
     const many = Array.from({ length: 7 }, (_, i) => `Collège mixte pour filles et garçons, groupe ${i + 1}`);
-    const first = collectEvidence(draft(), [page('https://test.qc.ca/', many)], TODAY).items.filter((i) => i.fact === 'gender');
+    const first = collectEvidence(school(), [page('https://test.qc.ca/', many)], TODAY).items.filter((i) => i.fact === 'gender');
     expect(first).toHaveLength(5);
-    const again = collectEvidence(draft(), [page('https://test.qc.ca/', many)], TODAY, new Set(first.map((i) => i.hash)));
+    const again = collectEvidence(school(), [page('https://test.qc.ca/', many)], TODAY, new Set(first.map((i) => i.hash)));
     expect(again.items.filter((i) => i.fact === 'gender')).toEqual([]);
   });
 
   it('never shows a line again once it was reviewed', () => {
     const reviewed = new Set([hashEvidence('events', ['Visite du 28 novembre'])]);
-    const items = collectEvidence(published, [page('https://test.qc.ca/po/', lines)], TODAY, reviewed).items;
+    const items = collectEvidence(withEvent, [page('https://test.qc.ca/po/', lines)], TODAY, reviewed).items;
     expect(items.map((i) => i.lines[0])).toEqual(['Examen d’admission']);
   });
 
-  it('settles the address without review when the postal code is on the site, and dedupes repeated lines', () => {
+  it('dedupes a line repeated across pages', () => {
     const banner = 'Collège privé mixte pour filles et garçons';
-    const result = collectEvidence(draft(), [
-      page('https://test.qc.ca/', [banner, 'Montréal H1X 1K7']),
+    const result = collectEvidence(school(), [
+      page('https://test.qc.ca/', [banner]),
       page('https://test.qc.ca/admission/', [banner]),
     ], TODAY);
-    expect(result.settled).toEqual(['address: postal code H1X 1K7 appears on [p1]']);
     expect(result.items.filter((i) => i.fact === 'gender').map((i) => i.lines)).toEqual([[banner]]);
-    expect(result.items.some((i) => i.fact === 'address')).toBe(false);
   });
 
   it('cuts a long paragraph down to the sentences that match', () => {
     const paragraph = `${'Notre histoire commence en 1950 avec une petite équipe. '.repeat(4)}La langue d’enseignement est le français. Nous offrons des sports.`;
-    const items = collectEvidence(draft(), [page('https://test.qc.ca/', [paragraph])], TODAY).items;
+    const items = collectEvidence(school(), [page('https://test.qc.ca/', [paragraph])], TODAY).items;
     expect(items.filter((i) => i.fact === 'language').map((i) => i.lines)).toEqual([['La langue d’enseignement est le français.']]);
   });
 
@@ -185,7 +183,7 @@ describe('collectEvidence', () => {
       'Grade 7', 'Tuition & Fees', 'Tuition: $28,830',
       'Préscolaire Primaire Secondaire', 'Droits de scolarité¹', '(services éducatifs) 7 050 $ 4 510 $ 5 335 $',
     ];
-    const items = collectEvidence(draft(), [page('https://test.qc.ca/frais/', fees)], TODAY).items;
+    const items = collectEvidence(school(), [page('https://test.qc.ca/frais/', fees)], TODAY).items;
     expect(items.filter((i) => i.fact === 'tuition').map((i) => i.lines)).toEqual([
       ['Grade 7', 'Tuition: $28,830'],
       ['Préscolaire Primaire Secondaire', 'Droits de scolarité¹', '(services éducatifs) 7 050 $ 4 510 $ 5 335 $'],
@@ -194,7 +192,7 @@ describe('collectEvidence', () => {
 
   it('reads a flattened fees header row as one heading', () => {
     const fees = ['Items', 'Grades 7 – 10', 'Grade 11', 'Tuition', '$10,050', 'Ancillary Fee', '$5,300'];
-    const items = collectEvidence(draft(), [page('https://test.qc.ca/fees/', fees)], TODAY).items;
+    const items = collectEvidence(school(), [page('https://test.qc.ca/fees/', fees)], TODAY).items;
     expect(items.filter((i) => i.fact === 'tuition').map((i) => i.lines)).toEqual([['Grades 7 – 10', 'Grade 11', 'Tuition', '$10,050']]);
   });
 
@@ -204,7 +202,7 @@ describe('collectEvidence', () => {
       'Le Collège Test est un établissement d’enseignement secondaire privé francophone situé au pied du mont.',
       'Un établissement privé francophone mixte d’enseignement reconnu par le ministère de l’Éducation',
     ]);
-    const items = collectEvidence(draft(), [about, admission], TODAY).items.filter((i) => i.fact === 'description');
+    const items = collectEvidence(school(), [about, admission], TODAY).items.filter((i) => i.fact === 'description');
     expect(items.map((i) => i.lines[0])).toEqual([
       'Le Collège Test est un établissement d’enseignement secondaire privé francophone situé au pied du mont.',
       'Un établissement privé francophone mixte d’enseignement reconnu par le ministère de l’Éducation',
@@ -219,23 +217,23 @@ describe('applyAnswers', () => {
   const read = (url: string) => (url === 'https://test.qc.ca/po/' ? text : null);
   const event = {
     type: 'open_house', starts_at: '2027-04-17T11:00:00-04:00', ends_at: '2027-04-17T14:00:00-04:00',
-    academic_year: '2028-2029', registration_required: null, notes_en: null, notes_fr: null, status: 'draft',
+    academic_year: '2028-2029', registration_required: null, notes_en: null, notes_fr: null,
     quote: 'samedi 17 avril 2027, de 11 h à 14 h', page: 1,
   };
 
   it('writes cited facts and events with their source and marks the shown lines reviewed', () => {
-    const result = applyAnswers([draft()], {
+    const result = applyAnswers([school()], {
       'college-test': { gender: { value: 'girls', quote: 'privée  pour filles', page: 1 }, events: [event] },
     }, manifest, read, TODAY);
     expect(result.errors).toEqual([]);
     expect(result.updated[0].gender).toBe('girls');
     expect(result.updated[0].last_verified_at).toBe(TODAY);
-    expect(result.updated[0].open_days[0]).toMatchObject({ source_url: 'https://test.qc.ca/po/', last_verified_at: TODAY, status: 'draft' });
+    expect(result.updated[0].open_days[0]).toMatchObject({ source_url: 'https://test.qc.ca/po/', last_verified_at: TODAY });
     expect(result.reviewed).toEqual({ 'college-test': ['abc'] });
   });
 
   it('rejects the whole school when one quote is not on the cited page', () => {
-    const result = applyAnswers([draft()], {
+    const result = applyAnswers([school()], {
       'college-test': { gender: { value: 'girls', quote: 'pour filles', page: 1 }, language: { value: 'en', quote: 'English instruction', page: 1 } },
     }, manifest, read, TODAY);
     expect(result.updated).toEqual([]);
@@ -244,20 +242,15 @@ describe('applyAnswers', () => {
   });
 
   it('rejects an event already on file and an event the schema refuses', () => {
-    const onFile = draft({ open_days: [{ ...event, quote: undefined, page: undefined, source_url: 'https://test.qc.ca/po/', last_verified_at: TODAY } as never] });
+    const onFile = school({ open_days: [{ ...event, quote: undefined, page: undefined, source_url: 'https://test.qc.ca/po/', last_verified_at: TODAY } as never] });
     const dup = applyAnswers([onFile], { 'college-test': { events: [event] } }, manifest, read, TODAY);
     expect(dup.errors[0]).toContain('already on file');
-    const bad = applyAnswers([draft()], { 'college-test': { events: [{ ...event, ends_at: '2027-04-17T10:00:00-04:00' }] } }, manifest, read, TODAY);
+    const bad = applyAnswers([school()], { 'college-test': { events: [{ ...event, ends_at: '2027-04-17T10:00:00-04:00' }] } }, manifest, read, TODAY);
     expect(bad.errors[0]).toContain('starts_at must be before ends_at');
   });
 
-  it("keeps a draft school's events draft", () => {
-    const result = applyAnswers([draft()], { 'college-test': { events: [{ ...event, status: 'published' }] } }, manifest, read, TODAY);
-    expect(result.errors).toEqual(["college-test: events[0]: a draft school's events stay draft"]);
-  });
-
   it('records an empty answer as reviewed without touching the file', () => {
-    const result = applyAnswers([draft()], { 'college-test': {} }, manifest, read, TODAY);
+    const result = applyAnswers([school()], { 'college-test': {} }, manifest, read, TODAY);
     expect(result.updated).toEqual([]);
     expect(result.reviewed).toEqual({ 'college-test': ['abc'] });
   });
@@ -309,26 +302,19 @@ describe('pickGeocode', () => {
 
 describe('addLedgerRows', () => {
   const ledger = [
-    '## Event field audit rows (1)', '', '| File | x |', '|---|---|', '| `a.json` | old |', '',
-    '## Publication-critical matrix', '', '| Kind | Identity |', '|---|---|', '| event | `a` |', '- note', '',
+    '## Event field audit rows (1)', '', '| File | x |', '|---|---|', '| `a.json` | old |', '- note', '',
     '## Mechanical coverage summary',
   ].join('\n');
   const event = {
     type: 'open_house', starts_at: '2027-09-18T10:00:00-04:00', ends_at: '2027-09-18T14:00:00-04:00',
     academic_year: '2028-2029', registration_required: null, source_url: 'https://test.qc.ca/po/',
-    last_verified_at: TODAY, status: 'published',
+    last_verified_at: TODAY,
   } as SchoolFile['open_days'][number];
 
-  it('adds an event row, a matrix row for a published event, and bumps the row count', () => {
+  it('adds an event row under the last table row with its quote, and bumps the row count', () => {
     const out = addLedgerRows(ledger, [{ slug: 'b', event, quote: 'Samedi | 18 septembre', url: 'https://test.qc.ca/po/' }], TODAY).split('\n');
     expect(out[0]).toBe('## Event field audit rows (2)');
     expect(out[5]).toBe('| `b.json` | `registration_required` | `2027-09-18T10:00:00-04:00 + open_house` | `null` | `null` | `unsupported-negative` | https://test.qc.ca/po/ | Research apply 2026-11-01: «Samedi / 18 septembre» |');
-    expect(out[12]).toBe('| event | `b|2027-09-18T10:00:00-04:00|open_house` | PASS | https://test.qc.ca/po/ | Research apply 2026-11-01: «Samedi / 18 septembre» |');
-    expect(out[13]).toBe('- note');
-  });
-
-  it('adds no matrix row for a draft event', () => {
-    const out = addLedgerRows(ledger, [{ slug: 'b', event: { ...event, status: 'draft' }, quote: 'q', url: 'u' }], TODAY);
-    expect(out.match(/\| PASS \|/g)).toBeNull();
+    expect(out[6]).toBe('- note');
   });
 });

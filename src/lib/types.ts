@@ -5,8 +5,9 @@ export type SchoolRow = {
   slug: string;
   name_en: string;
   name_fr: string;
-  language: 'fr' | 'en' | 'bilingual';
-  gender: 'mixed' | 'girls' | 'boys';
+  /** null until the school's own site states it. */
+  language: 'fr' | 'en' | 'bilingual' | null;
+  gender: 'mixed' | 'girls' | 'boys' | null;
   sector: 'private' | 'public';
   region: 'montreal_island' | 'west_island' | 'laval' | 'north_shore' | 'south_shore';
   city: string;
@@ -24,28 +25,20 @@ export type SchoolRow = {
   description_fr: string | null;
   source_url: string;
   last_verified_at: string;
-  status: 'published' | 'draft' | 'archived';
 };
 
 /**
- * A school on file, as the directory and school page show it. On a draft,
- * language, student body and boarding are the curator's best guess, so they
- * are null here rather than shown as fact; its description, tuition, street
- * address and coordinates are carried only when confirmed on its own site.
+ * A school on file, as the directory and school page show it. Every fact is
+ * confirmed on the school's own site or null; a null fact is shown as
+ * unknown and never matches a filter.
  */
 export type SchoolListing = Pick<
   SchoolRow,
-  'id' | 'slug' | 'name_en' | 'name_fr' | 'city' | 'region' | 'sector' | 'admissions_url' | 'website_url' | 'programs' | 'last_verified_at'
+  | 'id' | 'slug' | 'name_en' | 'name_fr' | 'city' | 'region' | 'sector' | 'admissions_url' | 'website_url'
+  | 'programs' | 'last_verified_at' | 'language' | 'gender' | 'has_boarding' | 'description_en' | 'description_fr'
+  | 'address' | 'tuition_annual_cad'
 > & {
-  confirmed: boolean;
-  language: SchoolRow['language'] | null;
-  gender: SchoolRow['gender'] | null;
-  has_boarding: boolean | null;
-  description_en: string | null;
-  description_fr: string | null;
-  address: string | null;
   location: { lat: number; lng: number; precision: 'exact' | 'approximate' } | null;
-  tuition_annual_cad: number | null;
 };
 
 export type OpenDayRow = {
@@ -64,7 +57,6 @@ export type OpenDayRow = {
   notes_fr: string | null;
   source_url: string;
   last_verified_at: string;
-  status: 'published' | 'draft' | 'archived';
 };
 
 export type AgendaEvent = OpenDayRow & { school: SchoolRow };

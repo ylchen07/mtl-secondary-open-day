@@ -44,7 +44,7 @@ async function main() {
   const violations = findAggregatorSources(ok);
   if (violations.length > 0) {
     console.error(
-      '\nPublished rows may not cite an aggregator as their source.\n' +
+      '\nNo school or event may cite an aggregator as its source.\n' +
         "FEEP is a lead, not a source. Verify against the school's own page.\n",
     );
     for (const v of violations) console.error(`  ${v}`);

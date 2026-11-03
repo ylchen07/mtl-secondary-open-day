@@ -207,7 +207,6 @@ main:focus { outline: none; }
 .school-section > h2, .aside-block > h2 { font-size: var(--text-2xl); }
 .school-description { max-width: 65ch; font-size: var(--text-lg); line-height: 1.5; }
 .gap { color: var(--color-ink-2); }
-.draft-note { max-width: 65ch; padding: var(--space-md) var(--space-lg); border: 1.5px dashed var(--color-ink); border-radius: var(--radius-card); }
 .checked { color: var(--color-ink-2); font-size: var(--text-sm); }
 .year-group { display: grid; gap: var(--space-xs); }
 .year-group h3 { font-size: var(--text-lg); }

@@ -17,7 +17,6 @@ function event(overrides: Partial<AgendaEvent> = {}): AgendaEvent {
     notes_fr: null,
     source_url: 'https://school.example/open-house',
     last_verified_at: '2026-09-15',
-    status: 'published',
     school: {
       id: 'school-1',
       slug: 'school-1',
@@ -42,7 +41,6 @@ function event(overrides: Partial<AgendaEvent> = {}): AgendaEvent {
       description_fr: null,
       source_url: 'https://school.example',
       last_verified_at: '2026-09-15',
-      status: 'published',
     },
     ...overrides,
   };

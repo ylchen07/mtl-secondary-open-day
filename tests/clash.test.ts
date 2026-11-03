@@ -10,7 +10,7 @@ function school(over: Partial<SchoolRow> = {}): SchoolRow {
     website_url: 'https://a.qc.ca', admissions_url: 'https://a.qc.ca',
     tuition_annual_cad: null, has_boarding: false, programs: [],
     description_en: 'd', description_fr: 'd', source_url: 'https://a.qc.ca',
-    last_verified_at: '2026-08-30', status: 'published', ...over,
+    last_verified_at: '2026-08-30', ...over,
   };
 }
 
@@ -19,7 +19,7 @@ function event(id: string, startsAt: string, endsAt: string, over: Partial<Agend
     id, school_id: over.school?.id ?? 's1', starts_at: startsAt, ends_at: endsAt, all_day: false,
     type: 'open_house', academic_year: '2027-2028', registration_required: false,
     registration_url: null, notes_en: null, notes_fr: null,
-    source_url: 'https://a.qc.ca', last_verified_at: '2026-08-30', status: 'published',
+    source_url: 'https://a.qc.ca', last_verified_at: '2026-08-30',
     school: school(), ...over,
   };
 }

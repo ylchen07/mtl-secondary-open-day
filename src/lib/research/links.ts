@@ -12,7 +12,6 @@ const LINK_RULES: { facts: readonly Fact[]; pattern: RegExp; weight: number }[] 
   { facts: ['events'], pattern: /portes?[-\s]?ouvertes?|open[-\s]?house|journ[ée]es?[-\s]portes/i, weight: 5 },
   { facts: ['events'], pattern: /examen|exam\b|test[-\s]d|entrevue|interview/i, weight: 4 },
   { facts: ['events'], pattern: /admission|inscri|apply|enrol/i, weight: 3 },
-  { facts: ['address'], pattern: /nous[-\s]joindre|contact|coordonn/i, weight: 2 },
   {
     facts: ['description', 'language', 'gender'],
     pattern: /[àa][-\s]propos|about|qui[-\s]sommes|mission|notre[-\s](?:école|college|collège)|histori/i,

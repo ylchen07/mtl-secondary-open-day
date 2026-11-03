@@ -33,7 +33,6 @@ export function toOpenDayRows(
       notes_fr: event.notes_fr ?? null,
       source_url: event.source_url,
       last_verified_at: event.last_verified_at,
-      status: event.status,
     };
   });
 }

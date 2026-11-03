@@ -23,7 +23,6 @@ const valid = {
   description_fr: 'Une ecole.',
   source_url: 'https://www.villamaria.qc.ca/admissions',
   last_verified_at: '2026-08-30',
-  status: 'published',
   open_days: [
     {
       starts_at: '2026-09-26T13:00:00-04:00',
@@ -36,7 +35,6 @@ const valid = {
       notes_fr: 'Familles du secondaire 1 seulement',
       source_url: 'https://www.villamaria.qc.ca/admissions',
       last_verified_at: '2026-08-30',
-      status: 'published',
     },
   ],
 };

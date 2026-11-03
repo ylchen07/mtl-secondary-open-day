@@ -11,8 +11,6 @@ const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'must be YYYY-MM-DD');
 
 const nonEmpty = z.string().trim().min(1);
 
-const publicationStatus = z.enum(['published', 'draft', 'archived']);
-
 const academicYear = z
   .string()
   .regex(/^\d{4}-\d{4}$/, 'must be YYYY-YYYY')
@@ -31,7 +29,6 @@ const eventFields = {
   notes_fr: z.string().nullish(),
   source_url: httpsUrl,
   last_verified_at: isoDate,
-  status: publicationStatus,
 };
 
 const timedEventSchema = z
@@ -95,8 +92,9 @@ export const schoolFileSchema = z
     slug: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'must be kebab-case'),
     name_en: nonEmpty,
     name_fr: nonEmpty,
-    language: z.enum(['fr', 'en', 'bilingual']),
-    gender: z.enum(['mixed', 'girls', 'boys']),
+    // null until the school's own site states it: a guess is never stored.
+    language: z.enum(['fr', 'en', 'bilingual']).nullable(),
+    gender: z.enum(['mixed', 'girls', 'boys']).nullable(),
     sector: z.enum(['private', 'public']),
     region: z.enum([
       'montreal_island',
@@ -124,7 +122,6 @@ export const schoolFileSchema = z
     description_fr: nonEmpty.nullish(),
     source_url: httpsUrl,
     last_verified_at: isoDate,
-    status: publicationStatus,
     open_days: z.array(openDaySchema),
   })
   .refine((s) => (s.geocode_precision === 'missing') === (s.location == null), {

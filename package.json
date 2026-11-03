@@ -16,7 +16,6 @@
     "data:index": "tsx scripts/build-school-index.ts",
     "test:watch": "pnpm data:index && vitest",
     "check:sources": "tsx scripts/check-sources.ts",
-    "harvest": "tsx scripts/harvest-feep.ts",
     "test:e2e": "playwright test",
     "research": "tsx scripts/research.ts scan",
     "research:apply": "tsx scripts/research.ts apply",

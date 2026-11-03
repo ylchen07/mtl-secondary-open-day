@@ -82,7 +82,6 @@ export default async function SchoolPage({ params }: { params: Params }) {
         <div className="school-main">
           <section aria-labelledby="about-heading" className="school-section">
             <h2 id="about-heading">{t('school.about')}</h2>
-            {!school.confirmed && <p className="draft-note">{t('school.draftNote')}</p>}
             {description ? <p className="school-description">{description}</p> : <p className="gap">{t('school.noDescription')}</p>}
             <p className="checked">{t('school.checked', { date: formatVerifiedDate(school.last_verified_at, locale) })}</p>
           </section>
@@ -144,7 +143,7 @@ export default async function SchoolPage({ params }: { params: Params }) {
         <aside className="school-aside" aria-labelledby="location-heading">
           <section className="aside-block">
             <h2 id="location-heading">{t('school.location')}</h2>
-            {school.address ? <p className="address">{school.address}</p> : <p className="gap">{t('school.addressUnconfirmed')}</p>}
+            <p className="address">{school.address}</p>
             <p className="position-note">
               {school.location
                 ? school.location.precision === 'approximate' ? t('school.approximate') : null

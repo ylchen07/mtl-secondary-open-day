@@ -16,8 +16,7 @@ import type { Browser } from '@playwright/test';
 import { extractText, getDocumentProxy } from 'unpdf';
 import { AGGREGATOR_HOSTS } from '../src/lib/check-sources';
 import { GREATER_MONTREAL_BBOX } from '../src/lib/constants';
-import { serialise } from '../src/lib/harvest/emit';
-import { loadExistingSchools, todayInMontreal } from '../src/lib/harvest/orchestrate';
+import { loadSchoolFiles, serialise, todayInMontreal } from '../src/lib/school-files';
 import { answersSchema, applyAnswers, type Manifest } from '../src/lib/research/apply';
 import { collectEvidence, gapsFor } from '../src/lib/research/evidence';
 import { geocodeQueries, pickGeocode, type GeocodePick, type NominatimResult } from '../src/lib/research/geocode';
@@ -79,8 +78,8 @@ async function readJson<T>(file: string, fallback: T): Promise<T> {
 }
 
 async function loadSchools(): Promise<SchoolFile[]> {
-  const all = await loadExistingSchools({ readdir, readFile: (p) => readFile(p, 'utf8') }, DATA_DIR);
-  return all.filter((s) => s.status !== 'archived' && (!only || only.has(s.slug)));
+  const all = await loadSchoolFiles({ readdir, readFile: (p) => readFile(p, 'utf8') }, DATA_DIR);
+  return all.filter((s) => !only || only.has(s.slug));
 }
 
 // ---------------------------------------------------------------- fetching
@@ -292,7 +291,6 @@ async function scan(): Promise<void> {
     pageTextChars: sum((r) => r.textChars),
     packChars: pack.length,
     linesForReview: sum((r) => r.entry.evidence.items.length),
-    settled: sum((r) => r.entry.evidence.settled.length),
   };
 
   await writeFile(PACK_PATH, pack, 'utf8');
@@ -302,7 +300,7 @@ async function scan(): Promise<void> {
   console.log(
     `Read ${metrics.pages} pages (${metrics.rendered} via browser, ${metrics.unreadable} unreadable).\n` +
       `Raw HTML ≈${tokens(metrics.rawHtmlChars).toLocaleString()} tokens → page text ≈${tokens(metrics.pageTextChars).toLocaleString()} → ` +
-      `pack ≈${tokens(metrics.packChars).toLocaleString()} (${metrics.linesForReview} lines to review, ${metrics.settled} facts settled without review).\n` +
+      `pack ≈${tokens(metrics.packChars).toLocaleString()} (${metrics.linesForReview} lines to review).\n` +
       `Pack written to ${path.relative(ROOT, PACK_PATH)}`,
   );
 }
@@ -364,31 +362,12 @@ async function nominatim(query: string): Promise<NominatimResult[]> {
   return (await res.json()) as NominatimResult[];
 }
 
-/**
- * Whether a draft's postal code is printed on its own site, per the last
- * scan's pages. A draft's pin and street address are shown on the site, so a
- * directory address the school never confirmed is not geocoded.
- */
-async function postalOnOwnSite(school: SchoolFile, manifest: Manifest | null): Promise<boolean> {
-  const want = school.postal_code.replace(/\s+/g, '').toUpperCase();
-  for (const url of manifest?.schools[school.slug]?.pages ?? []) {
-    const text = await readFile(pageFile(url), 'utf8').catch(() => '');
-    if (text.replace(/\s+/g, '').toUpperCase().includes(want)) return true;
-  }
-  return false;
-}
-
 async function geocode(): Promise<void> {
-  const manifest = await readJson<Manifest | null>(MANIFEST_PATH, null);
   const schools = (await loadSchools()).filter((s) => s.location == null);
   console.log(`Geocoding ${schools.length} school(s) without a location (OpenStreetMap Nominatim)…`);
   let placed = 0;
   let first = true;
   for (const school of schools) {
-    if (school.status !== 'published' && !(await postalOnOwnSite(school, manifest))) {
-      console.log(`  SKIP  ${school.slug}: draft whose postal code the last scan did not find on its site`);
-      continue;
-    }
     let pick: GeocodePick = { ok: false, reason: 'no query' };
     for (const query of geocodeQueries(school)) {
       if (!first) await sleep(GEOCODE_DELAY_MS);

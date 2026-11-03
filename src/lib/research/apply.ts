@@ -108,10 +108,6 @@ export function applyAnswers(
       if (!url) continue;
       const { quote: _quote, page: _page, ...fields } = raw;
       const start = String(fields.starts_at ?? fields.starts_on);
-      if (fields.status === 'published' && school.status !== 'published') {
-        problems.push(`events[${i}]: a draft school's events stay draft`);
-        continue;
-      }
       if (next.open_days.some((e) => ('starts_on' in e ? e.starts_on : e.starts_at) === start && e.type === fields.type)) {
         problems.push(`events[${i}]: a ${String(fields.type)} on ${start} is already on file`);
         continue;
@@ -119,7 +115,7 @@ export function applyAnswers(
       const event = { ...fields, source_url: url, last_verified_at: today } as SchoolFile['open_days'][number];
       next.open_days.push(event);
       added.push({ slug, event, quote: raw.quote, url });
-      changed.push(`event ${start} (${String(fields.status)})`);
+      changed.push(`event ${start}`);
     }
     if (changed.length > 0) next.last_verified_at = today;
 
