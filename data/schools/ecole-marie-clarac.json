@@ -3,7 +3,7 @@
   "name_en": "École Marie-Clarac",
   "name_fr": "École Marie-Clarac",
   "language": "fr",
-  "gender": "girls",
+  "gender": null,
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -23,6 +23,5 @@
   "description_fr": "L’École Marie-Clarac est une école privée de langue française, de la garderie au secondaire; son secondaire accueille uniquement des filles.",
   "source_url": "https://www.ecolemarie-clarac.qc.ca/admission-de-lecole-marie-clarac/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }

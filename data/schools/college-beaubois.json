@@ -3,7 +3,7 @@
   "name_en": "Collège Beaubois",
   "name_fr": "Collège Beaubois",
   "language": "fr",
-  "gender": "mixed",
+  "gender": null,
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -21,8 +21,7 @@
   "programs": [],
   "description_en": "Collège Beaubois is a private, non-profit school in Montreal, near Laval, offering preschool, elementary and secondary programs in French.",
   "description_fr": "Le Collège Beaubois est un collège privé à but non lucratif qui offre en français les programmes préscolaire, primaire et secondaire, à Montréal, près de Laval.",
-  "source_url": "https://www.feep.qc.ca/ecoles-privees-quebec/college-beaubois",
+  "source_url": "https://collegebeaubois.qc.ca/",
   "last_verified_at": "2026-11-02",
-  "status": "draft",
   "open_days": []
 }

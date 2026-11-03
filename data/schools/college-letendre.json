@@ -3,7 +3,7 @@
   "name_en": "Collège Letendre",
   "name_fr": "Collège Letendre",
   "language": "fr",
-  "gender": "mixed",
+  "gender": null,
   "sector": "private",
   "region": "laval",
   "city": "Laval",
@@ -23,6 +23,5 @@
   "description_fr": "Le Collège Letendre est un établissement privé d’enseignement secondaire qui offre un milieu éducatif francophone et laïc.",
   "source_url": "https://www.collegeletendre.qc.ca/journee-portes-ouvertes/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }

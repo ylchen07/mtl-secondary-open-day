@@ -2,8 +2,8 @@
   "slug": "externat-sacre-coeur",
   "name_en": "Externat Sacré-Coeur",
   "name_fr": "Externat Sacré-Coeur",
-  "language": "fr",
-  "gender": "mixed",
+  "language": null,
+  "gender": null,
   "sector": "private",
   "region": "north_shore",
   "city": "Rosemère",
@@ -23,6 +23,5 @@
   "description_fr": "L’Externat Sacré-Coeur accueille plus de 1 250 élèves au secondaire.",
   "source_url": "https://www.externat.qc.ca/",
   "last_verified_at": "2026-11-02",
-  "status": "draft",
   "open_days": []
 }

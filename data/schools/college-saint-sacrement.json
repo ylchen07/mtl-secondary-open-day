@@ -23,7 +23,6 @@
   "description_fr": null,
   "source_url": "https://collegesaintsacrement.qc.ca/portes-ouvertes/",
   "last_verified_at": "2026-11-02",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T10:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": "Portes ouvertes le samedi 19 septembre 2026, de 10h à 14h. Départs prévus toutes les dix minutes.",
       "source_url": "https://collegesaintsacrement.qc.ca/portes-ouvertes/",
-      "last_verified_at": "2026-09-19",
-      "status": "published"
+      "last_verified_at": "2026-09-19"
     },
     {
       "starts_at": "2027-09-18T10:00:00-04:00",
@@ -47,8 +45,7 @@
       "notes_en": null,
       "notes_fr": null,
       "source_url": "https://collegesaintsacrement.qc.ca/portes-ouvertes/",
-      "last_verified_at": "2026-11-01",
-      "status": "published"
+      "last_verified_at": "2026-11-01"
     }
   ]
 }

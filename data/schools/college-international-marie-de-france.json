@@ -2,7 +2,7 @@
   "slug": "college-international-marie-de-france",
   "name_en": "Collège international Marie de France",
   "name_fr": "Collège international Marie de France",
-  "language": "fr",
+  "language": null,
   "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
@@ -23,20 +23,5 @@
   "description_fr": "Le Collège international Marie de France offre une formation globale, tournée vers l’excellence, qui allie logique et créativité, bien-être et ouverture sur le monde.",
   "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
   "last_verified_at": "2026-11-02",
-  "status": "draft",
-  "open_days": [
-    {
-      "starts_at": "2026-09-26T09:00:00-04:00",
-      "ends_at": "2026-09-26T13:00:00-04:00",
-      "type": "open_house",
-      "academic_year": "2027-2028",
-      "registration_required": true,
-      "registration_url": "https://5o18i3lc.sibpages.com/",
-      "notes_en": null,
-      "notes_fr": "Le Collège ouvrira ses portes le samedi 26 septembre 2026 de 9h à 13h.",
-      "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
-      "last_verified_at": "2026-10-29",
-      "status": "draft"
-    }
-  ]
+  "open_days": []
 }

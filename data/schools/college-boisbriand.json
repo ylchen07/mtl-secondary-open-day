@@ -3,7 +3,7 @@
   "name_en": "Collège Boisbriand",
   "name_fr": "Collège Boisbriand",
   "language": "fr",
-  "gender": "mixed",
+  "gender": null,
   "sector": "private",
   "region": "north_shore",
   "city": "Boisbriand",
@@ -23,6 +23,5 @@
   "description_fr": "Le Collège Boisbriand est un établissement d’enseignement secondaire francophone, laïc, privé et subventionné de la Rive-Nord de Montréal. Il offre un programme de motivation à la persévérance et à la réussite scolaire par la pratique quotidienne d’activité physique.",
   "source_url": "https://collegeboisbriand.qc.ca/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }

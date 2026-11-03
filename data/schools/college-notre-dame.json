@@ -23,7 +23,6 @@
   "description_fr": "Le Collège Notre-Dame est un collège secondaire privé, mixte, francophone et catholique de l'arrondissement Côte-des-Neiges–Notre-Dame-de-Grâce, à Montréal, fondé en 1869 par la Congrégation de Sainte-Croix.",
   "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
   "last_verified_at": "2026-11-01",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": "Portes ouvertes en présence et sans rendez-vous – le samedi 19 septembre 2026, de 9 h à 14 h.",
       "source_url": "https://www.collegenotredame.com/admissions/portes-ouvertes/",
-      "last_verified_at": "2026-09-15",
-      "status": "published"
+      "last_verified_at": "2026-09-15"
     }
   ]
 }

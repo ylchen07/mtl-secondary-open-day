@@ -56,7 +56,7 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-saint-louis.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://collegesaintlouis.ecolelachine.com/historique/ ; https://collegesaintlouis.ecolelachine.com/admission/ | Added 2026-10-29. No boarding statement on official pages. |
 | `ecole-internationale-de-montreal.json` | `has_boarding` | — | `null` | `null` | `unsupported-negative` | https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/ | Added 2026-10-29. No boarding statement on official pages. |
 
-## Event field audit rows (28)
+## Event field audit rows (25)
 
 | File | Field | Identity (`starts_at + type`) | Before | After | Disposition | Official URL(s) | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -65,19 +65,16 @@ Allowed dispositions: `supported`, `unsupported-negative`, `unsupported-positive
 | `college-charles-lemoyne-campus-ville-de-sainte-catherine.json` | `registration_required` | `2026-09-20T09:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://monccl.com/actualites/journee-portes-ouvertes-2026/ | Official page instructs families to reserve a time slot and links to Booxi booking. |
 | `college-durocher-saint-lambert.json` | `registration_required` | `2026-09-19T09:30:00-04:00 + open_house` | `true` | `true` | `supported` | https://cdsl.qc.ca/portes-ouvertes/ | Official page says to register and reserve a time slot, with an Eventbrite destination. |
 | `college-francais-secondaire-montreal.json` | `registration_required` | `2026-10-04T13:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/ | Official page lists event details but does not explicitly state whether open-house attendance requires registration. |
-| `college-international-marie-de-france.json` | `registration_required` | `2026-09-26T09:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://www.cimf.ca/journees-portes-ouvertes/ | Official page links “Inscription à la Journée Portes Ouvertes” to a registration destination. |
 | `college-jean-de-brebeuf.json` | `registration_required` | `2026-09-26T08:30:00-04:00 + entrance_exam` | `true` | `null` | `unsupported-positive` | https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/ ; https://www.brebeuf.qc.ca/secondaire/admission/ | Official pages confirm exam schedule but do not explicitly provide event-level registration requirement wording and destination. |
 | `college-jean-de-brebeuf.json` | `registration_required` | `2026-09-27T08:30:00-04:00 + entrance_exam` | `true` | `null` | `unsupported-positive` | https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/ ; https://www.brebeuf.qc.ca/secondaire/admission/ | Official pages confirm exam schedule but do not explicitly provide event-level registration requirement wording and destination. |
 | `college-mont-royal.json` | `registration_required` | `2026-09-19T10:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://collegemont-royal.qc.ca/admission-college-mont-royal/ | Official page provides date/time but no explicit registration required or no-registration wording. |
 | `college-notre-dame-de-lourdes.json` | `registration_required` | `2026-10-03T09:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://www.ndl.qc.ca/portes-ouvertes/ | Official page states visits are “sur rendez-vous” and provides the registration destination link. |
 | `college-notre-dame.json` | `registration_required` | `2026-09-19T09:00:00-04:00 + open_house` | `false` | `false` | `supported` | https://www.collegenotredame.com/admissions/portes-ouvertes/ | Official page explicitly says the open house is “sans rendez-vous.” |
-| `college-pasteur.json` | `registration_required` | `2026-09-26T09:30:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://collegepasteur.ca/portes-ouvertes-college-pasteur.php | Official page provides date/time/location but no explicit registration polarity wording. |
 | `college-reine-marie.json` | `registration_required` | `2027-04-17T11:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://www.reine-marie.qc.ca/admission/ | Official page provides event date/time but no explicit registration required or no-registration wording. |
 | `college-saint-maurice.json` | `registration_required` | `2026-09-20T09:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://www.csm.qc.ca/ | Official source page provides date/time but no explicit registration polarity wording. |
 | `college-saint-sacrement.json` | `registration_required` | `2026-09-19T10:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://collegesaintsacrement.qc.ca/portes-ouvertes/ | Official page provides event flow but no explicit registration required or no-registration wording. |
 | `college-trinite.json` | `registration_required` | `2026-09-19T10:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://collegetrinite.ca/le-college/portes-ouvertes/ | Official page includes no-appointment wording, but the visible edition is 2025; polarity for the 2026 record is not explicit. |
 | `ecole-rudolf-steiner-de-montreal.json` | `registration_required` | `2026-10-03T10:00:00-04:00 + open_house` | `false` | `null` | `unsupported-negative` | https://ersm.org/admission-ecole/ ; https://ersm.org/calendrier-des-evenements/ | Official pages confirm event timing but do not explicitly state registration required or no-registration. |
-| `ecole-socrates-demosthene-campus-socrates-ii.json` | `registration_required` | `2026-10-03T09:00:00-04:00 + open_house` | `true` | `null` | `contradicted` | https://hcgm.org/schools/socdem/ ; https://hcgm.org/ecoles/socdem/index.html | Official materials include both “Aucune inscription requise” and registration CTA wording; requirement remains unresolved. |
 | `study.json` | `registration_required` | `2026-10-01T08:30:00-04:00 + open_house` | `true` | `true` | `supported` | https://www.thestudy.qc.ca/fr/admission | Official admissions page provides “INSCRIVEZ-VOUS” for the listed open-house sessions. |
 | `study.json` | `registration_required` | `2026-10-01T17:00:00-04:00 + open_house` | `true` | `true` | `supported` | https://www.thestudy.qc.ca/fr/admission | Official admissions page provides “INSCRIVEZ-VOUS” for the listed open-house sessions. |
 | `villa-maria.json` | `registration_required` | `2026-09-12T10:00:00-04:00 + open_house` | `false` | `false` | `supported` | https://portesouvertes.villamaria.qc.ca/ | Official page explicitly says no registration or appointment is necessary. |
@@ -213,7 +210,7 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 ## Mechanical coverage summary
 
 - School rows: 45/45
-- Event rows: 28/28
+- Event rows: 25/25
 - Missing identities: 0
 - Duplicate identities: 0
 
@@ -223,3 +220,4 @@ All draft events beginning from **2026-09-15 through 2026-12-15 in Montreal time
 - `loyola-high-school.json`: retained `registration_required: true`, populated `registration_url` with the official Eventbrite destination from `https://loyola.ca/openhouse`, and retained draft status because the official page does not establish the stored whole-event bounds.
 - `college-notre-dame-de-lourdes.json`: retained `registration_required: true` and aligned `registration_url` to the official open-house page destination `https://forms.gle/as5z6wH6ZadAhAif9`.
 - `loyola-high-school.json` (2026-11-02): postal code corrected from the directory's `H4B 1R6` to `H4B 1R2`, as on the school's own contact page; the duplicated city and postal code were removed from `address`. Description trimmed to what loyola.ca states.
+- 2026-11-02, draft status removed (`2026-11-02-draft-status-removed.md`): the CIMF 2026-09-26, Pasteur 2026-09-26 and Socrates II 2026-10-03 open houses were deleted, with their rows above, because no school-owned page showed they were for incoming Secondary 1 families. The publication-critical matrix above is kept as history; nothing is gated on it any more.

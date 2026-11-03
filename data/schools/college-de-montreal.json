@@ -2,7 +2,7 @@
   "slug": "college-de-montreal",
   "name_en": "Collège de Montréal",
   "name_fr": "Collège de Montréal",
-  "language": "fr",
+  "language": null,
   "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
@@ -23,6 +23,5 @@
   "description_fr": "Le Collège de Montréal est une institution privée mixte qui accueille plus de 1500 élèves, de la 1re à la 5e secondaire.",
   "source_url": "https://college-montreal.qc.ca/nous-joindre/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }

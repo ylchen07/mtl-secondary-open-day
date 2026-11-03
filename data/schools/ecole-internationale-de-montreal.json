@@ -2,8 +2,8 @@
   "slug": "ecole-internationale-de-montreal",
   "name_en": "École internationale de Montréal",
   "name_fr": "École internationale de Montréal",
-  "language": "fr",
-  "gender": "mixed",
+  "language": null,
+  "gender": null,
   "sector": "public",
   "region": "montreal_island",
   "city": "Westmount",
@@ -23,7 +23,6 @@
   "description_fr": "L’École internationale de Montréal offre à 560 jeunes du secondaire une formation globale de calibre international, dans un cadre chaleureux et humain.",
   "source_url": "https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/",
   "last_verified_at": "2026-11-02",
-  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-19T13:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": "Secondary open house; optional and separate from the admission process. Information sessions at 1:30 p.m. and 2:30 p.m.",
       "notes_fr": "Portes ouvertes du secondaire; facultatives et distinctes du processus d’admission. Séances d’information à 13 h 30 et 14 h 30.",
       "source_url": "https://ecole-internationale.cssdm.gouv.qc.ca/sinscrire-secondaire/",
-      "last_verified_at": "2026-10-29",
-      "status": "draft"
+      "last_verified_at": "2026-10-29"
     }
   ]
 }

@@ -2,8 +2,8 @@
   "slug": "college-jean-eudes",
   "name_en": "Collège Jean-Eudes",
   "name_fr": "Collège Jean-Eudes",
-  "language": "fr",
-  "gender": "mixed",
+  "language": null,
+  "gender": null,
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -23,6 +23,5 @@
   "description_fr": "Le Collège Jean-Eudes est un établissement d’enseignement secondaire à Montréal.",
   "source_url": "https://www.cje.qc.ca/nous-joindre/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }

@@ -3,7 +3,7 @@
   "name_en": "Collège Français Secondaire Longueuil",
   "name_fr": "Collège Français Secondaire Longueuil",
   "language": "fr",
-  "gender": "mixed",
+  "gender": null,
   "sector": "private",
   "region": "south_shore",
   "city": "Longueuil",
@@ -23,6 +23,5 @@
   "description_fr": null,
   "source_url": "https://secondaire.collegefrancais.ca/admission-3/journee-portes-ouvertes-2/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }

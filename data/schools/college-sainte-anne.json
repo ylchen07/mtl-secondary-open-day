@@ -2,7 +2,7 @@
   "slug": "college-sainte-anne",
   "name_en": "Collège Sainte-Anne",
   "name_fr": "Collège Sainte-Anne",
-  "language": "fr",
+  "language": null,
   "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
@@ -34,7 +34,6 @@
   "description_fr": null,
   "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
   "last_verified_at": "2026-10-29",
-  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-09-27T09:00:00-04:00",
@@ -46,8 +45,7 @@
       "notes_en": "Admission session for Secondary 1, by invitation only (candidates selected after file review).",
       "notes_fr": "Séance d'admission en 1re secondaire, sur convocation seulement (candidats sélectionnés après analyse des dossiers).",
       "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
-      "last_verified_at": "2026-10-29",
-      "status": "draft"
+      "last_verified_at": "2026-10-29"
     },
     {
       "starts_at": "2026-09-27T13:00:00-04:00",
@@ -59,8 +57,7 @@
       "notes_en": "Admission session for Secondary 1, by invitation only (candidates selected after file review).",
       "notes_fr": "Séance d'admission en 1re secondaire, sur convocation seulement (candidats sélectionnés après analyse des dossiers).",
       "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
-      "last_verified_at": "2026-10-29",
-      "status": "draft"
+      "last_verified_at": "2026-10-29"
     }
   ]
 }

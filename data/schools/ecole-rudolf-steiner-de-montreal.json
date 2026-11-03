@@ -3,7 +3,7 @@
   "name_en": "École Rudolf Steiner de Montréal",
   "name_fr": "École Rudolf Steiner de Montréal",
   "language": "fr",
-  "gender": "mixed",
+  "gender": null,
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -23,7 +23,6 @@
   "description_fr": "L’École Rudolf Steiner de Montréal est une école privée francophone et subventionnée qui propose une approche alternative basée sur la pédagogie Waldorf.",
   "source_url": "https://ersm.org/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": [
     {
       "starts_at": "2026-10-03T10:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": null,
       "source_url": "https://ersm.org/",
-      "last_verified_at": "2026-09-15",
-      "status": "draft"
+      "last_verified_at": "2026-09-15"
     }
   ]
 }

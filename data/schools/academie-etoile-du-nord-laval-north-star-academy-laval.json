@@ -23,7 +23,6 @@
   "description_fr": "North Star Academy Laval est un établissement privé qui ne reçoit pas de subventions gouvernementales.",
   "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
   "last_verified_at": "2026-11-02",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-24T18:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": null,
       "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
-      "last_verified_at": "2026-09-19",
-      "status": "published"
+      "last_verified_at": "2026-09-19"
     }
   ]
 }

@@ -23,7 +23,6 @@
   "description_fr": "Le Collège Français est un établissement privé d'enseignement secondaire de langue française, et le premier collège laïque et mixte au Québec.",
   "source_url": "https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/",
   "last_verified_at": "2026-11-02",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-10-04T13:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": "Dimanche 4 octobre 2026",
       "source_url": "https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/",
-      "last_verified_at": "2026-11-02",
-      "status": "published"
+      "last_verified_at": "2026-11-02"
     }
   ]
 }

@@ -23,7 +23,6 @@
   "description_fr": "The Study est une école privée pour filles, de la maternelle à la 11e année.",
   "source_url": "https://www.thestudy.qc.ca/fr/admission",
   "last_verified_at": "2026-11-02",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-10-01T08:30:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": "Portes ouvertes de notre école primaire et secondaire, 1er octobre 2026, le matin de 8h30 à 10h00.",
       "source_url": "https://www.thestudy.qc.ca/fr/admission",
-      "last_verified_at": "2026-09-15",
-      "status": "published"
+      "last_verified_at": "2026-09-15"
     },
     {
       "starts_at": "2026-10-01T17:00:00-04:00",
@@ -48,8 +46,7 @@
       "notes_en": null,
       "notes_fr": "Portes ouvertes de notre école primaire et secondaire, 1er octobre 2026, le soir de 17h00 à 19h00.",
       "source_url": "https://www.thestudy.qc.ca/fr/admission",
-      "last_verified_at": "2026-09-15",
-      "status": "published"
+      "last_verified_at": "2026-09-15"
     }
   ]
 }

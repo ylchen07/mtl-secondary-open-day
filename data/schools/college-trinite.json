@@ -20,7 +20,6 @@
   "description_fr": "Le Collège Trinité est un établissement d’enseignement secondaire privé francophone situé en Montérégie, au pied du mont Saint-Bruno.",
   "source_url": "https://collegetrinite.ca/portes-ouvertes/",
   "last_verified_at": "2026-11-02",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T10:00:00-04:00",
@@ -32,8 +31,7 @@
       "notes_en": null,
       "notes_fr": "Sans rendez-vous, découvrez notre école à votre rythme grâce à des kiosques animés par des gens qui vivent le Collège au quotidien!",
       "source_url": "https://collegetrinite.ca/portes-ouvertes/",
-      "last_verified_at": "2026-09-19",
-      "status": "published"
+      "last_verified_at": "2026-09-19"
     }
   ]
 }

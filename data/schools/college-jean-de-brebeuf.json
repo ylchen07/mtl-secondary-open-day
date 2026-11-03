@@ -25,7 +25,6 @@
   "description_fr": "Le Collège Jean-de-Brébeuf est une école secondaire privée francophone mixte située dans le quartier Côte-des-Neiges à Montréal, fondée il y a près de 100 ans. L'école offre une éducation axée sur les valeurs humanistes, avec des programmes spécialisés incluant Sport et monde pour les élèves athlétiques. Les classes sont organisées par genre de la 1re à la 4e secondaire, bien que les élèves partagent les installations du campus.",
   "source_url": "https://www.brebeuf.qc.ca/secondaire/admission/",
   "last_verified_at": "2026-09-15",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-26T08:30:00-04:00",
@@ -37,8 +36,7 @@
       "notes_en": "Invitation only. Only selected candidates are invited to attend based on application review. Exams consist of Mathematics (logic, approximately 35 minutes) and French (three components, 90 minutes total). Parents cannot attend.",
       "notes_fr": "Sur invitation seulement. Seuls les candidats sélectionnés sont invités à assister en fonction de l'examen de la demande. Les examens comprennent les mathématiques (logique, environ 35 minutes) et le français (trois composantes, 90 minutes au total). Les parents ne peuvent pas assister.",
       "source_url": "https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/",
-      "last_verified_at": "2026-09-15",
-      "status": "published"
+      "last_verified_at": "2026-09-15"
     },
     {
       "starts_at": "2026-09-27T08:30:00-04:00",
@@ -50,8 +48,7 @@
       "notes_en": "Invitation only. Continuation of entrance exam process. Only invited candidates attend.",
       "notes_fr": "Sur invitation seulement. Suite du processus d'examen d'entrée. Seuls les candidats invités y assistent.",
       "source_url": "https://www.brebeuf.qc.ca/secondaire/foire-aux-questions-pour-ladmission-2026-2027/",
-      "last_verified_at": "2026-09-15",
-      "status": "published"
+      "last_verified_at": "2026-09-15"
     }
   ]
 }

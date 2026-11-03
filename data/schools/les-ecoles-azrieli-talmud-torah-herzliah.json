@@ -2,8 +2,8 @@
   "slug": "les-ecoles-azrieli-talmud-torah-herzliah",
   "name_en": "Les écoles Azrieli Talmud Torah | Herzliah",
   "name_fr": "Les écoles Azrieli Talmud Torah | Herzliah",
-  "language": "bilingual",
-  "gender": "mixed",
+  "language": null,
+  "gender": null,
   "sector": "private",
   "region": "montreal_island",
   "city": "Montreal",
@@ -23,6 +23,5 @@
   "description_fr": "Les écoles Azrieli forment une école juive privée à Montréal.",
   "source_url": "https://www.azrieli-tth.ca/fr/admissions-herzliah",
   "last_verified_at": "2026-11-02",
-  "status": "draft",
   "open_days": []
 }

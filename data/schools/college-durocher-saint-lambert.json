@@ -23,7 +23,6 @@
   "description_fr": "Fondé à Saint-Lambert en 1910, le Collège Durocher Saint-Lambert est un organisme sans but lucratif qui offre le cours secondaire complet, en français, aux filles et aux garçons.",
   "source_url": "https://cdsl.qc.ca/portes-ouvertes/",
   "last_verified_at": "2026-11-02",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:30:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": "Portes ouvertes au pavillon Saint-Lambert (375, rue Riverside), le campus du 1er cycle (1re et 2e secondaire) où le portail d'admission COBA dirige les candidatures de 1re secondaire.",
       "source_url": "https://cdsl.qc.ca/portes-ouvertes/",
-      "last_verified_at": "2026-09-19",
-      "status": "published"
+      "last_verified_at": "2026-09-19"
     }
   ]
 }

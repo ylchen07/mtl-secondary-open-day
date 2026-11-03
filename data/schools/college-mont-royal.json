@@ -23,7 +23,6 @@
   "description_fr": "Le Collège Mont-Royal est une institution privée et mixte d’enseignement secondaire, qui offre un enseignement en français.",
   "source_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
   "last_verified_at": "2026-11-01",
-  "status": "published",
   "open_days": [
     {
       "starts_at": "2026-09-19T10:00:00-04:00",
@@ -35,8 +34,7 @@
       "notes_en": null,
       "notes_fr": "Nos portes ouvertes auront lieux le 19 septembre de 10 h à 14 h",
       "source_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
-      "last_verified_at": "2026-09-15",
-      "status": "published"
+      "last_verified_at": "2026-09-15"
     }
   ]
 }

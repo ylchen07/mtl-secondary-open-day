@@ -2,8 +2,8 @@
   "slug": "college-laval",
   "name_en": "Collège Laval",
   "name_fr": "Collège Laval",
-  "language": "fr",
-  "gender": "mixed",
+  "language": null,
+  "gender": null,
   "sector": "private",
   "region": "laval",
   "city": "Laval",
@@ -23,6 +23,5 @@
   "description_fr": "Le Collège Laval est une école secondaire privée à Laval qui œuvre dans l'éducation depuis 1888.",
   "source_url": "https://collegelaval.ca/journee-portes-ouvertes/",
   "last_verified_at": "2026-11-01",
-  "status": "draft",
   "open_days": []
 }
