@@ -14,10 +14,11 @@ const LINK_RULES: { facts: readonly Fact[]; pattern: RegExp; weight: number }[] 
   { facts: ['events'], pattern: /admission|inscri|apply|enrol/i, weight: 3 },
   {
     facts: ['description', 'language', 'gender'],
-    pattern: /[àa][-\s]propos|about|qui[-\s]sommes|mission|notre[-\s](?:école|college|collège)|histori/i,
+    pattern:
+      /[àa][-\s]propos|about|qui[-\s]sommes|mission|notre[-\s](?:école|college|collège)|le[-\s]coll[eè]ge\b|projet[-\s][ée]ducatif|pourquoi[-\s]choisir|why[-\s]choose|histori/i,
     weight: 2,
   },
-  { facts: ['tuition'], pattern: /frais|droits[-\s]de[-\s]scolarit|scolarit[ée]|tuition|fees|co[uû]ts?\b/i, weight: 3 },
+  { facts: ['tuition'], pattern: /frais|droits[-\s]de[-\s]scolarit|scolarit[ée]|tuition|fees|tarifs?\b|co[uû]ts?\b/i, weight: 3 },
 ];
 
 const DOCUMENT = /\.(pdf|docx?|xlsx?|pptx?)$/i;

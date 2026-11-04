@@ -47,8 +47,8 @@ const PARALLEL_SCHOOLS = 4;
 const MAX_PAGES = 10;
 /** Fees grids and admission guides are often PDFs; a school's best two are read. */
 const MAX_DOCUMENTS = 2;
-/** A larger PDF is a brochure or yearbook, not a fees grid. */
-const MAX_DOCUMENT_BYTES = 5_000_000;
+/** A larger PDF is a yearbook; an image-heavy projet éducatif still fits (Saint-Sacrement's is 9.5 MB). */
+const MAX_DOCUMENT_BYTES = 15_000_000;
 /** Sitemap files read per school: an index and a few of its children. */
 const MAX_SITEMAPS = 4;
 /** Below this, a page is a JS shell or an error page: try a real browser. */

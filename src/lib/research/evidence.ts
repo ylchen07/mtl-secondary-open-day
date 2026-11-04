@@ -74,7 +74,9 @@ const TIME_ONLY = /\b\d{1,2}\s?h(?:\s?\d{2})?\b|\b\d{1,2}:\d{2}\b|\b\d{1,2}\s?[a
 
 const PATTERNS: Record<'language' | 'gender', (text: string) => boolean> = {
   language: (t) =>
-    /langue\s+d['’]enseignement|francophone|anglophone|bilingue|bilingual|english[-\s]language|french[-\s]language|enseignement\s+(?:en|du)\s+(?:fran[çc]ais|anglais)|instruction\s+in\s+(?:english|french)|langue\s+fran[çc]aise/i.test(t),
+    /langue\s+d['’]enseignement|francophone|anglophone|bilingue|bilingual|english[-\s]language|french[-\s]language|enseignement\s+(?:en|du)\s+(?:fran[çc]ais|anglais)|instruction\s+in\s+(?:english|french)|langue\s+fran[çc]aise|taught\s+in\s+(?:english|french)/i.test(t) ||
+    // «dispenser en français un enseignement», «recevoir en français les services d'enseignement»
+    /(?:dispens|recev|re[çc]oi|offr|donn)\w*\s+(?:\S+\s+){0,3}en\s+(?:fran[çc]ais|anglais)\b.*enseignement/i.test(t),
   gender: (t) => /\bfilles\b|\bgar[çc]ons\b|\bmixte\b|\bgirls\b|\bboys\b|\bco-?ed(?:ucational)?\b|co[ée]ducation/i.test(t),
 };
 
@@ -98,7 +100,8 @@ function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
   lines.forEach((line, i) => {
     if (!TUITION_WORD.test(line)) return;
     const groups = sentencesMatching(line, (s) => TUITION_WORD.test(s) && AMOUNT.test(s)).map((s) => [s]);
-    if (groups.length === 0 && line.length <= 120) {
+    // A parenthetical note («(Un rabais est accordé…)») does not make a label a paragraph.
+    if (groups.length === 0 && line.replace(/\([^)]*\)/g, '').length <= 120) {
       // A label row: its amounts are the short lines just below it, up to the
       // next row; a note line («Date limite…») may sit before the first amount.
       const amounts: string[] = [];
@@ -266,21 +269,23 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
       return;
     }
     const test = PATTERNS[fact];
-    for (const line of page.lines) {
+    // A meta description is often the one place a school says «école privée mixte».
+    const texts = page.description ? [page.description, ...page.lines] : page.lines;
+    for (const line of texts) {
       for (const s of sentencesMatching(line, test)) {
         out.push({ fact, lines: [s], page: index, hash: hashEvidence(fact, [s]) });
       }
     }
   });
   // The strongest lines fill the cap first: fees rows that name Secondary 1,
-  // and a school's own statement of what it is.
+  // and a school's own statement of what it is (not a «soccer mixte» team).
   const strong =
     fact === 'tuition'
       ? (item: Evidence) => SECONDARY_ONE.test(item.lines.join(' '))
       : fact === 'description'
         ? (item: Evidence) => IDENTITY.test(item.lines.join(' '))
-        : null;
-  return strong ? [...out.filter(strong), ...out.filter((item) => !strong(item))] : out;
+        : (item: Evidence) => SELF_REFERENCE.test(item.lines.join(' '));
+  return [...out.filter(strong), ...out.filter((item) => !strong(item))];
 }
 
 /**

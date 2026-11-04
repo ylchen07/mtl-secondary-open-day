@@ -41,11 +41,22 @@ export function renderPack(entries: readonly PackEntry[], today: string): string
   const anything = entries.some((e) => e.evidence.items.length > 0);
   const out = [`# Research pack — ${today}`, '', ...(anything ? [INSTRUCTIONS, ''] : [])];
   const quiet: string[] = [];
+  // Open gaps with nothing to quote: where the crawl came up empty, so a human knows where to look.
+  const missing: string[] = [];
 
   for (const { school, evidence, pages, documents, failures } of entries) {
     // Settled facts need no action, so they ride along only with lines to review.
     if (evidence.items.length === 0) {
       quiet.push(school.slug);
+      // Events are always a gap; only a missing school fact is worth a line.
+      const open = evidence.gaps.filter((gap) => gap !== 'events');
+      if (open.length > 0) {
+        const notes = [
+          ...(failures.length > 0 ? [`unreadable: ${failures.map((f) => clip(f, 90)).join('; ')}`] : []),
+          ...(documents.length > 0 ? [`not read: ${documents.join(' ')}`] : []),
+        ];
+        missing.push(`- ${school.slug}: ${open.join(' ')}${notes.map((n) => ` · ${n}`).join('')}`);
+      }
       continue;
     }
     out.push(`## ${school.slug} · ${school.name_fr}`);
@@ -63,5 +74,6 @@ export function renderPack(entries: readonly PackEntry[], today: string): string
   }
 
   if (quiet.length > 0) out.push(anything ? '## Nothing new' : 'Nothing new to review.', quiet.join(', '), '');
+  if (missing.length > 0) out.push('## Still missing, nothing quotable found', ...missing, '');
   return out.join('\n');
 }

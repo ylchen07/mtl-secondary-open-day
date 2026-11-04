@@ -6,6 +6,7 @@ import { addLedgerRows } from '@/lib/research/ledger';
 import { isAllowed, parseRobots, pickLinks, readSitemap, sitemapsIn } from '@/lib/research/links';
 import { htmlToLines } from '@/lib/research/normalize';
 import { readPage, type PageFacts } from '@/lib/research/page';
+import { renderPack } from '@/lib/research/pack';
 import type { SchoolFile } from '@/lib/schema';
 
 const TODAY = '2026-11-01';
@@ -196,6 +197,28 @@ describe('collectEvidence', () => {
     expect(items.filter((i) => i.fact === 'tuition').map((i) => i.lines)).toEqual([['Grades 7 – 10', 'Grade 11', 'Tuition', '$10,050']]);
   });
 
+  it('reads a fees label carrying a long parenthetical note', () => {
+    const label = 'FRAIS DE SCOLARITÉ2 (Un rabais est accordé aux parents lorsqu’un deuxième ou un troisième enfant est inscrit au Collège.)';
+    const fees = ['Programme Odyssée + (1re et 2e secondaire seulement) : 250 $', label, '1er enfant 3 975 $', '2e enfant 3 625 $'];
+    const items = collectEvidence(school(), [page('https://test.qc.ca/frais/', fees)], TODAY).items;
+    expect(items.filter((i) => i.fact === 'tuition').map((i) => i.lines.slice(1))).toEqual([[label, '1er enfant 3 975 $', '2e enfant 3 625 $']]);
+  });
+
+  it('reads student body and language from the meta summary and a school statement, ahead of team names', () => {
+    const home = page('https://test.qc.ca/', ['Soccer mixte', 'Nos filles ont gagné la finale.'], {
+      description: 'École secondaire privée mixte à Montréal depuis 1955.',
+    });
+    const admission = page('https://test.qc.ca/admission/', [
+      'Un permis l’autorise à dispenser en français un enseignement général aux niveaux primaire et secondaire.',
+      'Une épreuve en français et une épreuve en mathématiques.',
+    ]);
+    const items = collectEvidence(school(), [home, admission], TODAY).items;
+    expect(items.find((i) => i.fact === 'gender')?.lines).toEqual(['École secondaire privée mixte à Montréal depuis 1955.']);
+    expect(items.filter((i) => i.fact === 'language').map((i) => i.lines[0])).toEqual([
+      'Un permis l’autorise à dispenser en français un enseignement général aux niveaux primaire et secondaire.',
+    ]);
+  });
+
   it('takes a school saying what it is from any page, ahead of other summaries', () => {
     const about = page('https://test.qc.ca/a-propos/', ['Le Collège Test est un milieu de vie dynamique et stimulant pour tous les élèves du secondaire.']);
     const admission = page('https://test.qc.ca/admission/', [
@@ -208,6 +231,21 @@ describe('collectEvidence', () => {
       'Un établissement privé francophone mixte d’enseignement reconnu par le ministère de l’Éducation',
       'Le Collège Test est un milieu de vie dynamique et stimulant pour tous les élèves du secondaire.',
     ]);
+  });
+});
+
+describe('renderPack', () => {
+  const quiet = (gaps: ('events' | 'tuition')[], failures: string[] = []) => ({
+    school: school(), evidence: { gaps, items: [] }, pages: [], documents: [], failures,
+  });
+
+  it('names a school whose open facts found nothing to quote, with where the crawl failed', () => {
+    const pack = renderPack([quiet(['events', 'tuition'], ['https://test.qc.ca/ (HTTP 429)'])], TODAY);
+    expect(pack).toContain('## Still missing, nothing quotable found\n- college-test: tuition · unreadable: https://test.qc.ca/ (HTTP 429)');
+  });
+
+  it('does not list a school whose only gap is events', () => {
+    expect(renderPack([quiet(['events'])], TODAY)).not.toContain('Still missing');
   });
 });
 
