@@ -3,7 +3,7 @@
   "name_en": "Collège Citoyen",
   "name_fr": "Collège Citoyen",
   "language": "fr",
-  "gender": null,
+  "gender": "mixed",
   "sector": "private",
   "region": "laval",
   "city": "Laval",
@@ -22,6 +22,6 @@
   "description_en": "Collège Citoyen is a subsidized private school.",
   "description_fr": "Le Collège Citoyen est un établissement d’enseignement privé subventionné.",
   "source_url": "https://www.collegecitoyen.ca/portes-ouvertes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-03",
   "open_days": []
 }

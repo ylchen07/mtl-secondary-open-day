@@ -3,7 +3,7 @@
   "name_en": "Collège Sainte-Marcelline",
   "name_fr": "Collège Sainte-Marcelline",
   "language": "fr",
-  "gender": null,
+  "gender": "girls",
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -22,6 +22,6 @@
   "description_en": null,
   "description_fr": null,
   "source_url": "https://college.marcelline.qc.ca/le-secondaire-vous-ouvre-ses-portes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-03",
   "open_days": []
 }

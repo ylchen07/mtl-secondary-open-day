@@ -2,7 +2,7 @@
   "slug": "college-pasteur",
   "name_en": "Collège Pasteur",
   "name_fr": "Collège Pasteur",
-  "language": null,
+  "language": "fr",
   "gender": null,
   "sector": "private",
   "region": "montreal_island",
@@ -22,6 +22,6 @@
   "description_en": "Collège Pasteur, founded in 1956, is licensed to teach in French from kindergarten through elementary and secondary school.",
   "description_fr": "Fondé en 1956, le Collège Pasteur détient un permis pour dispenser en français un enseignement de la maternelle au primaire et au secondaire.",
   "source_url": "https://collegepasteur.ca/portes-ouvertes-college-pasteur.php",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-03",
   "open_days": []
 }

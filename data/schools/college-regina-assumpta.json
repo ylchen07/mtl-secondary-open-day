@@ -3,7 +3,7 @@
   "name_en": "Collège Regina Assumpta",
   "name_fr": "Collège Regina Assumpta",
   "language": null,
-  "gender": null,
+  "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -19,9 +19,9 @@
   "tuition_annual_cad": 5450,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "A private co-ed secondary school in Montreal since 1955, with six concentrations.",
+  "description_fr": "École secondaire privée mixte à Montréal depuis 1955, avec six concentrations.",
   "source_url": "https://reginaassumpta.qc.ca/admission/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-03",
   "open_days": []
 }

@@ -13,13 +13,13 @@
   "geocode_precision": "missing",
   "website_url": "https://portesouvertes.csm.qc.ca/",
   "admissions_url": "https://portesouvertes.csm.qc.ca/",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 3975,
   "has_boarding": null,
   "programs": [],
   "description_en": "Collège Saint-Maurice is a private secondary school in Saint-Hyacinthe.",
   "description_fr": "Le Collège Saint-Maurice est une école secondaire privée située à Saint-Hyacinthe.",
   "source_url": "https://portesouvertes.csm.qc.ca/",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-03",
   "open_days": [
     {
       "starts_at": "2026-09-20T09:00:00-04:00",

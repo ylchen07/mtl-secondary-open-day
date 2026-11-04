@@ -3,7 +3,7 @@
   "name_en": "École secondaire Marcellin-Champagnat",
   "name_fr": "École secondaire Marcellin-Champagnat",
   "language": null,
-  "gender": null,
+  "gender": "mixed",
   "sector": "private",
   "region": "south_shore",
   "city": "Saint-Jean-sur-Richelieu",
@@ -19,6 +19,6 @@
   "description_en": "École secondaire Marcellin-Champagnat is a private school.",
   "description_fr": "L'École secondaire Marcellin-Champagnat est un établissement d'enseignement privé.",
   "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-03",
   "open_days": []
 }

@@ -67,18 +67,25 @@
     "f60de4c953"
   ],
   "college-citoyen": [
+    "0f23ac452e",
+    "155c2b9e39",
+    "31a85bd250",
     "355611afe1",
     "3ee227bd5a",
     "41a993c95e",
+    "48cf8c5b07",
+    "4c9cb49c91",
     "7968ecf92c",
     "87d3f281ce",
     "8a0e324b7d",
     "96dea25b63",
+    "c0307fc7bd",
     "cf9a1d0469",
     "d0d3173ba6",
     "d1cdaea124",
     "e0372c6b10",
     "e7cc67a4d3",
+    "e9e614d782",
     "f73994a026",
     "f7ef61d466",
     "f8e2597944"
@@ -177,12 +184,14 @@
     "25a653282a",
     "349f51a671",
     "3a86bc645e",
+    "5bcb833596",
     "60e3ca11ec",
     "af2bd04d20",
     "c2612b41ae",
     "c99bcadb5f",
     "d619280659",
-    "df279347ca"
+    "df279347ca",
+    "eb4ab51627"
   ],
   "college-laval": [
     "31813e67ad",
@@ -223,6 +232,7 @@
     "397b027bfa",
     "3c243085af",
     "4ca36a664f",
+    "5591b0e478",
     "7ab3422120",
     "87275a1ba0",
     "8d9af07389",
@@ -237,6 +247,7 @@
     "153ebaf2a9",
     "848a4d773d",
     "bd7d6acc72",
+    "c023aeb956",
     "f037ba16c3"
   ],
   "college-regina-assumpta": [
@@ -245,9 +256,11 @@
     "3c94ced881",
     "5d76cdd16b",
     "69320d80da",
-    "8a83d23faa"
+    "8a83d23faa",
+    "f7d5dba77d"
   ],
   "college-reine-marie": [
+    "400a4f3900",
     "4d67c80379",
     "9a8eca506e",
     "9fc21c9f03",
@@ -265,6 +278,7 @@
   ],
   "college-saint-maurice": [
     "00ffaf6e2a",
+    "25ff7ea734",
     "5fa33eea04",
     "63cd3bd9c6",
     "6a269236aa"
@@ -276,8 +290,11 @@
     "3dba33df8c",
     "518d474403",
     "55c619bb63",
+    "5703d1c4ef",
+    "6db8b597b7",
     "82746bff39",
-    "8f78a86151"
+    "8f78a86151",
+    "d9984e3465"
   ],
   "college-sainte-anne": [
     "230db92786",
@@ -358,13 +375,17 @@
     "024bc6dab0",
     "0c98aaa06c",
     "1226a72c4d",
+    "146023bd10",
     "45dd499c87",
     "5db753e810",
     "6437bde6b0",
+    "690756d22e",
     "9c154502a6",
     "b8d49ed3b2",
     "c017749230",
     "c24b3ebc16",
+    "c26ba7c221",
+    "cd308e5272",
     "d7a3f77595",
     "f66589e197"
   ],
@@ -374,10 +395,14 @@
   "ecole-secondaire-marcellin-champagnat": [
     "0bc1ad98b4",
     "0fc6d269d9",
+    "12323b09c2",
     "355dc98ee9",
     "382e019bab",
+    "54ef2510d6",
+    "5fa5384c2e",
     "7632da112e",
-    "7c9e0df2de"
+    "7c9e0df2de",
+    "98c628f6e6"
   ],
   "ecole-socrates-demosthene-campus-socrates-ii": [
     "27748d4736",

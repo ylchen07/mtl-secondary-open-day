@@ -2,7 +2,7 @@
   "slug": "college-reine-marie",
   "name_en": "Collège Reine-Marie",
   "name_fr": "Collège Reine-Marie",
-  "language": null,
+  "language": "fr",
   "gender": null,
   "sector": "private",
   "region": "montreal_island",
@@ -22,7 +22,7 @@
   "description_en": "Collège Reine-Marie is a private secondary school on the island of Montreal, where each student chooses a profile on entry.",
   "description_fr": "Le Collège Reine-Marie est un établissement d'enseignement secondaire privé situé sur l'île de Montréal, où chaque élève choisit un profil dès son entrée.",
   "source_url": "https://www.reine-marie.qc.ca/admission/",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-03",
   "open_days": [
     {
       "starts_at": "2027-04-17T11:00:00-04:00",
