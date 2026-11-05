@@ -35,8 +35,12 @@ Each description states only what its quote says. Lengths are `description_en` c
 | `study` | 67 | 178 | www.thestudy.qc.ca/ |
 | `villa-sainte-marcelline` | 83 | 169 | villa.marcelline.qc.ca/admissions/open-house/ |
 
-## Not filled
+## Saint-Nom-de-Marie, read by browser (2026-11-05)
 
-- Pensionnat du Saint-Nom-de-Marie: the site answers `HTTP 429` (Vercel bot checkpoint), as on 2026-11-03.
+The site answers scripted requests with `HTTP 429` (Vercel Security Checkpoint). On 2026-11-05 six pages (home, admission, portes-ouvertes, histoire-et-mission, a-propos, droits-scolarite) were read once in an ordinary Chromium, which passes the checkpoint as a visitor's browser does, and run through the same extractor and quote check:
+
+- Description: « La vision même des Sœurs des Saints Noms de Jésus et de Marie, fondatrices de l'institution en 1905, … » (psnm.qc.ca/histoire-et-mission).
+- Tuition `6150`: « Droits de scolarité* 6 150 $ », profile « Être et devenir », 2026-2027 (psnm.qc.ca/droits-scolarite).
+- Not added: the open house of Saturday 24 April 2027 has no hours on either page.
 
 Descriptions left as they were: the 27 schools already at 100 characters or more.

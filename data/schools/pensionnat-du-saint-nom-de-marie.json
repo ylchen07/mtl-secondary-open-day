@@ -16,12 +16,12 @@
   "geocode_precision": "approximate",
   "website_url": "https://www.psnm.qc.ca/",
   "admissions_url": "https://www.psnm.qc.ca/admission",
-  "tuition_annual_cad": null,
+  "tuition_annual_cad": 6150,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Founded in 1905 by the Sisters of the Holy Names of Jesus and Mary, the Pensionnat du Saint-Nom-de-Marie sets out to help young girls grow into thoughtful, determined, engaged and ambitious women.",
+  "description_fr": "Fondé en 1905 par les Sœurs des Saints Noms de Jésus et de Marie, le Pensionnat du Saint-Nom-de-Marie vise l’épanouissement des jeunes filles, pour qu’elles deviennent des femmes réfléchies, déterminées, engagées et ambitieuses.",
   "source_url": "https://www.psnm.qc.ca/",
-  "last_verified_at": "2026-10-29",
+  "last_verified_at": "2026-11-05",
   "open_days": []
 }
