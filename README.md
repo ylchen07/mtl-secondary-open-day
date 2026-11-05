@@ -107,6 +107,8 @@ pnpm research:geocode   # place schools on the map from their street address (no
 
 A school with an open fact but no line worth quoting is listed under **Still missing** at the end of the pack, with any page that could not be read (a bot wall answers `HTTP 429`) and any document left unread, so a gap the crawl cannot close is visible rather than silent. When what counts as a gap changes, `pnpm research --all --only a,b` shows reviewed lines again.
 
+A description counts as missing while it is under 100 characters: a bare label such as "X is a private school." keeps research looking for the school's own statement of its mission, history or approach, read from its about, mission, history and presentation pages.
+
 **Review** answers in `answers.json` (format at the top of `pack.md`). Every fact carries a verbatim `quote` and the `page` it came from; a table row is quoted as its label and amount joined by a space. A school with nothing usable is listed as `{}` so its lines are never shown again.
 
 **`pnpm research:apply`** rejects a school's whole answer if any quote is not in the fetched page text or the result fails the schema. That makes a hallucinated date or fact impossible to write. Whatever it writes is on the site at the next deploy, so an answer states only what its quote says.

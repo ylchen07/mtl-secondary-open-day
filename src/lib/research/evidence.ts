@@ -5,17 +5,24 @@ import type { PageFacts } from './page';
 
 /**
  * The facts research looks for. Each is only looked for when the school's
- * record is missing it, so a complete record costs nothing to re-check.
+ * record is missing it (or, for a description, has only a bare label), so a
+ * complete record costs nothing to re-check.
  */
 export const FACTS = ['events', 'language', 'gender', 'tuition', 'description'] as const;
 export type Fact = (typeof FACTS)[number];
+
+/**
+ * Below this, a description only names the kind of school («X is a private
+ * school.»), so research keeps looking for what makes it distinct.
+ */
+export const THIN_DESCRIPTION_CHARS = 100;
 
 export function gapsFor(school: SchoolFile): Fact[] {
   const gaps: Fact[] = ['events'];
   if (school.language == null) gaps.push('language');
   if (school.gender == null) gaps.push('gender');
   if (school.tuition_annual_cad == null) gaps.push('tuition');
-  if (school.description_fr == null) gaps.push('description');
+  if (school.description_en == null || school.description_en.length < THIN_DESCRIPTION_CHARS) gaps.push('description');
   return gaps;
 }
 
@@ -137,7 +144,11 @@ function tuitionEvidence(page: PageFacts, index: number): Evidence[] {
 }
 
 const SELF_REFERENCE = /(?<!\p{L})(?:[ée]cole|coll[èe]ge|school|college|[ée]tablissement|institution)(?!\p{L})/iu;
-const ABOUT_URL = /[àa]-?propos|about|qui-sommes|mission|histori|notre-/i;
+/** About-type pages; `(?<!ad)mission` keeps admission pages out. */
+const ABOUT_URL = /[àa]-?propos|about|qui-sommes|(?<!ad)mission|histori|notre-|le-college|projet-educatif|presentation/i;
+/** What makes a school distinct: its stated mission, and when and by whom it was founded. */
+const MISSION =
+  /a\s+pour\s+mission|notre\s+mission|our\s+mission|mission\s+(?:is|est)\b|fond[ée]e?s?\s+(?:en|par)\s|founded\s+(?:in|by)\s|depuis\s+1[89]\d\d|since\s+1[89]\d\d|voit\s+le\s+jour\s+en/i;
 /**
  * A school saying what it is: «X est un établissement…», «we are an independent … institution».
  * Letter lookarounds, not `\b`: `\b` treats «é» as a non-word character, so `\bétablissement` never matches.
@@ -258,7 +269,7 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
         out.push({ fact, lines: [page.description], page: index, hash: hashEvidence(fact, [page.description]) });
       }
       for (const line of page.lines) {
-        for (const s of sentencesMatching(line, (t) => t.length >= 80 && SELF_REFERENCE.test(t))) {
+        for (const s of sentencesMatching(line, (t) => t.length >= 80 && (SELF_REFERENCE.test(t) || MISSION.test(t)))) {
           out.push({ fact, lines: [s], page: index, hash: hashEvidence(fact, [s]) });
         }
       }
@@ -278,12 +289,12 @@ function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[]
     }
   });
   // The strongest lines fill the cap first: fees rows that name Secondary 1,
-  // and a school's own statement of what it is (not a «soccer mixte» team).
+  // a school's own statement of what it is or its mission (not a «soccer mixte» team).
   const strong =
     fact === 'tuition'
       ? (item: Evidence) => SECONDARY_ONE.test(item.lines.join(' '))
       : fact === 'description'
-        ? (item: Evidence) => IDENTITY.test(item.lines.join(' '))
+        ? (item: Evidence) => IDENTITY.test(item.lines.join(' ')) || MISSION.test(item.lines.join(' '))
         : (item: Evidence) => SELF_REFERENCE.test(item.lines.join(' '));
   return [...out.filter(strong), ...out.filter((item) => !strong(item))];
 }

@@ -90,6 +90,14 @@ describe('pickLinks', () => {
   it('ignores links that only serve a fact already on file', () => {
     expect(pickLinks(links, 'https://www.test.qc.ca/', new Set(), 5, ['tuition']).pages).not.toContain('https://test.qc.ca/nous-joindre/');
   });
+
+  it('does not take an admission page for an about page', () => {
+    const about = [
+      { href: 'https://test.qc.ca/admission/demande/', text: 'Demande d’admission' },
+      { href: 'https://test.qc.ca/le-college/presentation/', text: 'Présentation' },
+    ];
+    expect(pickLinks(about, 'https://test.qc.ca/', new Set(), 1, ['description']).pages).toEqual(['https://test.qc.ca/le-college/presentation/']);
+  });
 });
 
 describe('robots.txt', () => {
@@ -113,9 +121,12 @@ describe('datesIn', () => {
 });
 
 describe('gapsFor', () => {
-  it('only looks for what the record is missing', () => {
+  it('only looks for what the record is missing, and past a bare one-line description', () => {
+    const full = 'Collège Test is a private French-language secondary school in Montreal, founded in 1950 by the Sisters of Test.';
+    const known = { language: 'fr', gender: 'mixed', tuition_annual_cad: 5000, description_fr: 'y' } as const;
     expect(gapsFor(school())).toEqual(['events', 'language', 'gender', 'tuition', 'description']);
-    expect(gapsFor(school({ language: 'fr', gender: 'mixed', tuition_annual_cad: 5000, description_en: 'x', description_fr: 'y' }))).toEqual(['events']);
+    expect(gapsFor(school({ ...known, description_en: full }))).toEqual(['events']);
+    expect(gapsFor(school({ ...known, description_en: 'Collège Test is a private school.' }))).toEqual(['events', 'description']);
   });
 });
 
