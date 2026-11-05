@@ -111,6 +111,15 @@ describe('schoolFileSchema', () => {
     expect(r.success).toBe(false);
   });
 
+  it('takes a site or language root as the website, never an admission page', () => {
+    for (const url of ['https://x.qc.ca', 'https://x.qc.ca/', 'https://www.x.qc.ca/fr', 'https://x.ca/en/']) {
+      expect(schoolFileSchema.safeParse({ ...valid, website_url: url }).success).toBe(true);
+    }
+    for (const url of ['https://x.qc.ca/portes-ouvertes/', 'https://x.qc.ca/fr/admission', 'https://x.qc.ca/?page=1']) {
+      expect(schoolFileSchema.safeParse({ ...valid, website_url: url }).success).toBe(false);
+    }
+  });
+
   it('rejects coordinates outside Greater Montreal', () => {
     const r = schoolFileSchema.safeParse({
       ...valid,

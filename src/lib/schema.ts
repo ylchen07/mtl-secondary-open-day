@@ -11,6 +11,15 @@ const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'must be YYYY-MM-DD');
 
 const nonEmpty = z.string().trim().min(1);
 
+/**
+ * A school's home page: the site root, or its language root (`/fr`, `/en/`).
+ * Admission and open-house pages belong in `admissions_url`; a deep link here
+ * also makes research start mid-site and miss the home and about pages.
+ */
+const siteRoot = httpsUrl.refine((u) => /^\/(?:[a-z]{2}\/?)?$/.test(new URL(u).pathname) && !new URL(u).search, {
+  message: 'must be the home page (site root or language root such as /fr), not a deeper page',
+});
+
 const academicYear = z
   .string()
   .regex(/^\d{4}-\d{4}$/, 'must be YYYY-YYYY')
@@ -113,7 +122,7 @@ export const schoolFileSchema = z
       })
       .nullish(),
     geocode_precision: z.enum(['exact', 'approximate', 'missing']),
-    website_url: httpsUrl,
+    website_url: siteRoot,
     admissions_url: httpsUrl,
     tuition_annual_cad: z.number().int().positive().nullish(),
     has_boarding: z.boolean().nullable(),

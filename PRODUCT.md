@@ -53,6 +53,8 @@ away.
 - **Curation:** data is hand-curated JSON in git (`data/schools/*.json`),
   validated on every build (`pnpm check:sources`, Zod schema). A new school is
   added by hand from its own site; there is no unverified staging state.
+  `website_url` is the school's official home page (site or language root);
+  admission and open-house pages go in `admissions_url`.
 - **Freshness:** `pnpm research` reads each school's own site with scripts
   only and hands a reviewer just the quotable lines that answer what the record
   is missing; `pnpm research:apply` writes an answer only if its quote is in
