@@ -30,10 +30,10 @@
     "soccer_plus",
     "sport_et_art_elite"
   ],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Sainte-Anne’s teaching is built around six key competencies for the future: creativity, communication, collaboration, critical thinking, citizenship, and self-knowledge and courage.",
+  "description_fr": "L’enseignement du Collège Sainte-Anne s’articule autour de six compétences clés pour l’avenir : créativité, communication, collaboration, pensée critique, citoyenneté, connaissance de soi et courage.",
   "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
-  "last_verified_at": "2026-10-29",
+  "last_verified_at": "2026-11-04",
   "open_days": [
     {
       "starts_at": "2026-09-27T09:00:00-04:00",

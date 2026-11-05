@@ -7,6 +7,7 @@
     "25c266581b",
     "336726b57a",
     "4f16248b74",
+    "6e43bcf12a",
     "94a95b6e9e",
     "c903889809"
   ],
@@ -68,6 +69,7 @@
   ],
   "college-citoyen": [
     "0f23ac452e",
+    "0fbae32b7a",
     "155c2b9e39",
     "31a85bd250",
     "355611afe1",
@@ -79,6 +81,8 @@
     "87d3f281ce",
     "8a0e324b7d",
     "96dea25b63",
+    "a5ea8be22d",
+    "bf780cfbfd",
     "c0307fc7bd",
     "cf9a1d0469",
     "d0d3173ba6",
@@ -88,7 +92,8 @@
     "e9e614d782",
     "f73994a026",
     "f7ef61d466",
-    "f8e2597944"
+    "f8e2597944",
+    "fcdb9dd3a5"
   ],
   "college-danjou": [
     "2ddcb24749",
@@ -174,9 +179,11 @@
     "7009e99267",
     "813cd934ec",
     "88c751a080",
+    "8bf352146e",
     "9d49564455",
     "c6ab9b2751",
     "c93f347d9f",
+    "e5962ea268",
     "ec5f55dbaa",
     "f6f54413d8"
   ],
@@ -186,6 +193,9 @@
     "3a86bc645e",
     "5bcb833596",
     "60e3ca11ec",
+    "624a747c14",
+    "7e5ac1be87",
+    "ab270512d3",
     "af2bd04d20",
     "c2612b41ae",
     "c99bcadb5f",
@@ -194,12 +204,16 @@
     "eb4ab51627"
   ],
   "college-laval": [
+    "1c7648ef0c",
     "31813e67ad",
     "39d1f037a9",
     "44e0d0a74e",
     "4558a61c7d",
     "4632a64635",
-    "908eea6a0e"
+    "908eea6a0e",
+    "b7f7eb743a",
+    "c0de8b6220",
+    "ebc1f59e1f"
   ],
   "college-letendre": [
     "0a774c9c74",
@@ -212,6 +226,8 @@
   "college-mont-royal": [
     "0176425d34",
     "26f0731911",
+    "503db6bfe1",
+    "5c63eb7be6",
     "9dc5dac2fa",
     "c41277a554",
     "f5e6de00f0"
@@ -257,6 +273,8 @@
     "5d76cdd16b",
     "69320d80da",
     "8a83d23faa",
+    "9353bae581",
+    "b04b9b887a",
     "f7d5dba77d"
   ],
   "college-reine-marie": [
@@ -278,10 +296,14 @@
   ],
   "college-saint-maurice": [
     "00ffaf6e2a",
+    "0ad822bd78",
     "25ff7ea734",
     "5fa33eea04",
     "63cd3bd9c6",
-    "6a269236aa"
+    "6a269236aa",
+    "ae08764700",
+    "d1e912aac0",
+    "daaba4ca46"
   ],
   "college-saint-sacrement": [
     "117b4f8546",
@@ -297,7 +319,9 @@
     "d9984e3465"
   ],
   "college-sainte-anne": [
+    "08eb155ab1",
     "230db92786",
+    "26d3ad1cf3",
     "49d12ef4e0",
     "52c4969111",
     "6641d13cfe",
@@ -310,17 +334,22 @@
     "ca97d53f13",
     "d0dac6b50f",
     "d1b1b327d4",
+    "e8efff7eef",
     "f9069b50e1"
   ],
   "college-sainte-marcelline": [
     "1ae9efce68",
     "20092a79b7",
+    "2515d365a4",
+    "262b4438b5",
     "2ecc4cdf06",
+    "32bbc4c548",
     "33717e3587",
     "4199d136f7",
     "4d583ffcc5",
     "5241032ae2",
     "55c67b4e62",
+    "56f51d2e2b",
     "5b3a5b815a",
     "65943990d9",
     "6a483e7c37",
@@ -400,20 +429,27 @@
     "382e019bab",
     "54ef2510d6",
     "5fa5384c2e",
+    "72c596b5ac",
     "7632da112e",
     "7c9e0df2de",
-    "98c628f6e6"
+    "98c628f6e6",
+    "9cbfde83da",
+    "cc429e1978"
   ],
   "ecole-socrates-demosthene-campus-socrates-ii": [
     "27748d4736",
     "40d7d779fb",
     "4817682106",
+    "5fd9e9f68e",
     "a2aac40d4b",
     "a78888fad0",
     "ad16c52609",
     "bee4b9b658",
     "c7577781ff",
-    "dabd9624cb"
+    "c91b407fec",
+    "dabd9624cb",
+    "de9e91c0c8",
+    "df4e9304b6"
   ],
   "externat-sacre-coeur": [
     "20cd359c56",
@@ -421,23 +457,28 @@
     "2492146e35",
     "49ebffcdf4",
     "5539ab145d",
+    "745bcfa181",
     "89850bd5da",
     "ad67abc702",
     "b2a151360d",
     "bfbf1bf1ec",
     "c6c4adfc92",
     "cc9aa032e2",
+    "ceac4fb001",
     "e1cb9dd03e",
     "e28f1c5c74",
     "e3bd30c4e1"
   ],
   "les-ecoles-azrieli-talmud-torah-herzliah": [
+    "3efce07b73",
     "68698c40f3",
     "6936817da6",
+    "6cfe21d451",
     "77789180a2",
     "7d863f4e7d",
     "8fdf9364a3",
     "924266be37",
+    "9820a6f46b",
     "a84ad10072",
     "c1ddf71614",
     "db00000594",
@@ -477,17 +518,23 @@
     "0ca63bab09",
     "1590c4b5f2",
     "188681a6e2",
+    "416a744466",
     "4b34d8df35",
     "537e15ea17",
+    "5b16724c6b",
     "5c470c25cf",
     "67ca7832d3",
     "6da48dd454",
     "af5ac2fc91",
     "dda698dd3f",
+    "ee636f80c9",
     "fb91e6a1ce"
   ],
   "villa-sainte-marcelline": [
+    "2a0b64a56b",
+    "47a25d6ed1",
     "4bc71e930a",
+    "56ad77702f",
     "d56b2353aa",
     "dd05fa10dc",
     "f3b8b401b6"

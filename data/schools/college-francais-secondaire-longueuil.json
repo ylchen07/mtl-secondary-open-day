@@ -19,9 +19,9 @@
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": null,
-  "description_fr": null,
+  "description_en": "Collège Français opened this secondary campus on the South Shore in 1987, a short walk from its elementary campus.",
+  "description_fr": "Le Collège Français a fondé en 1987 cette annexe secondaire sur la Rive-Sud, à deux pas de son annexe primaire.",
   "source_url": "https://secondaire.collegefrancais.ca/admission-3/journee-portes-ouvertes-2/",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-04",
   "open_days": []
 }

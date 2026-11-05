@@ -19,9 +19,9 @@
   "tuition_annual_cad": 5280,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Externat Sacré-Coeur is a secondary school with more than 1,250 students.",
-  "description_fr": "L’Externat Sacré-Coeur accueille plus de 1 250 élèves au secondaire.",
+  "description_en": "Externat Sacré-Cœur is a human-scale school that aims to give students a solid general education on which to build their full potential.",
+  "description_fr": "L’Externat Sacré-Cœur est un milieu à échelle humaine qui vise à donner aux élèves une solide formation générale pour développer leur plein potentiel.",
   "source_url": "https://www.externat.qc.ca/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-04",
   "open_days": []
 }

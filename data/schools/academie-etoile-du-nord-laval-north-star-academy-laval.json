@@ -19,10 +19,10 @@
   "tuition_annual_cad": 10050,
   "has_boarding": true,
   "programs": [],
-  "description_en": "North Star Academy Laval is a private school that does not receive government grants.",
-  "description_fr": "North Star Academy Laval est un établissement privé qui ne reçoit pas de subventions gouvernementales.",
+  "description_en": "North Star Academy Laval keeps class sizes small so that teachers can personalise learning, with enrichment and support tailored to each child.",
+  "description_fr": "North Star Academy Laval mise sur de petits groupes pour permettre aux enseignants de personnaliser l’apprentissage, avec enrichissement et soutien adaptés à chaque enfant.",
   "source_url": "https://northstaracademy.ca/en/admissions/open-house-new.html",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-04",
   "open_days": [
     {
       "starts_at": "2026-09-24T18:00:00-04:00",

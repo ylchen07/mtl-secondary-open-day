@@ -19,10 +19,10 @@
   "tuition_annual_cad": 5050,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Mont-Royal is a private, co-educational secondary school that teaches in French.",
-  "description_fr": "Le Collège Mont-Royal est une institution privée et mixte d’enseignement secondaire, qui offre un enseignement en français.",
+  "description_en": "Collège Mont-Royal is a private, co-educational institution licensed for general secondary education, teaching in French towards the secondary school diploma.",
+  "description_fr": "Le Collège Mont-Royal est une institution privée et mixte, titulaire d’un permis pour la formation générale au secondaire, qui enseigne en français jusqu’au diplôme d’études secondaires.",
   "source_url": "https://collegemont-royal.qc.ca/admission-college-mont-royal/",
-  "last_verified_at": "2026-11-01",
+  "last_verified_at": "2026-11-04",
   "open_days": [
     {
       "starts_at": "2026-09-19T10:00:00-04:00",
