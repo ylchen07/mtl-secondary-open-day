@@ -14,7 +14,7 @@
     "lng": -73.51649
   },
   "geocode_precision": "approximate",
-  "website_url": "https://cdsl.qc.ca/admission/portesouvertes",
+  "website_url": "https://cdsl.qc.ca/",
   "admissions_url": "https://cdsl.qc.ca/admission/portesouvertes",
   "tuition_annual_cad": 4595,
   "has_boarding": null,
