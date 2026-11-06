@@ -17,15 +17,19 @@
   "website_url": "https://www.villamaria.qc.ca",
   "admissions_url": "https://villamaria.qc.ca/admission/",
   "tuition_annual_cad": 5520,
-  "has_boarding": null,
+  "has_boarding": false,
   "programs": [
     "pei"
   ],
-  "description_en": "Collège Villa Maria is a bilingual private co-educational secondary school in Montreal's Notre-Dame-de-Grâce area, founded in 1854. The school offers instruction in both French and English sectors and is introducing a new project-based learning model starting in the 2026-2027 school year focused on student voice and choice. Villa Maria provides four distinct study profiles and emphasizes innovation, community, and a bilingual environment.",
-  "description_fr": "Le Collège Villa Maria est une école secondaire privée bilingue et mixte située dans le quartier Notre-Dame-de-Grâce à Montréal, fondée en 1854. L'école offre un enseignement dans les secteurs français et anglais et introduit un nouveau modèle pédagogique par projets à partir de l'année scolaire 2026-2027, axé sur la voix et le choix des élèves. Villa Maria propose quatre profils d'études distincts et met l'accent sur l'innovation, la communauté et un environnement bilingue.",
+  "description_en": "Founded in 1854 as a boarding school for girls, Villa Maria is a subsidized private Catholic co-educational secondary school in Notre-Dame-de-Grâce, Montreal, with French and English streams; it stopped boarding in 1966 and has admitted boys since 2016.",
+  "description_fr": "Fondée en 1854 comme pensionnat pour filles, Villa Maria est une école secondaire privée subventionnée, catholique et mixte de Notre-Dame-de-Grâce, à Montréal, avec un secteur francophone et un secteur anglophone; elle a cessé le pensionnat en 1966 et accueille des garçons depuis 2016.",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Villa_Maria",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Villa_Maria_(school)",
+    "has_boarding": "https://en.wikipedia.org/wiki/Villa_Maria_(school)"
+  },
   "source_url": "https://villamaria.qc.ca/admission/",
-  "last_verified_at": "2026-09-15",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-09-12T10:00:00-04:00",

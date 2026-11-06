@@ -2,7 +2,7 @@
   "slug": "college-sainte-anne",
   "name_en": "Collège Sainte-Anne",
   "name_fr": "Collège Sainte-Anne",
-  "language": null,
+  "language": "fr",
   "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
@@ -32,8 +32,11 @@
   ],
   "description_en": "Founded in 1861, Collège Sainte-Anne is a private group of elementary, secondary and pre-university schools in Montreal’s Lachine, Dorval and Outremont areas.",
   "description_fr": "Fondé en 1861, le Collège Sainte-Anne regroupe des écoles privées primaire, secondaires et préuniversitaire à Montréal, à Lachine, Dorval et Outremont.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Sainte-Anne",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Sainte-Anne",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Sainte-Anne",
+    "language": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Sainte-Anne"
+  },
   "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
   "last_verified_at": "2026-11-05",
   "open_days": [

@@ -2,8 +2,8 @@
   "slug": "college-laval",
   "name_en": "Collège Laval",
   "name_fr": "Collège Laval",
-  "language": null,
-  "gender": null,
+  "language": "fr",
+  "gender": "mixed",
   "sector": "private",
   "region": "laval",
   "city": "Laval",
@@ -21,8 +21,12 @@
   "programs": [],
   "description_en": "Founded in 1855 and run by the Marist Brothers from 1888, Collège Laval is a secondary school in Laval’s Saint-Vincent-de-Paul district; once a boys’ school, it has been co-ed since 1996.",
   "description_fr": "Fondé en 1855 et dirigé par les Frères maristes à partir de 1888, le Collège Laval est une école secondaire du quartier Saint-Vincent-de-Paul, à Laval; autrefois réservé aux garçons, il est mixte depuis 1996.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Laval",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Laval",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Laval",
+    "language": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Laval",
+    "gender": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Laval"
+  },
   "source_url": "https://collegelaval.ca/journee-portes-ouvertes/",
   "last_verified_at": "2026-11-05",
   "open_days": []

@@ -2,7 +2,7 @@
   "slug": "college-jean-eudes",
   "name_en": "Collège Jean-Eudes",
   "name_fr": "Collège Jean-Eudes",
-  "language": null,
+  "language": "fr",
   "gender": null,
   "sector": "private",
   "region": "montreal_island",
@@ -21,8 +21,11 @@
   "programs": [],
   "description_en": "Founded in 1953 by the Eudists, Collège Jean-Eudes is a private French-language secondary school on Rosemont Boulevard, in Montreal’s Rosemont–La Petite-Patrie borough.",
   "description_fr": "Fondé en 1953 par les Eudistes, le Collège Jean-Eudes est une école secondaire privée de langue française, boulevard Rosemont, dans l’arrondissement de Rosemont–La Petite-Patrie à Montréal.",
-  "description_source_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Jean-Eudes",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean-Eudes",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Jean-Eudes",
+    "language": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean-Eudes"
+  },
   "source_url": "https://www.cje.qc.ca/nous-joindre/",
   "last_verified_at": "2026-11-05",
   "open_days": []

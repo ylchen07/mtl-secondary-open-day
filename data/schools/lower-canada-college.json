@@ -21,8 +21,10 @@
   "programs": [],
   "description_en": "Lower Canada College is an independent, co-educational English-language school in Montreal’s Monkland Village, from kindergarten to pre-university (Grade 12); its secondary school offers the International Baccalaureate Middle Years and Diploma Programmes.",
   "description_fr": "Le Lower Canada College est une école indépendante, mixte et de langue anglaise du village Monkland, à Montréal, de la maternelle au préuniversitaire (12e année); son secondaire offre les programmes intermédiaire et du diplôme du Baccalauréat International.",
-  "description_source_url": "https://en.wikipedia.org/wiki/Lower_Canada_College",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Lower_Canada_College",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Lower_Canada_College"
+  },
   "source_url": "https://www.lcc.ca/admissions/openhouse-info",
   "last_verified_at": "2026-11-05",
   "open_days": []

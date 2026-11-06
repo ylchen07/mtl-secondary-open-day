@@ -3,7 +3,7 @@
   "name_en": "Les écoles Azrieli Talmud Torah | Herzliah",
   "name_fr": "Les écoles Azrieli Talmud Torah | Herzliah",
   "language": null,
-  "gender": null,
+  "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
   "city": "Montreal",
@@ -17,12 +17,16 @@
   "website_url": "https://www.azrieli-tth.ca/fr",
   "admissions_url": "https://www.azrieli-tth.ca/fr/admissions-herzliah",
   "tuition_annual_cad": 16800,
-  "has_boarding": null,
+  "has_boarding": false,
   "programs": [],
   "description_en": "The Azrieli Schools are a private, co-educational Jewish day school system made up of an elementary school, United Talmud Torah, and a high school, Herzliah, in Montreal.",
   "description_fr": "Les écoles Azrieli forment un réseau privé et mixte d’écoles juives de jour : une école primaire, Talmud Torah, et une école secondaire, Herzliah, à Montréal.",
-  "description_source_url": "https://en.wikipedia.org/wiki/United_Talmud_Torahs_of_Montreal",
   "wikipedia_url": "https://en.wikipedia.org/wiki/United_Talmud_Torahs_of_Montreal",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/United_Talmud_Torahs_of_Montreal",
+    "gender": "https://en.wikipedia.org/wiki/United_Talmud_Torahs_of_Montreal",
+    "has_boarding": "https://en.wikipedia.org/wiki/United_Talmud_Torahs_of_Montreal"
+  },
   "source_url": "https://www.azrieli-tth.ca/fr/admissions-herzliah",
   "last_verified_at": "2026-11-05",
   "open_days": []

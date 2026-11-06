@@ -21,8 +21,10 @@
   "programs": [],
   "description_en": "Collège Français in Longueuil is a private French-language secondary school established in 1987, after the Collège Français elementary school opened in Longueuil in 1972 and its Montreal secondary campus in 1959.",
   "description_fr": "Le Collège Français de Longueuil est une école secondaire privée de langue française fondée en 1987, après l’ouverture de l’école primaire du Collège Français à Longueuil en 1972 et de son campus secondaire de Montréal en 1959.",
-  "description_source_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Fran%C3%A7ais_(Longueuil)",
   "wikipedia_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Fran%C3%A7ais_(Longueuil)",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Fran%C3%A7ais_(Longueuil)"
+  },
   "source_url": "https://secondaire.collegefrancais.ca/admission-3/journee-portes-ouvertes-2/",
   "last_verified_at": "2026-11-05",
   "open_days": []

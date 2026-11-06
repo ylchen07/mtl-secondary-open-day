@@ -2,7 +2,7 @@
   "slug": "college-de-montreal",
   "name_en": "Collège de Montréal",
   "name_fr": "Collège de Montréal",
-  "language": null,
+  "language": "fr",
   "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
@@ -21,8 +21,11 @@
   "programs": [],
   "description_en": "Founded in 1767 by the Sulpician Jean-Baptiste Curatteau, Collège de Montréal is a secondary school for girls and boys on Sherbrooke Street West, considered the first secondary school founded on the island of Montreal.",
   "description_fr": "Fondé en 1767 par le sulpicien Jean-Baptiste Curatteau, le Collège de Montréal est un établissement secondaire pour filles et garçons, rue Sherbrooke Ouest, considéré comme le premier du genre sur l’île de Montréal.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_de_Montr%C3%A9al",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_de_Montr%C3%A9al",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_de_Montr%C3%A9al",
+    "language": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_de_Montr%C3%A9al"
+  },
   "source_url": "https://college-montreal.qc.ca/nous-joindre/",
   "last_verified_at": "2026-11-05",
   "open_days": []

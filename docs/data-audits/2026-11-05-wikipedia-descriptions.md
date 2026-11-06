@@ -1,6 +1,6 @@
-# Descriptions from Wikipedia - 2026-11-05
+# Descriptions and school facts from Wikipedia - 2026-11-05
 
-A description may now be written from the school's Wikipedia article. Every other fact still comes from the school's own site.
+A school's description, language, student body and boarding may now come from its Wikipedia article. Dates, fees and admission rules still come only from the school's own site; `pnpm research:apply` refuses a fee or an event quoted from Wikipedia.
 
 ## Matching
 
@@ -14,21 +14,26 @@ Not linked: Socrates-Démosthène's article describes a Pre-K to Grade 6 school,
 
 ## Applied (quote checked against the article lead)
 
-Beaubois, both Charles-Lemoyne campuses, Collège de Montréal, Durocher Saint-Lambert, Esther-Blondin, Collège Français Longueuil, Marie de France, Jean de la Mennais, Jean-Eudes, Laval, Regina Assumpta, Sainte-Anne, École internationale de Montréal, Marcellin-Champagnat, Azrieli, Lower Canada College, Villa Sainte-Marcelline: 18 descriptions, 0 rejections. Each records its article in `description_source_url`, and the school page credits it.
+Round 1: Beaubois, both Charles-Lemoyne campuses, Collège de Montréal, Durocher Saint-Lambert, Esther-Blondin, Collège Français Longueuil, Marie de France, Jean de la Mennais, Jean-Eudes, Laval, Regina Assumpta, Sainte-Anne, École internationale de Montréal, Marcellin-Champagnat, Azrieli, Lower Canada College, Villa Sainte-Marcelline: 18 descriptions, 0 rejections.
 
-Kept, because the school's own description was as full or fuller: Collège Français Montréal, Brébeuf, Notre-Dame-de-Lourdes, Notre-Dame, Saint-Sacrement, Loyola, Saint-Nom-de-Marie, The Study, Villa Maria.
+Round 2, once Wikipedia was accepted as the description source for every school with an article: Collège Français Montréal, Brébeuf, Notre-Dame-de-Lourdes, Notre-Dame, Saint-Sacrement, Saint-Nom-de-Marie, The Study, Villa Maria. Loyola keeps the description from loyola.ca, because it carries an admission rule (applicants need a certificate of eligibility for English instruction) that the article lead does not state.
 
-Volatile figures in the leads (enrolment, tuition, the principal's name) and rankings or praise were left out.
+Each records its article in `fact_sources.description` (the earlier `description_source_url` moved there), and the school page credits it.
 
-## Stated by Wikipedia, still null on file
+Volatile figures in the leads (enrolment, tuition, the principal's name) and rankings or praise ("prestigieux") were left out.
 
-| School | Field | Wikipedia says |
-|---|---|---|
-| Collège de Montréal, Laval, Jean-Eudes, Regina Assumpta, Marie de France, Jean de la Mennais, École internationale | language | French-language |
-| Sainte-Anne | language | French (infobox) |
-| Azrieli | language | English, French, Hebrew (infobox) |
-| Beaubois, Laval, Jean de la Mennais, Azrieli | student body | co-ed |
-| Brébeuf | boarding | optional boarding |
+## School facts from Wikipedia (round 2, 0 rejections)
+
+| Field | Value | Schools | Quoted from |
+|---|---|---|---|
+| language | French | Collège de Montréal, Laval, Jean-Eudes, Regina Assumpta, Marie de France, Jean de la Mennais, École internationale, Sainte-Anne | infobox `language`/`langue` row or "French-language" / « francophone » in the lead |
+| student body | co-ed | Beaubois, Laval, Jean de la Mennais, Azrieli | « aux filles et aux garçons », « devenu mixte en 1996 », « mixte », "co-educational" |
+| boarding | no | Regina Assumpta, Azrieli, Villa Maria | "Day school" infobox rows; "stopped boarding students in 1966" |
+
+Not applied:
+
+- Azrieli's language: the infobox's "English, French, Hebrew" does not say whether the school is bilingual in our sense.
+- Brébeuf's boarding: the article's "optional boarding facilities" is the residence, which brebeuf.qc.ca scopes to the collégial (cégep) sector, not Secondary 1. Applied at first, then reverted; the description no longer mentions boarding.
 
 ## Wikipedia disagrees with the record (record kept)
 

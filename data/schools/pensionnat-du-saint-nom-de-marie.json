@@ -19,9 +19,12 @@
   "tuition_annual_cad": 6150,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Founded in 1905 by the Sisters of the Holy Names of Jesus and Mary, the Pensionnat du Saint-Nom-de-Marie sets out to help young girls grow into thoughtful, determined, engaged and ambitious women.",
-  "description_fr": "Fondé en 1905 par les Sœurs des Saints Noms de Jésus et de Marie, le Pensionnat du Saint-Nom-de-Marie vise l’épanouissement des jeunes filles, pour qu’elles deviennent des femmes réfléchies, déterminées, engagées et ambitieuses.",
+  "description_en": "The Pensionnat du Saint-Nom-de-Marie is a private secondary school for girls on Côte-Sainte-Catherine Road in Outremont, Montreal, in a building erected between 1903 and 1905 to plans by the architect Jean-Zéphirin Resther.",
+  "description_fr": "Le Pensionnat du Saint-Nom-de-Marie est un collège privé d’enseignement secondaire pour jeunes filles, chemin de la Côte-Sainte-Catherine à Outremont, dans un édifice érigé entre 1903 et 1905 selon les plans de l’architecte Jean-Zéphirin Resther.",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Pensionnat_du_Saint-Nom-de-Marie",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Pensionnat_du_Saint-Nom-de-Marie"
+  },
   "source_url": "https://www.psnm.qc.ca/",
   "last_verified_at": "2026-11-05",
   "open_days": []

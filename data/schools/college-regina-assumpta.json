@@ -2,7 +2,7 @@
   "slug": "college-regina-assumpta",
   "name_en": "Collège Regina Assumpta",
   "name_fr": "Collège Regina Assumpta",
-  "language": null,
+  "language": "fr",
   "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
@@ -17,12 +17,16 @@
   "website_url": "https://reginaassumpta.qc.ca/",
   "admissions_url": "https://reginaassumpta.qc.ca/procedure-admission/",
   "tuition_annual_cad": 5450,
-  "has_boarding": null,
+  "has_boarding": false,
   "programs": [],
   "description_en": "Founded in 1955 by the Sisters of the Congregation of Notre-Dame, Collège Regina Assumpta is a subsidized, selective private French-language school in Montreal.",
   "description_fr": "Fondé en 1955 par les sœurs de la Congrégation de Notre-Dame, le Collège Regina Assumpta est une école privée subventionnée et sélective de langue française à Montréal.",
-  "description_source_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Regina_Assumpta",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Regina_Assumpta",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Regina_Assumpta",
+    "language": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Regina_Assumpta",
+    "has_boarding": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Regina_Assumpta"
+  },
   "source_url": "https://reginaassumpta.qc.ca/admission/",
   "last_verified_at": "2026-11-05",
   "open_days": []

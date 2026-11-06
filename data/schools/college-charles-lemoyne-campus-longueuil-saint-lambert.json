@@ -21,8 +21,10 @@
   "programs": [],
   "description_en": "Collège Charles-Lemoyne is a private school on Montreal’s South Shore with two secondary campuses and, since 2015, a preschool and elementary school.",
   "description_fr": "Le Collège Charles-Lemoyne est un établissement privé de la Rive-Sud de Montréal qui compte deux campus secondaires et, depuis 2015, une école préscolaire et primaire.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Charles-Lemoyne",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Charles-Lemoyne",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Charles-Lemoyne"
+  },
   "source_url": "https://monccl.com/actualites/journee-portes-ouvertes-2026/",
   "last_verified_at": "2026-11-05",
   "open_days": [

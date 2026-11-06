@@ -21,8 +21,10 @@
   "programs": [],
   "description_en": "Founded in 1959 by the Sisters of Saint Marcellina, Villa Sainte-Marcelline is a private French-language school for girls in Westmount, from kindergarten through secondary.",
   "description_fr": "Fondée en 1959 par les Sœurs de Sainte-Marcelline, la Villa Sainte-Marcelline est une école privée de langue française pour filles, à Westmount, de la maternelle au secondaire.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Villa_Sainte-Marcelline",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Villa_Sainte-Marcelline",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Villa_Sainte-Marcelline"
+  },
   "source_url": "https://villa.marcelline.qc.ca/admissions/portes-ouvertes/",
   "last_verified_at": "2026-11-05",
   "open_days": [

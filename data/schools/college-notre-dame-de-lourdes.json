@@ -19,11 +19,14 @@
   "tuition_annual_cad": 5188,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Notre-Dame-de-Lourdes (NDL) is a private French-language secondary school in Longueuil, on Montreal's South Shore.",
-  "description_fr": "Le Collège Notre-Dame-de-Lourdes (NDL) est une école secondaire privée francophone située à Longueuil, sur la Rive-Sud de Montréal.",
+  "description_en": "Collège Notre-Dame-de-Lourdes (NDL) is a secondary school in Longueuil that is part of the International Baccalaureate.",
+  "description_fr": "Le Collège Notre-Dame-de-Lourdes (NDL) est une école secondaire de Longueuil qui fait partie du réseau du Baccalauréat International.",
   "wikipedia_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Notre-Dame-de-Lourdes",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Notre-Dame-de-Lourdes"
+  },
   "source_url": "https://www.ndl.qc.ca/portes-ouvertes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-10-03T09:00:00-04:00",

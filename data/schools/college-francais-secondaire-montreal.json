@@ -19,11 +19,14 @@
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Français is a private French-language secondary school, and the first secular co-educational college in Quebec.",
-  "description_fr": "Le Collège Français est un établissement privé d'enseignement secondaire de langue française, et le premier collège laïque et mixte au Québec.",
+  "description_en": "Collège Français is a private French-language secondary school founded in 1959, on Fairmount Avenue in Montreal’s Plateau-Mont-Royal borough.",
+  "description_fr": "Le Collège Français est une école secondaire privée de langue française fondée en 1959, avenue Fairmount, dans l’arrondissement du Plateau-Mont-Royal à Montréal.",
   "wikipedia_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Fran%C3%A7ais_(Montreal)",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Fran%C3%A7ais_(Montreal)"
+  },
   "source_url": "https://secondaire-mtl.collegefrancais.ca/admission/portes-ouvertes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-10-04T13:00:00-04:00",

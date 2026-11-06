@@ -19,11 +19,14 @@
   "tuition_annual_cad": 5325,
   "has_boarding": null,
   "programs": [],
-  "description_en": "A private, co-ed, secular French-language secondary school, run by a non-profit corporation since 1972.",
-  "description_fr": "Établissement d’enseignement secondaire privé, mixte, laïque et francophone, dirigé par une corporation à but non lucratif depuis 1972.",
+  "description_en": "Collège Saint-Sacrement is a private secondary school in Old Terrebonne, in the Lanaudière region.",
+  "description_fr": "Le Collège Saint-Sacrement est un établissement privé d’enseignement secondaire situé dans le Vieux-Terrebonne, dans Lanaudière.",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Saint-Sacrement",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Saint-Sacrement"
+  },
   "source_url": "https://collegesaintsacrement.qc.ca/portes-ouvertes/",
-  "last_verified_at": "2026-11-03",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-09-19T10:00:00-04:00",

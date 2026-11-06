@@ -3,7 +3,7 @@
   "name_en": "Collège Beaubois",
   "name_fr": "Collège Beaubois",
   "language": "fr",
-  "gender": null,
+  "gender": "mixed",
   "sector": "private",
   "region": "montreal_island",
   "city": "Montréal",
@@ -21,8 +21,11 @@
   "programs": [],
   "description_en": "Founded in 1967 by the Brothers of Saint-Gabriel, Collège Beaubois is a private school in the Montreal area that teaches girls and boys in French, from preschool through secondary.",
   "description_fr": "Fondé en 1967 par les Frères de Saint-Gabriel, le Collège Beaubois est une école privée de la région de Montréal qui enseigne en français aux filles et aux garçons, du préscolaire au secondaire.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Beaubois",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Beaubois",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Beaubois",
+    "gender": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Beaubois"
+  },
   "source_url": "https://collegebeaubois.qc.ca/",
   "last_verified_at": "2026-11-05",
   "open_days": []

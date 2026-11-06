@@ -2,8 +2,8 @@
   "slug": "college-jean-de-la-mennais",
   "name_en": "Collège Jean de la Mennais",
   "name_fr": "Collège Jean de la Mennais",
-  "language": null,
-  "gender": null,
+  "language": "fr",
+  "gender": "mixed",
   "sector": "private",
   "region": "south_shore",
   "city": "La Prairie",
@@ -21,8 +21,12 @@
   "programs": [],
   "description_en": "Collège Jean de la Mennais is a private, co-ed, French-language secondary school in La Prairie, on Montreal’s South Shore.",
   "description_fr": "Le Collège Jean de la Mennais est une école secondaire privée, mixte et francophone de La Prairie, sur la Rive-Sud de Montréal.",
-  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean_de_la_Mennais",
   "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean_de_la_Mennais",
+  "fact_sources": {
+    "description": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean_de_la_Mennais",
+    "language": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean_de_la_Mennais",
+    "gender": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean_de_la_Mennais"
+  },
   "source_url": "https://jdlm.qc.ca/admissions-et-inscriptions-secondaire/",
   "last_verified_at": "2026-11-05",
   "open_days": []

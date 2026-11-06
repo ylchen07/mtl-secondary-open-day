@@ -19,11 +19,14 @@
   "tuition_annual_cad": 35005,
   "has_boarding": false,
   "programs": [],
-  "description_en": "Founded in 1915, The Study is a private, bilingual girls’ school from kindergarten to Grade 11 in Westmount; a certificate of eligibility for English instruction is not required.",
-  "description_fr": "Fondée en 1915, The Study est une école privée bilingue pour filles, de la maternelle à la 11e année, à Westmount; le certificat d’admissibilité à l’enseignement en anglais n’est pas requis.",
+  "description_en": "Founded in 1915 by Margaret Gascoigne, The Study is a private English-language girls’ school in Westmount offering a bilingual mother-tongue education from kindergarten to Grade 11; it receives no government subsidies, so no certificate of eligibility for English instruction is required.",
+  "description_fr": "Fondée en 1915 par Margaret Gascoigne, The Study est une école privée de langue anglaise pour filles, à Westmount, qui offre un enseignement bilingue de langue maternelle de la maternelle à la 11e année; sans subvention gouvernementale, elle n’exige pas de certificat d’admissibilité à l’enseignement en anglais.",
   "wikipedia_url": "https://en.wikipedia.org/wiki/The_Study",
+  "fact_sources": {
+    "description": "https://en.wikipedia.org/wiki/The_Study"
+  },
   "source_url": "https://www.thestudy.qc.ca/fr/admission",
-  "last_verified_at": "2026-11-04",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-10-01T08:30:00-04:00",
