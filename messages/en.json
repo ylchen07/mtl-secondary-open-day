@@ -26,6 +26,7 @@
     "location": "Location",
     "events": "Admissions events",
     "noDescription": "No description yet.",
+    "fromWikipedia": "Based on the <article>Wikipedia article</article> (<license>CC BY-SA 4.0</license>).",
     "approximate": "Approximate position",
     "positionUnknown": "Exact position not on file; the region is shown.",
     "website": "School website",

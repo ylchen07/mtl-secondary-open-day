@@ -15,7 +15,7 @@ function school(over: Partial<SchoolRow> = {}): SchoolRow {
     address: 'a', postal_code: 'H1H 1H1', lat: null, lng: null, geocode_precision: 'missing',
     website_url: 'https://a.qc.ca', admissions_url: 'https://a.qc.ca',
     tuition_annual_cad: null, has_boarding: false, programs: ['ib'],
-    description_en: 'd', description_fr: 'd', source_url: 'https://a.qc.ca',
+    description_en: 'd', description_fr: 'd', description_source_url: null, source_url: 'https://a.qc.ca',
     last_verified_at: '2026-08-30', ...over,
   };
 }

@@ -98,9 +98,11 @@ export function applyAnswers(
       next.tuition_annual_cad = answer.tuition.value;
       changed.push(`tuition=${answer.tuition.value}`);
     }
-    if (answer.description && source('description', answer.description)) {
+    const descriptionSource = answer.description ? source('description', answer.description) : null;
+    if (answer.description && descriptionSource) {
       next.description_en = answer.description.en;
       next.description_fr = answer.description.fr;
+      next.description_source_url = descriptionSource;
       changed.push('description');
     }
     for (const [i, raw] of (answer.events ?? []).entries()) {

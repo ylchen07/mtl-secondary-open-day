@@ -39,6 +39,7 @@ function event(overrides: Partial<AgendaEvent> = {}): AgendaEvent {
       programs: [],
       description_en: null,
       description_fr: null,
+      description_source_url: null,
       source_url: 'https://school.example',
       last_verified_at: '2026-09-15',
     },

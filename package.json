@@ -18,6 +18,7 @@
     "check:sources": "tsx scripts/check-sources.ts",
     "test:e2e": "playwright test",
     "research": "tsx scripts/research.ts scan",
+    "research:wiki": "tsx scripts/research.ts wiki",
     "research:apply": "tsx scripts/research.ts apply",
     "research:geocode": "tsx scripts/research.ts geocode",
     "map:build": "tsx scripts/build-map.ts"

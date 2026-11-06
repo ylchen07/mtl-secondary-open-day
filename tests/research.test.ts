@@ -7,6 +7,7 @@ import { isAllowed, parseRobots, pickLinks, readSitemap, sitemapsIn } from '@/li
 import { htmlToLines } from '@/lib/research/normalize';
 import { readPage, type PageFacts } from '@/lib/research/page';
 import { renderPack } from '@/lib/research/pack';
+import { pickWikidataItem, type WikidataItem } from '@/lib/research/wikipedia';
 import type { SchoolFile } from '@/lib/schema';
 
 const TODAY = '2026-11-01';
@@ -303,6 +304,12 @@ describe('applyAnswers', () => {
     expect(result.updated).toEqual([]);
     expect(result.reviewed).toEqual({ 'college-test': ['abc'] });
   });
+
+  it('records the page a description was written from', () => {
+    const description = { en: 'A private school for girls.', fr: 'Une école secondaire privée pour filles.', quote: 'École secondaire privée pour filles', page: 1 };
+    const result = applyAnswers([school()], { 'college-test': { description } }, manifest, read, TODAY);
+    expect(result.updated[0].description_source_url).toBe('https://test.qc.ca/po/');
+  });
 });
 
 describe('geocodeQueries', () => {
@@ -346,6 +353,24 @@ describe('pickGeocode', () => {
     expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: building }], school)).toMatchObject({ ok: true, precision: 'approximate' });
     expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: { ...building, city: 'Laval' } }], school).ok).toBe(false);
     expect(pickGeocode([{ lat: '45.55', lon: '-73.58', address: { ...building, house_number: '3536' } }], school).ok).toBe(false);
+  });
+});
+
+describe('pickWikidataItem', () => {
+  const villa = { name_fr: 'Collège Villa Maria', name_en: 'Villa Maria', website_url: 'https://www.villamaria.qc.ca', location: { lat: 45.4794, lng: -73.6206 } };
+  const item = (over: Partial<WikidataItem>): WikidataItem => ({ id: 'Q1', websites: [], coord: null, classes: ['Q159334'], titles: { fr: null, en: null }, ...over });
+
+  it('takes the school at its building, never the metro station named after it', () => {
+    const station = item({ id: 'Q1480912', classes: ['Q928830'], coord: { lat: 45.4797, lng: -73.6198 }, titles: { fr: 'Villa-Maria (métro de Montréal)', en: null } });
+    const school = item({ id: 'Q3558663', coord: { lat: 45.4785, lng: -73.6055 }, titles: { fr: null, en: 'Villa Maria (school)' } });
+    expect(pickWikidataItem(villa, [station, school])?.id).toBe('Q3558663');
+  });
+
+  it('does not take a non-school that shares the website, nor a same-named school elsewhere', () => {
+    const college = item({ id: 'Q6694544', classes: ['Q189004'], websites: ['https://villamaria.qc.ca/'] });
+    const elsewhere = item({ id: 'Q2', coord: { lat: 46.81, lng: -71.22 }, titles: { fr: 'Villa Maria', en: null } });
+    expect(pickWikidataItem(villa, [college, elsewhere])).toBeNull();
+    expect(pickWikidataItem(villa, [item({ id: 'Q3', websites: ['https://villamaria.qc.ca/fr'] })])?.id).toBe('Q3');
   });
 });
 

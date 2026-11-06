@@ -10,6 +10,7 @@ import type { Locale } from '@/lib/constants';
 import { dayKey, formatDayHeading, formatEventRange, formatVerifiedDate, isPastEvent } from '@/lib/dates';
 import { regionCrop } from '@/lib/geo';
 import { fetchAgendaEvents, fetchSchool, fetchSchoolListings } from '@/lib/queries';
+import { isWikipediaUrl } from '@/lib/schema';
 import { mapRegionFor } from '@/lib/regions';
 
 export const revalidate = 3600;
@@ -50,6 +51,8 @@ export default async function SchoolPage({ params }: { params: Params }) {
 
   const name = locale === 'fr' ? school.name_fr : school.name_en;
   const description = locale === 'fr' ? school.description_fr : school.description_en;
+  const wikipediaSource =
+    description && school.description_source_url && isWikipediaUrl(school.description_source_url) ? school.description_source_url : null;
   const region = mapRegionFor(school.region);
   const { view, focus } = regionCrop(region, BAND_ASPECT, school.location);
   const bandFrame = { '--focus-x': focus.x, '--focus-y': focus.y, '--view-aspect': view.w / view.h } as CSSProperties;
@@ -83,6 +86,14 @@ export default async function SchoolPage({ params }: { params: Params }) {
           <section aria-labelledby="about-heading" className="school-section">
             <h2 id="about-heading">{t('school.about')}</h2>
             {description ? <p className="school-description">{description}</p> : <p className="gap">{t('school.noDescription')}</p>}
+            {wikipediaSource && (
+              <p className="checked">
+                {t.rich('school.fromWikipedia', {
+                  article: (chunks) => <a href={wikipediaSource} target="_blank" rel="noopener noreferrer">{chunks}</a>,
+                  license: (chunks) => <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">{chunks}</a>,
+                })}
+              </p>
+            )}
             <p className="checked">{t('school.checked', { date: formatVerifiedDate(school.last_verified_at, locale) })}</p>
           </section>
 

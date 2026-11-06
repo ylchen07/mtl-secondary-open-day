@@ -20,6 +20,12 @@ const siteRoot = httpsUrl.refine((u) => /^\/(?:[a-z]{2}\/?)?$/.test(new URL(u).p
   message: 'must be the home page (site root or language root such as /fr), not a deeper page',
 });
 
+/** A French or English Wikipedia article. */
+export const isWikipediaUrl = (u: string): boolean =>
+  /^(?:fr|en)\.wikipedia\.org$/.test(new URL(u).hostname) && new URL(u).pathname.startsWith('/wiki/');
+
+const wikipediaArticle = httpsUrl.refine(isWikipediaUrl, { message: 'must be a fr.wikipedia.org or en.wikipedia.org article' });
+
 const academicYear = z
   .string()
   .regex(/^\d{4}-\d{4}$/, 'must be YYYY-YYYY')
@@ -129,6 +135,10 @@ export const schoolFileSchema = z
     programs: z.array(z.string()),
     description_en: nonEmpty.nullish(),
     description_fr: nonEmpty.nullish(),
+    /** The page the description was written from: the school's own site, or its Wikipedia article. */
+    description_source_url: httpsUrl.nullish(),
+    /** The school's Wikipedia article, once research has matched it to this school. */
+    wikipedia_url: wikipediaArticle.nullish(),
     source_url: httpsUrl,
     last_verified_at: isoDate,
     open_days: z.array(openDaySchema),
@@ -141,6 +151,10 @@ export const schoolFileSchema = z
     message:
       'descriptions must be both present or neither — a one-sided description would render the wrong language',
     path: ['description_fr'],
+  })
+  .refine((s) => s.description_source_url == null || s.description_en != null, {
+    message: 'description_source_url names the source of a description, so it needs one',
+    path: ['description_source_url'],
   });
 
 export type SchoolFile = z.infer<typeof schoolFileSchema>;

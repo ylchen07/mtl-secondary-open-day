@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AGGREGATOR_HOSTS, findAggregatorSources } from '@/lib/check-sources';
+import { AGGREGATOR_HOSTS, findAggregatorSources, findDescriptionSources } from '@/lib/check-sources';
 import type { SchoolFile } from '@/lib/schema';
 
 function school(over: Partial<SchoolFile>): SchoolFile {
@@ -113,5 +113,20 @@ describe('findAggregatorSources', () => {
 
   it('exports the aggregator host list so callers extend it instead of restating it', () => {
     expect(AGGREGATOR_HOSTS).toContain('feep.qc.ca');
+  });
+});
+
+describe('findDescriptionSources', () => {
+  const described = { description_en: 'A school.', description_fr: 'Une école.' };
+  const article = 'https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Test';
+
+  it('takes a description from the school site, or from Wikipedia once the article is matched', () => {
+    expect(findDescriptionSources([school({ ...described, description_source_url: 'https://www.s.qc.ca/a-propos/' })])).toEqual([]);
+    expect(findDescriptionSources([school({ ...described, wikipedia_url: article, description_source_url: 'https://en.wikipedia.org/wiki/Coll%C3%A8ge_Test' })])).toEqual([]);
+  });
+
+  it('flags Wikipedia with no matched article, and any other site', () => {
+    expect(findDescriptionSources([school({ ...described, description_source_url: article })])).toHaveLength(1);
+    expect(findDescriptionSources([school({ ...described, wikipedia_url: article, description_source_url: 'https://www.feep.qc.ca/x' })])).toHaveLength(1);
   });
 });

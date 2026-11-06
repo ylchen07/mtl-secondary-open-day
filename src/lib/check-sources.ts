@@ -1,4 +1,5 @@
-import type { SchoolFile } from './schema';
+import { isSameSite } from './research/links';
+import { isWikipediaUrl, type SchoolFile } from './schema';
 
 /**
  * Hosts that are directories of schools, not schools themselves.
@@ -58,4 +59,20 @@ export function findAggregatorSources(schools: SchoolFile[]): string[] {
   }
 
   return violations;
+}
+
+/**
+ * One violation per school whose description cites a page that is neither
+ * the school's own site nor Wikipedia. A description is the one field that
+ * may come from Wikipedia: it summarises the school, it states no date,
+ * fee or admission rule a family acts on.
+ */
+export function findDescriptionSources(schools: SchoolFile[]): string[] {
+  return schools.flatMap((school) => {
+    const url = school.description_source_url;
+    if (url == null || isSameSite(url, school.website_url)) return [];
+    // The fr or en article of the school's matched Wikipedia entry.
+    if (school.wikipedia_url != null && isWikipediaUrl(url)) return [];
+    return [`${school.slug}: description cites ${url}, neither the school's site nor its Wikipedia article`];
+  });
 }

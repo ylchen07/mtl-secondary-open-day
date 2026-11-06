@@ -3,6 +3,7 @@
  * the few quotable lines each school's open gaps need.
  *
  *   pnpm research [--only a,b] [--all] [--no-render]   fetch sites, write work/research/pack.md
+ *   pnpm research:wiki [--only a,b] [--all]             match Wikipedia articles, pack their leads for descriptions
  *   pnpm research:apply                                 merge work/research/answers.json
  *   pnpm research:geocode [--only a,b] [--dry-run]      place schools on the map from their address
  *
@@ -18,8 +19,9 @@ import { AGGREGATOR_HOSTS } from '../src/lib/check-sources';
 import { GREATER_MONTREAL_BBOX } from '../src/lib/constants';
 import { loadSchoolFiles, serialise, todayInMontreal } from '../src/lib/school-files';
 import { answersSchema, applyAnswers, type Manifest } from '../src/lib/research/apply';
-import { collectEvidence, gapsFor } from '../src/lib/research/evidence';
+import { collectEvidence, gapsFor, hashEvidence, type Evidence } from '../src/lib/research/evidence';
 import { geocodeQueries, pickGeocode, type GeocodePick, type NominatimResult } from '../src/lib/research/geocode';
+import { articleOf, articleUrl, leadSentences, pickWikidataItem, readWikidataItem, type WikidataItem } from '../src/lib/research/wikipedia';
 import { addLedgerRows } from '../src/lib/research/ledger';
 import { isAllowed, isSameSite, parseRobots, pickLinks, readSitemap, sitemapsIn } from '../src/lib/research/links';
 import { renderPack, type PackEntry } from '../src/lib/research/pack';
@@ -55,6 +57,10 @@ const MAX_SITEMAPS = 4;
 const MIN_TEXT_CHARS = 200;
 /** Nominatim's usage policy: at most one request per second. */
 const GEOCODE_DELAY_MS = 1_100;
+/** Wikimedia asks API clients to keep requests serial and unhurried. */
+const WIKI_DELAY_MS = 200;
+/** Lead sentences per article language offered for a description. */
+const LEAD_SENTENCES = 4;
 
 const args = process.argv.slice(2);
 const command = args[0] && !args[0].startsWith('--') ? args[0] : 'scan';
@@ -388,10 +394,126 @@ async function geocode(): Promise<void> {
   console.log(`Placed ${placed} of ${schools.length}${flag('dry-run') ? ' (dry run, nothing written)' : ''}.`);
 }
 
-const commands: Record<string, () => Promise<void>> = { scan, apply, geocode };
+// ---------------------------------------------------------------- wikipedia
+
+async function wikiApi<T>(host: string, params: Record<string, string>): Promise<T> {
+  await sleep(WIKI_DELAY_MS);
+  const res = await fetch(`https://${host}/w/api.php?${new URLSearchParams({ ...params, format: 'json', formatversion: '2' })}`, {
+    headers: { 'user-agent': UA },
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  });
+  if (!res.ok) throw new Error(`${host} HTTP ${res.status}`);
+  return (await res.json()) as T;
+}
+
+type PagesReply = { query?: { pages?: { title: string; missing?: boolean; extract?: string; pageprops?: { wikibase_item?: string } }[] } };
+
+async function wikidataItems(ids: string[]): Promise<WikidataItem[]> {
+  if (ids.length === 0) return [];
+  const reply = await wikiApi<{ entities: Record<string, Parameters<typeof readWikidataItem>[0]> }>('www.wikidata.org', {
+    action: 'wbgetentities',
+    ids: ids.join('|'),
+    props: 'claims|sitelinks',
+  });
+  return Object.values(reply.entities).map(readWikidataItem);
+}
+
+/** Search both Wikipedias for the school by name, alone and with its city; keep only the item that is provably the school. */
+async function findArticle(school: SchoolFile): Promise<string | null> {
+  const ids = new Set<string>();
+  for (const [lang, name] of [['fr', school.name_fr], ['en', school.name_en]] as const) {
+    const host = `${lang}.wikipedia.org`;
+    const titles = new Set<string>();
+    for (const query of [name, `${name} ${school.city}`]) {
+      const found = await wikiApi<{ query: { search: { title: string }[] } }>(host, { action: 'query', list: 'search', srsearch: query, srlimit: '5' });
+      for (const hit of found.query.search) titles.add(hit.title);
+    }
+    if (titles.size === 0) continue;
+    const props = await wikiApi<PagesReply>(host, { action: 'query', prop: 'pageprops', ppprop: 'wikibase_item', redirects: '1', titles: [...titles].join('|') });
+    for (const page of props.query?.pages ?? []) if (page.pageprops?.wikibase_item) ids.add(page.pageprops.wikibase_item);
+  }
+  const item = pickWikidataItem(school, await wikidataItems([...ids]));
+  if (!item) return null;
+  return item.titles.fr ? articleUrl('fr', item.titles.fr) : item.titles.en ? articleUrl('en', item.titles.en) : null;
+}
+
+/** The school's article in both languages, with each one's lead as plain text. */
+async function readArticles(wikipediaUrl: string): Promise<{ url: string; intro: string }[]> {
+  const { lang, title } = articleOf(wikipediaUrl);
+  const props = await wikiApi<PagesReply>(`${lang}.wikipedia.org`, { action: 'query', prop: 'pageprops', ppprop: 'wikibase_item', redirects: '1', titles: title });
+  const id = props.query?.pages?.[0]?.pageprops?.wikibase_item;
+  const [item] = id ? await wikidataItems([id]) : [];
+  const titles = item ? item.titles : { fr: lang === 'fr' ? title : null, en: lang === 'en' ? title : null };
+  const out: { url: string; intro: string }[] = [];
+  for (const l of ['fr', 'en'] as const) {
+    const t = titles[l];
+    if (!t) continue;
+    const reply = await wikiApi<PagesReply>(`${l}.wikipedia.org`, { action: 'query', prop: 'extracts', exintro: '1', explaintext: '1', redirects: '1', titles: t });
+    const intro = reply.query?.pages?.[0]?.extract?.trim();
+    if (intro) out.push({ url: articleUrl(l, t), intro });
+  }
+  return out;
+}
+
+/**
+ * Match each school to its Wikipedia article (written to the record: a
+ * website or building match settles it, as a postal code settles an
+ * address) and pack the article leads for a description, unless the
+ * description already comes from Wikipedia. Answers go through
+ * `pnpm research:apply` like any other pack.
+ */
+async function wiki(): Promise<void> {
+  const today = todayInMontreal(new Date());
+  const reviewedBySlug = flag('all') ? {} : await readJson<Record<string, string[]>>(REVIEWED_PATH, {});
+  await mkdir(PAGES_DIR, { recursive: true });
+  const entries: PackEntry[] = [];
+  let matched = 0;
+  for (const loaded of await loadSchools()) {
+    let school = loaded;
+    if (!school.wikipedia_url) {
+      const url = await findArticle(school);
+      if (!url) {
+        console.log(`  NONE   ${school.slug}`);
+        continue;
+      }
+      matched++;
+      school = { ...school, wikipedia_url: url };
+      await writeFile(path.join(DATA_DIR, `${school.slug}.json`), serialise(school), 'utf8');
+      console.log(`  MATCH  ${school.slug}: ${url}`);
+    }
+    const articles = await readArticles(school.wikipedia_url as string);
+    const reviewed = new Set(reviewedBySlug[school.slug] ?? []);
+    const fromWikipedia = school.description_source_url != null && /wikipedia\.org$/.test(new URL(school.description_source_url).hostname);
+    const items: Evidence[] = [];
+    for (const [page, { url, intro }] of articles.entries()) {
+      await writeFile(pageFile(url), `# ${url}\n${intro}`, 'utf8');
+      if (fromWikipedia) continue;
+      for (const s of leadSentences(intro, LEAD_SENTENCES)) {
+        const hash = hashEvidence('description', [s]);
+        if (!reviewed.has(hash)) items.push({ fact: 'description', lines: [s], page, hash });
+      }
+    }
+    entries.push({ school, evidence: { gaps: items.length > 0 ? ['description'] : [], items }, pages: articles.map((a) => a.url), documents: [], failures: [] });
+  }
+
+  const pack = renderPack(entries, today);
+  const manifest: Manifest = {
+    today,
+    schools: Object.fromEntries(entries.map((e) => [e.school.slug, { pages: e.pages, shown: e.evidence.items.map((i) => i.hash) }])),
+  };
+  await writeFile(PACK_PATH, pack, 'utf8');
+  await writeFile(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+  const lines = entries.reduce((n, e) => n + e.evidence.items.length, 0);
+  console.log(
+    `${entries.length} school(s) with a Wikipedia article (${matched} newly matched); ` +
+      `pack ≈${tokens(pack.length).toLocaleString()} tokens (${lines} lines to review).\nPack written to ${path.relative(ROOT, PACK_PATH)}`,
+  );
+}
+
+const commands: Record<string, () => Promise<void>> = { scan, apply, geocode, wiki };
 const run = commands[command];
 if (!run) {
-  console.error(`Unknown command "${command}". Use scan, apply or geocode.`);
+  console.error(`Unknown command "${command}". Use scan, wiki, apply or geocode.`);
   process.exitCode = 1;
 } else {
   run().catch((error: unknown) => {

@@ -18,7 +18,7 @@ the conflicts.
 **v1 implementation complete.**
 
 The site features:
-- `/en` and `/fr` open on the **school directory**: every school on file, over a map of Greater Montreal whose regions (Montreal Island, Laval, North Shore, South Shore) filter the list. Each row shows the school's short description when one exists, its city and region, and its next confirmed event or "No upcoming event observed". Every fact on file is confirmed on the school's own site or `null`; an unknown language or student body is simply not shown and never matches a filter
+- `/en` and `/fr` open on the **school directory**: every school on file, over a map of Greater Montreal whose regions (Montreal Island, Laval, North Shore, South Shore) filter the list. Each row shows the school's short description when one exists, its city and region, and its next confirmed event or "No upcoming event observed". Every fact on file is confirmed on the school's own site or `null`, except a description, which may be written from the school's Wikipedia article and is then credited on the school page; an unknown language or student body is simply not shown and never matches a filter
 - `/en/schools/<slug>`: one page per school with its region on the map (a pin when coordinates are confirmed), description, address, admissions and website links, and every event grouped by school year, with clashes flagged
 - `/en/events/current`: admissions events for the school year currently recruiting, by day, with conflict detection and the past-events archive; it moves to the next year on its own when the season turns over (July). `/en/events/2027-2028` pins a year and stays shareable afterwards; unknown years 404. Filters live in the URL. `/en/events` and old links (`/en/2027-2028`, `/en?view=calendar`) redirect here
 - The map is drawn from committed OpenStreetMap geometry in `data/geo/greater-montreal.json` (regenerate with `pnpm map:build`); visitors' browsers never contact a map tile server
@@ -96,6 +96,7 @@ School data is filled and kept current by a research pipeline built to spend as 
 pnpm research           # fetch each school's site, write work/research/pack.md (no model)
 # review pack.md, write work/research/answers.json
 pnpm research:apply     # check every quote against the fetched page, write data/schools/*.json
+pnpm research:wiki      # match each school to its Wikipedia article, pack the article leads for a description
 pnpm research:geocode   # place schools on the map from their street address (no model)
 ```
 
@@ -114,6 +115,8 @@ A description counts as missing while it is under 100 characters: a bare label s
 **`pnpm research:apply`** rejects a school's whole answer if any quote is not in the fetched page text or the result fails the schema. That makes a hallucinated date or fact impossible to write. Whatever it writes is on the site at the next deploy, so an answer states only what its quote says.
 
 **`pnpm research:geocode`** asks OpenStreetMap Nominatim (one request per second) for each school without a location, naming the street and city. It keeps a result only inside Greater Montreal, and only if it carries the school's own postal code (`exact` for a numbered building with the full code, else `approximate`) or is the record's own building (same house number, street and city) under a postal code OpenStreetMap got wrong (`approximate`).
+
+**`pnpm research:wiki`** searches French and English Wikipedia for each school without a `wikipedia_url`, by name alone and with its city, and writes the article only when Wikidata files the hit as a school and either gives the school's own website or places it within 1.5 km of the school with every distinctive word of its name in the title. A metro station or a same-named school elsewhere never passes; an article the check cannot prove may be set by hand. It then packs the first sentences of the French and English leads for a description, unless the description already comes from Wikipedia. Answers go through `pnpm research:apply`, which records the quoted page in `description_source_url`; `pnpm check:sources` accepts a description only from the school's own site or its matched Wikipedia article. A description summarises: dates, fees, language, student body and admission rules still come from the school's own site.
 
 Token counts are estimates at 4 characters per token:
 

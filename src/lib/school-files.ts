@@ -67,7 +67,7 @@ const KEY_ORDER: (keyof SchoolFile)[] = [
   'slug', 'name_en', 'name_fr', 'language', 'gender', 'sector', 'region', 'city',
   'address', 'postal_code', 'location', 'geocode_precision', 'website_url',
   'admissions_url', 'tuition_annual_cad', 'has_boarding', 'programs',
-  'description_en', 'description_fr', 'source_url', 'last_verified_at', 'open_days',
+  'description_en', 'description_fr', 'description_source_url', 'wikipedia_url', 'source_url', 'last_verified_at', 'open_days',
 ];
 
 /** Serialise a `SchoolFile` with a stable key order and a trailing newline. */

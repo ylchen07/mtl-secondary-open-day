@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
-import { findAggregatorSources } from '../src/lib/check-sources';
+import { findAggregatorSources, findDescriptionSources } from '../src/lib/check-sources';
 import { validateSchoolFiles } from '../src/lib/schema';
 
 const DATA_DIR = join(process.cwd(), 'data', 'schools');
@@ -48,6 +48,14 @@ async function main() {
         "FEEP is a lead, not a source. Verify against the school's own page.\n",
     );
     for (const v of violations) console.error(`  ${v}`);
+    console.error('');
+    process.exit(1);
+  }
+
+  const descriptions = findDescriptionSources(ok);
+  if (descriptions.length > 0) {
+    console.error("\nA description may cite only the school's own site or its Wikipedia article.\n");
+    for (const v of descriptions) console.error(`  ${v}`);
     console.error('');
     process.exit(1);
   }

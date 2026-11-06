@@ -208,6 +208,7 @@ main:focus { outline: none; }
 .school-description { max-width: 65ch; font-size: var(--text-lg); line-height: 1.5; }
 .gap { color: var(--color-ink-2); }
 .checked { color: var(--color-ink-2); font-size: var(--text-sm); }
+.checked a { text-decoration: underline; text-underline-offset: 3px; }
 .year-group { display: grid; gap: var(--space-xs); }
 .year-group h3 { font-size: var(--text-lg); }
 .year-group h3 a { text-decoration: none; }

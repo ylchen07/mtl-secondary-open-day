@@ -30,6 +30,7 @@ function toSchoolListing(school: SchoolFile): SchoolListing {
     has_boarding: school.has_boarding,
     description_en: school.description_en ?? null,
     description_fr: school.description_fr ?? null,
+    description_source_url: school.description_source_url ?? null,
     address: school.address,
     location:
       school.location && school.geocode_precision !== 'missing'
@@ -73,6 +74,7 @@ function toSchoolRow(school: SchoolFile): SchoolRow {
     programs: school.programs,
     description_en: school.description_en ?? null,
     description_fr: school.description_fr ?? null,
+    description_source_url: school.description_source_url ?? null,
     source_url: school.source_url,
     last_verified_at: school.last_verified_at,
   };
