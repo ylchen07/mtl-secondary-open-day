@@ -19,10 +19,12 @@
   "tuition_annual_cad": 5390,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Charles-Lemoyne is a private school offering a range of programs, with robotics, arts and sports profiles.",
-  "description_fr": "Établissement d’enseignement privé, le Collège Charles-Lemoyne propose une variété de programmes avec des profils en robotique, art et sport.",
+  "description_en": "Collège Charles-Lemoyne is a private school on Montreal’s South Shore with two secondary campuses and, since 2015, a preschool and elementary school.",
+  "description_fr": "Le Collège Charles-Lemoyne est un établissement privé de la Rive-Sud de Montréal qui compte deux campus secondaires et, depuis 2015, une école préscolaire et primaire.",
+  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Charles-Lemoyne",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Charles-Lemoyne",
   "source_url": "https://monccl.com/actualites/journee-portes-ouvertes-2026/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-09-20T09:00:00-04:00",

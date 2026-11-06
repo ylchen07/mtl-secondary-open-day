@@ -19,10 +19,12 @@
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": "École internationale de Montréal offers 560 secondary students a well-rounded education of international calibre in a warm, caring setting.",
-  "description_fr": "L’École internationale de Montréal offre à 560 jeunes du secondaire une formation globale de calibre international, dans un cadre chaleureux et humain.",
+  "description_en": "École internationale de Montréal is a public French-language secondary school in Westmount, part of the Centre de services scolaire de Montréal (CSSDM).",
+  "description_fr": "L’École internationale de Montréal est une école secondaire publique de langue française à Westmount, qui relève du Centre de services scolaire de Montréal (CSSDM).",
+  "description_source_url": "https://en.wikipedia.org/wiki/%C3%89cole_internationale_de_Montr%C3%A9al",
+  "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%89cole_internationale_de_Montr%C3%A9al",
   "source_url": "https://ecole-internationale.cssdm.gouv.qc.ca/nous-joindre/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-09-19T13:00:00-04:00",

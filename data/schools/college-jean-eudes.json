@@ -19,9 +19,11 @@
   "tuition_annual_cad": 5285,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Jean-Eudes is a secondary school in the heart of Rosemont, in Montreal, offering a modern, stimulating and caring environment.",
-  "description_fr": "Le Collège Jean-Eudes est une école secondaire située au cœur de Rosemont, qui offre un environnement moderne, stimulant et bienveillant.",
+  "description_en": "Founded in 1953 by the Eudists, Collège Jean-Eudes is a private French-language secondary school on Rosemont Boulevard, in Montreal’s Rosemont–La Petite-Patrie borough.",
+  "description_fr": "Fondé en 1953 par les Eudistes, le Collège Jean-Eudes est une école secondaire privée de langue française, boulevard Rosemont, dans l’arrondissement de Rosemont–La Petite-Patrie à Montréal.",
+  "description_source_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_Jean-Eudes",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Jean-Eudes",
   "source_url": "https://www.cje.qc.ca/nous-joindre/",
-  "last_verified_at": "2026-11-04",
+  "last_verified_at": "2026-11-05",
   "open_days": []
 }

@@ -19,10 +19,12 @@
   "tuition_annual_cad": 4595,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Founded in Saint-Lambert in 1910, Collège Durocher Saint-Lambert is a non-profit school offering the complete secondary program in French to girls and boys.",
-  "description_fr": "Fondé à Saint-Lambert en 1910, le Collège Durocher Saint-Lambert est un organisme sans but lucratif qui offre le cours secondaire complet, en français, aux filles et aux garçons.",
+  "description_en": "Collège Durocher Saint-Lambert is a private co-ed secondary school on Montreal’s South Shore, founded in 1910 as the Saint-Lambert boarding school run by the Sisters of the Holy Names of Jesus and Mary.",
+  "description_fr": "Le Collège Durocher Saint-Lambert est une école secondaire privée mixte de la Rive-Sud de Montréal, créée en 1910 comme pensionnat de Saint-Lambert des Sœurs du Saint Nom de Jésus et de Marie.",
+  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Durocher_Saint-Lambert",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Durocher_Saint-Lambert",
   "source_url": "https://cdsl.qc.ca/portes-ouvertes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-09-19T09:30:00-04:00",

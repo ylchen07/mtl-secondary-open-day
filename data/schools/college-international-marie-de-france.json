@@ -19,9 +19,11 @@
   "tuition_annual_cad": null,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège international Marie de France offers a well-rounded education focused on excellence, combining logic and creativity, well-being and openness to the world.",
-  "description_fr": "Le Collège international Marie de France offre une formation globale, tournée vers l’excellence, qui allie logique et créativité, bien-être et ouverture sur le monde.",
+  "description_en": "Founded in 1939 by French expatriates, Collège international Marie de France is a private French-language international school in Montreal that prepares students aged 4 to 18 for the French baccalauréat.",
+  "description_fr": "Fondé en 1939 par des expatriés français, le Collège international Marie de France est une école internationale privée de langue française à Montréal qui prépare les élèves de 4 à 18 ans au baccalauréat français.",
+  "description_source_url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_international_Marie_de_France",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_international_Marie-de-France",
   "source_url": "https://www.cimf.ca/journees-portes-ouvertes/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": []
 }

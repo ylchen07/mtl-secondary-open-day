@@ -30,10 +30,12 @@
     "soccer_plus",
     "sport_et_art_elite"
   ],
-  "description_en": "Collège Sainte-Anne’s teaching is built around six key competencies for the future: creativity, communication, collaboration, critical thinking, citizenship, and self-knowledge and courage.",
-  "description_fr": "L’enseignement du Collège Sainte-Anne s’articule autour de six compétences clés pour l’avenir : créativité, communication, collaboration, pensée critique, citoyenneté, connaissance de soi et courage.",
+  "description_en": "Founded in 1861, Collège Sainte-Anne is a private group of elementary, secondary and pre-university schools in Montreal’s Lachine, Dorval and Outremont areas.",
+  "description_fr": "Fondé en 1861, le Collège Sainte-Anne regroupe des écoles privées primaire, secondaires et préuniversitaire à Montréal, à Lachine, Dorval et Outremont.",
+  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Sainte-Anne",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Sainte-Anne",
   "source_url": "https://secondaire.lachine.sainteanne.ca/admission/",
-  "last_verified_at": "2026-11-04",
+  "last_verified_at": "2026-11-05",
   "open_days": [
     {
       "starts_at": "2026-09-27T09:00:00-04:00",

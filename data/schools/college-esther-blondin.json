@@ -16,9 +16,11 @@
   "tuition_annual_cad": 5070,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Esther-Blondin is a secondary school that centres its setting on high-quality human relationships and the personal growth of its students.",
-  "description_fr": "Le Collège Esther-Blondin est un établissement d'enseignement secondaire dont le cadre est centré sur des relations humaines de qualité et l'épanouissement des élèves.",
+  "description_en": "Collège Esther-Blondin is a private school in Saint-Jacques, in Lanaudière, offering the International Education Program (PEI); it is named after Marie-Anne (Esther) Blondin, founder of the Sisters of Saint Anne.",
+  "description_fr": "Le Collège Esther-Blondin est un établissement privé de Saint-Jacques, dans Lanaudière, qui offre le programme d’éducation internationale (PEI); il porte le nom de Marie-Anne (Esther) Blondin, fondatrice des Sœurs de Sainte-Anne.",
+  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Esther-Blondin",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Esther-Blondin",
   "source_url": "https://www.collegeblondin.qc.ca/admission/portes-ouvertes",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": []
 }

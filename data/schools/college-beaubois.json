@@ -19,9 +19,11 @@
   "tuition_annual_cad": 6196,
   "has_boarding": null,
   "programs": [],
-  "description_en": "Collège Beaubois is a private, non-profit school in Montreal, near Laval, offering preschool, elementary and secondary programs in French.",
-  "description_fr": "Le Collège Beaubois est un collège privé à but non lucratif qui offre en français les programmes préscolaire, primaire et secondaire, à Montréal, près de Laval.",
+  "description_en": "Founded in 1967 by the Brothers of Saint-Gabriel, Collège Beaubois is a private school in the Montreal area that teaches girls and boys in French, from preschool through secondary.",
+  "description_fr": "Fondé en 1967 par les Frères de Saint-Gabriel, le Collège Beaubois est une école privée de la région de Montréal qui enseigne en français aux filles et aux garçons, du préscolaire au secondaire.",
+  "description_source_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Beaubois",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Beaubois",
   "source_url": "https://collegebeaubois.qc.ca/",
-  "last_verified_at": "2026-11-02",
+  "last_verified_at": "2026-11-05",
   "open_days": []
 }

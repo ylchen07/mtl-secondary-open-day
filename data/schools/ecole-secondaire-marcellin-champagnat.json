@@ -16,9 +16,11 @@
   "tuition_annual_cad": 4815,
   "has_boarding": false,
   "programs": [],
-  "description_en": "École secondaire Marcellin-Champagnat is a private co-ed school recognised as being of public interest by Quebec’s Ministry of Education.",
-  "description_fr": "L’École secondaire Marcellin-Champagnat est un établissement privé mixte, reconnu d’intérêt public par le ministère de l’Éducation.",
+  "description_en": "École secondaire Marcellin-Champagnat is a private co-ed secondary school in the Iberville sector of Saint-Jean-sur-Richelieu, in Montérégie.",
+  "description_fr": "L’École secondaire Marcellin-Champagnat est une école secondaire privée mixte du secteur Iberville de Saint-Jean-sur-Richelieu, en Montérégie.",
+  "description_source_url": "https://fr.wikipedia.org/wiki/%C3%89cole_secondaire_Marcellin-Champagnat",
+  "wikipedia_url": "https://fr.wikipedia.org/wiki/%C3%89cole_secondaire_Marcellin-Champagnat",
   "source_url": "https://esmc.qc.ca/admission/portes-ouvertes/",
-  "last_verified_at": "2026-11-04",
+  "last_verified_at": "2026-11-05",
   "open_days": []
 }
