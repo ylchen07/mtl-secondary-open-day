@@ -8,7 +8,8 @@ import type { PageFacts } from './page';
  * record is missing it (or, for a description, has only a bare label), so a
  * complete record costs nothing to re-check.
  */
-export const FACTS = ['events', 'language', 'gender', 'tuition', 'description'] as const;
+/** `boarding` is only looked for in Wikipedia articles (`pnpm research:wiki`). */
+export const FACTS = ['events', 'language', 'gender', 'boarding', 'tuition', 'description'] as const;
 export type Fact = (typeof FACTS)[number];
 
 /**
@@ -182,7 +183,7 @@ export type SchoolEvidence = {
   items: Evidence[];
 };
 
-const CAP: Record<Fact, number> = { events: 20, language: 5, gender: 5, tuition: 4, description: 4 };
+const CAP: Record<Fact, number> = { events: 20, language: 5, gender: 5, boarding: 3, tuition: 4, description: 4 };
 
 export function hashEvidence(fact: Fact, lines: readonly string[]): string {
   return createHash('sha1').update(`${fact}|${lines.join('\n')}`).digest('hex').slice(0, 10);
@@ -253,6 +254,8 @@ function eventEvidence(pages: readonly PageFacts[], school: SchoolFile, today: s
 
 function factEvidence(fact: Exclude<Fact, 'events'>, pages: readonly PageFacts[], school: SchoolFile): Evidence[] {
   const out: Evidence[] = [];
+  // A school site rarely says it has no boarding; only Wikipedia rows are packed for it.
+  if (fact === 'boarding') return out;
   pages.forEach((page, index) => {
     if (fact === 'description') {
       // A school saying what it is counts on any page; other summaries only

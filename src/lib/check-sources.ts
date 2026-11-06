@@ -62,17 +62,18 @@ export function findAggregatorSources(schools: SchoolFile[]): string[] {
 }
 
 /**
- * One violation per school whose description cites a page that is neither
- * the school's own site nor Wikipedia. A description is the one field that
- * may come from Wikipedia: it summarises the school, it states no date,
- * fee or admission rule a family acts on.
+ * One violation per recorded fact source that is neither the school's own
+ * site nor its matched Wikipedia article. Description, language, student
+ * body and boarding may come from Wikipedia; dates, fees and admission rules
+ * never do (events and tuition carry no Wikipedia source at all).
  */
-export function findDescriptionSources(schools: SchoolFile[]): string[] {
-  return schools.flatMap((school) => {
-    const url = school.description_source_url;
-    if (url == null || isSameSite(url, school.website_url)) return [];
-    // The fr or en article of the school's matched Wikipedia entry.
-    if (school.wikipedia_url != null && isWikipediaUrl(url)) return [];
-    return [`${school.slug}: description cites ${url}, neither the school's site nor its Wikipedia article`];
-  });
+export function findFactSources(schools: SchoolFile[]): string[] {
+  return schools.flatMap((school) =>
+    Object.entries(school.fact_sources ?? {}).flatMap(([fact, url]) => {
+      if (isSameSite(url, school.website_url)) return [];
+      // The fr or en article of the school's matched Wikipedia entry.
+      if (school.wikipedia_url != null && isWikipediaUrl(url)) return [];
+      return [`${school.slug}: ${fact} cites ${url}, neither the school's site nor its Wikipedia article`];
+    }),
+  );
 }

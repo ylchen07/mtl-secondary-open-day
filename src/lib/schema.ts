@@ -135,10 +135,18 @@ export const schoolFileSchema = z
     programs: z.array(z.string()),
     description_en: nonEmpty.nullish(),
     description_fr: nonEmpty.nullish(),
-    /** The page the description was written from: the school's own site, or its Wikipedia article. */
-    description_source_url: httpsUrl.nullish(),
     /** The school's Wikipedia article, once research has matched it to this school. */
     wikipedia_url: wikipediaArticle.nullish(),
+    /**
+     * The page each research-written fact was quoted from: the school's own
+     * site, or its Wikipedia article. A fact with no entry was checked by
+     * hand against the school's site.
+     */
+    fact_sources: z
+      .object({ description: httpsUrl, language: httpsUrl, gender: httpsUrl, has_boarding: httpsUrl })
+      .partial()
+      .strict()
+      .nullish(),
     source_url: httpsUrl,
     last_verified_at: isoDate,
     open_days: z.array(openDaySchema),
@@ -152,10 +160,14 @@ export const schoolFileSchema = z
       'descriptions must be both present or neither — a one-sided description would render the wrong language',
     path: ['description_fr'],
   })
-  .refine((s) => s.description_source_url == null || s.description_en != null, {
-    message: 'description_source_url names the source of a description, so it needs one',
-    path: ['description_source_url'],
+  .refine((s) => Object.keys(s.fact_sources ?? {}).every((fact) => (fact === 'description' ? s.description_en : s[fact as SourcedFact]) != null), {
+    message: 'fact_sources names the source of a fact on file, so that fact must be set',
+    path: ['fact_sources'],
   });
+
+/** Facts whose source page research records in `fact_sources`. */
+export const SOURCED_FACTS = ['description', 'language', 'gender', 'has_boarding'] as const;
+type SourcedFact = Exclude<(typeof SOURCED_FACTS)[number], 'description'>;
 
 export type SchoolFile = z.infer<typeof schoolFileSchema>;
 export type OpenDayInput = SchoolFile['open_days'][number];

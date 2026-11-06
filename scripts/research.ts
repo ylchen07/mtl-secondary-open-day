@@ -19,14 +19,14 @@ import { AGGREGATOR_HOSTS } from '../src/lib/check-sources';
 import { GREATER_MONTREAL_BBOX } from '../src/lib/constants';
 import { loadSchoolFiles, serialise, todayInMontreal } from '../src/lib/school-files';
 import { answersSchema, applyAnswers, type Manifest } from '../src/lib/research/apply';
-import { collectEvidence, gapsFor, hashEvidence, type Evidence } from '../src/lib/research/evidence';
+import { collectEvidence, gapsFor, hashEvidence, type Evidence, type Fact } from '../src/lib/research/evidence';
 import { geocodeQueries, pickGeocode, type GeocodePick, type NominatimResult } from '../src/lib/research/geocode';
-import { articleOf, articleUrl, leadSentences, pickWikidataItem, readWikidataItem, type WikidataItem } from '../src/lib/research/wikipedia';
+import { articleOf, articleUrl, infoboxLines, leadSentences, pickWikidataItem, readWikidataItem, wikiFactLines, type WikidataItem, type WikiFact } from '../src/lib/research/wikipedia';
 import { addLedgerRows } from '../src/lib/research/ledger';
 import { isAllowed, isSameSite, parseRobots, pickLinks, readSitemap, sitemapsIn } from '../src/lib/research/links';
 import { renderPack, type PackEntry } from '../src/lib/research/pack';
 import { readPage, type PageFacts, type PageLink } from '../src/lib/research/page';
-import type { SchoolFile } from '../src/lib/schema';
+import { isWikipediaUrl, type SchoolFile } from '../src/lib/schema';
 
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'data', 'schools');
@@ -437,20 +437,23 @@ async function findArticle(school: SchoolFile): Promise<string | null> {
   return item.titles.fr ? articleUrl('fr', item.titles.fr) : item.titles.en ? articleUrl('en', item.titles.en) : null;
 }
 
-/** The school's article in both languages, with each one's lead as plain text. */
-async function readArticles(wikipediaUrl: string): Promise<{ url: string; intro: string }[]> {
+/** The school's article in both languages: each one's lead as plain text and its infobox rows. */
+async function readArticles(wikipediaUrl: string): Promise<{ url: string; intro: string; infobox: string[] }[]> {
   const { lang, title } = articleOf(wikipediaUrl);
   const props = await wikiApi<PagesReply>(`${lang}.wikipedia.org`, { action: 'query', prop: 'pageprops', ppprop: 'wikibase_item', redirects: '1', titles: title });
   const id = props.query?.pages?.[0]?.pageprops?.wikibase_item;
   const [item] = id ? await wikidataItems([id]) : [];
   const titles = item ? item.titles : { fr: lang === 'fr' ? title : null, en: lang === 'en' ? title : null };
-  const out: { url: string; intro: string }[] = [];
+  const out: { url: string; intro: string; infobox: string[] }[] = [];
   for (const l of ['fr', 'en'] as const) {
     const t = titles[l];
     if (!t) continue;
-    const reply = await wikiApi<PagesReply>(`${l}.wikipedia.org`, { action: 'query', prop: 'extracts', exintro: '1', explaintext: '1', redirects: '1', titles: t });
+    const host = `${l}.wikipedia.org`;
+    const reply = await wikiApi<PagesReply>(host, { action: 'query', prop: 'extracts', exintro: '1', explaintext: '1', redirects: '1', titles: t });
     const intro = reply.query?.pages?.[0]?.extract?.trim();
-    if (intro) out.push({ url: articleUrl(l, t), intro });
+    if (!intro) continue;
+    const source = await wikiApi<{ parse?: { wikitext?: string } }>(host, { action: 'parse', page: t, prop: 'wikitext', section: '0', redirects: '1' });
+    out.push({ url: articleUrl(l, t), intro, infobox: infoboxLines(source.parse?.wikitext ?? '') });
   }
   return out;
 }
@@ -458,8 +461,10 @@ async function readArticles(wikipediaUrl: string): Promise<{ url: string; intro:
 /**
  * Match each school to its Wikipedia article (written to the record: a
  * website or building match settles it, as a postal code settles an
- * address) and pack the article leads for a description, unless the
- * description already comes from Wikipedia. Answers go through
+ * address), then pack, for the facts the record lacks, what the article
+ * says: its lead for a description (unless the description already comes
+ * from Wikipedia), and the lead sentences and infobox rows that state the
+ * language, student body or boarding. Answers go through
  * `pnpm research:apply` like any other pack.
  */
 async function wiki(): Promise<void> {
@@ -483,17 +488,26 @@ async function wiki(): Promise<void> {
     }
     const articles = await readArticles(school.wikipedia_url as string);
     const reviewed = new Set(reviewedBySlug[school.slug] ?? []);
-    const fromWikipedia = school.description_source_url != null && /wikipedia\.org$/.test(new URL(school.description_source_url).hostname);
+    const descriptionSource = school.fact_sources?.description;
+    const wantDescription = descriptionSource == null || !isWikipediaUrl(descriptionSource);
+    const wanted: [Fact & WikiFact, boolean][] = [
+      ['language', school.language == null],
+      ['gender', school.gender == null],
+      ['boarding', school.has_boarding == null],
+    ];
     const items: Evidence[] = [];
-    for (const [page, { url, intro }] of articles.entries()) {
-      await writeFile(pageFile(url), `# ${url}\n${intro}`, 'utf8');
-      if (fromWikipedia) continue;
-      for (const s of leadSentences(intro, LEAD_SENTENCES)) {
-        const hash = hashEvidence('description', [s]);
-        if (!reviewed.has(hash)) items.push({ fact: 'description', lines: [s], page, hash });
-      }
+    const offer = (fact: Fact, line: string, page: number) => {
+      const hash = hashEvidence(fact, [line]);
+      if (!reviewed.has(hash) && !items.some((i) => i.hash === hash)) items.push({ fact, lines: [line], page, hash });
+    };
+    for (const [page, { url, intro, infobox }] of articles.entries()) {
+      await writeFile(pageFile(url), [`# ${url}`, intro, ...infobox].join('\n'), 'utf8');
+      const lead = leadSentences(intro, Number.POSITIVE_INFINITY);
+      if (wantDescription) for (const s of lead.slice(0, LEAD_SENTENCES)) offer('description', s, page);
+      for (const [fact, open] of wanted) if (open) for (const line of wikiFactLines(fact, lead, infobox)) offer(fact, line, page);
     }
-    entries.push({ school, evidence: { gaps: items.length > 0 ? ['description'] : [], items }, pages: articles.map((a) => a.url), documents: [], failures: [] });
+    const gaps = [...new Set(items.map((i) => i.fact))];
+    entries.push({ school, evidence: { gaps, items }, pages: articles.map((a) => a.url), documents: [], failures: [] });
   }
 
   const pack = renderPack(entries, today);

@@ -24,6 +24,7 @@ find in the fetched page.
 { "<slug>": {
   "language": { "value": "fr|en|bilingual", "quote": "…", "page": 2 },
   "gender": { "value": "mixed|girls|boys", "quote": "…", "page": 2 },
+  "boarding": { "value": true, "quote": "…", "page": 1 },
   "tuition": { "value": 5360, "quote": "…", "page": 3 },
   "description": { "en": "1-2 factual sentences", "fr": "1-2 phrases", "quote": "…", "page": 1 },
   "events": [{ "type": "open_house", "starts_at": "2027-04-17T11:00:00-04:00", "ends_at": "…",

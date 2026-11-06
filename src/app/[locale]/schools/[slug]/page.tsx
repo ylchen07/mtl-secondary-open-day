@@ -10,7 +10,7 @@ import type { Locale } from '@/lib/constants';
 import { dayKey, formatDayHeading, formatEventRange, formatVerifiedDate, isPastEvent } from '@/lib/dates';
 import { regionCrop } from '@/lib/geo';
 import { fetchAgendaEvents, fetchSchool, fetchSchoolListings } from '@/lib/queries';
-import { isWikipediaUrl } from '@/lib/schema';
+import { isWikipediaUrl, SOURCED_FACTS } from '@/lib/schema';
 import { mapRegionFor } from '@/lib/regions';
 
 export const revalidate = 3600;
@@ -51,8 +51,12 @@ export default async function SchoolPage({ params }: { params: Params }) {
 
   const name = locale === 'fr' ? school.name_fr : school.name_en;
   const description = locale === 'fr' ? school.description_fr : school.description_en;
-  const wikipediaSource =
-    description && school.description_source_url && isWikipediaUrl(school.description_source_url) ? school.description_source_url : null;
+  // Facts written from Wikipedia, named in the credit; all cite the school's one matched article.
+  const fromWikipedia = SOURCED_FACTS.filter((fact) => {
+    const url = school.fact_sources[fact];
+    return url != null && isWikipediaUrl(url);
+  });
+  const wikipediaSource = fromWikipedia.length > 0 ? school.fact_sources[fromWikipedia[0]]! : null;
   const region = mapRegionFor(school.region);
   const { view, focus } = regionCrop(region, BAND_ASPECT, school.location);
   const bandFrame = { '--focus-x': focus.x, '--focus-y': focus.y, '--view-aspect': view.w / view.h } as CSSProperties;
@@ -89,6 +93,7 @@ export default async function SchoolPage({ params }: { params: Params }) {
             {wikipediaSource && (
               <p className="checked">
                 {t.rich('school.fromWikipedia', {
+                  facts: new Intl.ListFormat(locale, { type: 'conjunction' }).format(fromWikipedia.map((fact) => t(`school.sourcedFact.${fact}`))),
                   article: (chunks) => <a href={wikipediaSource} target="_blank" rel="noopener noreferrer">{chunks}</a>,
                   license: (chunks) => <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">{chunks}</a>,
                 })}

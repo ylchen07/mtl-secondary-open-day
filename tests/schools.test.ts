@@ -10,7 +10,7 @@ function listing(over: Partial<SchoolListing> = {}): SchoolListing {
     id: 'a', slug: 'a', name_en: 'Alpha', name_fr: 'Alpha', city: 'Montréal',
     region: 'montreal_island', sector: 'private', admissions_url: 'https://a.qc.ca', website_url: 'https://a.qc.ca',
     programs: [], last_verified_at: '2026-10-29',
-    language: 'fr', gender: 'girls', has_boarding: null, description_en: null, description_fr: null, description_source_url: null,
+    language: 'fr', gender: 'girls', has_boarding: null, description_en: null, description_fr: null, fact_sources: {},
     address: '1 rue Test', location: null, tuition_annual_cad: null, ...over,
   };
 }

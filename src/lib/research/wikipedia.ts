@@ -103,3 +103,57 @@ export function leadSentences(intro: string, max: number): string[] {
     .filter((s) => s.length >= 20)
     .slice(0, max);
 }
+
+/**
+ * An article's infobox as `key: value` lines, markup stripped: what a
+ * reviewer quotes for a language or a student body the lead leaves out.
+ */
+export function infoboxLines(wikitext: string): string[] {
+  let text = wikitext.replace(/<ref[^>]*\/>|<ref[\s\S]*?<\/ref>|<!--[\s\S]*?-->/g, '');
+  // Inner templates first, so a citation inside a value does not cut it short.
+  for (let before = ''; before !== text; ) {
+    before = text;
+    text = text.replace(/\{\{(?:lang|langue)\|[^|{}]*\|([^{}]*)\}\}/gi, '$1').replace(/\{\{(?!\s*infobox)[^{}]*\}\}/gi, '');
+  }
+  // A row is `| key = value`; some infoboxes put several on one line.
+  const pairs = [...text.matchAll(/^\s*\|(.+)$/gm)].flatMap(([, line]) =>
+    line.split(/\|(?=\s*[\p{L}_ ]+\s*=)/u).flatMap((part) => {
+      const at = part.indexOf('=');
+      return at > 0 ? [[part.slice(0, at), part.slice(at + 1)]] : [];
+    }),
+  );
+  return pairs
+    .map(([key, value]) => [
+      key.trim().toLowerCase(),
+      value
+        .replace(/\[\[(?:[^|\]]*\|)?([^\]]*)\]\]/g, '$1')
+        .replace(/<br\s*\/?>/gi, ', ')
+        .replace(/<[^>]+>|'''?/g, '')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    ])
+    .filter(([, value]) => value.length > 0)
+    .map(([key, value]) => `${key}: ${value}`);
+}
+
+export type WikiFact = 'language' | 'gender' | 'boarding';
+
+/** Infobox keys that state a fact outright, in either Wikipedia. */
+const INFOBOX_KEY: Record<WikiFact, RegExp> = {
+  language: /^(?:language|langues?|langue d['’]enseignement)$/,
+  gender: /^(?:gender|genre|sexe|mixité)$/,
+  boarding: /^(?:boarding|pensionnat|internat)$/,
+};
+/** Wording that states a fact in a lead sentence or another infobox row (a «type» row saying «mixte»). */
+const WORDING: Record<WikiFact, RegExp> = {
+  language: /francophone|anglophone|bilingu|(?:french|english)[-\s]language|de langue (?:française|anglaise)|langue d['’]enseignement/i,
+  gender: /\bmixte\b|co-?ed(?:ucational)?|\bfilles\b|\bgar[çc]ons\b|\bgirls?\b|\bboys\b/i,
+  // «internat», not «international».
+  boarding: /boarding|pensionnaires|\binternats?\b|\bday school\b/i,
+};
+
+/** The lead sentences and infobox rows that can answer `fact`. */
+export function wikiFactLines(fact: WikiFact, lead: readonly string[], infobox: readonly string[]): string[] {
+  const rows = infobox.filter((line) => INFOBOX_KEY[fact].test(line.slice(0, line.indexOf(':'))) || WORDING[fact].test(line));
+  return [...rows, ...lead.filter((s) => WORDING[fact].test(s))];
+}

@@ -32,7 +32,7 @@ test('a school page shows its description, address and sourced events', async ({
   await page.locator('.school-row').getByRole('link', { name: 'Collège Jean-de-Brébeuf' }).click();
   await expect(page).toHaveURL(/\/en\/schools\/college-jean-de-brebeuf$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Collège Jean-de-Brébeuf');
-  await expect(page.locator('.school-description')).toContainText('Côte-des-Neiges');
+  await expect(page.locator('.school-description')).toContainText('Côte-Sainte-Catherine');
   await expect(page.locator('.address')).toContainText('H3T 1C1');
   const event = page.locator('.school-event').first();
   await expect(event.getByRole('link', { name: 'source' })).toHaveAttribute('href', /^https:/);
@@ -45,8 +45,8 @@ test('a school with unconfirmed facts shows what is confirmed and leaves the res
   await expect(row).toHaveCount(1);
   await expect(row).toContainText('No upcoming event observed');
   await row.getByRole('link', { name: 'Collège Jean-Eudes' }).click();
-  // Region, city and sector only: its language and student body are not confirmed.
-  await expect(page.locator('.fact-caps li')).toHaveCount(3);
+  // Region, city, sector and language (from Wikipedia): its student body is not confirmed.
+  await expect(page.locator('.fact-caps li')).toHaveCount(4);
   await expect(page.locator('.school-description')).toBeVisible();
   await expect(page.locator('.address')).toContainText('3535, boulevard Rosemont');
   await expect(page.locator('.map-pin')).toHaveCount(1);

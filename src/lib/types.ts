@@ -23,8 +23,8 @@ export type SchoolRow = {
   programs: string[];
   description_en: string | null;
   description_fr: string | null;
-  /** Where the description was written from: the school's site, or its Wikipedia article. */
-  description_source_url: string | null;
+  /** The page each research-written fact was quoted from: the school's site, or its Wikipedia article. */
+  fact_sources: Partial<Record<'description' | 'language' | 'gender' | 'has_boarding', string>>;
   source_url: string;
   last_verified_at: string;
 };
@@ -38,7 +38,7 @@ export type SchoolListing = Pick<
   SchoolRow,
   | 'id' | 'slug' | 'name_en' | 'name_fr' | 'city' | 'region' | 'sector' | 'admissions_url' | 'website_url'
   | 'programs' | 'last_verified_at' | 'language' | 'gender' | 'has_boarding' | 'description_en' | 'description_fr'
-  | 'description_source_url'
+  | 'fact_sources'
   | 'address' | 'tuition_annual_cad'
 > & {
   location: { lat: number; lng: number; precision: 'exact' | 'approximate' } | null;

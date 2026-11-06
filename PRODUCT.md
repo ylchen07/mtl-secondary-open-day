@@ -127,8 +127,10 @@ are the real test.
 
 1. **One place, school's own truth.** Every fact traces to the school's own
    website, with the date it was checked. If it can't be traced, it isn't shown.
-   The one exception is a school's description, which may be written from its
-   Wikipedia article and then credits that article (CC BY-SA 4.0).
+   The exceptions are a school's description, language, student body and
+   boarding, which may come from its Wikipedia article; the school page then
+   names them and credits the article (CC BY-SA 4.0). Dates, fees and
+   admission rules never do.
 2. **Show less rather than guess.** A missing time stays missing; an
    unconfirmed fact stays hidden. A wrong date costs a family their Saturday.
 3. **Every school stays visible.** A school with nothing published still has a

@@ -7,7 +7,7 @@ import { isAllowed, parseRobots, pickLinks, readSitemap, sitemapsIn } from '@/li
 import { htmlToLines } from '@/lib/research/normalize';
 import { readPage, type PageFacts } from '@/lib/research/page';
 import { renderPack } from '@/lib/research/pack';
-import { pickWikidataItem, type WikidataItem } from '@/lib/research/wikipedia';
+import { infoboxLines, pickWikidataItem, wikiFactLines, type WikidataItem } from '@/lib/research/wikipedia';
 import type { SchoolFile } from '@/lib/schema';
 
 const TODAY = '2026-11-01';
@@ -305,10 +305,25 @@ describe('applyAnswers', () => {
     expect(result.reviewed).toEqual({ 'college-test': ['abc'] });
   });
 
-  it('records the page a description was written from', () => {
-    const description = { en: 'A private school for girls.', fr: 'Une école secondaire privée pour filles.', quote: 'École secondaire privée pour filles', page: 1 };
-    const result = applyAnswers([school()], { 'college-test': { description } }, manifest, read, TODAY);
-    expect(result.updated[0].description_source_url).toBe('https://test.qc.ca/po/');
+  const wiki = 'https://fr.wikipedia.org/wiki/Coll%C3%A8ge_Test';
+  const wikiManifest: Manifest = { today: TODAY, schools: { 'college-test': { pages: [wiki], shown: [] } } };
+  const wikiText = `# ${wiki}\nLe Collège Test est une école secondaire privée mixte, pensionnat compris.\nfrais: 5 000 $`;
+  const readWiki = (url: string) => (url === wiki ? wikiText : null);
+
+  it('records the page each fact was written from, Wikipedia included', () => {
+    const quote = 'école secondaire privée mixte, pensionnat compris';
+    const result = applyAnswers([school({ wikipedia_url: wiki })], {
+      'college-test': { gender: { value: 'mixed', quote, page: 1 }, boarding: { value: true, quote, page: 1 } },
+    }, wikiManifest, readWiki, TODAY);
+    expect(result.updated[0]).toMatchObject({ gender: 'mixed', has_boarding: true, fact_sources: { gender: wiki, has_boarding: wiki } });
+  });
+
+  it('never takes a fee or a date from Wikipedia', () => {
+    const result = applyAnswers([school({ wikipedia_url: wiki })], {
+      'college-test': { tuition: { value: 5000, quote: 'frais: 5 000 $', page: 1 } },
+    }, wikiManifest, readWiki, TODAY);
+    expect(result.updated).toEqual([]);
+    expect(result.errors[0]).toMatch(/tuition: cites Wikipedia/);
   });
 });
 
@@ -371,6 +386,27 @@ describe('pickWikidataItem', () => {
     const elsewhere = item({ id: 'Q2', coord: { lat: 46.81, lng: -71.22 }, titles: { fr: 'Villa Maria', en: null } });
     expect(pickWikidataItem(villa, [college, elsewhere])).toBeNull();
     expect(pickWikidataItem(villa, [item({ id: 'Q3', websites: ['https://villamaria.qc.ca/fr'] })])?.id).toBe('Q3');
+  });
+});
+
+describe('infoboxLines and wikiFactLines', () => {
+  const wikitext = [
+    '{{Infobox school',
+    '| name = Collège Test',
+    '| langues = | géolocalisation = Laval',
+    "| language = [[French language|French]]<ref>{{cite web|url=x}}</ref>",
+    '| schooltype = Private, Day school',
+    '}}',
+  ].join('\n');
+
+  it('reads one-line rows apart, drops empty values and markup', () => {
+    expect(infoboxLines(wikitext)).toEqual(['name: Collège Test', 'géolocalisation: Laval', 'language: French', 'schooltype: Private, Day school']);
+  });
+
+  it('answers a fact from its own row or its wording, never from a word that only contains it', () => {
+    const rows = infoboxLines(wikitext);
+    expect(wikiFactLines('language', [], rows)).toEqual(['language: French']);
+    expect(wikiFactLines('boarding', ['Le collège offre le programme d’éducation internationale.'], rows)).toEqual(['schooltype: Private, Day school']);
   });
 });
 

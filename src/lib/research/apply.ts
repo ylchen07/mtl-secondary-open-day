@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { schoolFileSchema, type SchoolFile } from '../schema';
+import { isWikipediaUrl, schoolFileSchema, type SchoolFile } from '../schema';
 import type { AddedEvent } from './ledger';
 
 /** What the research run handed the reviewer, per school: needed to resolve `page` and mark lines reviewed. */
@@ -14,6 +14,7 @@ const answerSchema = z
   .object({
     language: z.object({ value: z.enum(['fr', 'en', 'bilingual']), ...cited }).strict(),
     gender: z.object({ value: z.enum(['mixed', 'girls', 'boys']), ...cited }).strict(),
+    boarding: z.object({ value: z.boolean(), ...cited }).strict(),
     tuition: z.object({ value: z.number().int().positive(), ...cited }).strict(),
     description: z.object({ en: z.string().trim().min(20), fr: z.string().trim().min(20), ...cited }).strict(),
     // The event's own fields are checked by the school schema once merged.
@@ -82,19 +83,39 @@ export function applyAnswers(
       }
       return url;
     };
+    // Dates and fees are what a family acts on: only the school's own page backs them.
+    const siteOnly = (field: string, c: { quote: string; page: number }): string | null => {
+      const url = source(field, c);
+      if (url && isWikipediaUrl(url)) {
+        problems.push(`${field}: cites Wikipedia; dates and fees come only from the school's site`);
+        return null;
+      }
+      return url;
+    };
 
     const next: SchoolFile = { ...school, open_days: [...school.open_days] };
     const changed: string[] = [];
     const added: AddedEvent[] = [];
-    if (answer.language && source('language', answer.language)) {
+    const sources = { ...next.fact_sources };
+    const languageSource = answer.language ? source('language', answer.language) : null;
+    if (answer.language && languageSource) {
       next.language = answer.language.value;
+      sources.language = languageSource;
       changed.push(`language=${answer.language.value}`);
     }
-    if (answer.gender && source('gender', answer.gender)) {
+    const genderSource = answer.gender ? source('gender', answer.gender) : null;
+    if (answer.gender && genderSource) {
       next.gender = answer.gender.value;
+      sources.gender = genderSource;
       changed.push(`gender=${answer.gender.value}`);
     }
-    if (answer.tuition && source('tuition', answer.tuition)) {
+    const boardingSource = answer.boarding ? source('boarding', answer.boarding) : null;
+    if (answer.boarding && boardingSource) {
+      next.has_boarding = answer.boarding.value;
+      sources.has_boarding = boardingSource;
+      changed.push(`boarding=${answer.boarding.value}`);
+    }
+    if (answer.tuition && siteOnly('tuition', answer.tuition)) {
       next.tuition_annual_cad = answer.tuition.value;
       changed.push(`tuition=${answer.tuition.value}`);
     }
@@ -102,11 +123,12 @@ export function applyAnswers(
     if (answer.description && descriptionSource) {
       next.description_en = answer.description.en;
       next.description_fr = answer.description.fr;
-      next.description_source_url = descriptionSource;
+      sources.description = descriptionSource;
       changed.push('description');
     }
+    if (Object.keys(sources).length > 0) next.fact_sources = sources;
     for (const [i, raw] of (answer.events ?? []).entries()) {
-      const url = source(`events[${i}]`, raw);
+      const url = siteOnly(`events[${i}]`, raw);
       if (!url) continue;
       const { quote: _quote, page: _page, ...fields } = raw;
       const start = String(fields.starts_at ?? fields.starts_on);
