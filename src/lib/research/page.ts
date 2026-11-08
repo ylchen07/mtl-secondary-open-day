@@ -4,7 +4,7 @@ import { htmlToLines } from './normalize';
 export type PageLink = { href: string; text: string };
 
 /** A structured event a page declares in JSON-LD; read without any model. */
-export type JsonLdEvent = { name: string; startDate: string; endDate: string | null };
+type JsonLdEvent = { name: string; startDate: string; endDate: string | null };
 
 /**
  * Everything the research step keeps from one fetched page. The raw HTML is

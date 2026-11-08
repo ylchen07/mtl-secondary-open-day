@@ -16,9 +16,7 @@
     "heading": "Secondary schools of Greater Montreal",
     "lead": "Admissions dates from each school’s own website, in one place. Pick a region on the map or search by name.",
     "regionCount": "{count, plural, one {# school} other {# schools}}",
-    "regionsLabel": "Region",
-    "colLocation": "Location",
-    "openSchool": "Open school page"
+    "regionsLabel": "Region"
   },
   "school": {
     "back": "All schools",
@@ -54,7 +52,6 @@
     "source": "source",
     "register": "Register",
     "checkRegistrationDetails": "Check registration details",
-    "registrationRequired": "Registration required",
     "emptyTitle": "No upcoming open days right now",
     "emptyBody": "Most private schools publish their dates in August for the autumn season. Browse the school directory in the meantime.",
     "emptyFiltered": "No events match these filters.",
@@ -70,7 +67,6 @@
     "schoolYear": "School year {year}",
     "schoolYearNav": "School years",
     "schoolCount": "Showing {count, plural, =0 {no schools} one {# school} other {# schools}}",
-    "colNext": "Next confirmed event",
     "noUpcoming": "No upcoming event observed",
     "checkedOn": "Checked {date}",
     "moreUpcoming": "{count, plural, one {# more upcoming} other {# more upcoming}}",

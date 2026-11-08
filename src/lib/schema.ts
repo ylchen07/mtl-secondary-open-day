@@ -170,7 +170,6 @@ export const SOURCED_FACTS = ['description', 'language', 'gender', 'has_boarding
 type SourcedFact = Exclude<(typeof SOURCED_FACTS)[number], 'description'>;
 
 export type SchoolFile = z.infer<typeof schoolFileSchema>;
-export type OpenDayInput = SchoolFile['open_days'][number];
 
 /**
  * A failed event matches neither shape, and zod reports that as one opaque

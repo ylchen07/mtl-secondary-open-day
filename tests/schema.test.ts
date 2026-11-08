@@ -244,7 +244,7 @@ describe('description optionality', () => {
   });
 
   // JSON has no `undefined`, so an absent description arrives as an OMITTED key,
-  // not as null. This is the shape the harvester will actually emit. The
+  // not as null. This is the shape a hand-edited file or `research:apply` emits. The
   // refinement handles it only because it uses loose `== null`; tightening that
   // to `=== null` would silently reopen the /fr-renders-English hole with the
   // whole suite still green. These two tests are what would catch that.

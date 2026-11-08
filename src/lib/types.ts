@@ -44,7 +44,7 @@ export type SchoolListing = Pick<
   location: { lat: number; lng: number; precision: 'exact' | 'approximate' } | null;
 };
 
-export type OpenDayRow = {
+type OpenDayRow = {
   id: string;
   school_id: string;
   /** Instants; for an all-day event, Montreal midnight to the midnight after its last day. */

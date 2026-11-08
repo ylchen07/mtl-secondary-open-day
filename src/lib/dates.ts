@@ -1,5 +1,5 @@
 import { TZDate } from '@date-fns/tz';
-import { addMonths, endOfDay, format, startOfWeek, subMilliseconds } from 'date-fns';
+import { addMonths, endOfDay, format, subMilliseconds } from 'date-fns';
 import { enUS, fr } from 'date-fns/locale';
 import { MONTREAL_TZ, type Locale } from './constants';
 
@@ -13,11 +13,6 @@ function montreal(iso: string): TZDate {
 export function agendaWindowEnd(now = new Date()): Date {
   const end = endOfDay(addMonths(new TZDate(now, MONTREAL_TZ), 3));
   return new Date(end.getTime());
-}
-
-/** ISO date of the Monday starting this event's week, in Montreal time. */
-export function weekKey(iso: string): string {
-  return format(startOfWeek(montreal(iso), { weekStartsOn: 1 }), 'yyyy-MM-dd');
 }
 
 /**
@@ -43,11 +38,6 @@ export function eventBounds(
  * second half of a calendar year (July onward) recruit for the intake that
  * starts the *following* September; earlier events recruit for the intake
  * starting that same September.
- *
- * FEEP's own labels confirm the boundary: Collège Reine-Marie's open house on
- * 17 avril 2027 is "Année scolaire 2027-2028" and Académie Centennial's on
- * 25 avril 2026 is "Année scolaire 2026-2027" (both in
- * `tests/fixtures/feep/listing-montreal.html`).
  */
 export function academicYearFor(date: string): string {
   const [y, m] = date.split('-').map(Number);
@@ -75,17 +65,6 @@ export function formatEventRange(
   const end = montreal(event.ends_at);
   const timeFmt = locale === 'fr' ? 'HH:mm' : 'h:mm a';
   return `${format(start, timeFmt)} – ${format(end, timeFmt)}`;
-}
-
-export function formatEventTime(
-  startsAt: string,
-  endsAt: string,
-  locale: Locale,
-): string {
-  const start = montreal(startsAt);
-  const opts = { locale: dateFnsLocale[locale] };
-  const day = format(start, locale === 'fr' ? 'EEEE d MMMM' : 'EEEE, MMMM d', opts);
-  return `${day} · ${formatEventRange({ starts_at: startsAt, ends_at: endsAt, all_day: false }, locale)}`;
 }
 
 export function formatVerifiedDate(date: string, locale: Locale): string {
@@ -140,25 +119,5 @@ export function groupByDay<T extends { starts_at: string }>(
     .map(([day, dayEvents]) => ({
       day,
       events: [...dayEvents].sort((a, b) => a.starts_at.localeCompare(b.starts_at)),
-    }));
-}
-
-export function groupByWeek<T extends { starts_at: string }>(
-  events: T[],
-): { weekStart: string; events: T[] }[] {
-  const buckets = new Map<string, T[]>();
-
-  for (const event of events) {
-    const key = weekKey(event.starts_at);
-    const bucket = buckets.get(key);
-    if (bucket) bucket.push(event);
-    else buckets.set(key, [event]);
-  }
-
-  return [...buckets.entries()]
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([weekStart, weekEvents]) => ({
-      weekStart,
-      events: [...weekEvents].sort((a, b) => a.starts_at.localeCompare(b.starts_at)),
     }));
 }

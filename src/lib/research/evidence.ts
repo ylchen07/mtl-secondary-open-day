@@ -16,7 +16,7 @@ export type Fact = (typeof FACTS)[number];
  * Below this, a description only names the kind of school («X is a private
  * school.»), so research keeps looking for what makes it distinct.
  */
-export const THIN_DESCRIPTION_CHARS = 100;
+const THIN_DESCRIPTION_CHARS = 100;
 
 export function gapsFor(school: SchoolFile): Fact[] {
   const gaps: Fact[] = ['events'];

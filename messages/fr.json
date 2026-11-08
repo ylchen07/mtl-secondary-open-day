@@ -16,9 +16,7 @@
     "heading": "Écoles secondaires du Grand Montréal",
     "lead": "Les dates d’admission tirées du site de chaque école, au même endroit. Choisissez une région sur la carte ou cherchez par nom.",
     "regionCount": "{count, plural, one {# école} other {# écoles}}",
-    "regionsLabel": "Région",
-    "colLocation": "Emplacement",
-    "openSchool": "Ouvrir la page de l’école"
+    "regionsLabel": "Région"
   },
   "school": {
     "back": "Toutes les écoles",
@@ -54,7 +52,6 @@
     "source": "source",
     "register": "S'inscrire",
     "checkRegistrationDetails": "Vérifier les modalités d'inscription",
-    "registrationRequired": "Inscription requise",
     "emptyTitle": "Aucune porte ouverte à venir pour le moment",
     "emptyBody": "La plupart des écoles privées publient leurs dates en août pour la saison d'automne. Consultez le répertoire des écoles entre-temps.",
     "emptyFiltered": "Aucun événement ne correspond à ces filtres.",
@@ -70,7 +67,6 @@
     "schoolYear": "Année scolaire {year}",
     "schoolYearNav": "Années scolaires",
     "schoolCount": "{count, plural, =0 {Aucune école} one {# école} other {# écoles}}",
-    "colNext": "Prochain événement confirmé",
     "noUpcoming": "Aucun événement à venir observé",
     "checkedOn": "Vérifié le {date}",
     "moreUpcoming": "{count, plural, one {# autre à venir} other {# autres à venir}}",
