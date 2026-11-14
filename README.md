@@ -18,7 +18,7 @@ the conflicts.
 **v1 implementation complete.**
 
 The site features:
-- `/en` and `/fr` open on the **school directory**: every school on file, over a map of Greater Montreal whose regions (Montreal Island, Laval, North Shore, South Shore) filter the list. Each row shows the school's short description when one exists, its city and region, and its next confirmed event or "No upcoming event observed". Every fact on file is confirmed on the school's own site or `null`, except that a description, language, student body or boarding may come from the school's Wikipedia article, which the school page then credits; an unknown language or student body is simply not shown and never matches a filter
+- `/en`, `/fr` and `/zh` (Simplified Chinese) open on the **school directory**: every school on file, over a map of Greater Montreal whose regions (Montreal Island, Laval, North Shore, South Shore) filter the list. Each row shows the school's short description when one exists, its city and region, and its next confirmed event or "No upcoming event observed". Every fact on file is confirmed on the school's own site or `null`, except that a description, language, student body or boarding may come from the school's Wikipedia article, which the school page then credits; an unknown language or student body is simply not shown and never matches a filter. School records hold English and French text only, so `/zh` translates the interface and shows each school's English name, description and event notes, marked `lang="en"`
 - `/en/schools/<slug>`: one page per school with its region on the map (a pin when coordinates are confirmed), description, address, admissions and website links, and every event grouped by school year, with clashes flagged
 - `/en/events/current`: admissions events for the school year currently recruiting, by day, with conflict detection and the past-events archive; it moves to the next year on its own when the season turns over (July). `/en/events/2027-2028` pins a year and stays shareable afterwards; unknown years 404. Filters live in the URL. `/en/events` and old links (`/en/2027-2028`, `/en?view=calendar`) redirect here
 - The map is drawn from committed OpenStreetMap geometry in `data/geo/greater-montreal.json` (regenerate with `pnpm map:build`); visitors' browsers never contact a map tile server
@@ -73,7 +73,7 @@ merged to `main`.
 
 ## Stack
 
-Next.js 16 · React 19 · TypeScript · Tailwind v4 · next-intl (EN/FR) · deployed to Vercel and Cloudflare Workers
+Next.js 16 · React 19 · TypeScript · Tailwind v4 · next-intl (EN/FR/简体中文) · deployed to Vercel and Cloudflare Workers
 
 ## Deploying
 

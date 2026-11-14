@@ -1,9 +1,13 @@
 import { TZDate } from '@date-fns/tz';
-import { addMonths, endOfDay, format, subMilliseconds } from 'date-fns';
-import { enUS, fr } from 'date-fns/locale';
+import { addMonths, endOfDay, format, subMilliseconds, type Locale as DateFnsLocale } from 'date-fns';
+import { enUS, fr, zhCN } from 'date-fns/locale';
 import { MONTREAL_TZ, type Locale } from './constants';
 
-const dateFnsLocale = { en: enUS, fr } as const;
+const FORMATS: Record<Locale, { locale: DateFnsLocale; day: string; dayHeading: string; verified: string; time: string }> = {
+  en: { locale: enUS, day: 'MMM d', dayHeading: 'EEEE, MMMM d', verified: 'MMM d, yyyy', time: 'h:mm a' },
+  fr: { locale: fr, day: 'd MMM', dayHeading: 'EEEE d MMMM', verified: 'd MMM yyyy', time: 'HH:mm' },
+  zh: { locale: zhCN, day: 'M月d日', dayHeading: 'M月d日 EEEE', verified: 'yyyy年M月d日', time: 'HH:mm' },
+};
 
 function montreal(iso: string): TZDate {
   return new TZDate(new Date(iso), MONTREAL_TZ);
@@ -58,19 +62,16 @@ export function formatEventRange(
   if (event.all_day) {
     const lastDay = montreal(subMilliseconds(new Date(event.ends_at), 1).toISOString());
     if (dayKey(event.starts_at) === format(lastDay, 'yyyy-MM-dd')) return null;
-    const dayFmt = locale === 'fr' ? 'd MMM' : 'MMM d';
-    const opts = { locale: dateFnsLocale[locale] };
-    return `${format(start, dayFmt, opts)} – ${format(lastDay, dayFmt, opts)}`;
+    const { day, locale: dateLocale } = FORMATS[locale];
+    return `${format(start, day, { locale: dateLocale })} – ${format(lastDay, day, { locale: dateLocale })}`;
   }
   const end = montreal(event.ends_at);
-  const timeFmt = locale === 'fr' ? 'HH:mm' : 'h:mm a';
-  return `${format(start, timeFmt)} – ${format(end, timeFmt)}`;
+  const { time } = FORMATS[locale];
+  return `${format(start, time)} – ${format(end, time)}`;
 }
 
 export function formatVerifiedDate(date: string, locale: Locale): string {
-  return format(montreal(`${date}T12:00:00Z`), locale === 'fr' ? 'd MMM yyyy' : 'MMM d, yyyy', {
-    locale: dateFnsLocale[locale],
-  });
+  return format(montreal(`${date}T12:00:00Z`), FORMATS[locale].verified, { locale: FORMATS[locale].locale });
 }
 
 export function isPastEvent(endsAt: string, now = new Date()): boolean {
@@ -97,9 +98,7 @@ export function dayKey(iso: string): string {
 }
 
 export function formatDayHeading(day: string, locale: Locale): string {
-  return format(new TZDate(`${day}T12:00:00`, MONTREAL_TZ), locale === 'fr' ? 'EEEE d MMMM' : 'EEEE, MMMM d', {
-    locale: dateFnsLocale[locale],
-  });
+  return format(new TZDate(`${day}T12:00:00`, MONTREAL_TZ), FORMATS[locale].dayHeading, { locale: FORMATS[locale].locale });
 }
 
 export function groupByDay<T extends { starts_at: string }>(

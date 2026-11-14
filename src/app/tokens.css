@@ -32,3 +32,11 @@
   --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
   --move: 0.4s;
 }
+
+/* Bricolage has no Han glyphs: name the system's Simplified Chinese faces, and drop the
+   negative display tracking, which crowds Han characters. */
+:root:lang(zh) {
+  --font-body: var(--font-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-display: var(--font-body);
+  --tracking-display: 0;
+}

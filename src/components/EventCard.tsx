@@ -7,7 +7,7 @@ import { formatEventRange, formatVerifiedDate } from '@/lib/dates';
 import { mapRegionFor } from '@/lib/regions';
 import { registrationAction } from '@/lib/registration';
 import type { AgendaEvent } from '@/lib/types';
-import type { Locale } from '@/lib/constants';
+import { recordLang, type Locale } from '@/lib/constants';
 
 export function EventCard({
   event,
@@ -39,7 +39,7 @@ export function EventCard({
       <p className="event-time">{formatEventRange(event, locale) ?? t('timeNotPublished')}</p>
       <div className="event-content">
         <div className="event-heading">
-          <h4><Link href={`/schools/${event.school.slug}`}>{schoolName}</Link></h4>
+          <h4 lang={recordLang(locale)}><Link href={`/schools/${event.school.slug}`}>{schoolName}</Link></h4>
           <span className="event-type type-cap" data-type={past ? undefined : event.type}>{past ? t('pastEvent') : tType(event.type)}</span>
         </div>
         <ul className="event-details" aria-label={t('schoolDetails')}>
@@ -48,7 +48,7 @@ export function EventCard({
           {event.school.gender && <li>{tGender(event.school.gender)}</li>}
           <li>{tSector(event.school.sector)}</li>
         </ul>
-        {note && <p className="event-note">{note}</p>}
+        {note && <p className="event-note" lang={recordLang(locale)}>{note}</p>}
         {clashes.length > 0 && (
           <ul className="event-clashes">
             {clashes.map((clash) => (

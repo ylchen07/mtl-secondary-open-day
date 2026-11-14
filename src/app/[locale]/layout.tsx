@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/SiteHeader';
 import { routing } from '@/i18n/routing';
+import { LOCALE_TAGS } from '@/lib/constants';
 import '../globals.css';
 
 const sans = Bricolage_Grotesque({
@@ -42,7 +43,7 @@ export default async function LocaleLayout({
   ]);
 
   return (
-    <html lang={locale} className={sans.variable}>
+    <html lang={LOCALE_TAGS[locale]} className={sans.variable}>
       <body>
         <NextIntlClientProvider>
           <div className="site-shell">

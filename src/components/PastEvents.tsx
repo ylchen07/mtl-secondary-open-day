@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { dayKey, formatDayHeading, formatEventRange, formatVerifiedDate } from '@/lib/dates';
-import type { Locale } from '@/lib/constants';
+import { recordLang, type Locale } from '@/lib/constants';
 import type { AgendaEvent } from '@/lib/types';
 
 export function PastEvents({ events }: { events: AgendaEvent[] }) {
@@ -42,7 +42,7 @@ export function PastEvents({ events }: { events: AgendaEvent[] }) {
               <details className="archive-event-details">
                 <summary className="archive-summary">
                   <time dateTime={date}>{formatDayHeading(date, locale)}</time>
-                  <h3>{name}</h3>
+                  <h3 lang={recordLang(locale)}>{name}</h3>
                   <span className="archive-event-type">{tType(event.type)}</span>
                   <span className="archive-details-label">{t('eventDetails')}</span>
                 </summary>
@@ -54,7 +54,7 @@ export function PastEvents({ events }: { events: AgendaEvent[] }) {
                     {event.school.gender && <li>{tGender(event.school.gender)}</li>}
                     <li>{tSector(event.school.sector)}</li>
                   </ul>
-                  {note && <p className="event-note">{note}</p>}
+                  {note && <p className="event-note" lang={recordLang(locale)}>{note}</p>}
                   <p className="event-evidence">{t('verifiedOn', { date: formatVerifiedDate(event.last_verified_at, locale) })}</p>
                 </div>
               </details>

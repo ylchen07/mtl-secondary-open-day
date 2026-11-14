@@ -22,7 +22,9 @@ name in an English interface is normal and expected, and vice versa.
 A public, bilingual (FR/EN) record of the admissions schedule (open houses,
 entrance exams and admission interviews) for Greater Montreal secondary
 schools, published by school year (the Secondary 1 entry cohort, e.g.
-2027–2028).
+2027–2028). The interface is also in Simplified Chinese for newcomer
+families; school records stay in English and French, and the Chinese pages
+show the English.
 
 The job it does:
 

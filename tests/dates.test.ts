@@ -3,7 +3,9 @@ import {
   academicYearFor,
   agendaWindowEnd,
   eventBounds,
+  formatDayHeading,
   formatEventRange,
+  formatVerifiedDate,
   groupByDay,
   partitionAgendaEvents,
 } from '@/lib/dates';
@@ -81,6 +83,15 @@ describe('formatEventRange', () => {
     const window = eventBounds({ starts_on: '2026-10-26', ends_on: '2026-11-06' });
     expect(formatEventRange(window, 'en')).toBe('Oct 26 – Nov 6');
     expect(formatEventRange(window, 'fr')).toBe('26 oct. – 6 nov.');
+    expect(formatEventRange(window, 'zh')).toBe('10月26日 – 11月6日');
+  });
+
+  it('writes Chinese dates in Chinese order, with a 24-hour clock', () => {
+    expect(formatDayHeading('2026-11-14', 'zh')).toBe('11月14日 星期六');
+    expect(formatVerifiedDate('2026-11-05', 'zh')).toBe('2026年11月5日');
+    expect(
+      formatEventRange({ starts_at: '2026-09-26T17:00:00.000Z', ends_at: '2026-09-26T20:00:00.000Z', all_day: false }, 'zh'),
+    ).toBe('13:00 – 16:00');
   });
 });
 

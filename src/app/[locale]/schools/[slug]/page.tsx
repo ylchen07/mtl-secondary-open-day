@@ -6,7 +6,7 @@ import { RegionMap } from '@/components/RegionMap';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { findClashes } from '@/lib/clash';
-import type { Locale } from '@/lib/constants';
+import { LOCALE_TAGS, recordLang, type Locale } from '@/lib/constants';
 import { dayKey, formatDayHeading, formatEventRange, formatVerifiedDate, isPastEvent } from '@/lib/dates';
 import { regionCrop } from '@/lib/geo';
 import { fetchAgendaEvents, fetchSchool, fetchSchoolListings } from '@/lib/queries';
@@ -61,7 +61,7 @@ export default async function SchoolPage({ params }: { params: Params }) {
   const { view, focus } = regionCrop(region, BAND_ASPECT, school.location);
   const bandFrame = { '--focus-x': focus.x, '--focus-y': focus.y, '--view-aspect': view.w / view.h } as CSSProperties;
   const yearLabel = (y: string) => y.replace('-', '–');
-  const money = new Intl.NumberFormat(locale === 'fr' ? 'fr-CA' : 'en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
+  const money = new Intl.NumberFormat(LOCALE_TAGS[locale], { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
 
   return (
     <article className="school-page" data-region={region}>
@@ -74,7 +74,7 @@ export default async function SchoolPage({ params }: { params: Params }) {
             </svg>
             {t('school.back')}
           </Link>
-          <h1>{name}</h1>
+          <h1 lang={recordLang(locale)}>{name}</h1>
           <ul className="fact-caps" aria-label={t('agenda.schoolDetails')}>
             <li className="region-cap">{t(`region.${school.region}`)}</li>
             <li>{school.city}</li>
@@ -89,7 +89,7 @@ export default async function SchoolPage({ params }: { params: Params }) {
         <div className="school-main">
           <section aria-labelledby="about-heading" className="school-section">
             <h2 id="about-heading">{t('school.about')}</h2>
-            {description ? <p className="school-description">{description}</p> : <p className="gap">{t('school.noDescription')}</p>}
+            {description ? <p className="school-description" lang={recordLang(locale)}>{description}</p> : <p className="gap">{t('school.noDescription')}</p>}
             {wikipediaSource && (
               <p className="checked">
                 {t.rich('school.fromWikipedia', {
@@ -128,7 +128,7 @@ export default async function SchoolPage({ params }: { params: Params }) {
                             {past && <span className="past-cap">{t('agenda.pastEvent')}</span>}
                             <span>{formatEventRange(event, locale) ?? t('agenda.timeNotPublished')}</span>
                           </p>
-                          {note && <p className="event-note">{note}</p>}
+                          {note && <p className="event-note" lang={recordLang(locale)}>{note}</p>}
                           {overlaps.length > 0 && (
                             <ul className="event-clashes">
                               {overlaps.map((clash) => (

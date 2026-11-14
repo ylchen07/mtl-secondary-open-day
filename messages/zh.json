@@ -1,0 +1,114 @@
+{
+  "site": {
+    "title": "蒙特利尔中学开放日",
+    "tagline": "开放日、入学考试和入学面试，一站汇总。"
+  },
+  "nav": {
+    "label": "主导航",
+    "schools": "学校",
+    "events": "活动",
+    "skip": "跳到正文",
+    "languages": "语言",
+    "mapCredit": "地图数据 © OpenStreetMap 贡献者",
+    "siteName": "蒙特利尔中学日程"
+  },
+  "directory": {
+    "heading": "大蒙特利尔地区中学",
+    "lead": "各校官网公布的入学日期，汇总于此。可在地图上选择地区，或按校名搜索。",
+    "regionCount": "{count, plural, other {# 所学校}}",
+    "regionsLabel": "地区"
+  },
+  "school": {
+    "back": "全部学校",
+    "about": "简介",
+    "location": "位置",
+    "events": "招生活动",
+    "noDescription": "暂无简介。",
+    "fromWikipedia": "摘自<article>维基百科条目</article>（<license>CC BY-SA 4.0</license>）：{facts}。",
+    "sourcedFact": { "description": "简介", "language": "教学语言", "gender": "学生性别", "has_boarding": "寄宿" },
+    "approximate": "大致位置",
+    "positionUnknown": "暂无准确位置，仅显示所在地区。",
+    "website": "学校官网",
+    "tuition": "每年 {amount}",
+    "tuitionLabel": "学费",
+    "checked": "学校信息核对于 {date}",
+    "moreInRegion": "{region}还有 {count, plural, other {# 所学校}}",
+    "noEvents": "尚未发现招生活动。学校公布日期后将显示在此处。",
+    "factsLabel": "主要信息"
+  },
+  "events": {
+    "heading": "招生活动",
+    "lead": "{year} 学年的开放日、入学考试和入学面试，按时间先后排列。时间重叠的活动会标出。"
+  },
+  "agenda": {
+    "resultCount": "{count, plural, =0 {没有活动} other {共 # 场活动}}",
+    "dayCount": "{count, plural, other {# 场活动}}",
+    "pastHeading": "往期活动",
+    "pastDescription": "仅供参考，这些日期已过。",
+    "upcomingHeading": "即将举行",
+    "pastEvent": "已结束",
+    "clashWith": "与{school}（{type}）时间重叠",
+    "verifiedOn": "核对于 {date}",
+    "source": "来源",
+    "register": "报名",
+    "checkRegistrationDetails": "查看报名要求",
+    "emptyTitle": "目前没有即将举行的开放日",
+    "emptyBody": "大多数私立学校在八月公布秋季的日期。在此期间可先浏览学校名录。",
+    "emptyFiltered": "没有符合筛选条件的活动。",
+    "clearFilters": "清除筛选",
+    "filtersLandmark": "筛选",
+    "eventsLandmark": "活动",
+    "footerNote": "参观前请向各校确认日期和报名方式。",
+    "schoolDetails": "学校详情",
+    "showPast": "显示",
+    "hidePast": "隐藏",
+    "eventDetails": "详情",
+    "timeNotPublished": "未公布时间",
+    "schoolYear": "{year} 学年",
+    "schoolYearNav": "学年",
+    "schoolCount": "{count, plural, =0 {没有学校} other {共 # 所学校}}",
+    "noUpcoming": "暂无即将举行的活动",
+    "checkedOn": "核对于 {date}",
+    "moreUpcoming": "{count, plural, other {另有 # 场即将举行}}",
+    "admissionsPage": "招生页面",
+    "emptySchoolsFiltered": "没有符合筛选条件的学校。"
+  },
+  "filters": {
+    "search": "搜索学校",
+    "searchPlaceholder": "校名、城市或课程",
+    "language": "教学语言",
+    "region": "地区",
+    "gender": "学生性别",
+    "sector": "办学性质",
+    "type": "活动类型"
+  },
+  "language": {
+    "fr": "法语",
+    "en": "英语",
+    "bilingual": "双语"
+  },
+  "gender": {
+    "mixed": "男女同校",
+    "girls": "女校",
+    "boys": "男校"
+  },
+  "sector": {
+    "private": "私立",
+    "public": "公立"
+  },
+  "region": {
+    "montreal_island": "蒙特利尔岛",
+    "west_island": "西岛",
+    "laval": "拉瓦尔",
+    "north_shore": "北岸",
+    "south_shore": "南岸"
+  },
+  "eventType": {
+    "open_house": "开放日",
+    "info_session": "说明会",
+    "entrance_exam": "入学考试",
+    "interview": "入学面试",
+    "tour": "导览参观",
+    "virtual": "线上活动"
+  }
+}

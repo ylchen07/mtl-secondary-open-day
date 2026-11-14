@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
+import { LOCALES, LOCALE_NAMES, LOCALE_TAGS } from '@/lib/constants';
 
 export function SiteHeader() {
   const t = useTranslations('nav');
@@ -21,9 +22,15 @@ export function SiteHeader() {
           {t('events')}
         </Link>
       </nav>
-      <Link href={pathname} locale={locale === 'en' ? 'fr' : 'en'} hrefLang={locale === 'en' ? 'fr' : 'en'} className="locale-switch">
-        {t('otherLocale')}
-      </Link>
+      <ul className="locale-switches" aria-label={t('languages')}>
+        {LOCALES.filter((other) => other !== locale).map((other) => (
+          <li key={other}>
+            <Link href={pathname} locale={other} hrefLang={LOCALE_TAGS[other]} lang={LOCALE_TAGS[other]} className="locale-switch">
+              {LOCALE_NAMES[other]}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </header>
   );
 }

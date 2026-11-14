@@ -1,9 +1,13 @@
 import { expect, test } from '@playwright/test';
 
-for (const [locale, schools, events] of [['en', 'Schools', 'Events'], ['fr', 'Écoles', 'Événements']]) {
+for (const [locale, main, schools, events] of [
+  ['en', 'Main', 'Schools', 'Events'],
+  ['fr', 'Principal', 'Écoles', 'Événements'],
+  ['zh', '主导航', '学校', '活动'],
+]) {
   test(`the directory leads and events are one link away in ${locale}`, async ({ page }) => {
     await page.goto(`/${locale}`);
-    const nav = page.getByRole('navigation', { name: locale === 'en' ? 'Main' : 'Principal' });
+    const nav = page.getByRole('navigation', { name: main });
     await expect(nav.getByRole('link', { name: schools })).toHaveAttribute('aria-current', 'page');
     await expect(page.locator('.school-row').first()).toBeVisible();
     await nav.getByRole('link', { name: events }).click();
@@ -11,6 +15,19 @@ for (const [locale, schools, events] of [['en', 'Schools', 'Events'], ['fr', 'É
     await expect(nav.getByRole('link', { name: events })).toHaveAttribute('aria-current', 'page');
   });
 }
+
+test('the language switch keeps the page and offers the two other languages', async ({ page }) => {
+  await page.goto('/en/schools/college-laval');
+  const languages = page.getByRole('list', { name: 'Language' });
+  await expect(languages.getByRole('link')).toHaveText(['Français', '简体中文']);
+  await languages.getByRole('link', { name: '简体中文' }).click();
+  await expect(page).toHaveURL(/\/zh\/schools\/college-laval$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'zh-Hans-CA');
+  await expect(page.getByRole('heading', { name: '简介' })).toBeVisible();
+  // School records hold English and French only; Chinese pages show the English, marked as such.
+  await expect(page.locator('.school-description')).toHaveAttribute('lang', 'en');
+  await expect(page.getByRole('list', { name: '语言' }).getByRole('link')).toHaveText(['English', 'Français']);
+});
 
 test('a region on the map filters the directory and is shareable', async ({ page }) => {
   await page.goto('/en');
@@ -147,10 +164,10 @@ test('hydration stays consistent when the browser clock differs', async ({ page 
   expect(errors).toEqual([]);
 });
 
-for (const locale of ['en', 'fr']) {
+for (const [locale, pastHeading] of [['en', 'Past events'], ['fr', 'Événements passés'], ['zh', '往期活动']]) {
   test(`past events use an accessible archive in ${locale}`, async ({ page }) => {
     await page.goto(`/${locale}/events/current`);
-    const archive = page.getByRole('region', { name: locale === 'en' ? 'Past events' : 'Événements passés', exact: true });
+    const archive = page.getByRole('region', { name: pastHeading, exact: true });
     const toggle = archive.getByRole('button');
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(archive.locator('article').first()).toBeHidden();

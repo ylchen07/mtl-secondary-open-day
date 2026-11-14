@@ -25,7 +25,8 @@ main:focus { outline: none; }
 .nav-link { min-height: 40px; padding-inline: var(--space-md); font-weight: 500; text-decoration: none; transition: background-color var(--move) ease, transform var(--move) var(--ease-overshoot); }
 .nav-link:hover { background: var(--color-paper-2); }
 .nav-link[data-active] { background: var(--land-island); }
-.locale-switch { margin-left: auto; min-height: 40px; padding-inline: var(--space-md); border: 1.5px solid var(--color-ink); font-weight: 500; text-decoration: none; transition: background-color var(--move) ease; }
+.locale-switches { display: flex; gap: var(--space-2xs); margin: 0 0 0 auto; padding: 0; list-style: none; }
+.locale-switch { min-height: 40px; padding-inline: var(--space-md); border: 1.5px solid var(--color-ink); font-weight: 500; text-decoration: none; transition: background-color var(--move) ease; }
 .locale-switch:hover { background: var(--color-paper-2); }
 
 .site-footer { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-xl); align-items: baseline; margin-top: var(--space-3xl); padding-block: var(--space-xl); border-top: var(--rule-hair) solid var(--color-rule); color: var(--color-ink-2); font-size: var(--text-sm); }
@@ -275,3 +276,7 @@ main:focus { outline: none; }
   .school-event { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
   .map-credit { margin-left: 0; }
 }
+
+/* Han characters need taller lines than the Latin display setting allows. A heading
+   holding a school's name from its record is marked English and keeps the Latin setting. */
+h1:lang(zh), h2:lang(zh), h3:lang(zh) { line-height: 1.25; }

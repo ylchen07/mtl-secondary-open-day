@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import en from '../messages/en.json';
 import fr from '../messages/fr.json';
+import zh from '../messages/zh.json';
 
 function keys(obj: unknown, prefix = ''): string[] {
   if (typeof obj !== 'object' || obj === null) return [prefix];
@@ -10,8 +11,9 @@ function keys(obj: unknown, prefix = ''): string[] {
 }
 
 describe('message catalogs', () => {
-  it('en and fr define exactly the same keys', () => {
+  it('every catalog defines exactly the English keys', () => {
     expect(keys(fr).sort()).toEqual(keys(en).sort());
+    expect(keys(zh).sort()).toEqual(keys(en).sort());
   });
 
   it('includes checkRegistrationDetails for unknown registration evidence', () => {

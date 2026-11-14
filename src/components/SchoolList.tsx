@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { dayKey, formatDayHeading, formatEventRange, formatVerifiedDate } from '@/lib/dates';
 import { mapRegionFor } from '@/lib/regions';
 import type { SchoolListRow } from '@/lib/schools';
-import type { Locale } from '@/lib/constants';
+import { recordLang, type Locale } from '@/lib/constants';
 
 export function SchoolList({ rows }: { rows: SchoolListRow[] }) {
   const t = useTranslations('agenda');
@@ -25,10 +25,10 @@ export function SchoolList({ rows }: { rows: SchoolListRow[] }) {
         return (
           <li key={school.id} className="school-row" data-region={mapRegionFor(school.region)}>
             <div className="row-main">
-              <h3 className="row-name">
+              <h3 className="row-name" lang={recordLang(locale)}>
                 <Link href={`/schools/${school.slug}`}>{name}</Link>
               </h3>
-              {description && <p className="row-description">{description}</p>}
+              {description && <p className="row-description" lang={recordLang(locale)}>{description}</p>}
               <ul className="row-facts" aria-label={t('schoolDetails')}>
                 <li>{tSector(school.sector)}</li>
                 {school.language && <li>{tLanguage(school.language)}</li>}
