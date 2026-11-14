@@ -16,17 +16,33 @@ for (const [locale, main, schools, events] of [
   });
 }
 
-test('the language switch keeps the page and offers the two other languages', async ({ page }) => {
+test('the language menu keeps the page and closes like a menu', async ({ page }) => {
   await page.goto('/en/schools/college-laval');
+  const toggle = page.locator('.locale-menu summary');
   const languages = page.getByRole('list', { name: 'Language' });
-  await expect(languages.getByRole('link')).toHaveText(['Français', '简体中文']);
+  await expect(toggle).toHaveText('Language: English');
+  await expect(languages).toBeHidden();
+  await toggle.click();
+  await expect(languages.getByRole('link')).toHaveText(['English', 'Français', '简体中文']);
+  await expect(languages.getByRole('link', { name: 'English' })).toHaveAttribute('aria-current', 'true');
   await languages.getByRole('link', { name: '简体中文' }).click();
   await expect(page).toHaveURL(/\/zh\/schools\/college-laval$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-Hans-CA');
   await expect(page.getByRole('heading', { name: '简介' })).toBeVisible();
   // School records hold English and French only; Chinese pages show the English, marked as such.
   await expect(page.locator('.school-description')).toHaveAttribute('lang', 'en');
-  await expect(page.getByRole('list', { name: '语言' }).getByRole('link')).toHaveText(['English', 'Français']);
+
+  await page.waitForLoadState('networkidle');
+  const menu = page.getByRole('list', { name: '语言' });
+  await expect(menu).toBeHidden();
+  await toggle.click();
+  await expect(menu).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  await expect(toggle).toBeFocused();
+  await toggle.click();
+  await page.getByRole('heading', { name: '简介' }).click();
+  await expect(menu).toBeHidden();
 });
 
 test('a region on the map filters the directory and is shareable', async ({ page }) => {

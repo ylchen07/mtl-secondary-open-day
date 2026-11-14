@@ -25,9 +25,16 @@ main:focus { outline: none; }
 .nav-link { min-height: 40px; padding-inline: var(--space-md); font-weight: 500; text-decoration: none; transition: background-color var(--move) ease, transform var(--move) var(--ease-overshoot); }
 .nav-link:hover { background: var(--color-paper-2); }
 .nav-link[data-active] { background: var(--land-island); }
-.locale-switches { display: flex; gap: var(--space-2xs); margin: 0 0 0 auto; padding: 0; list-style: none; }
-.locale-switch { min-height: 40px; padding-inline: var(--space-md); border: 1.5px solid var(--color-ink); font-weight: 500; text-decoration: none; transition: background-color var(--move) ease; }
-.locale-switch:hover { background: var(--color-paper-2); }
+.locale-menu { position: relative; margin-left: auto; }
+.locale-switch { min-height: 40px; padding-inline: var(--space-md) var(--space-sm); border: 1.5px solid var(--color-ink); font-weight: 500; cursor: pointer; list-style: none; user-select: none; transition: background-color var(--move) ease; }
+.locale-switch::-webkit-details-marker { display: none; }
+.locale-switch:hover, .locale-menu[open] .locale-switch { background: var(--color-paper-2); }
+.locale-chevron { width: 16px; height: 16px; transition: transform var(--move) var(--ease-overshoot); }
+.locale-menu[open] .locale-chevron { transform: rotate(180deg); }
+.locale-options { position: absolute; top: calc(100% + var(--space-2xs)); right: 0; z-index: var(--z-modal); display: grid; gap: 2px; min-width: 100%; margin: 0; padding: var(--space-2xs); border: 1.5px solid var(--color-ink); border-radius: var(--radius-card); background: var(--color-paper); list-style: none; }
+.locale-options a { display: flex; align-items: center; min-height: 40px; padding-inline: var(--space-md); border-radius: var(--radius-pill); white-space: nowrap; text-decoration: none; }
+.locale-options a:hover { background: var(--color-paper-2); }
+.locale-options a[aria-current] { background: var(--land-island); }
 
 .site-footer { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-xl); align-items: baseline; margin-top: var(--space-3xl); padding-block: var(--space-xl); border-top: var(--rule-hair) solid var(--color-rule); color: var(--color-ink-2); font-size: var(--text-sm); }
 .site-footer > span { color: var(--color-ink); font-weight: 500; }
