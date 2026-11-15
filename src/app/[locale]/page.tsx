@@ -17,7 +17,7 @@ type Params = Promise<{ locale: string }>;
 export async function generateMetadata({ params }: { params: Params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-  return { title: `${t('directory.heading')} · ${t('site.title')}` };
+  return { title: `${t.markup('directory.heading', { wbr: () => '' })} · ${t('site.title')}` };
 }
 
 export default async function DirectoryPage({
@@ -54,7 +54,7 @@ export default async function DirectoryPage({
       map={<RegionMap view={DIRECTORY_VIEW} label={t('regionsLabel')} />}
       intro={
         <>
-          <h1>{t('heading')}</h1>
+          <h1>{t.rich('heading', { wbr: () => <wbr /> })}</h1>
           <p className="lead">{t('lead')}</p>
         </>
       }

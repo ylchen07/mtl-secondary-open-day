@@ -13,7 +13,7 @@
     "siteName": "蒙特利尔中学日程"
   },
   "directory": {
-    "heading": "大蒙特利尔地区中学",
+    "heading": "大蒙特利尔<wbr></wbr>地区中学",
     "lead": "各校官网公布的入学日期，汇总于此。可在地图上选择地区，或按校名搜索。",
     "regionCount": "{count, plural, other {# 所学校}}",
     "regionsLabel": "地区"
